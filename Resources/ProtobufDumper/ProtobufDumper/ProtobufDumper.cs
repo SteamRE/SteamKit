@@ -639,7 +639,8 @@ namespace ProtobufDumper
                 DumpEnumDescriptor( source, field, sb, level + 1, ref innerMarker );
             }
 
-            var rootFields = proto.field.Where( x => !x.ShouldSerializeoneof_index() ).ToList();
+            // Proto3 optional fields are each in a oneof of their own that the compiler made
+            var rootFields = proto.field.Where( x => !x.ShouldSerializeoneof_index() || x.proto3_optional ).ToList();
 
             foreach ( var field in rootFields )
             {
@@ -656,6 +657,9 @@ namespace ProtobufDumper
             {
                 var oneof = proto.oneof_decl[ i ];
                 var fields = proto.field.Where( x => x.ShouldSerializeoneof_index() && x.oneof_index == i ).ToArray();
+
+                if ( fields.Any( x => x.proto3_optional ) )
+                    continue;
 
                 AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\toneof {oneof.name} {{" );
@@ -800,6 +804,7 @@ namespace ProtobufDumper
 
             var type = ResolveType( field );
             var options = new Dictionary<string, string>();
+            var isProto2 = string.IsNullOrEmpty( source.syntax ) || source.syntax == "proto2";
 
             if ( !string.IsNullOrEmpty( field.default_value ) )
             {
@@ -810,7 +815,7 @@ namespace ProtobufDumper
 
                 options.Add( "default", defaultValue );
             }
-            else if ( field.type == FieldDescriptorProto.Type.TYPE_ENUM && field.label != FieldDescriptorProto.Label.LABEL_REPEATED )
+            else if ( isProto2 && field.type == FieldDescriptorProto.Type.TYPE_ENUM && field.label != FieldDescriptorProto.Label.LABEL_REPEATED )
             {
                 var lookup = protobufTypeMap[ field.type_name ];
 
@@ -849,7 +854,8 @@ namespace ProtobufDumper
             }
             else if ( emitFieldLabel )
             {
-                label = GetLabel( field.label );
+                // Fields in proto3 have no label unless they are repeated or track presence
+                label = isProto2 || field.label == FieldDescriptorProto.Label.LABEL_REPEATED || field.proto3_optional ? GetLabel( field.label ) : null;
             }
 
             var descriptorDeclarationBuilder = new StringBuilder();
