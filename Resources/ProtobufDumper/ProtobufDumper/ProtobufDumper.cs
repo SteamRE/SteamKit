@@ -251,6 +251,12 @@ namespace ProtobufDumper
 
             foreach ( var extension in messageType.extension )
             {
+                protoNode.Types.Add( GetOrCreateTypeNode( GetPackagePath( GetPackagePath( packagePath, messageType.name ), extension.name ),
+                    protoNode.Proto, extension ) );
+
+                if ( IsNamedType( extension.type ) && !string.IsNullOrEmpty( extension.type_name ) )
+                    protoNode.Types.Add( GetOrCreateTypeNode( GetPackagePath( packagePath, extension.type_name ) ) );
+
                 if ( !string.IsNullOrEmpty( extension.extendee ) )
                     protoNode.Types.Add( GetOrCreateTypeNode( GetPackagePath( packagePath, extension.extendee ) ) );
             }
@@ -625,7 +631,8 @@ namespace ProtobufDumper
                 {
                     if ( !string.IsNullOrEmpty( field.extendee ) && field.extendee == typeName )
                     {
-                        DumpOptionsFieldRecursive( field, options, optionsKv, $"({field.name})" );
+                        // The full name, extensions can be declared inside a message or a package
+                        DumpOptionsFieldRecursive( field, options, optionsKv, $"({type.Key.TrimStart( '.' )})" );
                     }
                 }
             }
