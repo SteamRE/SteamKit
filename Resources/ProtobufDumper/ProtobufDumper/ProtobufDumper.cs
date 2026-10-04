@@ -806,12 +806,15 @@ namespace ProtobufDumper
             var options = new Dictionary<string, string>();
             var isProto2 = string.IsNullOrEmpty( source.syntax ) || source.syntax == "proto2";
 
-            if ( !string.IsNullOrEmpty( field.default_value ) )
+            if ( field.ShouldSerializedefault_value() )
             {
                 var defaultValue = field.default_value;
 
+                // Strings are stored as is, bytes are already escaped
                 if ( field.type == FieldDescriptorProto.Type.TYPE_STRING )
                     defaultValue = Util.ToLiteral( defaultValue );
+                else if ( field.type == FieldDescriptorProto.Type.TYPE_BYTES )
+                    defaultValue = $"\"{defaultValue}\"";
 
                 options.Add( "default", defaultValue );
             }
