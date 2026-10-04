@@ -628,7 +628,8 @@ namespace ProtobufDumper
                 DumpExtensionDescriptors( source, proto.extension, sb, level + 1, ref innerMarker );
             }
 
-            foreach ( var field in proto.nested_type )
+            // Map entries are written as the map fields that use them
+            foreach ( var field in proto.nested_type.Where( x => x.options?.map_entry != true ) )
             {
                 DumpDescriptor( source, field, sb, level + 1, ref innerMarker );
             }
@@ -836,10 +837,25 @@ namespace ProtobufDumper
 
             PopDescriptorName();
 
-            var descriptorDeclarationBuilder = new StringBuilder();
-            if ( emitFieldLabel )
+            string label = null;
+
+            if ( field.label == FieldDescriptorProto.Label.LABEL_REPEATED && field.type == FieldDescriptorProto.Type.TYPE_MESSAGE
+                && protobufTypeMap[ field.type_name ].Source is DescriptorProto { options.map_entry: true } mapEntry )
             {
-                descriptorDeclarationBuilder.Append( GetLabel( field.label ) );
+                var key = mapEntry.field.Find( x => x.number == 1 );
+                var value = mapEntry.field.Find( x => x.number == 2 );
+
+                type = $"map<{ResolveType( key )}, {ResolveType( value )}>";
+            }
+            else if ( emitFieldLabel )
+            {
+                label = GetLabel( field.label );
+            }
+
+            var descriptorDeclarationBuilder = new StringBuilder();
+            if ( label != null )
+            {
+                descriptorDeclarationBuilder.Append( label );
                 descriptorDeclarationBuilder.Append( ' ' );
             }
 
