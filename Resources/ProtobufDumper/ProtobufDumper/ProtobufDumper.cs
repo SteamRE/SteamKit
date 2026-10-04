@@ -224,7 +224,10 @@ namespace ProtobufDumper
             {
                 foreach ( var dep in node.Proto.dependency )
                 {
-                    var depend = protobufMap[ dep ];
+                    // Google dependencies are not required to be in the binary
+                    if ( !protobufMap.TryGetValue( dep, out var depend ) || !depend.Defined )
+                        continue;
+
                     set.Add( depend.Proto );
                     RecursiveAddPublicDependencies( set, depend, depth + 1 );
                 }
@@ -233,7 +236,9 @@ namespace ProtobufDumper
             {
                 foreach ( var idx in node.Proto.public_dependency )
                 {
-                    var depend = protobufMap[ node.Proto.dependency[ idx ] ];
+                    if ( !protobufMap.TryGetValue( node.Proto.dependency[ idx ], out var depend ) || !depend.Defined )
+                        continue;
+
                     set.Add( depend.Proto );
                     RecursiveAddPublicDependencies( set, depend, depth + 1 );
                 }
