@@ -676,8 +676,7 @@ namespace ProtobufDumper
                 sb.AppendLine( $"{levelspace}\textensions {FormatRange( range.start, range.end - 1, MaxFieldNumber )};" );
             }
 
-            // TODO: proto.reserved_range
-            // TODO: proto.reserved_name
+            DumpReserved( proto.reserved_range.Select( x => FormatRange( x.start, x.end - 1, MaxFieldNumber ) ), proto.reserved_name, sb, levelspace, ref innerMarker );
 
             sb.AppendLine( $"{levelspace}}}" );
             marker = true;
@@ -710,6 +709,10 @@ namespace ProtobufDumper
                 sb.AppendLine( $"{levelspace}\t{enumValue.name} = {enumValue.number}{parameters};" );
             }
 
+            // The ends of reserved ranges in enums are inclusive
+            var innerMarker = false;
+            DumpReserved( field.reserved_range.Select( x => FormatRange( x.start, x.end, int.MaxValue ) ), field.reserved_name, sb, levelspace, ref innerMarker );
+
             sb.AppendLine( $"{levelspace}}}" );
             marker = true;
         }
@@ -722,6 +725,23 @@ namespace ProtobufDumper
                 return $"{start}";
 
             return end >= max ? $"{start} to max" : $"{start} to {end}";
+        }
+
+        static void DumpReserved( IEnumerable<string> ranges, List<string> names, StringBuilder sb, string levelspace, ref bool marker )
+        {
+            var rangeList = ranges.ToList();
+
+            if ( rangeList.Count > 0 )
+            {
+                AppendHeadingSpace( sb, ref marker );
+                sb.AppendLine( $"{levelspace}\treserved {string.Join( ", ", rangeList )};" );
+            }
+
+            if ( names.Count > 0 )
+            {
+                AppendHeadingSpace( sb, ref marker );
+                sb.AppendLine( $"{levelspace}\treserved {string.Join( ", ", names.Select( Util.ToLiteral ) )};" );
+            }
         }
 
         void DumpService( FileDescriptorProto source, ServiceDescriptorProto service, StringBuilder sb, ref bool marker )
