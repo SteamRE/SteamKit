@@ -19,6 +19,7 @@ namespace ProtobufDumper
         readonly Stack<string> messageNameStack;
         readonly Dictionary<string, ProtoNode> protobufMap;
         readonly Dictionary<string, ProtoTypeNode> protobufTypeMap;
+        readonly SortedSet<string> optionImports = [];
 
         class ProtoNode
         {
@@ -325,6 +326,10 @@ namespace ProtobufDumper
                 marker = true;
             }
 
+            var importsEnd = sb.Length;
+            var hasHeading = marker;
+            optionImports.Clear();
+
             if ( !string.IsNullOrEmpty( proto.package ) )
             {
                 AppendHeadingSpace( sb, ref marker );
@@ -360,6 +365,25 @@ namespace ProtobufDumper
             foreach ( var service in proto.service )
             {
                 DumpService( proto, service, sb, ref marker );
+            }
+
+            // Valve's protoc has the options of its descriptor.proto built in, so the binary doesn't list the import,
+            // but any other protoc only knows them when the file imports it
+            if ( optionImports.Count > 0 )
+            {
+                var imports = new StringBuilder();
+
+                foreach ( var import in optionImports )
+                {
+                    imports.AppendLine( $"import \"{import}\";" );
+                }
+
+                if ( !hasHeading && importsEnd < sb.Length )
+                {
+                    imports.AppendLine();
+                }
+
+                sb.Insert( importsEnd, imports.ToString() );
             }
 
             if ( !string.IsNullOrEmpty( proto.package ) )
@@ -655,11 +679,16 @@ namespace ProtobufDumper
             // are left over as unknown fields. The ones Descriptor.cs has were read into its properties.
             if ( protobufTypeMap.TryGetValue( typeName, out var optionsType ) && optionsType.Source is DescriptorProto optionsProto )
             {
+                var count = optionsKv.Count;
+
                 foreach ( var field in optionsProto.field )
                 {
                     if ( field.name != "uninterpreted_option" )
                         DumpOptionsFieldRecursive( field, options, optionsKv, field.name );
                 }
+
+                if ( optionsKv.Count > count && !dependencies.Contains( optionsType.Proto ) )
+                    optionImports.Add( optionsType.Proto.name );
             }
 
             foreach ( var type in protobufTypeMap )
