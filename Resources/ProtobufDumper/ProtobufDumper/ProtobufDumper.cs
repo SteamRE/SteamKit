@@ -520,8 +520,34 @@ namespace ProtobufDumper
 
             if ( options.ShouldSerializedeprecated() )
                 optionsKv.Add( "deprecated", options.deprecated ? "true" : "false" );
+            if ( options.ShouldSerializeidempotency_level() )
+                optionsKv.Add( "idempotency_level", $"{options.idempotency_level}" );
 
             DumpOptionsMatching( source, ".google.protobuf.MethodOptions", options, optionsKv );
+
+            return optionsKv;
+        }
+
+        OptionList DumpOptions( FileDescriptorProto source, OneofOptions options )
+        {
+            var optionsKv = new OptionList();
+
+            if ( options == null )
+                return optionsKv;
+
+            DumpOptionsMatching( source, ".google.protobuf.OneofOptions", options, optionsKv );
+
+            return optionsKv;
+        }
+
+        OptionList DumpOptions( FileDescriptorProto source, ExtensionRangeOptions options )
+        {
+            var optionsKv = new OptionList();
+
+            if ( options == null )
+                return optionsKv;
+
+            DumpOptionsMatching( source, ".google.protobuf.ExtensionRangeOptions", options, optionsKv );
 
             return optionsKv;
         }
@@ -735,6 +761,11 @@ namespace ProtobufDumper
                 AppendHeadingSpace( sb, ref innerMarker );
                 sb.AppendLine( $"{levelspace}\toneof {oneof.name} {{" );
 
+                foreach ( var option in DumpOptions( source, oneof.options ) )
+                {
+                    sb.AppendLine( $"{levelspace}\t\toption {option.Key} = {option.Value};" );
+                }
+
                 foreach ( var field in fields )
                 {
                     sb.AppendLine(
@@ -749,7 +780,10 @@ namespace ProtobufDumper
             foreach ( var range in proto.extension_range )
             {
                 AppendHeadingSpace( sb, ref innerMarker );
-                sb.AppendLine( $"{levelspace}\textensions {FormatRange( range.start, range.end - 1, MaxFieldNumber )};" );
+                var rangeOptions = DumpOptions( source, range.options );
+                var parameters = rangeOptions.Count > 0 ? $" [{string.Join( ", ", rangeOptions.Select( kvp => $"{kvp.Key} = {kvp.Value}" ) )}]" : string.Empty;
+
+                sb.AppendLine( $"{levelspace}\textensions {FormatRange( range.start, range.end - 1, MaxFieldNumber )}{parameters};" );
             }
 
             DumpReserved( proto.reserved_range.Select( x => FormatRange( x.start, x.end - 1, MaxFieldNumber ) ), proto.reserved_name, sb, levelspace, ref innerMarker );
