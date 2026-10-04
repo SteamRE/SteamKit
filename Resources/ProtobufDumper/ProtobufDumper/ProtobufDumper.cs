@@ -669,21 +669,11 @@ namespace ProtobufDumper
                 innerMarker = true;
             }
 
+            // The ends of extension and reserved ranges in messages are exclusive
             foreach ( var range in proto.extension_range )
             {
-                var max = Convert.ToString( range.end );
-
-                // https://protobuf.dev/programming-guides/proto2/#defining-ranges
-                // If your numbering convention might involve extensions having very large numbers as tags, you can specify
-                // that your extension range goes up to the maximum possible field number using the max keyword:
-                // max is 2^29 - 1, or 536,870,911. 
-                if ( range.end >= 536870911 )
-                {
-                    max = "max";
-                }
-
                 AppendHeadingSpace( sb, ref innerMarker );
-                sb.AppendLine( $"{levelspace}\textensions {range.start} to {max};" );
+                sb.AppendLine( $"{levelspace}\textensions {FormatRange( range.start, range.end - 1, MaxFieldNumber )};" );
             }
 
             // TODO: proto.reserved_range
@@ -722,6 +712,16 @@ namespace ProtobufDumper
 
             sb.AppendLine( $"{levelspace}}}" );
             marker = true;
+        }
+
+        const int MaxFieldNumber = 536870911;
+
+        static string FormatRange( int start, int end, int max )
+        {
+            if ( start == end )
+                return $"{start}";
+
+            return end >= max ? $"{start} to max" : $"{start} to {end}";
         }
 
         void DumpService( FileDescriptorProto source, ServiceDescriptorProto service, StringBuilder sb, ref bool marker )
