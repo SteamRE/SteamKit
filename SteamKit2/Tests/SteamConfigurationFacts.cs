@@ -91,6 +91,12 @@ namespace Tests
         }
 
         [Fact]
+        public void TimeProviderIsSystemTime()
+        {
+            Assert.Equal(TimeProvider.System, configuration.TimeProvider);
+        }
+
+        [Fact]
         public void WebAPIAddress()
         {
             Assert.Equal("https://api.steampowered.com/", configuration.WebAPIBaseAddress?.AbsoluteUri);
@@ -116,6 +122,7 @@ namespace Tests
                  .WithMachineInfoProvider(new CustomMachineInfoProvider())
                  .WithProtocolTypes(ProtocolTypes.WebSocket | ProtocolTypes.Udp)
                  .WithServerListProvider(new CustomServerListProvider())
+                 .WithTimeProvider(new CustomTimeProvider())
                  .WithUniverse(EUniverse.Internal)
                  .WithWebAPIBaseAddress(new Uri("http://foo.bar.com/api/"))
                  .WithWebAPIKey("T0PS3kR1t"));
@@ -180,6 +187,12 @@ namespace Tests
         }
 
         [Fact]
+        public void TimeProviderIsConfigured()
+        {
+            Assert.IsType<CustomTimeProvider>(configuration.TimeProvider);
+        }
+
+        [Fact]
         public void UniverseIsConfigured()
         {
             Assert.Equal(EUniverse.Internal, configuration.Universe);
@@ -216,6 +229,10 @@ namespace Tests
 
             Task IServerListProvider.UpdateServerListAsync(IEnumerable<ServerRecord> endpoints)
                 => throw new NotImplementedException();
+        }
+
+        class CustomTimeProvider : TimeProvider
+        {
         }
     }
 }
