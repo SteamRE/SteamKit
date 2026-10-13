@@ -7,7 +7,7 @@ namespace ProtobufDumper
 {
     partial class ExecutableScanner
     {
-        [GeneratedRegex( @"^[a-zA-Z_0-9\\/.]+\.proto$", RegexOptions.ExplicitCapture | RegexOptions.Compiled | RegexOptions.CultureInvariant )]
+        [GeneratedRegex( @"^[a-zA-Z_0-9\\/.-]+\.proto$", RegexOptions.ExplicitCapture | RegexOptions.Compiled | RegexOptions.CultureInvariant )]
         private static partial Regex ProtoFileNameRegex();
 
         public delegate bool ProcessCandidate( string name, Stream buffer, out long bytesConsumed );
