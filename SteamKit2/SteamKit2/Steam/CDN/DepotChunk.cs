@@ -54,9 +54,9 @@ namespace SteamKit2.CDN
             {
                 var written = aes.DecryptCbc( data[ iv.Length.. ], iv, buffer, PaddingMode.PKCS7 );
 
-                if ( buffer.Length < 16 )
+                if ( written < 16 )
                 {
-                    throw new InvalidDataException( $"Not enough data in the decrypted depot chunk (was {buffer.Length} bytes)." );
+                    throw new InvalidDataException( $"Not enough data in the decrypted depot chunk (was {written} bytes)." );
                 }
 
                 if ( buffer[ 0 ] == 'V' && buffer[ 1 ] == 'S' && buffer[ 2 ] == 'Z' && buffer[ 3 ] == 'a' ) // Zstd
