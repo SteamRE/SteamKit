@@ -374,8 +374,9 @@ namespace SevenZip.Compression.LZMA
 			int remainder = bits / 9;
 			int lp = remainder % 5;
 			int pb = remainder / 5;
-			if (pb > Base.kNumPosStatesBitsMax || dictionarySize < (1 << 12))
+			if (pb > Base.kNumPosStatesBitsMax)
 				throw new InvalidParamException();
+			dictionarySize = Math.Max(dictionarySize, 1 << 12);
 			SetLiteralProperties(lp, lc);
 			SetPosBitsProperties(pb);
 			m_DictionarySize = m_DictionarySizeCheck = dictionarySize;
