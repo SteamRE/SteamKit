@@ -42,7 +42,7 @@ namespace SteamKit2
                 throw new Exception( "Expecting VZipFooter at end of stream" );
             }
 
-            SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder( allowIllegalStreamStart: true );
+            SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
             decoder.SetDecoderProperties( properties );
 
             using MemoryStream trainingStream = new MemoryStream( sourceChunkData );

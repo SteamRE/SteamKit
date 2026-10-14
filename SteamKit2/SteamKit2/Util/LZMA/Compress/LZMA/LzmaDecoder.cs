@@ -159,18 +159,11 @@ namespace SevenZip.Compression.LZMA
 
 		uint m_PosStateMask;
 
-		bool m_AllowIllegalStreamStart; // Added by SteamKit
-
 		public Decoder()
 		{
 			m_DictionarySize = 0xFFFFFFFF;
 			for (int i = 0; i < Base.kNumLenToPosStates; i++)
 				m_PosSlotDecoder[i] = new BitTreeDecoder(Base.kNumPosSlotBits);
-		}
-
-		public Decoder(bool allowIllegalStreamStart) : this() // Added by SteamKit
-		{
-			m_AllowIllegalStreamStart = allowIllegalStreamStart;
 		}
 
 		void SetDictionarySize(uint dictionarySize)
@@ -245,10 +238,11 @@ namespace SevenZip.Compression.LZMA
 			state.Init();
 			uint rep0 = 0, rep1 = 0, rep2 = 0, rep3 = 0;
 
-			UInt64 nowPos64 = 0;
-			UInt64 outSize64 = (UInt64)outSize;
+			// Changed by SteamKit: positions continue after the trained dictionary, so a match may come first
+			UInt64 nowPos64 = m_OutWindow.TrainSize;
+			UInt64 outSize64 = nowPos64 + (UInt64)outSize;
 
-			if (nowPos64 < outSize64 && !m_AllowIllegalStreamStart)
+			if (nowPos64 == 0 && nowPos64 < outSize64)
 			{
 				if (m_IsMatchDecoders[state.Index << Base.kNumPosStatesBitsMax].Decode(m_RangeDecoder) != 0)
 					throw new DataErrorException();
@@ -340,7 +334,7 @@ namespace SevenZip.Compression.LZMA
 							else
 								rep0 = posSlot;
 						}
-						if (rep0 >= m_OutWindow.TrainSize + nowPos64 || rep0 >= m_DictionarySizeCheck)
+						if (rep0 >= nowPos64 || rep0 >= m_DictionarySizeCheck)
 						{
 							if (rep0 == 0xFFFFFFFF)
 								break;
