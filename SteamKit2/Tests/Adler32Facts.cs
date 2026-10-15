@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Intrinsics;
 using System.Text;
 using SteamKit2;
 using Xunit;
@@ -63,6 +64,76 @@ public class Adler32Facts
         var expected = ReferenceImplementation( 1, data );
         var actual = Adler32.Calculate( 1, data );
         Assert.Equal( expected, actual );
+    }
+
+    public static TheoryData<int> VectorizedLengths =>
+    [
+        0, 1, 15, 16, 17, 31, 32, 33, 63, 64, 65, 100,
+        5552 - 32 - 1, 5552 - 32, 5552 - 16, 5552 - 1, 5552, 5552 + 1, 5552 + 31, 5552 + 32,
+        173 * 32 - 1, 173 * 32, 173 * 32 + 1, 173 * 32 + 31,
+        2 * 173 * 32 - 1, 2 * 173 * 32, 2 * 173 * 32 + 1,
+        65536, 1024 * 1024, 1024 * 1024 + 7,
+    ];
+
+    [Theory]
+    [MemberData( nameof( VectorizedLengths ) )]
+    public void VectorizedMatchesScalar( int length )
+    {
+        var random = new Random( length );
+        var data = new byte[ length ];
+        random.NextBytes( data );
+
+        var seed = ( ( uint )random.Next( 65521 ) << 16 ) | ( uint )random.Next( 65521 );
+
+        AssertAllPathsMatchScalar( seed, data );
+        AssertAllPathsMatchScalar( 0, data );
+        AssertAllPathsMatchScalar( 1, data );
+    }
+
+    [Fact]
+    public void VectorizedMatchesScalarOnRandomSlices()
+    {
+        var random = new Random( 1950 );
+        var data = new byte[ 20000 ];
+        random.NextBytes( data );
+
+        for ( var i = 0; i < 500; i++ )
+        {
+            var start = random.Next( 64 );
+            var length = random.Next( data.Length - start );
+            var seed = ( ( uint )random.Next( 65521 ) << 16 ) | ( uint )random.Next( 65521 );
+
+            AssertAllPathsMatchScalar( seed, data.AsSpan( start, length ) );
+        }
+    }
+
+    [Theory]
+    [InlineData( 0xFFF0FFF0 )]
+    [InlineData( 0xFFFFFFFF )]
+    public void VectorizedNoOverflowWithMaxBytes( uint seed )
+    {
+        var data = new byte[ 5552 * 4 + 31 ];
+        Array.Fill( data, ( byte )0xFF );
+
+        AssertAllPathsMatchScalar( seed, data );
+        Assert.Equal( ReferenceImplementation( 1, data ), Adler32.Calculate( 1, data ) );
+    }
+
+    private static void AssertAllPathsMatchScalar( uint seed, ReadOnlySpan<byte> data )
+    {
+        var expected = Adler32.CalculateScalar( seed, data );
+
+        Assert.Equal( expected, Adler32.Calculate( seed, data ) );
+
+        if ( Vector128.IsHardwareAccelerated )
+        {
+            Assert.Equal( expected, Adler32.CalculateVector128( seed, data ) );
+        }
+
+        if ( Vector256.IsHardwareAccelerated )
+        {
+            Assert.Equal( expected, Adler32.CalculateVector256( seed, data ) );
+        }
     }
 
     private static uint ReferenceImplementation( uint seed, ReadOnlySpan<byte> input )
