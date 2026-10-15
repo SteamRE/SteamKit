@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Buffers;
 using System.IO;
 using System.IO.Hashing;
 
@@ -6,58 +7,35 @@ namespace SteamKit2
 {
     static class VZipDeltaUtil
     {
-        private static ushort VZipHeader = 0x5A56;
-        private static ushort VZipFooter = 0x767A;
-        private static int HeaderLength = 7;
-        private static int FooterLength = 10;
-
-        private static char Version = 'd';
-
+        private const byte Version = ( byte )'d';
 
         public static byte[] Decompress( byte[] buffer, byte[] sourceChunkData )
         {
-            using MemoryStream ms = new MemoryStream( buffer );
-            using BinaryReader reader = new BinaryReader( ms );
-            if ( reader.ReadUInt16() != VZipHeader )
+            // The CRC in the header is also the CRC of the chunk
+            var frame = VZipUtil.ReadFrame( buffer, Version );
+
+            // The source chunk is the preset dictionary, and positions in the delta continue after it
+            var totalLength = sourceChunkData.Length + frame.DecompressedSize;
+            var window = ArrayPool<byte>.Shared.Rent( totalLength );
+
+            try
             {
-                throw new Exception( "Expecting VZipHeader at start of stream" );
-            }
+                sourceChunkData.CopyTo( window, 0 );
+                LzmaDecoder.Decode( frame.Properties, frame.Compressed, window.AsSpan( 0, totalLength ), sourceChunkData.Length );
 
-            if ( reader.ReadChar() != Version )
+                var outData = window.AsSpan( sourceChunkData.Length, frame.DecompressedSize ).ToArray();
+
+                if ( Crc32.HashToUInt32( outData ) != frame.OutputCRC )
+                {
+                    throw new InvalidDataException( "CRC does not match decompressed data. VZip data may be corrupted." );
+                }
+
+                return outData;
+            }
+            finally
             {
-                throw new Exception( "Expecting VZip version 'd'" );
+                ArrayPool<byte>.Shared.Return( window );
             }
-
-            // This is also the CRC of the chunk
-            /* uint secondaryCRC = */ reader.ReadUInt32();
-
-            byte[] properties = reader.ReadBytes( 5 );
-            byte[] deltaBuffer = reader.ReadBytes( ( int )ms.Length - HeaderLength - FooterLength - 5 );
-
-            uint outputCRC = reader.ReadUInt32();
-            uint sizeDecompressed = reader.ReadUInt32();
-
-            if ( reader.ReadUInt16() != VZipFooter )
-            {
-                throw new Exception( "Expecting VZipFooter at end of stream" );
-            }
-
-            SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
-            decoder.SetDecoderProperties( properties );
-
-            using MemoryStream trainingStream = new MemoryStream( sourceChunkData );
-            using MemoryStream inputStream = new MemoryStream( deltaBuffer );
-            using MemoryStream outStream = new MemoryStream( ( int )sizeDecompressed );
-            decoder.Train( trainingStream );
-            decoder.Code( inputStream, outStream, deltaBuffer.Length, sizeDecompressed, null );
-
-            var outData = outStream.ToArray();
-            if ( Crc32.HashToUInt32( outData ) != outputCRC )
-            {
-                throw new InvalidDataException( "CRC does not match decompressed data. VZip data may be corrupted." );
-            }
-
-            return outData;
         }
     }
 }

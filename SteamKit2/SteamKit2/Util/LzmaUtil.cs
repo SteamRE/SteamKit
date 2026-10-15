@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Buffers.Binary;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -35,13 +36,23 @@ namespace SteamKit2.Internal
         /// <param name="uncompressedLength">The (expected) length of data after decompression.</param>
         public static void Decompress( Stream input, Stream output, int compressedLength, int uncompressedLength )
         {
-            var decoder = new SevenZip.Compression.LZMA.Decoder();
-
-            var properties = new byte[ 5 ];
+            Span<byte> properties = stackalloc byte[ LzmaDecoder.PropertiesSize ];
             input.ReadExactly( properties );
 
-            decoder.SetDecoderProperties( properties );
-            decoder.Code( input, output, compressedLength, uncompressedLength, null );
+            var compressed = ArrayPool<byte>.Shared.Rent( compressedLength );
+            var decompressed = ArrayPool<byte>.Shared.Rent( uncompressedLength );
+
+            try
+            {
+                input.ReadExactly( compressed, 0, compressedLength );
+                LzmaDecoder.Decode( properties, compressed.AsSpan( 0, compressedLength ), decompressed.AsSpan( 0, uncompressedLength ) );
+                output.Write( decompressed, 0, uncompressedLength );
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return( compressed );
+                ArrayPool<byte>.Shared.Return( decompressed );
+            }
         }
 
         /// <summary>
@@ -84,6 +95,11 @@ namespace SteamKit2.Internal
             }
 
             var compressedLength = BinaryPrimitives.ReadInt32LittleEndian( buffer );
+
+            if ( compressedLength < 0 || uncompressedLength < 0 )
+            {
+                throw new InvalidDataException( $"LZMA lengths must not be negative (compressed {compressedLength}, uncompressed {uncompressedLength})." );
+            }
 
             output = outputFactory( uncompressedLength );
             try

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Buffers;
+using System.Buffers.Binary;
 using System.IO;
 using System.IO.Hashing;
 
@@ -14,72 +14,78 @@ namespace SteamKit2
 
         private const byte Version = (byte)'a';
 
-        public static int Decompress( MemoryStream ms, byte[] destination, bool verifyChecksum = true )
+        /// <summary>
+        /// The parts of a VZip buffer: the LZMA properties and stream, and the footer's CRC and size of the decompressed data.
+        /// </summary>
+        internal readonly ref struct Frame
         {
-            using BinaryReader reader = new BinaryReader( ms );
-            if ( reader.ReadUInt16() != VZipHeader )
+            public ReadOnlySpan<byte> Properties { get; init; }
+            public ReadOnlySpan<byte> Compressed { get; init; }
+            public uint OutputCRC { get; init; }
+            public int DecompressedSize { get; init; }
+        }
+
+        internal static Frame ReadFrame( ReadOnlySpan<byte> buffer, byte version )
+        {
+            if ( buffer.Length < HeaderLength + LzmaDecoder.PropertiesSize + FooterLength )
+            {
+                throw new InvalidDataException( $"VZip data is too short (was {buffer.Length} bytes)." );
+            }
+
+            if ( BinaryPrimitives.ReadUInt16LittleEndian( buffer ) != VZipHeader )
             {
                 throw new InvalidDataException( "Expecting VZipHeader at start of stream" );
             }
 
-            if ( reader.ReadByte() != Version )
+            if ( buffer[ 2 ] != version )
             {
-                throw new InvalidDataException( "Expecting VZip version 'a'" );
+                throw new InvalidDataException( $"Expecting VZip version '{( char )version}'" );
             }
 
-            // Sometimes this is a creation timestamp (e.g. for Steam Client VZips).
-            // Sometimes this is a CRC32 (e.g. for depot chunks).
-            /* uint creationTimestampOrSecondaryCRC = */
-            reader.ReadUInt32();
+            // The next four bytes are sometimes a creation timestamp (e.g. for Steam Client VZips),
+            // and sometimes a CRC32 (e.g. for depot chunks).
 
-            // this is 5 bytes of LZMA properties
-            var propertyBits = reader.ReadByte();
-            var dictionarySize = reader.ReadUInt32();
-            var compressedBytesOffset = ms.Position;
+            var footer = buffer[ ^FooterLength.. ];
+            var outputCRC = BinaryPrimitives.ReadUInt32LittleEndian( footer );
+            var sizeDecompressed = BinaryPrimitives.ReadInt32LittleEndian( footer[ 4.. ] );
 
-            // jump to the end of the buffer to read the footer
-            ms.Seek( -FooterLength, SeekOrigin.End );
-            var sizeCompressed = ms.Position - compressedBytesOffset;
-            var outputCRC = reader.ReadUInt32();
-            var sizeDecompressed = reader.ReadInt32();
-
-            if ( reader.ReadUInt16() != VZipFooter )
+            if ( BinaryPrimitives.ReadUInt16LittleEndian( footer[ 8.. ] ) != VZipFooter )
             {
                 throw new InvalidDataException( "Expecting VZipFooter at end of stream" );
             }
 
-            if ( destination.Length < sizeDecompressed )
+            if ( sizeDecompressed < 0 )
+            {
+                throw new InvalidDataException( $"VZip decompressed size is negative (was {sizeDecompressed})." );
+            }
+
+            return new Frame
+            {
+                Properties = buffer.Slice( HeaderLength, LzmaDecoder.PropertiesSize ),
+                Compressed = buffer[ ( HeaderLength + LzmaDecoder.PropertiesSize )..^FooterLength ],
+                OutputCRC = outputCRC,
+                DecompressedSize = sizeDecompressed,
+            };
+        }
+
+        public static int Decompress( ReadOnlySpan<byte> buffer, byte[] destination, bool verifyChecksum = true )
+        {
+            var frame = ReadFrame( buffer, Version );
+
+            if ( destination.Length < frame.DecompressedSize )
             {
                 throw new ArgumentException( "The destination buffer is smaller than the decompressed data size.", nameof( destination ) );
             }
 
-            // jump back to the beginning of the compressed data
-            ms.Position = compressedBytesOffset;
+            var output = destination.AsSpan( 0, frame.DecompressedSize );
+            LzmaDecoder.Decode( frame.Properties, frame.Compressed, output );
 
-            SevenZip.Compression.LZMA.Decoder decoder = new SevenZip.Compression.LZMA.Decoder();
-
-            // If the value of dictionary size in properties is smaller than (1 << 12),
-            // the LZMA decoder must set the dictionary size variable to (1 << 12).
-            var windowBuffer = ArrayPool<byte>.Shared.Rent( Math.Max( 1 << 12, ( int )dictionarySize ) );
-
-            try
-            {
-                decoder.SteamKitSetDecoderProperties( propertyBits, dictionarySize, windowBuffer );
-
-                using MemoryStream outStream = new MemoryStream( destination );
-                decoder.Code( ms, outStream, sizeCompressed, sizeDecompressed, null );
-            }
-            finally
-            {
-                ArrayPool<byte>.Shared.Return( windowBuffer );
-            }
-
-            if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan()[ ..sizeDecompressed ] ) != outputCRC )
+            if ( verifyChecksum && Crc32.HashToUInt32( output ) != frame.OutputCRC )
             {
                 throw new InvalidDataException( "CRC does not match decompressed data. VZip data may be corrupted." );
             }
 
-            return sizeDecompressed;
+            return frame.DecompressedSize;
         }
 
         public static byte[] Compress( byte[] buffer )

@@ -6,14 +6,6 @@ using System;
 namespace SevenZip
 {
 	/// <summary>
-	/// The exception that is thrown when an error in input stream occurs during decoding.
-	/// </summary>
-	class DataErrorException : Exception
-	{
-		public DataErrorException(): base("Data Error") { }
-	}
-
-	/// <summary>
 	/// The exception that is thrown when the value of an argument is outside the allowable range.
 	/// </summary>
 	class InvalidParamException : Exception
@@ -55,9 +47,6 @@ namespace SevenZip
 		/// <param name="progress">
 		/// callback progress reference.
 		/// </param>
-		/// <exception cref="SevenZip.DataErrorException">
-		/// if input stream is not valid
-		/// </exception>
 		void Code(System.IO.Stream inStream, System.IO.Stream outStream,
 			Int64 inSize, Int64 outSize, ICodeProgress progress);
 	};
@@ -149,10 +138,5 @@ namespace SevenZip
 	interface IWriteCoderProperties
 	{
 		void WriteCoderProperties(System.IO.Stream outStream);
-	}
-
-	interface ISetDecoderProperties
-	{
-		void SetDecoderProperties(byte[] properties);
 	}
 }
