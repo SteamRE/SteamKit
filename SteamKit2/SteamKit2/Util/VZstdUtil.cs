@@ -9,16 +9,23 @@ namespace SteamKit2
     static class VZstdUtil
     {
         private const uint VZstdHeader = 0x615A5356;
+        private const int HeaderLength = 8; // magic + crc
+        private const int FooterLength = 15; // crc + decompressed size + unknown + magic
 
         public static int Decompress( ReadOnlySpan<byte> buffer, byte[] destination, bool verifyChecksum = true )
         {
+            if ( buffer.Length < HeaderLength + FooterLength )
+            {
+                throw new InvalidDataException( $"VZstd data is too short (was {buffer.Length} bytes)." );
+            }
+
             if ( MemoryMarshal.Read<uint>( buffer ) != VZstdHeader )
             {
                 throw new InvalidDataException( "Expecting VZstdHeader at start of stream" );
             }
 
             var crc32 = MemoryMarshal.Read<int>( buffer[ 4.. ] );
-            var crc32_footer = MemoryMarshal.Read<int>( buffer[ ^15.. ] );
+            var crc32_footer = MemoryMarshal.Read<int>( buffer[ ^FooterLength.. ] );
             var sizeDecompressed = MemoryMarshal.Read<int>( buffer[ ^11.. ] );
 
             Debug.Assert( crc32 == crc32_footer ); // They write CRC32 twice?
@@ -35,11 +42,18 @@ namespace SteamKit2
 
             using var zstdDecompressor = new ZstdSharp.Decompressor();
 
-            var input = buffer[ 8..^15 ];
+            var input = buffer[ HeaderLength..^FooterLength ];
 
-            if ( !zstdDecompressor.TryUnwrap( input, destination, out var sizeWritten ) || sizeDecompressed != sizeWritten )
+            try
             {
-                throw new InvalidDataException( $"Failed to decompress Zstd (expected {sizeDecompressed} bytes, got {sizeWritten})." );
+                if ( !zstdDecompressor.TryUnwrap( input, destination, out var sizeWritten ) || sizeDecompressed != sizeWritten )
+                {
+                    throw new InvalidDataException( $"Failed to decompress Zstd (expected {sizeDecompressed} bytes, got {sizeWritten})." );
+                }
+            }
+            catch ( ZstdSharp.ZstdException ex )
+            {
+                throw new InvalidDataException( "Failed to decompress Zstd.", ex );
             }
 
             if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan()[ ..sizeDecompressed ] ) != crc32_footer )
