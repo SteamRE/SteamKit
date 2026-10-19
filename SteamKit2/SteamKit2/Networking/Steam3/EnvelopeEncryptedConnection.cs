@@ -56,10 +56,19 @@ namespace SteamKit2
                 return;
             }
 
-            var buffer = ArrayPool<byte>.Shared.Rent( encryption!.CalculateMaxEncryptedDataLength( data.Length ) );
+            // A disconnect on the network thread can clear the encryption between the state check and here
+            var currentEncryption = encryption;
+
+            if ( currentEncryption == null )
+            {
+                log.LogDebug( nameof( EnvelopeEncryptedConnection ), "Attempting to send client data when not connected." );
+                return;
+            }
+
+            var buffer = ArrayPool<byte>.Shared.Rent( currentEncryption.CalculateMaxEncryptedDataLength( data.Length ) );
             try
             {
-                var length = encryption!.ProcessOutgoing( data.Span, buffer );
+                var length = currentEncryption.ProcessOutgoing( data.Span, buffer );
                 var segment = new Memory<byte>( buffer, 0, length );
 
                 inner.Send( segment );
