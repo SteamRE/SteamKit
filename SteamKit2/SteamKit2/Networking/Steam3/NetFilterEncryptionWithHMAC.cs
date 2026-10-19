@@ -61,9 +61,13 @@ namespace SteamKit2
         byte[] SymmetricDecryptHMACIV( Span<byte> input )
         {
             Span<byte> iv = stackalloc byte[ InitializationVectorLength ];
+            byte[] plainText;
 
-            aes.DecryptEcb( input[ ..iv.Length ], iv, PaddingMode.None );
-            byte[] plainText = aes.DecryptCbc( input[ iv.Length.. ], iv, PaddingMode.PKCS7 );
+            lock ( aes )
+            {
+                aes.DecryptEcb( input[ ..iv.Length ], iv, PaddingMode.None );
+                plainText = aes.DecryptCbc( input[ iv.Length.. ], iv, PaddingMode.PKCS7 );
+            }
 
             ValidateInitializationVector( plainText, iv );
 
@@ -83,10 +87,13 @@ namespace SteamKit2
             var outputSpan = output.AsSpan();
 
             // final output is 16 byte ecb crypted IV + cbc crypted plaintext
-            var cryptedIvLength = aes.EncryptEcb( iv, outputSpan, PaddingMode.None );
-            var cipherTextLength = aes.EncryptCbc( input, iv, outputSpan[ cryptedIvLength.. ], PaddingMode.PKCS7 );
+            lock ( aes )
+            {
+                var cryptedIvLength = aes.EncryptEcb( iv, outputSpan, PaddingMode.None );
+                var cipherTextLength = aes.EncryptCbc( input, iv, outputSpan[ cryptedIvLength.. ], PaddingMode.PKCS7 );
 
-            return cryptedIvLength + cipherTextLength;
+                return cryptedIvLength + cipherTextLength;
+            }
         }
 
         void GenerateInitializationVector( Span<byte> plainText, Span<byte> iv )
