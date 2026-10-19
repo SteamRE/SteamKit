@@ -1,5 +1,29 @@
 ------------------------------------------------------------------------------
-v 3.4.0			January 14 2025
+v 3.5.0			October 19 2026
+------------------------------------------------------------------------------
+
+* Added `CallbackManager.Subscribe` overloads that accept callbacks returning `Task`.
+* Added `SteamClient.GetRequiredHandler<T>`, which throws if the handler is not registered.
+* Added `SteamUserStats.DownloadLeaderboardEntriesForUsers`.
+* Added `BypassProxiesOfType` to CDN `Server`.
+* Replaced the vendored LZMA decoder with a span-based decoder.
+* Vectorized Adler-32 checksums.
+* Fixed `GetAuthSessionTicket` hanging or throwing "Ticket verification failed" when called repeatedly.
+* Fixed a crash or disconnect when messages were sent from multiple threads at the same time on an encrypted connection.
+* Fixed a `NullReferenceException` when sending a message while an encrypted connection is disconnecting.
+* Fixed an exception when closing an already disposed websocket.
+* Fixed decrypted depot chunk length validation.
+* Short or corrupt VZstd chunks now throw `InvalidDataException`.
+* Updated Steam enums and protobufs.
+* Updated dependencies.
+
+BREAKING CHANGES
+* `SteamCloud` now uses unified messages: `RequestUGCDetails`, `GetSingleFileInfo` and `ShareFile` return `Task`, and their callbacks no longer derive from `CallbackMsg`.
+* Removed the deprecated `IsSteamDeck` from `LogOnDetails`, use `GamingDeviceType` instead.
+* Removed `steammessages_clientserver_ufs` protobufs.
+
+------------------------------------------------------------------------------
+v 3.4.0			January 14 2026
 ------------------------------------------------------------------------------
 
 * Added `UserCountryCode` to `LoggedOnCallback`.
