@@ -165,9 +165,10 @@ namespace SteamKit2.WebUI.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
+        [global::System.ComponentModel.DefaultValue(0)]
         public int validation_failure
         {
-            get => __pbn__validation_failure.GetValueOrDefault();
+            get => __pbn__validation_failure ?? 0;
             set => __pbn__validation_failure = value;
         }
         public bool ShouldSerializevalidation_failure() => __pbn__validation_failure != null;

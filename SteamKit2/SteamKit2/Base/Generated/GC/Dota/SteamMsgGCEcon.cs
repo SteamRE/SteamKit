@@ -581,6 +581,16 @@ namespace SteamKit2.GC.Dota.Internal
         public void Resetescalation_level3() => __pbn__escalation_level3 = null;
         private uint? __pbn__escalation_level3;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public uint escalation_level4
+        {
+            get => __pbn__escalation_level4.GetValueOrDefault();
+            set => __pbn__escalation_level4 = value;
+        }
+        public bool ShouldSerializeescalation_level4() => __pbn__escalation_level4 != null;
+        public void Resetescalation_level4() => __pbn__escalation_level4 = null;
+        private uint? __pbn__escalation_level4;
+
         [global::ProtoBuf.ProtoContract()]
         public enum EResult
         {
@@ -3737,16 +3747,6 @@ namespace SteamKit2.GC.Dota.Internal
             public bool ShouldSerializedefault_price() => __pbn__default_price != null;
             public void Resetdefault_price() => __pbn__default_price = null;
             private bool? __pbn__default_price;
-
-            [global::ProtoBuf.ProtoMember(9)]
-            public bool is_user_facing
-            {
-                get => __pbn__is_user_facing.GetValueOrDefault();
-                set => __pbn__is_user_facing = value;
-            }
-            public bool ShouldSerializeis_user_facing() => __pbn__is_user_facing != null;
-            public void Resetis_user_facing() => __pbn__is_user_facing = null;
-            private bool? __pbn__is_user_facing;
 
             [global::ProtoBuf.ProtoMember(11)]
             public int price_index

@@ -429,6 +429,89 @@ namespace SteamKit2.Internal
         public void Resettrace_tag() => __pbn__trace_tag = null;
         private ulong? __pbn__trace_tag;
 
+        [global::ProtoBuf.ProtoMember(46)]
+        public uint wg_msg_trace_flags
+        {
+            get => __pbn__wg_msg_trace_flags.GetValueOrDefault();
+            set => __pbn__wg_msg_trace_flags = value;
+        }
+        public bool ShouldSerializewg_msg_trace_flags() => __pbn__wg_msg_trace_flags != null;
+        public void Resetwg_msg_trace_flags() => __pbn__wg_msg_trace_flags = null;
+        private uint? __pbn__wg_msg_trace_flags;
+
+        [global::ProtoBuf.ProtoMember(47)]
+        public uint wg_msg_trace_instance
+        {
+            get => __pbn__wg_msg_trace_instance.GetValueOrDefault();
+            set => __pbn__wg_msg_trace_instance = value;
+        }
+        public bool ShouldSerializewg_msg_trace_instance() => __pbn__wg_msg_trace_instance != null;
+        public void Resetwg_msg_trace_instance() => __pbn__wg_msg_trace_instance = null;
+        private uint? __pbn__wg_msg_trace_instance;
+
+        [global::ProtoBuf.ProtoMember(48)]
+        public uint wg_msg_trace_gid
+        {
+            get => __pbn__wg_msg_trace_gid.GetValueOrDefault();
+            set => __pbn__wg_msg_trace_gid = value;
+        }
+        public bool ShouldSerializewg_msg_trace_gid() => __pbn__wg_msg_trace_gid != null;
+        public void Resetwg_msg_trace_gid() => __pbn__wg_msg_trace_gid = null;
+        private uint? __pbn__wg_msg_trace_gid;
+
+        [global::ProtoBuf.ProtoMember(49)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wg_msg_trace_token
+        {
+            get => __pbn__wg_msg_trace_token ?? "";
+            set => __pbn__wg_msg_trace_token = value;
+        }
+        public bool ShouldSerializewg_msg_trace_token() => __pbn__wg_msg_trace_token != null;
+        public void Resetwg_msg_trace_token() => __pbn__wg_msg_trace_token = null;
+        private string __pbn__wg_msg_trace_token;
+
+        [global::ProtoBuf.ProtoMember(50, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong wg_msg_trace_steamid
+        {
+            get => __pbn__wg_msg_trace_steamid.GetValueOrDefault();
+            set => __pbn__wg_msg_trace_steamid = value;
+        }
+        public bool ShouldSerializewg_msg_trace_steamid() => __pbn__wg_msg_trace_steamid != null;
+        public void Resetwg_msg_trace_steamid() => __pbn__wg_msg_trace_steamid = null;
+        private ulong? __pbn__wg_msg_trace_steamid;
+
+        [global::ProtoBuf.ProtoMember(51)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string wg_msg_trace_status
+        {
+            get => __pbn__wg_msg_trace_status ?? "";
+            set => __pbn__wg_msg_trace_status = value;
+        }
+        public bool ShouldSerializewg_msg_trace_status() => __pbn__wg_msg_trace_status != null;
+        public void Resetwg_msg_trace_status() => __pbn__wg_msg_trace_status = null;
+        private string __pbn__wg_msg_trace_status;
+
+        [global::ProtoBuf.ProtoMember(52)]
+        public uint trace_flags
+        {
+            get => __pbn__trace_flags.GetValueOrDefault();
+            set => __pbn__trace_flags = value;
+        }
+        public bool ShouldSerializetrace_flags() => __pbn__trace_flags != null;
+        public void Resettrace_flags() => __pbn__trace_flags = null;
+        private uint? __pbn__trace_flags;
+
+        [global::ProtoBuf.ProtoMember(53)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string browserapi_site
+        {
+            get => __pbn__browserapi_site ?? "";
+            set => __pbn__browserapi_site = value;
+        }
+        public bool ShouldSerializebrowserapi_site() => __pbn__browserapi_site != null;
+        public void Resetbrowserapi_site() => __pbn__browserapi_site = null;
+        private string __pbn__browserapi_site;
+
         [global::ProtoBuf.ProtoMember(15)]
         public uint ip
         {

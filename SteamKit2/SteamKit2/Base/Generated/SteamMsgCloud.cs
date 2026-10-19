@@ -362,6 +362,16 @@ namespace SteamKit2.Internal
         public void Resetcontent_type() => __pbn__content_type = null;
         private string __pbn__content_type;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public bool is_public
+        {
+            get => __pbn__is_public.GetValueOrDefault();
+            set => __pbn__is_public = value;
+        }
+        public bool ShouldSerializeis_public() => __pbn__is_public != null;
+        public void Resetis_public() => __pbn__is_public = null;
+        private bool? __pbn__is_public;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

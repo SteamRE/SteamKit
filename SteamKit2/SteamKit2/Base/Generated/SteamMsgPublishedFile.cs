@@ -4309,6 +4309,16 @@ namespace SteamKit2.Internal
             public void Resetreported() => __pbn__reported = null;
             private bool? __pbn__reported;
 
+            [global::ProtoBuf.ProtoMember(5)]
+            public bool vote_later
+            {
+                get => __pbn__vote_later.GetValueOrDefault();
+                set => __pbn__vote_later = value;
+            }
+            public bool ShouldSerializevote_later() => __pbn__vote_later != null;
+            public void Resetvote_later() => __pbn__vote_later = null;
+            private bool? __pbn__vote_later;
+
         }
 
     }
@@ -4569,6 +4579,160 @@ namespace SteamKit2.Internal
         public bool ShouldSerializetimestamp_updated() => __pbn__timestamp_updated != null;
         public void Resettimestamp_updated() => __pbn__timestamp_updated = null;
         private uint? __pbn__timestamp_updated;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_SanctionPublishedFile_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong publishedfileid
+        {
+            get => __pbn__publishedfileid.GetValueOrDefault();
+            set => __pbn__publishedfileid = value;
+        }
+        public bool ShouldSerializepublishedfileid() => __pbn__publishedfileid != null;
+        public void Resetpublishedfileid() => __pbn__publishedfileid = null;
+        private ulong? __pbn__publishedfileid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EContentReportReason.k_EContentReportReason_Invalid)]
+        public EContentReportReason reason
+        {
+            get => __pbn__reason ?? EContentReportReason.k_EContentReportReason_Invalid;
+            set => __pbn__reason = value;
+        }
+        public bool ShouldSerializereason() => __pbn__reason != null;
+        public void Resetreason() => __pbn__reason = null;
+        private EContentReportReason? __pbn__reason;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string note
+        {
+            get => __pbn__note ?? "";
+            set => __pbn__note = value;
+        }
+        public bool ShouldSerializenote() => __pbn__note != null;
+        public void Resetnote() => __pbn__note = null;
+        private string __pbn__note;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue(EResolutionAutomation.k_EResolutionAutomation_Manual)]
+        public EResolutionAutomation resolved_by_automation
+        {
+            get => __pbn__resolved_by_automation ?? EResolutionAutomation.k_EResolutionAutomation_Manual;
+            set => __pbn__resolved_by_automation = value;
+        }
+        public bool ShouldSerializeresolved_by_automation() => __pbn__resolved_by_automation != null;
+        public void Resetresolved_by_automation() => __pbn__resolved_by_automation = null;
+        private EResolutionAutomation? __pbn__resolved_by_automation;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public global::System.Collections.Generic.List<Sanction> sanctions { get; } = new global::System.Collections.Generic.List<Sanction>();
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Sanction : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            [global::System.ComponentModel.DefaultValue(EContentModerationSanction.k_EContentModerationSanction_Invalid)]
+            public EContentModerationSanction sanction
+            {
+                get => __pbn__sanction ?? EContentModerationSanction.k_EContentModerationSanction_Invalid;
+                set => __pbn__sanction = value;
+            }
+            public bool ShouldSerializesanction() => __pbn__sanction != null;
+            public void Resetsanction() => __pbn__sanction = null;
+            private EContentModerationSanction? __pbn__sanction;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public int days
+            {
+                get => __pbn__days.GetValueOrDefault();
+                set => __pbn__days = value;
+            }
+            public bool ShouldSerializedays() => __pbn__days != null;
+            public void Resetdays() => __pbn__days = null;
+            private int? __pbn__days;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            [global::System.ComponentModel.DefaultValue(EContentModeratorLevel.k_EContentModeratorLevel_Any)]
+            public EContentModeratorLevel escalate_to
+            {
+                get => __pbn__escalate_to ?? EContentModeratorLevel.k_EContentModeratorLevel_Any;
+                set => __pbn__escalate_to = value;
+            }
+            public bool ShouldSerializeescalate_to() => __pbn__escalate_to != null;
+            public void Resetescalate_to() => __pbn__escalate_to = null;
+            private EContentModeratorLevel? __pbn__escalate_to;
+
+        }
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_SanctionPublishedFile_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public bool force_unbanned
+        {
+            get => __pbn__force_unbanned.GetValueOrDefault();
+            set => __pbn__force_unbanned = value;
+        }
+        public bool ShouldSerializeforce_unbanned() => __pbn__force_unbanned != null;
+        public void Resetforce_unbanned() => __pbn__force_unbanned = null;
+        private bool? __pbn__force_unbanned;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_AcquitPublishedFile_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong publishedfileid
+        {
+            get => __pbn__publishedfileid.GetValueOrDefault();
+            set => __pbn__publishedfileid = value;
+        }
+        public bool ShouldSerializepublishedfileid() => __pbn__publishedfileid != null;
+        public void Resetpublishedfileid() => __pbn__publishedfileid = null;
+        private ulong? __pbn__publishedfileid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue(EResolutionAutomation.k_EResolutionAutomation_Manual)]
+        public EResolutionAutomation resolved_by_automation
+        {
+            get => __pbn__resolved_by_automation ?? EResolutionAutomation.k_EResolutionAutomation_Manual;
+            set => __pbn__resolved_by_automation = value;
+        }
+        public bool ShouldSerializeresolved_by_automation() => __pbn__resolved_by_automation != null;
+        public void Resetresolved_by_automation() => __pbn__resolved_by_automation = null;
+        private EResolutionAutomation? __pbn__resolved_by_automation;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CPublishedFile_AcquitPublishedFile_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
     }
 
@@ -4998,6 +5162,16 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CPublishedFile_UpdateContentDescriptors_Request, CPublishedFile_UpdateContentDescriptors_Response>( "PublishedFile.UpdateContentDescriptors#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SanctionPublishedFile_Response>> SanctionPublishedFile( CPublishedFile_SanctionPublishedFile_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_SanctionPublishedFile_Request, CPublishedFile_SanctionPublishedFile_Response>( "PublishedFile.SanctionPublishedFile#1", request );
+        }
+
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AcquitPublishedFile_Response>> AcquitPublishedFile( CPublishedFile_AcquitPublishedFile_Request request )
+        {
+            return UnifiedMessages.SendMessage<CPublishedFile_AcquitPublishedFile_Request, CPublishedFile_AcquitPublishedFile_Response>( "PublishedFile.AcquitPublishedFile#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -5100,6 +5274,12 @@ namespace SteamKit2.Internal
                     break;
                 case "UpdateContentDescriptors":
                     PostResponseMsg<CPublishedFile_UpdateContentDescriptors_Response>( packetMsg );
+                    break;
+                case "SanctionPublishedFile":
+                    PostResponseMsg<CPublishedFile_SanctionPublishedFile_Response>( packetMsg );
+                    break;
+                case "AcquitPublishedFile":
+                    PostResponseMsg<CPublishedFile_AcquitPublishedFile_Response>( packetMsg );
                     break;
             }
         }

@@ -3576,14 +3576,14 @@ namespace SteamKit2.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public float stage_progress
+        public float total_progress
         {
-            get => __pbn__stage_progress.GetValueOrDefault();
-            set => __pbn__stage_progress = value;
+            get => __pbn__total_progress.GetValueOrDefault();
+            set => __pbn__total_progress = value;
         }
-        public bool ShouldSerializestage_progress() => __pbn__stage_progress != null;
-        public void Resetstage_progress() => __pbn__stage_progress = null;
-        private float? __pbn__stage_progress;
+        public bool ShouldSerializetotal_progress() => __pbn__total_progress != null;
+        public void Resettotal_progress() => __pbn__total_progress = null;
+        private float? __pbn__total_progress;
 
         [global::ProtoBuf.ProtoMember(2)]
         public long stage_size_bytes
@@ -3604,6 +3604,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializertime_estimated_completion() => __pbn__rtime_estimated_completion != null;
         public void Resetrtime_estimated_completion() => __pbn__rtime_estimated_completion = null;
         private uint? __pbn__rtime_estimated_completion;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        public long stage_bytes_downloaded
+        {
+            get => __pbn__stage_bytes_downloaded.GetValueOrDefault();
+            set => __pbn__stage_bytes_downloaded = value;
+        }
+        public bool ShouldSerializestage_bytes_downloaded() => __pbn__stage_bytes_downloaded != null;
+        public void Resetstage_bytes_downloaded() => __pbn__stage_bytes_downloaded = null;
+        private long? __pbn__stage_bytes_downloaded;
 
     }
 
@@ -3699,6 +3709,9 @@ namespace SteamKit2.Internal
 
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<EUpdaterType> apply_types { get; } = new global::System.Collections.Generic.List<EUpdaterType>();
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<EUpdaterType> recheck_types { get; } = new global::System.Collections.Generic.List<EUpdaterType>();
 
     }
 

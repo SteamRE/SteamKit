@@ -601,6 +601,16 @@ namespace SteamKit2.Internal
         public void Resetinclude_extended_appinfo() => __pbn__include_extended_appinfo = null;
         private bool? __pbn__include_extended_appinfo;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public bool include_family_licenses
+        {
+            get => __pbn__include_family_licenses.GetValueOrDefault();
+            set => __pbn__include_family_licenses = value;
+        }
+        public bool ShouldSerializeinclude_family_licenses() => __pbn__include_family_licenses != null;
+        public void Resetinclude_family_licenses() => __pbn__include_family_licenses = null;
+        private bool? __pbn__include_family_licenses;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -817,6 +827,16 @@ namespace SteamKit2.Internal
             public void Resetplaytime_disconnected() => __pbn__playtime_disconnected = null;
             private int? __pbn__playtime_disconnected;
 
+            [global::ProtoBuf.ProtoMember(21)]
+            public bool family_shared
+            {
+                get => __pbn__family_shared.GetValueOrDefault();
+                set => __pbn__family_shared = value;
+            }
+            public bool ShouldSerializefamily_shared() => __pbn__family_shared != null;
+            public void Resetfamily_shared() => __pbn__family_shared = null;
+            private bool? __pbn__family_shared;
+
         }
 
     }
@@ -881,6 +901,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeappid() => __pbn__appid != null;
         public void Resetappid() => __pbn__appid = null;
         private uint? __pbn__appid;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public bool include_family_licenses
+        {
+            get => __pbn__include_family_licenses.GetValueOrDefault();
+            set => __pbn__include_family_licenses = value;
+        }
+        public bool ShouldSerializeinclude_family_licenses() => __pbn__include_family_licenses != null;
+        public void Resetinclude_family_licenses() => __pbn__include_family_licenses = null;
+        private bool? __pbn__include_family_licenses;
 
     }
 
@@ -2261,6 +2291,56 @@ namespace SteamKit2.Internal
             public void Resetvetted() => __pbn__vetted = null;
             private bool? __pbn__vetted;
 
+            [global::ProtoBuf.ProtoMember(8)]
+            public uint groups_completed_base
+            {
+                get => __pbn__groups_completed_base.GetValueOrDefault();
+                set => __pbn__groups_completed_base = value;
+            }
+            public bool ShouldSerializegroups_completed_base() => __pbn__groups_completed_base != null;
+            public void Resetgroups_completed_base() => __pbn__groups_completed_base = null;
+            private uint? __pbn__groups_completed_base;
+
+            [global::ProtoBuf.ProtoMember(9)]
+            public uint groups_total_base
+            {
+                get => __pbn__groups_total_base.GetValueOrDefault();
+                set => __pbn__groups_total_base = value;
+            }
+            public bool ShouldSerializegroups_total_base() => __pbn__groups_total_base != null;
+            public void Resetgroups_total_base() => __pbn__groups_total_base = null;
+            private uint? __pbn__groups_total_base;
+
+            [global::ProtoBuf.ProtoMember(10)]
+            public uint groups_completed_dlc
+            {
+                get => __pbn__groups_completed_dlc.GetValueOrDefault();
+                set => __pbn__groups_completed_dlc = value;
+            }
+            public bool ShouldSerializegroups_completed_dlc() => __pbn__groups_completed_dlc != null;
+            public void Resetgroups_completed_dlc() => __pbn__groups_completed_dlc = null;
+            private uint? __pbn__groups_completed_dlc;
+
+            [global::ProtoBuf.ProtoMember(11)]
+            public uint groups_total_dlc
+            {
+                get => __pbn__groups_total_dlc.GetValueOrDefault();
+                set => __pbn__groups_total_dlc = value;
+            }
+            public bool ShouldSerializegroups_total_dlc() => __pbn__groups_total_dlc != null;
+            public void Resetgroups_total_dlc() => __pbn__groups_total_dlc = null;
+            private uint? __pbn__groups_total_dlc;
+
+            [global::ProtoBuf.ProtoMember(12)]
+            public uint base_game_total
+            {
+                get => __pbn__base_game_total.GetValueOrDefault();
+                set => __pbn__base_game_total = value;
+            }
+            public bool ShouldSerializebase_game_total() => __pbn__base_game_total != null;
+            public void Resetbase_game_total() => __pbn__base_game_total = null;
+            private uint? __pbn__base_game_total;
+
         }
 
     }
@@ -2774,6 +2854,16 @@ namespace SteamKit2.Internal
             public void Resetis_completed() => __pbn__is_completed = null;
             private bool? __pbn__is_completed;
 
+            [global::ProtoBuf.ProtoMember(9, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+            public uint time_completed
+            {
+                get => __pbn__time_completed.GetValueOrDefault();
+                set => __pbn__time_completed = value;
+            }
+            public bool ShouldSerializetime_completed() => __pbn__time_completed != null;
+            public void Resettime_completed() => __pbn__time_completed = null;
+            private uint? __pbn__time_completed;
+
         }
 
     }
@@ -2807,6 +2897,9 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(1)]
         public global::System.Collections.Generic.List<Achievement> achievements { get; } = new global::System.Collections.Generic.List<Achievement>();
 
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<Group> groups { get; } = new global::System.Collections.Generic.List<Group>();
+
         [global::ProtoBuf.ProtoContract()]
         public partial class Achievement : global::ProtoBuf.IExtensible
         {
@@ -2833,6 +2926,35 @@ namespace SteamKit2.Internal
             public bool ShouldSerializeplayer_percent_unlocked() => __pbn__player_percent_unlocked != null;
             public void Resetplayer_percent_unlocked() => __pbn__player_percent_unlocked = null;
             private float? __pbn__player_percent_unlocked;
+
+        }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class Group : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint groupid
+            {
+                get => __pbn__groupid.GetValueOrDefault();
+                set => __pbn__groupid = value;
+            }
+            public bool ShouldSerializegroupid() => __pbn__groupid != null;
+            public void Resetgroupid() => __pbn__groupid = null;
+            private uint? __pbn__groupid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public float player_percent_completed
+            {
+                get => __pbn__player_percent_completed.GetValueOrDefault();
+                set => __pbn__player_percent_completed = value;
+            }
+            public bool ShouldSerializeplayer_percent_completed() => __pbn__player_percent_completed != null;
+            public void Resetplayer_percent_completed() => __pbn__player_percent_completed = null;
+            private float? __pbn__player_percent_completed;
 
         }
 

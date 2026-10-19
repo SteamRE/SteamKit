@@ -138,14 +138,14 @@ namespace SteamKit2.WebUI.Internal
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1)]
-        public long gidshoppingcart
+        public ulong gidshoppingcart
         {
             get => __pbn__gidshoppingcart.GetValueOrDefault();
             set => __pbn__gidshoppingcart = value;
         }
         public bool ShouldSerializegidshoppingcart() => __pbn__gidshoppingcart != null;
         public void Resetgidshoppingcart() => __pbn__gidshoppingcart = null;
-        private long? __pbn__gidshoppingcart;
+        private ulong? __pbn__gidshoppingcart;
 
         [global::ProtoBuf.ProtoMember(2)]
         public StoreBrowseContext context { get; set; }

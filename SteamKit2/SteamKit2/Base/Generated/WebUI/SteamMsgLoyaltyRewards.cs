@@ -825,9 +825,10 @@ namespace SteamKit2.WebUI.Internal
         private string __pbn__cursor;
 
         [global::ProtoBuf.ProtoMember(7)]
+        [global::System.ComponentModel.DefaultValue(1)]
         public int sort
         {
-            get => __pbn__sort.GetValueOrDefault();
+            get => __pbn__sort ?? 1;
             set => __pbn__sort = value;
         }
         public bool ShouldSerializesort() => __pbn__sort != null;

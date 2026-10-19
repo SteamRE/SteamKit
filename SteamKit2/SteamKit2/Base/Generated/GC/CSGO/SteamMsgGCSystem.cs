@@ -589,7 +589,7 @@ namespace SteamKit2.GC.CSGO.Internal
         k_EGCMsgLookupAccountFromInput = 66,
         k_EGCMsgSendHTTPRequest = 67,
         k_EGCMsgSendHTTPRequestResponse = 68,
-        k_EGCMsgPreTestSetup = 69,
+        k_EGCMsgPreTestSetup_DEPRECATED = 69,
         k_EGCMsgRecordSupportAction = 70,
         k_EGCMsgGetAccountDetails_DEPRECATED = 71,
         k_EGCMsgReceiveInterAppMessage = 73,

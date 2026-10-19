@@ -521,6 +521,16 @@ namespace SteamKit2.Internal
         [global::ProtoBuf.ProtoMember(12)]
         public global::System.Collections.Generic.List<StoreItemID> recommended_items { get; } = new global::System.Collections.Generic.List<StoreItemID>();
 
+        [global::ProtoBuf.ProtoMember(13)]
+        public uint sale_item_count
+        {
+            get => __pbn__sale_item_count.GetValueOrDefault();
+            set => __pbn__sale_item_count = value;
+        }
+        public bool ShouldSerializesale_item_count() => __pbn__sale_item_count != null;
+        public void Resetsale_item_count() => __pbn__sale_item_count = null;
+        private uint? __pbn__sale_item_count;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1419,7 +1429,8 @@ namespace SteamKit2.Internal
         k_EMarketingMessageTemplate_Replay = 5,
         k_EMarketingMessageTemplate_Event = 6,
         k_EMarketingMessageTemplate_AutoRender = 7,
-        k_EMarketingMessageTemplate_MAX = 8,
+        k_EMarketingMessageTemplate_SaleItems = 8,
+        k_EMarketingMessageTemplate_MAX = 9,
     }
 
     [global::ProtoBuf.ProtoContract()]

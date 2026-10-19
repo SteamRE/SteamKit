@@ -1967,66 +1967,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CCloudGaming_CreateNonce_Request : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string platform
-        {
-            get => __pbn__platform ?? "";
-            set => __pbn__platform = value;
-        }
-        public bool ShouldSerializeplatform() => __pbn__platform != null;
-        public void Resetplatform() => __pbn__platform = null;
-        private string __pbn__platform;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint appid
-        {
-            get => __pbn__appid.GetValueOrDefault();
-            set => __pbn__appid = value;
-        }
-        public bool ShouldSerializeappid() => __pbn__appid != null;
-        public void Resetappid() => __pbn__appid = null;
-        private uint? __pbn__appid;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CCloudGaming_CreateNonce_Response : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string nonce
-        {
-            get => __pbn__nonce ?? "";
-            set => __pbn__nonce = value;
-        }
-        public bool ShouldSerializenonce() => __pbn__nonce != null;
-        public void Resetnonce() => __pbn__nonce = null;
-        private string __pbn__nonce;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public uint expiry
-        {
-            get => __pbn__expiry.GetValueOrDefault();
-            set => __pbn__expiry = value;
-        }
-        public bool ShouldSerializeexpiry() => __pbn__expiry != null;
-        public void Resetexpiry() => __pbn__expiry = null;
-        private uint? __pbn__expiry;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CCloudGaming_GetTimeRemaining_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2362,11 +2302,6 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "CloudGaming";
 
-        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudGaming_CreateNonce_Response>> CreateNonce( CCloudGaming_CreateNonce_Request request )
-        {
-            return UnifiedMessages.SendMessage<CCloudGaming_CreateNonce_Request, CCloudGaming_CreateNonce_Response>( "CloudGaming.CreateNonce#1", request );
-        }
-
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudGaming_GetTimeRemaining_Response>> GetTimeRemaining( CCloudGaming_GetTimeRemaining_Request request )
         {
             return UnifiedMessages.SendMessage<CCloudGaming_GetTimeRemaining_Request, CCloudGaming_GetTimeRemaining_Response>( "CloudGaming.GetTimeRemaining#1", request );
@@ -2376,9 +2311,6 @@ namespace SteamKit2.Internal
         {
             switch ( methodName )
             {
-                case "CreateNonce":
-                    PostResponseMsg<CCloudGaming_CreateNonce_Response>( packetMsg );
-                    break;
                 case "GetTimeRemaining":
                     PostResponseMsg<CCloudGaming_GetTimeRemaining_Response>( packetMsg );
                     break;

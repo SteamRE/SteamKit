@@ -1137,93 +1137,6 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgApplyStrangePart : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong strange_part_item_id
-        {
-            get => __pbn__strange_part_item_id.GetValueOrDefault();
-            set => __pbn__strange_part_item_id = value;
-        }
-        public bool ShouldSerializestrange_part_item_id() => __pbn__strange_part_item_id != null;
-        public void Resetstrange_part_item_id() => __pbn__strange_part_item_id = null;
-        private ulong? __pbn__strange_part_item_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong item_item_id
-        {
-            get => __pbn__item_item_id.GetValueOrDefault();
-            set => __pbn__item_item_id = value;
-        }
-        public bool ShouldSerializeitem_item_id() => __pbn__item_item_id != null;
-        public void Resetitem_item_id() => __pbn__item_item_id = null;
-        private ulong? __pbn__item_item_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgApplyPennantUpgrade : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong upgrade_item_id
-        {
-            get => __pbn__upgrade_item_id.GetValueOrDefault();
-            set => __pbn__upgrade_item_id = value;
-        }
-        public bool ShouldSerializeupgrade_item_id() => __pbn__upgrade_item_id != null;
-        public void Resetupgrade_item_id() => __pbn__upgrade_item_id = null;
-        private ulong? __pbn__upgrade_item_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong pennant_item_id
-        {
-            get => __pbn__pennant_item_id.GetValueOrDefault();
-            set => __pbn__pennant_item_id = value;
-        }
-        public bool ShouldSerializepennant_item_id() => __pbn__pennant_item_id != null;
-        public void Resetpennant_item_id() => __pbn__pennant_item_id = null;
-        private ulong? __pbn__pennant_item_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgApplyEggEssence : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong essence_item_id
-        {
-            get => __pbn__essence_item_id.GetValueOrDefault();
-            set => __pbn__essence_item_id = value;
-        }
-        public bool ShouldSerializeessence_item_id() => __pbn__essence_item_id != null;
-        public void Resetessence_item_id() => __pbn__essence_item_id = null;
-        private ulong? __pbn__essence_item_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong egg_item_id
-        {
-            get => __pbn__egg_item_id.GetValueOrDefault();
-            set => __pbn__egg_item_id = value;
-        }
-        public bool ShouldSerializeegg_item_id() => __pbn__egg_item_id != null;
-        public void Resetegg_item_id() => __pbn__egg_item_id = null;
-        private ulong? __pbn__egg_item_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CSOEconItemAttribute : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1485,6 +1398,97 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgDeleteItem : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong item_id
+        {
+            get => __pbn__item_id.GetValueOrDefault();
+            set => __pbn__item_id = value;
+        }
+        public bool ShouldSerializeitem_id() => __pbn__item_id != null;
+        public void Resetitem_id() => __pbn__item_id = null;
+        private ulong? __pbn__item_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgModifyItemStringAttr : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong tool_item_id
+        {
+            get => __pbn__tool_item_id.GetValueOrDefault();
+            set => __pbn__tool_item_id = value;
+        }
+        public bool ShouldSerializetool_item_id() => __pbn__tool_item_id != null;
+        public void Resettool_item_id() => __pbn__tool_item_id = null;
+        private ulong? __pbn__tool_item_id;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public ulong subject_item_id
+        {
+            get => __pbn__subject_item_id.GetValueOrDefault();
+            set => __pbn__subject_item_id = value;
+        }
+        public bool ShouldSerializesubject_item_id() => __pbn__subject_item_id != null;
+        public void Resetsubject_item_id() => __pbn__subject_item_id = null;
+        private ulong? __pbn__subject_item_id;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public uint attr_def
+        {
+            get => __pbn__attr_def.GetValueOrDefault();
+            set => __pbn__attr_def = value;
+        }
+        public bool ShouldSerializeattr_def() => __pbn__attr_def != null;
+        public void Resetattr_def() => __pbn__attr_def = null;
+        private uint? __pbn__attr_def;
+
+        [global::ProtoBuf.ProtoMember(4)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string attr_value
+        {
+            get => __pbn__attr_value ?? "";
+            set => __pbn__attr_value = value;
+        }
+        public bool ShouldSerializeattr_value() => __pbn__attr_value != null;
+        public void Resetattr_value() => __pbn__attr_value = null;
+        private string __pbn__attr_value;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CMsgCraftItemsRequest : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public uint recipe_def
+        {
+            get => __pbn__recipe_def.GetValueOrDefault();
+            set => __pbn__recipe_def = value;
+        }
+        public bool ShouldSerializerecipe_def() => __pbn__recipe_def != null;
+        public void Resetrecipe_def() => __pbn__recipe_def = null;
+        private uint? __pbn__recipe_def;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        public global::System.Collections.Generic.List<ulong> craft_items { get; } = new global::System.Collections.Generic.List<ulong>();
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CSOEconClaimCode : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -1721,16 +1725,6 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(3)]
         public global::System.Collections.Generic.List<uint> gift__potential_targets { get; } = new global::System.Collections.Generic.List<uint>();
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public uint duel__class_lock
-        {
-            get => __pbn__duel__class_lock.GetValueOrDefault();
-            set => __pbn__duel__class_lock = value;
-        }
-        public bool ShouldSerializeduel__class_lock() => __pbn__duel__class_lock != null;
-        public void Resetduel__class_lock() => __pbn__duel__class_lock = null;
-        private uint? __pbn__duel__class_lock;
 
         [global::ProtoBuf.ProtoMember(5, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
         public ulong initiator_steam_id
@@ -2095,43 +2089,6 @@ namespace SteamKit2.GC.CSGO.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCClientDisplayNotification : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string notification_title_localization_key
-        {
-            get => __pbn__notification_title_localization_key ?? "";
-            set => __pbn__notification_title_localization_key = value;
-        }
-        public bool ShouldSerializenotification_title_localization_key() => __pbn__notification_title_localization_key != null;
-        public void Resetnotification_title_localization_key() => __pbn__notification_title_localization_key = null;
-        private string __pbn__notification_title_localization_key;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        [global::System.ComponentModel.DefaultValue("")]
-        public string notification_body_localization_key
-        {
-            get => __pbn__notification_body_localization_key ?? "";
-            set => __pbn__notification_body_localization_key = value;
-        }
-        public bool ShouldSerializenotification_body_localization_key() => __pbn__notification_body_localization_key != null;
-        public void Resetnotification_body_localization_key() => __pbn__notification_body_localization_key = null;
-        private string __pbn__notification_body_localization_key;
-
-        [global::ProtoBuf.ProtoMember(3)]
-        public global::System.Collections.Generic.List<string> body_substring_keys { get; } = new global::System.Collections.Generic.List<string>();
-
-        [global::ProtoBuf.ProtoMember(4)]
-        public global::System.Collections.Generic.List<string> body_substring_values { get; } = new global::System.Collections.Generic.List<string>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CMsgGCShowItemsPickedUp : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -2353,25 +2310,6 @@ namespace SteamKit2.GC.CSGO.Internal
         public bool ShouldSerializeitem_id() => __pbn__item_id != null;
         public void Resetitem_id() => __pbn__item_id = null;
         private ulong? __pbn__item_id;
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCItemPreviewItemBoughtNotification : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public uint item_def_index
-        {
-            get => __pbn__item_def_index.GetValueOrDefault();
-            set => __pbn__item_def_index = value;
-        }
-        public bool ShouldSerializeitem_def_index() => __pbn__item_def_index != null;
-        public void Resetitem_def_index() => __pbn__item_def_index = null;
-        private uint? __pbn__item_def_index;
 
     }
 
@@ -2687,35 +2625,6 @@ namespace SteamKit2.GC.CSGO.Internal
 
         [global::ProtoBuf.ProtoMember(2)]
         public global::System.Collections.Generic.List<ulong> key_uint64 { get; } = new global::System.Collections.Generic.List<ulong>();
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
-    public partial class CMsgGCCollectItem : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1)]
-        public ulong collection_item_id
-        {
-            get => __pbn__collection_item_id.GetValueOrDefault();
-            set => __pbn__collection_item_id = value;
-        }
-        public bool ShouldSerializecollection_item_id() => __pbn__collection_item_id != null;
-        public void Resetcollection_item_id() => __pbn__collection_item_id = null;
-        private ulong? __pbn__collection_item_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public ulong subject_item_id
-        {
-            get => __pbn__subject_item_id.GetValueOrDefault();
-            set => __pbn__subject_item_id = value;
-        }
-        public bool ShouldSerializesubject_item_id() => __pbn__subject_item_id != null;
-        public void Resetsubject_item_id() => __pbn__subject_item_id = null;
-        private ulong? __pbn__subject_item_id;
 
     }
 

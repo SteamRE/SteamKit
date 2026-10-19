@@ -4881,6 +4881,14 @@ namespace SteamKit2.GC.Deadlock.Internal
         {
             k_eInternalError = 0,
             k_eSuccess = 1,
+            k_eNotAuthor = 2,
+            k_eInvalidBuildID = 3,
+            k_eInvalidName = 4,
+            k_eNameTooLong = 5,
+            k_eDescriptionTooLong = 6,
+            k_eInvalidDetails = 7,
+            k_eStaleVersion = 8,
+            k_eBuildTooLarge = 9,
         }
 
     }
@@ -5043,6 +5051,8 @@ namespace SteamKit2.GC.Deadlock.Internal
             k_eInternalError = 0,
             k_eSuccess = 1,
             k_eTooBusy = 2,
+            k_eMissingHeroID = 3,
+            k_eInvalidLanguages = 4,
         }
 
     }

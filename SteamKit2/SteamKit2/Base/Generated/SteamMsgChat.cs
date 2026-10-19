@@ -4340,6 +4340,16 @@ namespace SteamKit2.Internal
         public void Resetskip_lock() => __pbn__skip_lock = null;
         private bool? __pbn__skip_lock;
 
+        [global::ProtoBuf.ProtoMember(9)]
+        public ulong reported_content_id
+        {
+            get => __pbn__reported_content_id.GetValueOrDefault();
+            set => __pbn__reported_content_id = value;
+        }
+        public bool ShouldSerializereported_content_id() => __pbn__reported_content_id != null;
+        public void Resetreported_content_id() => __pbn__reported_content_id = null;
+        private ulong? __pbn__reported_content_id;
+
     }
 
     [global::ProtoBuf.ProtoContract()]

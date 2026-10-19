@@ -2000,16 +2000,6 @@ namespace SteamKit2.GC.Dota.Internal
             public void Resetgame_time() => __pbn__game_time = null;
             private int? __pbn__game_time;
 
-            [global::ProtoBuf.ProtoMember(5)]
-            public uint replay_time
-            {
-                get => __pbn__replay_time.GetValueOrDefault();
-                set => __pbn__replay_time = value;
-            }
-            public bool ShouldSerializereplay_time() => __pbn__replay_time != null;
-            public void Resetreplay_time() => __pbn__replay_time = null;
-            private uint? __pbn__replay_time;
-
         }
 
         [global::ProtoBuf.ProtoContract()]
@@ -4227,16 +4217,6 @@ namespace SteamKit2.GC.Dota.Internal
         public bool ShouldSerializedota_time() => __pbn__dota_time != null;
         public void Resetdota_time() => __pbn__dota_time = null;
         private int? __pbn__dota_time;
-
-        [global::ProtoBuf.ProtoMember(6)]
-        public float replay_time
-        {
-            get => __pbn__replay_time.GetValueOrDefault();
-            set => __pbn__replay_time = value;
-        }
-        public bool ShouldSerializereplay_time() => __pbn__replay_time != null;
-        public void Resetreplay_time() => __pbn__replay_time = null;
-        private float? __pbn__replay_time;
 
         [global::ProtoBuf.ProtoMember(7)]
         [global::System.ComponentModel.DefaultValue("")]

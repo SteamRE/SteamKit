@@ -723,6 +723,7 @@ namespace SteamKit2.Internal
         k_ECompromiseDetectionType_MaliciousRefund = 5,
         k_ECompromiseDetectionType_Move2FA = 6,
         k_ECompromiseDetectionType_DeviceType = 7,
+        k_ECompromiseDetectionType_LeakedCredentialList = 8,
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -937,7 +938,8 @@ namespace SteamKit2.Internal
         k_EContentModerationSanction_HarassmentBanned = 10,
         k_EContentModerationSanction_HarassmentStrike = 11,
         k_EContentModerationSanction_Escalate = 12,
-        k_EContentModerationSanction_MAX = 13,
+        k_EContentModerationSanction_MarkedIncompatible = 13,
+        k_EContentModerationSanction_MAX = 14,
     }
 
     [global::ProtoBuf.ProtoContract()]

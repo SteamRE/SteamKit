@@ -530,6 +530,44 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_GetPartnerSharedChatGroup_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CFriendMessages_GetPartnerSharedChatGroup_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1)]
+        public ulong chat_group_id
+        {
+            get => __pbn__chat_group_id.GetValueOrDefault();
+            set => __pbn__chat_group_id = value;
+        }
+        public bool ShouldSerializechat_group_id() => __pbn__chat_group_id != null;
+        public void Resetchat_group_id() => __pbn__chat_group_id = null;
+        private ulong? __pbn__chat_group_id;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class CFriendMessages_UpdateMessageReaction_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -781,6 +819,16 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeskip_lock() => __pbn__skip_lock != null;
         public void Resetskip_lock() => __pbn__skip_lock = null;
         private bool? __pbn__skip_lock;
+
+        [global::ProtoBuf.ProtoMember(8)]
+        public ulong reported_content_id
+        {
+            get => __pbn__reported_content_id.GetValueOrDefault();
+            set => __pbn__reported_content_id = value;
+        }
+        public bool ShouldSerializereported_content_id() => __pbn__reported_content_id != null;
+        public void Resetreported_content_id() => __pbn__reported_content_id = null;
+        private ulong? __pbn__reported_content_id;
 
     }
 
@@ -1089,6 +1137,11 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CFriendMessages_IsInFriendsUIBeta_Request, CFriendMessages_IsInFriendsUIBeta_Response>( "FriendMessages.IsInFriendsUIBeta#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_GetPartnerSharedChatGroup_Response>> GetPartnerSharedChatGroup( CFriendMessages_GetPartnerSharedChatGroup_Request request )
+        {
+            return UnifiedMessages.SendMessage<CFriendMessages_GetPartnerSharedChatGroup_Request, CFriendMessages_GetPartnerSharedChatGroup_Response>( "FriendMessages.GetPartnerSharedChatGroup#1", request );
+        }
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_UpdateMessageReaction_Response>> UpdateMessageReaction( CFriendMessages_UpdateMessageReaction_Request request )
         {
             return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( "FriendMessages.UpdateMessageReaction#1", request );
@@ -1124,6 +1177,9 @@ namespace SteamKit2.Internal
                     break;
                 case "IsInFriendsUIBeta":
                     PostResponseMsg<CFriendMessages_IsInFriendsUIBeta_Response>( packetMsg );
+                    break;
+                case "GetPartnerSharedChatGroup":
+                    PostResponseMsg<CFriendMessages_GetPartnerSharedChatGroup_Response>( packetMsg );
                     break;
                 case "UpdateMessageReaction":
                     PostResponseMsg<CFriendMessages_UpdateMessageReaction_Response>( packetMsg );

@@ -97,141 +97,6 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public partial class CSiteManagerClient_TrackedPayments_Notification : global::ProtoBuf.IExtensible
-    {
-        private global::ProtoBuf.IExtension __pbn__extensionData;
-        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
-        public ulong site_id
-        {
-            get => __pbn__site_id.GetValueOrDefault();
-            set => __pbn__site_id = value;
-        }
-        public bool ShouldSerializesite_id() => __pbn__site_id != null;
-        public void Resetsite_id() => __pbn__site_id = null;
-        private ulong? __pbn__site_id;
-
-        [global::ProtoBuf.ProtoMember(2)]
-        public global::System.Collections.Generic.List<Payment> payments { get; } = new global::System.Collections.Generic.List<Payment>();
-
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Payment : global::ProtoBuf.IExtensible
-        {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
-
-            [global::ProtoBuf.ProtoMember(1)]
-            public ulong transid
-            {
-                get => __pbn__transid.GetValueOrDefault();
-                set => __pbn__transid = value;
-            }
-            public bool ShouldSerializetransid() => __pbn__transid != null;
-            public void Resettransid() => __pbn__transid = null;
-            private ulong? __pbn__transid;
-
-            [global::ProtoBuf.ProtoMember(2)]
-            public ulong steamid
-            {
-                get => __pbn__steamid.GetValueOrDefault();
-                set => __pbn__steamid = value;
-            }
-            public bool ShouldSerializesteamid() => __pbn__steamid != null;
-            public void Resetsteamid() => __pbn__steamid = null;
-            private ulong? __pbn__steamid;
-
-            [global::ProtoBuf.ProtoMember(3)]
-            public long amount
-            {
-                get => __pbn__amount.GetValueOrDefault();
-                set => __pbn__amount = value;
-            }
-            public bool ShouldSerializeamount() => __pbn__amount != null;
-            public void Resetamount() => __pbn__amount = null;
-            private long? __pbn__amount;
-
-            [global::ProtoBuf.ProtoMember(4)]
-            public uint ecurrency
-            {
-                get => __pbn__ecurrency.GetValueOrDefault();
-                set => __pbn__ecurrency = value;
-            }
-            public bool ShouldSerializeecurrency() => __pbn__ecurrency != null;
-            public void Resetecurrency() => __pbn__ecurrency = null;
-            private uint? __pbn__ecurrency;
-
-            [global::ProtoBuf.ProtoMember(5)]
-            public int time_created
-            {
-                get => __pbn__time_created.GetValueOrDefault();
-                set => __pbn__time_created = value;
-            }
-            public bool ShouldSerializetime_created() => __pbn__time_created != null;
-            public void Resettime_created() => __pbn__time_created = null;
-            private int? __pbn__time_created;
-
-            [global::ProtoBuf.ProtoMember(6)]
-            public int purchase_status
-            {
-                get => __pbn__purchase_status.GetValueOrDefault();
-                set => __pbn__purchase_status = value;
-            }
-            public bool ShouldSerializepurchase_status() => __pbn__purchase_status != null;
-            public void Resetpurchase_status() => __pbn__purchase_status = null;
-            private int? __pbn__purchase_status;
-
-            [global::ProtoBuf.ProtoMember(7)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string machine_name
-            {
-                get => __pbn__machine_name ?? "";
-                set => __pbn__machine_name = value;
-            }
-            public bool ShouldSerializemachine_name() => __pbn__machine_name != null;
-            public void Resetmachine_name() => __pbn__machine_name = null;
-            private string __pbn__machine_name;
-
-            [global::ProtoBuf.ProtoMember(8)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string persona_name
-            {
-                get => __pbn__persona_name ?? "";
-                set => __pbn__persona_name = value;
-            }
-            public bool ShouldSerializepersona_name() => __pbn__persona_name != null;
-            public void Resetpersona_name() => __pbn__persona_name = null;
-            private string __pbn__persona_name;
-
-            [global::ProtoBuf.ProtoMember(9)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string profile_url
-            {
-                get => __pbn__profile_url ?? "";
-                set => __pbn__profile_url = value;
-            }
-            public bool ShouldSerializeprofile_url() => __pbn__profile_url != null;
-            public void Resetprofile_url() => __pbn__profile_url = null;
-            private string __pbn__profile_url;
-
-            [global::ProtoBuf.ProtoMember(10)]
-            [global::System.ComponentModel.DefaultValue("")]
-            public string avatar_url
-            {
-                get => __pbn__avatar_url ?? "";
-                set => __pbn__avatar_url = value;
-            }
-            public bool ShouldSerializeavatar_url() => __pbn__avatar_url != null;
-            public void Resetavatar_url() => __pbn__avatar_url = null;
-            private string __pbn__avatar_url;
-
-        }
-
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public partial class CSiteLicense_InitiateAssociation_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -286,6 +151,27 @@ namespace SteamKit2.Internal
         public bool ShouldSerializeconnection_key() => __pbn__connection_key != null;
         public void Resetconnection_key() => __pbn__connection_key = null;
         private byte[] __pbn__connection_key;
+
+        [global::ProtoBuf.ProtoMember(2)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string site_name
+        {
+            get => __pbn__site_name ?? "";
+            set => __pbn__site_name = value;
+        }
+        public bool ShouldSerializesite_name() => __pbn__site_name != null;
+        public void Resetsite_name() => __pbn__site_name = null;
+        private string __pbn__site_name;
+
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool has_parental_restrictions
+        {
+            get => __pbn__has_parental_restrictions.GetValueOrDefault();
+            set => __pbn__has_parental_restrictions = value;
+        }
+        public bool ShouldSerializehas_parental_restrictions() => __pbn__has_parental_restrictions != null;
+        public void Resethas_parental_restrictions() => __pbn__has_parental_restrictions = null;
+        private bool? __pbn__has_parental_restrictions;
 
     }
 
@@ -537,11 +423,6 @@ namespace SteamKit2.Internal
             UnifiedMessages.SendNotification<CSiteLicense_ClientSeatCheckout_Notification>( "SiteManagerClient.ClientSeatCheckoutNotification#1", request );
         }
 
-        public void TrackedPaymentsNotification(CSiteManagerClient_TrackedPayments_Notification request )
-        {
-            UnifiedMessages.SendNotification<CSiteManagerClient_TrackedPayments_Notification>( "SiteManagerClient.TrackedPaymentsNotification#1", request );
-        }
-
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -558,9 +439,6 @@ namespace SteamKit2.Internal
             {
                 case "ClientSeatCheckoutNotification":
                     PostNotificationMsg<CSiteLicense_ClientSeatCheckout_Notification>( packetMsg );
-                    break;
-                case "TrackedPaymentsNotification":
-                    PostNotificationMsg<CSiteManagerClient_TrackedPayments_Notification>( packetMsg );
                     break;
             }
         }

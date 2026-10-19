@@ -1218,6 +1218,38 @@ namespace SteamKit2.Internal
         public void Resetlaunch_only() => __pbn__launch_only = null;
         private bool? __pbn__launch_only;
 
+        [global::ProtoBuf.ProtoMember(16)]
+        public int gaming_device_type
+        {
+            get => __pbn__gaming_device_type.GetValueOrDefault();
+            set => __pbn__gaming_device_type = value;
+        }
+        public bool ShouldSerializegaming_device_type() => __pbn__gaming_device_type != null;
+        public void Resetgaming_device_type() => __pbn__gaming_device_type = null;
+        private int? __pbn__gaming_device_type;
+
+        [global::ProtoBuf.ProtoMember(17)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int cloud_conflict_resolution
+        {
+            get => __pbn__cloud_conflict_resolution ?? -1;
+            set => __pbn__cloud_conflict_resolution = value;
+        }
+        public bool ShouldSerializecloud_conflict_resolution() => __pbn__cloud_conflict_resolution != null;
+        public void Resetcloud_conflict_resolution() => __pbn__cloud_conflict_resolution = null;
+        private int? __pbn__cloud_conflict_resolution;
+
+        [global::ProtoBuf.ProtoMember(18)]
+        [global::System.ComponentModel.DefaultValue(-1)]
+        public int controller_config_conflict_resolution
+        {
+            get => __pbn__controller_config_conflict_resolution ?? -1;
+            set => __pbn__controller_config_conflict_resolution = value;
+        }
+        public bool ShouldSerializecontroller_config_conflict_resolution() => __pbn__controller_config_conflict_resolution != null;
+        public void Resetcontroller_config_conflict_resolution() => __pbn__controller_config_conflict_resolution = null;
+        private int? __pbn__controller_config_conflict_resolution;
+
         [global::ProtoBuf.ProtoContract()]
         public partial class ReservedGamepad : global::ProtoBuf.IExtensible
         {
@@ -1375,6 +1407,48 @@ namespace SteamKit2.Internal
         public bool ShouldSerializelaunch_only() => __pbn__launch_only != null;
         public void Resetlaunch_only() => __pbn__launch_only = null;
         private bool? __pbn__launch_only;
+
+        [global::ProtoBuf.ProtoMember(13)]
+        public CloudConflict cloud_conflict { get; set; }
+
+        [global::ProtoBuf.ProtoContract()]
+        public partial class CloudConflict : global::ProtoBuf.IExtensible
+        {
+            private global::ProtoBuf.IExtension __pbn__extensionData;
+            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+            [global::ProtoBuf.ProtoMember(1)]
+            public uint appid
+            {
+                get => __pbn__appid.GetValueOrDefault();
+                set => __pbn__appid = value;
+            }
+            public bool ShouldSerializeappid() => __pbn__appid != null;
+            public void Resetappid() => __pbn__appid = null;
+            private uint? __pbn__appid;
+
+            [global::ProtoBuf.ProtoMember(2)]
+            public uint local_time
+            {
+                get => __pbn__local_time.GetValueOrDefault();
+                set => __pbn__local_time = value;
+            }
+            public bool ShouldSerializelocal_time() => __pbn__local_time != null;
+            public void Resetlocal_time() => __pbn__local_time = null;
+            private uint? __pbn__local_time;
+
+            [global::ProtoBuf.ProtoMember(3)]
+            public uint remote_time
+            {
+                get => __pbn__remote_time.GetValueOrDefault();
+                set => __pbn__remote_time = value;
+            }
+            public bool ShouldSerializeremote_time() => __pbn__remote_time != null;
+            public void Resetremote_time() => __pbn__remote_time = null;
+            private uint? __pbn__remote_time;
+
+        }
 
     }
 
@@ -1594,6 +1668,16 @@ namespace SteamKit2.Internal
         public void Resetpassword() => __pbn__password = null;
         private string __pbn__password;
 
+        [global::ProtoBuf.ProtoMember(3)]
+        public bool supports_progress
+        {
+            get => __pbn__supports_progress.GetValueOrDefault();
+            set => __pbn__supports_progress = value;
+        }
+        public bool ShouldSerializesupports_progress() => __pbn__supports_progress != null;
+        public void Resetsupports_progress() => __pbn__supports_progress = null;
+        private bool? __pbn__supports_progress;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1636,6 +1720,47 @@ namespace SteamKit2.Internal
         public void Resetpassword() => __pbn__password = null;
         private string __pbn__password;
 
+        [global::ProtoBuf.ProtoMember(4)]
+        public int steps_done
+        {
+            get => __pbn__steps_done.GetValueOrDefault();
+            set => __pbn__steps_done = value;
+        }
+        public bool ShouldSerializesteps_done() => __pbn__steps_done != null;
+        public void Resetsteps_done() => __pbn__steps_done = null;
+        private int? __pbn__steps_done;
+
+        [global::ProtoBuf.ProtoMember(5)]
+        public int steps_total
+        {
+            get => __pbn__steps_total.GetValueOrDefault();
+            set => __pbn__steps_total = value;
+        }
+        public bool ShouldSerializesteps_total() => __pbn__steps_total != null;
+        public void Resetsteps_total() => __pbn__steps_total = null;
+        private int? __pbn__steps_total;
+
+        [global::ProtoBuf.ProtoMember(6)]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string step_name
+        {
+            get => __pbn__step_name ?? "";
+            set => __pbn__step_name = value;
+        }
+        public bool ShouldSerializestep_name() => __pbn__step_name != null;
+        public void Resetstep_name() => __pbn__step_name = null;
+        private string __pbn__step_name;
+
+        [global::ProtoBuf.ProtoMember(7)]
+        public uint estimated_seconds
+        {
+            get => __pbn__estimated_seconds.GetValueOrDefault();
+            set => __pbn__estimated_seconds = value;
+        }
+        public bool ShouldSerializeestimated_seconds() => __pbn__estimated_seconds != null;
+        public void Resetestimated_seconds() => __pbn__estimated_seconds = null;
+        private uint? __pbn__estimated_seconds;
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -1648,6 +1773,8 @@ namespace SteamKit2.Internal
         k_ERemoteClientPairWifiAPNoDonglePresent = 5,
         k_ERemoteClientPairWifiAPTimeout = 6,
         k_ERemoteClientPairWifiAPCanceled = 7,
+        k_ERemoteClientPairWifiAPProgress = 8,
+        k_ERemoteClientPairWifiAPConnectFailed = 9,
     }
 
     [global::ProtoBuf.ProtoContract()]

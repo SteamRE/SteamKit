@@ -682,6 +682,44 @@ namespace SteamKit2.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
+    public partial class CGameServers_RestrictPlayersToSteamClan_Request : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+        [global::ProtoBuf.ProtoMember(1, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamid
+        {
+            get => __pbn__steamid.GetValueOrDefault();
+            set => __pbn__steamid = value;
+        }
+        public bool ShouldSerializesteamid() => __pbn__steamid != null;
+        public void Resetsteamid() => __pbn__steamid = null;
+        private ulong? __pbn__steamid;
+
+        [global::ProtoBuf.ProtoMember(2, DataFormat = global::ProtoBuf.DataFormat.FixedSize)]
+        public ulong steamidclan
+        {
+            get => __pbn__steamidclan.GetValueOrDefault();
+            set => __pbn__steamidclan = value;
+        }
+        public bool ShouldSerializesteamidclan() => __pbn__steamidclan != null;
+        public void Resetsteamidclan() => __pbn__steamidclan = null;
+        private ulong? __pbn__steamidclan;
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public partial class CGameServers_RestrictPlayersToSteamClan_Response : global::ProtoBuf.IExtensible
+    {
+        private global::ProtoBuf.IExtension __pbn__extensionData;
+        global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+            => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+
+    }
+
+    [global::ProtoBuf.ProtoContract()]
     public partial class GameServerClient_QueryServerData_Request : global::ProtoBuf.IExtensible
     {
         private global::ProtoBuf.IExtension __pbn__extensionData;
@@ -742,6 +780,11 @@ namespace SteamKit2.Internal
             return UnifiedMessages.SendMessage<CGameServers_MasterServerQuery_Request, CGameServers_MasterServerQuery_Response>( "GameServers.MasterServerQuery#1", request );
         }
 
+        public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_RestrictPlayersToSteamClan_Response>> RestrictPlayersToSteamClan( CGameServers_RestrictPlayersToSteamClan_Request request )
+        {
+            return UnifiedMessages.SendMessage<CGameServers_RestrictPlayersToSteamClan_Request, CGameServers_RestrictPlayersToSteamClan_Response>( "GameServers.RestrictPlayersToSteamClan#1", request );
+        }
+
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
         {
             switch ( methodName )
@@ -760,6 +803,9 @@ namespace SteamKit2.Internal
                     break;
                 case "MasterServerQuery":
                     PostResponseMsg<CGameServers_MasterServerQuery_Response>( packetMsg );
+                    break;
+                case "RestrictPlayersToSteamClan":
+                    PostResponseMsg<CGameServers_RestrictPlayersToSteamClan_Response>( packetMsg );
                     break;
             }
         }

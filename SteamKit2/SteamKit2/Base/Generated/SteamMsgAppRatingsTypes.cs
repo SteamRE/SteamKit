@@ -53,6 +53,9 @@ namespace SteamKit2.Internal
         public void Resetesrb_online_interactions_not_rated() => __pbn__esrb_online_interactions_not_rated = null;
         private bool? __pbn__esrb_online_interactions_not_rated;
 
+        [global::ProtoBuf.ProtoMember(6)]
+        public global::System.Collections.Generic.List<ERatingDescriptorImage> descriptor_images { get; } = new global::System.Collections.Generic.List<ERatingDescriptorImage>();
+
     }
 
     [global::ProtoBuf.ProtoContract()]
@@ -161,6 +164,21 @@ namespace SteamKit2.Internal
         k_EAppRatingSource_Invalid = 0,
         k_EAppRatingSource_Official = 1,
         k_EAppRatingSource_Generated = 2,
+    }
+
+    [global::ProtoBuf.ProtoContract()]
+    public enum ERatingDescriptorImage
+    {
+        k_ERatingDescriptorImage_Invalid = 0,
+        k_ERatingDescriptorImage_CERO_Love = 1,
+        k_ERatingDescriptorImage_CERO_SexualContent = 2,
+        k_ERatingDescriptorImage_CERO_Violence = 3,
+        k_ERatingDescriptorImage_CERO_Horror = 4,
+        k_ERatingDescriptorImage_CERO_DrinkingSmoking = 5,
+        k_ERatingDescriptorImage_CERO_Gambling = 6,
+        k_ERatingDescriptorImage_CERO_Crime = 7,
+        k_ERatingDescriptorImage_CERO_Drugs = 8,
+        k_ERatingDescriptorImage_CERO_Language = 9,
     }
 
 }

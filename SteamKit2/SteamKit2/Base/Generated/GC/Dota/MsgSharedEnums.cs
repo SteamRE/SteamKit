@@ -2053,13 +2053,6 @@ namespace SteamKit2.GC.Dota.Internal
     }
 
     [global::ProtoBuf.ProtoContract()]
-    public enum EEventActionScoreMode
-    {
-        k_eEventActionScoreMode_Add = 0,
-        k_eEventActionScoreMode_Min = 1,
-    }
-
-    [global::ProtoBuf.ProtoContract()]
     public enum EPlayerChallengeHistoryType
     {
         k_EPlayerChallengeHistoryType_Invalid = 0,
