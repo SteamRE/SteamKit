@@ -8,7 +8,7 @@ namespace Tests
         [Fact]
         public void LogOnPostsLoggedOnCallbackWhenNoConnection()
         {
-            var asyncJob = Handler.LogOn(new SteamGameServer.LogOnDetails
+            Handler.LogOn(new SteamGameServer.LogOnDetails
             {
                 Token = "SuperSecretToken"
             });
@@ -19,13 +19,12 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
-            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
 
         [Fact]
         public void LogOnAnonymousPostsLoggedOnCallbackWhenNoConnection()
         {
-            var asyncJob = Handler.LogOnAnonymous();
+            Handler.LogOnAnonymous();
 
             var callback = SteamClient.GetCallback( );
             Assert.NotNull( callback );
@@ -33,7 +32,6 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
-            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
     }
 }

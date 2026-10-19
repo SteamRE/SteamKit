@@ -9,7 +9,7 @@ namespace Tests
         [Fact]
         public void LogOnPostsLoggedOnCallbackWhenNoConnection()
         {
-            var asyncJob = Handler.LogOn(new SteamUser.LogOnDetails
+            Handler.LogOn(new SteamUser.LogOnDetails
             {
                 Username = "iamauser",
                 Password = "lamepassword"
@@ -21,7 +21,6 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
-            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
 
         [Fact]
@@ -103,7 +102,7 @@ namespace Tests
         [Fact]
         public void LogOnAnonymousPostsLoggedOnCallbackWhenNoConnection()
         {
-            var asyncJob = Handler.LogOnAnonymous();
+            Handler.LogOnAnonymous();
 
             var callback = SteamClient.GetCallback( );
             Assert.NotNull( callback );
@@ -111,7 +110,6 @@ namespace Tests
 
             var loc = (SteamUser.LoggedOnCallback)callback;
             Assert.Equal( EResult.NoConnection, loc.Result );
-            Assert.Equal( asyncJob.JobID, loc.JobID );
         }
     }
 }
