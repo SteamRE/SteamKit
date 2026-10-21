@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write
   packages: write
+  id-token: write
 
 jobs:
   publish-nupkg:
@@ -36,9 +37,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: gh release upload "${{ github.event.release.tag_name }}" "SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg"
 
+    - name: NuGet Login (Trusted Publishing)
+      id: nuget-login
+      uses: NuGet/login@v1
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
     - name: Publish NuGet Package to NuGet Gallery
       run: |
-        dotnet nuget push SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        dotnet nuget push SteamKit2/SteamKit2/bin/Release/SteamKit2.${{ github.event.release.tag_name }}.nupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
     - name: Publish NuGet Package to GitHub Packages
       run: |
