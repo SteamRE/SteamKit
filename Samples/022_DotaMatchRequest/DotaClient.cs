@@ -107,7 +107,8 @@ class DotaClient
         // now we need to inform the steam server that we're playing dota (in order to receive GC messages)
 
         // steamkit doesn't expose the "play game" message through any handler, so we'll just send the message manually
-        var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>( EMsg.ClientGamesPlayed );
+        // CMsgClientGamesPlayed is a regular steam message, so SteamKit's own protobuf model can serialize it
+        var playGame = new ClientMsgProtobuf<CMsgClientGamesPlayed>( EMsg.ClientGamesPlayed, SteamKitProtobuf.Model );
 
         playGame.Body.games_played.Add( new CMsgClientGamesPlayed.GamePlayed
         {
@@ -122,7 +123,8 @@ class DotaClient
         Thread.Sleep( 5000 );
 
         // inform the dota GC that we want a session
-        var clientHello = new ClientGCMsgProtobuf<SteamKit2.GC.Dota.Internal.CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello );
+        // GC messages are serialized with our own protobuf model, see DotaProtobufModel
+        var clientHello = new ClientGCMsgProtobuf<SteamKit2.GC.Dota.Internal.CMsgClientHello>( ( uint )EGCBaseClientMsg.k_EMsgGCClientHello, DotaProtobufModel.Instance );
         clientHello.Body.engine = ESourceEngine.k_ESE_Source2;
         gameCoordinator.Send( clientHello, APPID );
     }
@@ -159,7 +161,7 @@ class DotaClient
         // in order to get at the contents of the message, we need to create a ClientGCMsgProtobuf from the packet message we receive
         // note here the difference between ClientGCMsgProtobuf and the ClientMsgProtobuf used when sending ClientGamesPlayed
         // this message is used for the GC, while the other is used for general steam messages
-        var msg = new ClientGCMsgProtobuf<CMsgClientWelcome>( packetMsg );
+        var msg = new ClientGCMsgProtobuf<CMsgClientWelcome>( packetMsg, DotaProtobufModel.Instance );
 
         Console.WriteLine( "GC is welcoming us. Version: {0}", msg.Body.version );
 
@@ -168,7 +170,7 @@ class DotaClient
         // at this point, the GC is now ready to accept messages from us
         // so now we'll request the details of the match we're looking for
 
-        var requestMatch = new ClientGCMsgProtobuf<CMsgGCMatchDetailsRequest>( ( uint )EDOTAGCMsg.k_EMsgGCMatchDetailsRequest );
+        var requestMatch = new ClientGCMsgProtobuf<CMsgGCMatchDetailsRequest>( ( uint )EDOTAGCMsg.k_EMsgGCMatchDetailsRequest, DotaProtobufModel.Instance );
         requestMatch.Body.match_id = matchId;
 
         gameCoordinator.Send( requestMatch, APPID );
@@ -177,7 +179,7 @@ class DotaClient
     // this message arrives after we've requested the details for a match
     void OnMatchDetails( IPacketGCMsg packetMsg )
     {
-        var msg = new ClientGCMsgProtobuf<CMsgGCMatchDetailsResponse>( packetMsg );
+        var msg = new ClientGCMsgProtobuf<CMsgGCMatchDetailsResponse>( packetMsg, DotaProtobufModel.Instance );
 
         EResult result = ( EResult )msg.Body.result;
         if ( result != EResult.OK )
