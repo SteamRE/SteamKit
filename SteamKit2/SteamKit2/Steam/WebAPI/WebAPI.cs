@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using ProtoBuf;
+using ProtoBuf.Meta;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -235,13 +238,34 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="ProtoException">An error occurred when parsing the response from the WebAPI.</exception>
-            public async Task<T> CallProtobufAsync<T>( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
+            [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+            [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
+            public Task<T> CallProtobufAsync<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] T>( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
+                => CallProtobufAsync<T>( method, func, RuntimeTypeModel.Default, version, args );
+
+            /// <summary>
+            /// Manually calls the specified Web API function with the provided details.
+            /// </summary>
+            /// <typeparam name="T">Protobuf type of the response message.</typeparam>
+            /// <param name="func">The function name to call.</param>
+            /// <param name="model">The protobuf model used to deserialize the response, such as <see cref="SteamKitProtobuf.Model"/>.</param>
+            /// <param name="version">The version of the function to call.</param>
+            /// <param name="args">A dictionary of string key value pairs representing arguments to be passed to the API.</param>
+            /// <param name="method">The http request method. Either "POST" or "GET".</param>
+            /// <returns>A <see cref="Task{T}"/> that contains object representing the results of the Web API call.</returns>
+            /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
+            /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="ProtoException">An error occurred when parsing the response from the WebAPI.</exception>
+            public async Task<T> CallProtobufAsync<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] T>( HttpMethod method, string func, TypeModel model, int version = 1, Dictionary<string, object?>? args = null )
             {
+                ArgumentNullException.ThrowIfNull( model );
+
                 var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" ).ConfigureAwait( false );
 
                 using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
 
-                var body = Serializer.Deserialize<T>( stream );
+                var body = ProtobufUtil.Deserialize<T>( model, stream );
 
                 return body;
             }
@@ -261,7 +285,30 @@ namespace SteamKit2
             /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
             /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
             /// <exception cref="ProtoException">An error occurred when parsing the response from the WebAPI.</exception>
-            public async Task<WebAPIResponse<TResponse>> CallProtobufAsync<TResponse, TRequest>( HttpMethod method, string func, TRequest request, int version = 1, Dictionary<string, object?>? extraArgs = null )
+            [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+            [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
+            public Task<WebAPIResponse<TResponse>> CallProtobufAsync<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResponse, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest>( HttpMethod method, string func, TRequest request, int version = 1, Dictionary<string, object?>? extraArgs = null )
+                where TResponse : IExtensible, new()
+                where TRequest : IExtensible, new()
+                => CallProtobufAsync<TResponse, TRequest>( method, func, request, RuntimeTypeModel.Default, version, extraArgs );
+
+            /// <summary>
+            /// Manually calls the specified Web API function with the provided details.
+            /// </summary>
+            /// <typeparam name="TRequest">Protobuf type of the request message.</typeparam>
+            /// <typeparam name="TResponse">Protobuf type of the response message.</typeparam>
+            /// <param name="func">The function name to call.</param>
+            /// <param name="version">The version of the function to call.</param>
+            /// <param name="extraArgs">A dictionary of string key value pairs representing extra arguments to be passed to the API (in addition to request).</param>
+            /// <param name="request">A protobuf object representing arguments to be passed to the API.</param>
+            /// <param name="model">The protobuf model used to serialize the request and deserialize the response, such as <see cref="SteamKitProtobuf.Model"/>.</param>
+            /// <param name="method">The http request method. Either "POST" or "GET".</param>
+            /// <returns>A <see cref="Task{T}"/> that contains object representing the results of the Web API call.</returns>
+            /// <exception cref="ArgumentNullException">The function name or request method provided were <c>null</c>.</exception>
+            /// <exception cref="HttpRequestException">An network error occurred when performing the request.</exception>
+            /// <exception cref="WebAPIRequestException">A network error occurred when performing the request.</exception>
+            /// <exception cref="ProtoException">An error occurred when parsing the response from the WebAPI.</exception>
+            public async Task<WebAPIResponse<TResponse>> CallProtobufAsync<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResponse, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest>( HttpMethod method, string func, TRequest request, TypeModel model, int version = 1, Dictionary<string, object?>? extraArgs = null )
                 where TResponse : IExtensible, new()
                 where TRequest : IExtensible, new()
             {
@@ -274,8 +321,10 @@ namespace SteamKit2
                     throw new ArgumentNullException( nameof( request ) );
                 }
 
+                ArgumentNullException.ThrowIfNull( model );
+
                 using var inputPayload = new MemoryStream();
-                Serializer.Serialize<TRequest>( inputPayload, request );
+                ProtobufUtil.Serialize( model, inputPayload, request );
 
                 var base64 = Convert.ToBase64String( inputPayload.ToArray() );
                 var args = new Dictionary<string, object?>
@@ -301,7 +350,7 @@ namespace SteamKit2
                     eresult = ( EResult )resultInt;
                 }
 
-                var body = Serializer.Deserialize<TResponse>( stream );
+                var body = ProtobufUtil.Deserialize<TResponse>( model, stream );
                 var apiResponse = new WebAPIResponse<TResponse>( eresult, body );
 
                 return apiResponse;

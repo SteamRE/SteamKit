@@ -95,7 +95,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( details );
 
-            var msg = new ClientMsgProtobuf<CMsgClientUCMAddScreenshot>( EMsg.ClientUCMAddScreenshot );
+            var msg = new ClientMsgProtobuf<CMsgClientUCMAddScreenshot>( EMsg.ClientUCMAddScreenshot, SteamKitProtobuf.Model );
             msg.SourceJobID = Client.GetNextJobID();
 
             if ( details.GameID != null )

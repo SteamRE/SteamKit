@@ -27,7 +27,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( publicKey );
 
-            var msg = new ClientMsgProtobuf<CMsgClientNetworkingCertRequest>( EMsg.ClientNetworkingCertRequest );
+            var msg = new ClientMsgProtobuf<CMsgClientNetworkingCertRequest>( EMsg.ClientNetworkingCertRequest, SteamKitProtobuf.Model );
             msg.SourceJobID = Client.GetNextJobID();
 
             msg.Body.app_id = appId;

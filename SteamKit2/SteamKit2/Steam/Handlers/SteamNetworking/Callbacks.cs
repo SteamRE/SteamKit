@@ -26,7 +26,7 @@ namespace SteamKit2
 
             internal NetworkingCertificateCallback( IPacketMsg packetMsg )
             {
-                var resp = new ClientMsgProtobuf<CMsgClientNetworkingCertReply>( packetMsg );
+                var resp = new ClientMsgProtobuf<CMsgClientNetworkingCertReply>( packetMsg, SteamKitProtobuf.Model );
                 var msg = resp.Body;
 
                 JobID = resp.TargetJobID;

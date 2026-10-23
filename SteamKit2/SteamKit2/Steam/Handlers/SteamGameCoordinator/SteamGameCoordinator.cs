@@ -19,7 +19,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( msg );
 
-            var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC );
+            var clientMsg = new ClientMsgProtobuf<CMsgGCClient>( EMsg.ClientToGC, SteamKitProtobuf.Model );
 
             clientMsg.ProtoHeader.routing_appid = appId;
             clientMsg.Body.msgtype = MsgUtil.MakeGCMsg( msg.MsgType, msg.IsProto );
