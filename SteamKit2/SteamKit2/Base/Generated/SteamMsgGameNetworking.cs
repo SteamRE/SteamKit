@@ -92,18 +92,18 @@ namespace SteamKit2.Internal
 
     }
 
-    public class GameNetworking : SteamUnifiedMessages.UnifiedService
+    public partial class GameNetworking : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "GameNetworking";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNetworking_AllocateFakeIP_Response>> AllocateFakeIP( CGameNetworking_AllocateFakeIP_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( "GameNetworking.AllocateFakeIP#1", request );
+            return UnifiedMessages.SendMessage<CGameNetworking_AllocateFakeIP_Request, CGameNetworking_AllocateFakeIP_Response>( "GameNetworking.AllocateFakeIP#1", request, Model );
         }
 
         public void NotifyReleaseFakeIP(CGameNetworking_ReleaseFakeIP_Notification request )
         {
-            UnifiedMessages.SendNotification<CGameNetworking_ReleaseFakeIP_Notification>( "GameNetworking.NotifyReleaseFakeIP#1", request );
+            UnifiedMessages.SendNotification<CGameNetworking_ReleaseFakeIP_Notification>( "GameNetworking.NotifyReleaseFakeIP#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -128,6 +128,18 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNetworking_AllocateFakeIP_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNetworking_AllocateFakeIP_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNetworking_ReleaseFakeIP_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

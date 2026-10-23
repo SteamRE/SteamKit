@@ -219,13 +219,13 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class UserGameActivity : SteamUnifiedMessages.UnifiedService
+    public partial class UserGameActivity : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "UserGameActivity";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameActivity_GetActivity_Response>> GetActivity( CUserGameActivity_GetActivity_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserGameActivity_GetActivity_Request, CUserGameActivity_GetActivity_Response>( "UserGameActivity.GetActivity#1", request );
+            return UnifiedMessages.SendMessage<CUserGameActivity_GetActivity_Request, CUserGameActivity_GetActivity_Response>( "UserGameActivity.GetActivity#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -244,6 +244,17 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameActivity_GetActivity_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameActivity_GetActivity_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

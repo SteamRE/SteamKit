@@ -2690,168 +2690,168 @@ namespace SteamKit2.Internal
         k_ESteamTVContentTemplate_Event = 8,
     }
 
-    public class SteamTV : SteamUnifiedMessages.UnifiedService
+    public partial class SteamTV : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "SteamTV";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_CreateBroadcastChannel_Response>> CreateBroadcastChannel( CSteamTV_CreateBroadcastChannel_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_CreateBroadcastChannel_Request, CSteamTV_CreateBroadcastChannel_Response>( "SteamTV.CreateBroadcastChannel#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_CreateBroadcastChannel_Request, CSteamTV_CreateBroadcastChannel_Response>( "SteamTV.CreateBroadcastChannel#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelID_Response>> GetBroadcastChannelID( CSteamTV_GetBroadcastChannelID_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelID_Request, CSteamTV_GetBroadcastChannelID_Response>( "SteamTV.GetBroadcastChannelID#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelID_Request, CSteamTV_GetBroadcastChannelID_Response>( "SteamTV.GetBroadcastChannelID#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_SetBroadcastChannelProfile_Response>> SetBroadcastChannelProfile( CSteamTV_SetBroadcastChannelProfile_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_SetBroadcastChannelProfile_Request, CSteamTV_SetBroadcastChannelProfile_Response>( "SteamTV.SetBroadcastChannelProfile#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_SetBroadcastChannelProfile_Request, CSteamTV_SetBroadcastChannelProfile_Response>( "SteamTV.SetBroadcastChannelProfile#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelProfile_Response>> GetBroadcastChannelProfile( CSteamTV_GetBroadcastChannelProfile_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelProfile_Request, CSteamTV_GetBroadcastChannelProfile_Response>( "SteamTV.GetBroadcastChannelProfile#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelProfile_Request, CSteamTV_GetBroadcastChannelProfile_Response>( "SteamTV.GetBroadcastChannelProfile#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_SetBroadcastChannelImage_Response>> SetBroadcastChannelImage( CSteamTV_SetBroadcastChannelImage_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_SetBroadcastChannelImage_Request, CSteamTV_SetBroadcastChannelImage_Response>( "SteamTV.SetBroadcastChannelImage#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_SetBroadcastChannelImage_Request, CSteamTV_SetBroadcastChannelImage_Response>( "SteamTV.SetBroadcastChannelImage#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelImages_Response>> GetBroadcastChannelImages( CSteamTV_GetBroadcastChannelImages_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelImages_Request, CSteamTV_GetBroadcastChannelImages_Response>( "SteamTV.GetBroadcastChannelImages#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelImages_Request, CSteamTV_GetBroadcastChannelImages_Response>( "SteamTV.GetBroadcastChannelImages#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_SetBroadcastChannelLinkRegions_Response>> SetBroadcastChannelLinkRegions( CSteamTV_SetBroadcastChannelLinkRegions_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_SetBroadcastChannelLinkRegions_Request, CSteamTV_SetBroadcastChannelLinkRegions_Response>( "SteamTV.SetBroadcastChannelLinkRegions#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_SetBroadcastChannelLinkRegions_Request, CSteamTV_SetBroadcastChannelLinkRegions_Response>( "SteamTV.SetBroadcastChannelLinkRegions#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelLinks_Response>> GetBroadcastChannelLinks( CSteamTV_GetBroadcastChannelLinks_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelLinks_Request, CSteamTV_GetBroadcastChannelLinks_Response>( "SteamTV.GetBroadcastChannelLinks#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelLinks_Request, CSteamTV_GetBroadcastChannelLinks_Response>( "SteamTV.GetBroadcastChannelLinks#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelBroadcasters_Response>> GetBroadcastChannelBroadcasters( CSteamTV_GetBroadcastChannelBroadcasters_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelBroadcasters_Request, CSteamTV_GetBroadcastChannelBroadcasters_Response>( "SteamTV.GetBroadcastChannelBroadcasters#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelBroadcasters_Request, CSteamTV_GetBroadcastChannelBroadcasters_Response>( "SteamTV.GetBroadcastChannelBroadcasters#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetFollowedChannels_Response>> GetFollowedChannels( CSteamTV_GetFollowedChannels_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetFollowedChannels_Request, CSteamTV_GetFollowedChannels_Response>( "SteamTV.GetFollowedChannels#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetFollowedChannels_Request, CSteamTV_GetFollowedChannels_Response>( "SteamTV.GetFollowedChannels#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetSubscribedChannels_Response>> GetSubscribedChannels( CSteamTV_GetSubscribedChannels_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetSubscribedChannels_Request, CSteamTV_GetSubscribedChannels_Response>( "SteamTV.GetSubscribedChannels#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetSubscribedChannels_Request, CSteamTV_GetSubscribedChannels_Response>( "SteamTV.GetSubscribedChannels#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelStatus_Response>> GetBroadcastChannelStatus( CSteamTV_GetBroadcastChannelStatus_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelStatus_Request, CSteamTV_GetBroadcastChannelStatus_Response>( "SteamTV.GetBroadcastChannelStatus#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelStatus_Request, CSteamTV_GetBroadcastChannelStatus_Response>( "SteamTV.GetBroadcastChannelStatus#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_FollowBroadcastChannel_Response>> FollowBroadcastChannel( CSteamTV_FollowBroadcastChannel_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_FollowBroadcastChannel_Request, CSteamTV_FollowBroadcastChannel_Response>( "SteamTV.FollowBroadcastChannel#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_FollowBroadcastChannel_Request, CSteamTV_FollowBroadcastChannel_Response>( "SteamTV.FollowBroadcastChannel#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_SubscribeBroadcastChannel_Response>> SubscribeBroadcastChannel( CSteamTV_SubscribeBroadcastChannel_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_SubscribeBroadcastChannel_Request, CSteamTV_SubscribeBroadcastChannel_Response>( "SteamTV.SubscribeBroadcastChannel#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_SubscribeBroadcastChannel_Request, CSteamTV_SubscribeBroadcastChannel_Response>( "SteamTV.SubscribeBroadcastChannel#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelClips_Response>> GetBroadcastChannelClips( CSteamTV_GetBroadcastChannelClips_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelClips_Request, CSteamTV_GetBroadcastChannelClips_Response>( "SteamTV.GetBroadcastChannelClips#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelClips_Request, CSteamTV_GetBroadcastChannelClips_Response>( "SteamTV.GetBroadcastChannelClips#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_ReportBroadcastChannel_Response>> ReportBroadcastChannel( CSteamTV_ReportBroadcastChannel_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_ReportBroadcastChannel_Request, CSteamTV_ReportBroadcastChannel_Response>( "SteamTV.ReportBroadcastChannel#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_ReportBroadcastChannel_Request, CSteamTV_ReportBroadcastChannel_Response>( "SteamTV.ReportBroadcastChannel#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetBroadcastChannelInteraction_Response>> GetBroadcastChannelInteraction( CSteamTV_GetBroadcastChannelInteraction_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelInteraction_Request, CSteamTV_GetBroadcastChannelInteraction_Response>( "SteamTV.GetBroadcastChannelInteraction#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetBroadcastChannelInteraction_Request, CSteamTV_GetBroadcastChannelInteraction_Response>( "SteamTV.GetBroadcastChannelInteraction#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetGames_Response>> GetGames( CSteamTV_GetGames_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetGames_Request, CSteamTV_GetGames_Response>( "SteamTV.GetGames#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetGames_Request, CSteamTV_GetGames_Response>( "SteamTV.GetGames#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetChannels_Response>> GetChannels( CSteamTV_GetChannels_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetChannels_Request, CSteamTV_GetChannels_Response>( "SteamTV.GetChannels#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetChannels_Request, CSteamTV_GetChannels_Response>( "SteamTV.GetChannels#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_AddChatBan_Response>> AddChatBan( CSteamTV_AddChatBan_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_AddChatBan_Request, CSteamTV_AddChatBan_Response>( "SteamTV.AddChatBan#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_AddChatBan_Request, CSteamTV_AddChatBan_Response>( "SteamTV.AddChatBan#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetChatBans_Response>> GetChatBans( CSteamTV_GetChatBans_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetChatBans_Request, CSteamTV_GetChatBans_Response>( "SteamTV.GetChatBans#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetChatBans_Request, CSteamTV_GetChatBans_Response>( "SteamTV.GetChatBans#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_AddChatModerator_Response>> AddChatModerator( CSteamTV_AddChatModerator_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_AddChatModerator_Request, CSteamTV_AddChatModerator_Response>( "SteamTV.AddChatModerator#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_AddChatModerator_Request, CSteamTV_AddChatModerator_Response>( "SteamTV.AddChatModerator#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetChatModerators_Response>> GetChatModerators( CSteamTV_GetChatModerators_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetChatModerators_Request, CSteamTV_GetChatModerators_Response>( "SteamTV.GetChatModerators#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetChatModerators_Request, CSteamTV_GetChatModerators_Response>( "SteamTV.GetChatModerators#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_AddWordBan_Response>> AddWordBan( CSteamTV_AddWordBan_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_AddWordBan_Request, CSteamTV_AddWordBan_Response>( "SteamTV.AddWordBan#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_AddWordBan_Request, CSteamTV_AddWordBan_Response>( "SteamTV.AddWordBan#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetWordBans_Response>> GetWordBans( CSteamTV_GetWordBans_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetWordBans_Request, CSteamTV_GetWordBans_Response>( "SteamTV.GetWordBans#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetWordBans_Request, CSteamTV_GetWordBans_Response>( "SteamTV.GetWordBans#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_JoinChat_Response>> JoinChat( CSteamTV_JoinChat_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_JoinChat_Request, CSteamTV_JoinChat_Response>( "SteamTV.JoinChat#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_JoinChat_Request, CSteamTV_JoinChat_Response>( "SteamTV.JoinChat#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_Search_Response>> Search( CSteamTV_Search_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_Search_Request, CSteamTV_Search_Response>( "SteamTV.Search#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_Search_Request, CSteamTV_Search_Response>( "SteamTV.Search#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetSteamTVUserSettings_Response>> GetSteamTVUserSettings( CSteamTV_GetSteamTVUserSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetSteamTVUserSettings_Request, CSteamTV_GetSteamTVUserSettings_Response>( "SteamTV.GetSteamTVUserSettings#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetSteamTVUserSettings_Request, CSteamTV_GetSteamTVUserSettings_Response>( "SteamTV.GetSteamTVUserSettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_SetSteamTVUserSettings_Response>> SetSteamTVUserSettings( CSteamTV_SetSteamTVUserSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_SetSteamTVUserSettings_Request, CSteamTV_SetSteamTVUserSettings_Response>( "SteamTV.SetSteamTVUserSettings#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_SetSteamTVUserSettings_Request, CSteamTV_SetSteamTVUserSettings_Response>( "SteamTV.SetSteamTVUserSettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetMyBroadcastChannels_Response>> GetMyBroadcastChannels( CSteamTV_GetMyBroadcastChannels_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetMyBroadcastChannels_Request, CSteamTV_GetMyBroadcastChannels_Response>( "SteamTV.GetMyBroadcastChannels#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetMyBroadcastChannels_Request, CSteamTV_GetMyBroadcastChannels_Response>( "SteamTV.GetMyBroadcastChannels#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_GetHomePageContents_Response>> GetHomePageContents( CSteamTV_GetHomePageContents_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_GetHomePageContents_Request, CSteamTV_GetHomePageContents_Response>( "SteamTV.GetHomePageContents#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_GetHomePageContents_Request, CSteamTV_GetHomePageContents_Response>( "SteamTV.GetHomePageContents#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_AppCheer_Response>> AppCheer( CSteamTV_AppCheer_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamTV_AppCheer_Request, CSteamTV_AppCheer_Response>( "SteamTV.AppCheer#1", request );
+            return UnifiedMessages.SendMessage<CSteamTV_AppCheer_Request, CSteamTV_AppCheer_Response>( "SteamTV.AppCheer#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -2963,6 +2963,79 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_CreateBroadcastChannel_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_CreateBroadcastChannel_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelID_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelID_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetBroadcastChannelProfile_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetBroadcastChannelProfile_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelProfile_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelProfile_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetBroadcastChannelImage_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetBroadcastChannelImage_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelImages_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelImages_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetBroadcastChannelLinkRegions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetBroadcastChannelLinkRegions_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelLinks_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelLinks_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelBroadcasters_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelBroadcasters_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetFollowedChannels_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetFollowedChannels_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetSubscribedChannels_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetSubscribedChannels_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelStatus_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelStatus_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_FollowBroadcastChannel_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_FollowBroadcastChannel_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SubscribeBroadcastChannel_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SubscribeBroadcastChannel_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelClips_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelClips_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_ReportBroadcastChannel_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_ReportBroadcastChannel_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelInteraction_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetBroadcastChannelInteraction_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetGames_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetGames_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetChannels_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetChannels_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AddChatBan_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AddChatBan_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetChatBans_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetChatBans_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AddChatModerator_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AddChatModerator_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetChatModerators_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetChatModerators_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AddWordBan_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AddWordBan_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetWordBans_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetWordBans_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_JoinChat_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_JoinChat_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_Search_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_Search_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetSteamTVUserSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetSteamTVUserSettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetSteamTVUserSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_SetSteamTVUserSettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetMyBroadcastChannels_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetMyBroadcastChannels_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetHomePageContents_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_GetHomePageContents_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AppCheer_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamTV_AppCheer_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

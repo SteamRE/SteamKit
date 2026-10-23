@@ -64,7 +64,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( details );
 
-            var query = new ClientMsgProtobuf<CMsgClientGMSServerQuery>( EMsg.ClientGMSServerQuery );
+            var query = new ClientMsgProtobuf<CMsgClientGMSServerQuery>( EMsg.ClientGMSServerQuery, SteamKitProtobuf.Model );
             query.SourceJobID = Client.GetNextJobID();
 
             query.Body.app_id = details.AppID;

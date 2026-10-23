@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 
 namespace SteamKit2
@@ -10,10 +11,12 @@ namespace SteamKit2
     {
         /// <summary>
         /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// For a typed API that is safe for trimming and native AOT, use <see cref="GetAsyncWebAPIInterface"/>.
         /// </summary>
         /// <param name="config">The configuration to use for this Web API interface.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <returns>A dynamic <see cref="WebAPI.Interface"/> object to interact with the Web API.</returns>
+        [RequiresDynamicCode( WebAPI.DynamicInterfaceMessage )]
         public static WebAPI.Interface GetWebAPIInterface(this SteamConfiguration config, string iface)
         {
             ArgumentNullException.ThrowIfNull( config );
@@ -22,11 +25,11 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="config">The configuration to use for this Web API interface.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
-        /// <returns>A dynamic <see cref="WebAPI.AsyncInterface"/> object to interact with the Web API.</returns>
+        /// <returns>A <see cref="WebAPI.AsyncInterface"/> object to interact with the Web API.</returns>
         public static WebAPI.AsyncInterface GetAsyncWebAPIInterface(this SteamConfiguration config, string iface)
         {
             ArgumentNullException.ThrowIfNull( config );

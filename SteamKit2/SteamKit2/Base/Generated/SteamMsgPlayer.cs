@@ -5485,288 +5485,288 @@ namespace SteamKit2.Internal
         k_ETextFilterSettingDisabled = 3,
     }
 
-    public class Player : SteamUnifiedMessages.UnifiedService
+    public partial class Player : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Player";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetRecentPlaytimeSessionsForChild_Response>> GetRecentPlaytimeSessionsForChild( CPlayer_GetRecentPlaytimeSessionsForChild_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetRecentPlaytimeSessionsForChild_Request, CPlayer_GetRecentPlaytimeSessionsForChild_Response>( "Player.GetRecentPlaytimeSessionsForChild#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetRecentPlaytimeSessionsForChild_Request, CPlayer_GetRecentPlaytimeSessionsForChild_Response>( "Player.GetRecentPlaytimeSessionsForChild#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetPlayerLinkDetails_Response>> GetPlayerLinkDetails( CPlayer_GetPlayerLinkDetails_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetPlayerLinkDetails_Request, CPlayer_GetPlayerLinkDetails_Response>( "Player.GetPlayerLinkDetails#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetPlayerLinkDetails_Request, CPlayer_GetPlayerLinkDetails_Response>( "Player.GetPlayerLinkDetails#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetMutualFriendsForIncomingInvites_Response>> GetMutualFriendsForIncomingInvites( CPlayer_GetMutualFriendsForIncomingInvites_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetMutualFriendsForIncomingInvites_Request, CPlayer_GetMutualFriendsForIncomingInvites_Response>( "Player.GetMutualFriendsForIncomingInvites#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetMutualFriendsForIncomingInvites_Request, CPlayer_GetMutualFriendsForIncomingInvites_Response>( "Player.GetMutualFriendsForIncomingInvites#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetOwnedGames_Response>> GetOwnedGames( CPlayer_GetOwnedGames_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetOwnedGames_Request, CPlayer_GetOwnedGames_Response>( "Player.GetOwnedGames#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetOwnedGames_Request, CPlayer_GetOwnedGames_Response>( "Player.GetOwnedGames#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetPlayNext_Response>> GetPlayNext( CPlayer_GetPlayNext_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetPlayNext_Request, CPlayer_GetPlayNext_Response>( "Player.GetPlayNext#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetPlayNext_Request, CPlayer_GetPlayNext_Response>( "Player.GetPlayNext#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetFriendsGameplayInfo_Response>> GetFriendsGameplayInfo( CPlayer_GetFriendsGameplayInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetFriendsGameplayInfo_Request, CPlayer_GetFriendsGameplayInfo_Response>( "Player.GetFriendsGameplayInfo#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetFriendsGameplayInfo_Request, CPlayer_GetFriendsGameplayInfo_Response>( "Player.GetFriendsGameplayInfo#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetGameBadgeLevels_Response>> GetGameBadgeLevels( CPlayer_GetGameBadgeLevels_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetGameBadgeLevels_Request, CPlayer_GetGameBadgeLevels_Response>( "Player.GetGameBadgeLevels#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetGameBadgeLevels_Request, CPlayer_GetGameBadgeLevels_Response>( "Player.GetGameBadgeLevels#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetProfileBackground_Response>> GetProfileBackground( CPlayer_GetProfileBackground_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetProfileBackground_Request, CPlayer_GetProfileBackground_Response>( "Player.GetProfileBackground#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetProfileBackground_Request, CPlayer_GetProfileBackground_Response>( "Player.GetProfileBackground#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetProfileBackground_Response>> SetProfileBackground( CPlayer_SetProfileBackground_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetProfileBackground_Request, CPlayer_SetProfileBackground_Response>( "Player.SetProfileBackground#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetProfileBackground_Request, CPlayer_SetProfileBackground_Response>( "Player.SetProfileBackground#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetMiniProfileBackground_Response>> GetMiniProfileBackground( CPlayer_GetMiniProfileBackground_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetMiniProfileBackground_Request, CPlayer_GetMiniProfileBackground_Response>( "Player.GetMiniProfileBackground#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetMiniProfileBackground_Request, CPlayer_GetMiniProfileBackground_Response>( "Player.GetMiniProfileBackground#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetMiniProfileBackground_Response>> SetMiniProfileBackground( CPlayer_SetMiniProfileBackground_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetMiniProfileBackground_Request, CPlayer_SetMiniProfileBackground_Response>( "Player.SetMiniProfileBackground#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetMiniProfileBackground_Request, CPlayer_SetMiniProfileBackground_Response>( "Player.SetMiniProfileBackground#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetAvatarFrame_Response>> GetAvatarFrame( CPlayer_GetAvatarFrame_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetAvatarFrame_Request, CPlayer_GetAvatarFrame_Response>( "Player.GetAvatarFrame#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetAvatarFrame_Request, CPlayer_GetAvatarFrame_Response>( "Player.GetAvatarFrame#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetAvatarFrame_Response>> SetAvatarFrame( CPlayer_SetAvatarFrame_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetAvatarFrame_Request, CPlayer_SetAvatarFrame_Response>( "Player.SetAvatarFrame#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetAvatarFrame_Request, CPlayer_SetAvatarFrame_Response>( "Player.SetAvatarFrame#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetAnimatedAvatar_Response>> GetAnimatedAvatar( CPlayer_GetAnimatedAvatar_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetAnimatedAvatar_Request, CPlayer_GetAnimatedAvatar_Response>( "Player.GetAnimatedAvatar#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetAnimatedAvatar_Request, CPlayer_GetAnimatedAvatar_Response>( "Player.GetAnimatedAvatar#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetAnimatedAvatar_Response>> SetAnimatedAvatar( CPlayer_SetAnimatedAvatar_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetAnimatedAvatar_Request, CPlayer_SetAnimatedAvatar_Response>( "Player.SetAnimatedAvatar#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetAnimatedAvatar_Request, CPlayer_SetAnimatedAvatar_Response>( "Player.SetAnimatedAvatar#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetSteamDeckKeyboardSkin_Response>> GetSteamDeckKeyboardSkin( CPlayer_GetSteamDeckKeyboardSkin_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetSteamDeckKeyboardSkin_Request, CPlayer_GetSteamDeckKeyboardSkin_Response>( "Player.GetSteamDeckKeyboardSkin#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetSteamDeckKeyboardSkin_Request, CPlayer_GetSteamDeckKeyboardSkin_Response>( "Player.GetSteamDeckKeyboardSkin#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetSteamDeckKeyboardSkin_Response>> SetSteamDeckKeyboardSkin( CPlayer_SetSteamDeckKeyboardSkin_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetSteamDeckKeyboardSkin_Request, CPlayer_SetSteamDeckKeyboardSkin_Response>( "Player.SetSteamDeckKeyboardSkin#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetSteamDeckKeyboardSkin_Request, CPlayer_SetSteamDeckKeyboardSkin_Response>( "Player.SetSteamDeckKeyboardSkin#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetProfileItemsOwned_Response>> GetProfileItemsOwned( CPlayer_GetProfileItemsOwned_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetProfileItemsOwned_Request, CPlayer_GetProfileItemsOwned_Response>( "Player.GetProfileItemsOwned#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetProfileItemsOwned_Request, CPlayer_GetProfileItemsOwned_Response>( "Player.GetProfileItemsOwned#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetProfileItemsEquipped_Response>> GetProfileItemsEquipped( CPlayer_GetProfileItemsEquipped_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetProfileItemsEquipped_Request, CPlayer_GetProfileItemsEquipped_Response>( "Player.GetProfileItemsEquipped#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetProfileItemsEquipped_Request, CPlayer_GetProfileItemsEquipped_Response>( "Player.GetProfileItemsEquipped#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetEquippedProfileItemFlags_Response>> SetEquippedProfileItemFlags( CPlayer_SetEquippedProfileItemFlags_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetEquippedProfileItemFlags_Request, CPlayer_SetEquippedProfileItemFlags_Response>( "Player.SetEquippedProfileItemFlags#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetEquippedProfileItemFlags_Request, CPlayer_SetEquippedProfileItemFlags_Response>( "Player.SetEquippedProfileItemFlags#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetEmoticonList_Response>> GetEmoticonList( CPlayer_GetEmoticonList_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetEmoticonList_Request, CPlayer_GetEmoticonList_Response>( "Player.GetEmoticonList#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetEmoticonList_Request, CPlayer_GetEmoticonList_Response>( "Player.GetEmoticonList#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetCommunityBadgeProgress_Response>> GetCommunityBadgeProgress( CPlayer_GetCommunityBadgeProgress_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetCommunityBadgeProgress_Request, CPlayer_GetCommunityBadgeProgress_Response>( "Player.GetCommunityBadgeProgress#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetCommunityBadgeProgress_Request, CPlayer_GetCommunityBadgeProgress_Response>( "Player.GetCommunityBadgeProgress#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetTopAchievementsForGames_Response>> GetTopAchievementsForGames( CPlayer_GetTopAchievementsForGames_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetTopAchievementsForGames_Request, CPlayer_GetTopAchievementsForGames_Response>( "Player.GetTopAchievementsForGames#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetTopAchievementsForGames_Request, CPlayer_GetTopAchievementsForGames_Response>( "Player.GetTopAchievementsForGames#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetAchievementsProgress_Response>> GetAchievementsProgress( CPlayer_GetAchievementsProgress_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetAchievementsProgress_Request, CPlayer_GetAchievementsProgress_Response>( "Player.GetAchievementsProgress#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetAchievementsProgress_Request, CPlayer_GetAchievementsProgress_Response>( "Player.GetAchievementsProgress#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetGameAchievements_Response>> GetGameAchievements( CPlayer_GetGameAchievements_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetGameAchievements_Request, CPlayer_GetGameAchievements_Response>( "Player.GetGameAchievements#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetGameAchievements_Request, CPlayer_GetGameAchievements_Response>( "Player.GetGameAchievements#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetUserAchievements_Response>> GetUserAchievements( CPlayer_GetUserAchievements_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetUserAchievements_Request, CPlayer_GetUserAchievements_Response>( "Player.GetUserAchievements#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetUserAchievements_Request, CPlayer_GetUserAchievements_Response>( "Player.GetUserAchievements#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetGlobalAchievementPercentages_Response>> GetGlobalAchievementPercentages( CPlayer_GetGlobalAchievementPercentages_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetGlobalAchievementPercentages_Request, CPlayer_GetGlobalAchievementPercentages_Response>( "Player.GetGlobalAchievementPercentages#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetGlobalAchievementPercentages_Request, CPlayer_GetGlobalAchievementPercentages_Response>( "Player.GetGlobalAchievementPercentages#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetUserStats_Response>> GetUserStats( CPlayer_GetUserStats_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetUserStats_Request, CPlayer_GetUserStats_Response>( "Player.GetUserStats#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetUserStats_Request, CPlayer_GetUserStats_Response>( "Player.GetUserStats#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetFavoriteBadge_Response>> GetFavoriteBadge( CPlayer_GetFavoriteBadge_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetFavoriteBadge_Request, CPlayer_GetFavoriteBadge_Response>( "Player.GetFavoriteBadge#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetFavoriteBadge_Request, CPlayer_GetFavoriteBadge_Response>( "Player.GetFavoriteBadge#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetFavoriteBadge_Response>> SetFavoriteBadge( CPlayer_SetFavoriteBadge_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetFavoriteBadge_Request, CPlayer_SetFavoriteBadge_Response>( "Player.SetFavoriteBadge#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetFavoriteBadge_Request, CPlayer_SetFavoriteBadge_Response>( "Player.SetFavoriteBadge#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetProfileCustomization_Response>> GetProfileCustomization( CPlayer_GetProfileCustomization_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetProfileCustomization_Request, CPlayer_GetProfileCustomization_Response>( "Player.GetProfileCustomization#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetProfileCustomization_Request, CPlayer_GetProfileCustomization_Response>( "Player.GetProfileCustomization#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetPurchasedProfileCustomizations_Response>> GetPurchasedProfileCustomizations( CPlayer_GetPurchasedProfileCustomizations_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetPurchasedProfileCustomizations_Request, CPlayer_GetPurchasedProfileCustomizations_Response>( "Player.GetPurchasedProfileCustomizations#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetPurchasedProfileCustomizations_Request, CPlayer_GetPurchasedProfileCustomizations_Response>( "Player.GetPurchasedProfileCustomizations#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response>> GetPurchasedAndUpgradedProfileCustomizations( CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request, CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response>( "Player.GetPurchasedAndUpgradedProfileCustomizations#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request, CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response>( "Player.GetPurchasedAndUpgradedProfileCustomizations#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetProfileThemesAvailable_Response>> GetProfileThemesAvailable( CPlayer_GetProfileThemesAvailable_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetProfileThemesAvailable_Request, CPlayer_GetProfileThemesAvailable_Response>( "Player.GetProfileThemesAvailable#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetProfileThemesAvailable_Request, CPlayer_GetProfileThemesAvailable_Response>( "Player.GetProfileThemesAvailable#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetProfileTheme_Response>> SetProfileTheme( CPlayer_SetProfileTheme_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetProfileTheme_Request, CPlayer_SetProfileTheme_Response>( "Player.SetProfileTheme#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetProfileTheme_Request, CPlayer_SetProfileTheme_Response>( "Player.SetProfileTheme#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetProfilePreferences_Response>> SetProfilePreferences( CPlayer_SetProfilePreferences_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetProfilePreferences_Request, CPlayer_SetProfilePreferences_Response>( "Player.SetProfilePreferences#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetProfilePreferences_Request, CPlayer_SetProfilePreferences_Response>( "Player.SetProfilePreferences#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_PostStatusToFriends_Response>> PostStatusToFriends( CPlayer_PostStatusToFriends_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_PostStatusToFriends_Request, CPlayer_PostStatusToFriends_Response>( "Player.PostStatusToFriends#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_PostStatusToFriends_Request, CPlayer_PostStatusToFriends_Response>( "Player.PostStatusToFriends#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetPostedStatus_Response>> GetPostedStatus( CPlayer_GetPostedStatus_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetPostedStatus_Request, CPlayer_GetPostedStatus_Response>( "Player.GetPostedStatus#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetPostedStatus_Request, CPlayer_GetPostedStatus_Response>( "Player.GetPostedStatus#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_DeletePostedStatus_Response>> DeletePostedStatus( CPlayer_DeletePostedStatus_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_DeletePostedStatus_Request, CPlayer_DeletePostedStatus_Response>( "Player.DeletePostedStatus#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_DeletePostedStatus_Request, CPlayer_DeletePostedStatus_Response>( "Player.DeletePostedStatus#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetLastPlayedTimes_Response>> ClientGetLastPlayedTimes( CPlayer_GetLastPlayedTimes_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetLastPlayedTimes_Request, CPlayer_GetLastPlayedTimes_Response>( "Player.ClientGetLastPlayedTimes#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetLastPlayedTimes_Request, CPlayer_GetLastPlayedTimes_Response>( "Player.ClientGetLastPlayedTimes#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetTimeSSAAccepted_Response>> GetTimeSSAAccepted( CPlayer_GetTimeSSAAccepted_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetTimeSSAAccepted_Request, CPlayer_GetTimeSSAAccepted_Response>( "Player.GetTimeSSAAccepted#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetTimeSSAAccepted_Request, CPlayer_GetTimeSSAAccepted_Response>( "Player.GetTimeSSAAccepted#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_AcceptSSA_Response>> AcceptSSA( CPlayer_AcceptSSA_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_AcceptSSA_Request, CPlayer_AcceptSSA_Response>( "Player.AcceptSSA#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_AcceptSSA_Request, CPlayer_AcceptSSA_Response>( "Player.AcceptSSA#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetNicknameList_Response>> GetNicknameList( CPlayer_GetNicknameList_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetNicknameList_Request, CPlayer_GetNicknameList_Response>( "Player.GetNicknameList#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetNicknameList_Request, CPlayer_GetNicknameList_Response>( "Player.GetNicknameList#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetPerFriendPreferences_Response>> GetPerFriendPreferences( CPlayer_GetPerFriendPreferences_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetPerFriendPreferences_Request, CPlayer_GetPerFriendPreferences_Response>( "Player.GetPerFriendPreferences#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetPerFriendPreferences_Request, CPlayer_GetPerFriendPreferences_Response>( "Player.GetPerFriendPreferences#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetPerFriendPreferences_Response>> SetPerFriendPreferences( CPlayer_SetPerFriendPreferences_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetPerFriendPreferences_Request, CPlayer_SetPerFriendPreferences_Response>( "Player.SetPerFriendPreferences#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetPerFriendPreferences_Request, CPlayer_SetPerFriendPreferences_Response>( "Player.SetPerFriendPreferences#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_AddFriend_Response>> AddFriend( CPlayer_AddFriend_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_AddFriend_Request, CPlayer_AddFriend_Response>( "Player.AddFriend#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_AddFriend_Request, CPlayer_AddFriend_Response>( "Player.AddFriend#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_RemoveFriend_Response>> RemoveFriend( CPlayer_RemoveFriend_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_RemoveFriend_Request, CPlayer_RemoveFriend_Response>( "Player.RemoveFriend#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_RemoveFriend_Request, CPlayer_RemoveFriend_Response>( "Player.RemoveFriend#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_IgnoreFriend_Response>> IgnoreFriend( CPlayer_IgnoreFriend_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_IgnoreFriend_Request, CPlayer_IgnoreFriend_Response>( "Player.IgnoreFriend#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_IgnoreFriend_Request, CPlayer_IgnoreFriend_Response>( "Player.IgnoreFriend#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetCommunityPreferences_Response>> GetCommunityPreferences( CPlayer_GetCommunityPreferences_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetCommunityPreferences_Request, CPlayer_GetCommunityPreferences_Response>( "Player.GetCommunityPreferences#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetCommunityPreferences_Request, CPlayer_GetCommunityPreferences_Response>( "Player.GetCommunityPreferences#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_SetCommunityPreferences_Response>> SetCommunityPreferences( CPlayer_SetCommunityPreferences_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_SetCommunityPreferences_Request, CPlayer_SetCommunityPreferences_Response>( "Player.SetCommunityPreferences#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_SetCommunityPreferences_Request, CPlayer_SetCommunityPreferences_Response>( "Player.SetCommunityPreferences#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetTextFilterWords_Response>> GetTextFilterWords( CPlayer_GetTextFilterWords_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetTextFilterWords_Request, CPlayer_GetTextFilterWords_Response>( "Player.GetTextFilterWords#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetTextFilterWords_Request, CPlayer_GetTextFilterWords_Response>( "Player.GetTextFilterWords#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetNewSteamAnnouncementState_Response>> GetNewSteamAnnouncementState( CPlayer_GetNewSteamAnnouncementState_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetNewSteamAnnouncementState_Request, CPlayer_GetNewSteamAnnouncementState_Response>( "Player.GetNewSteamAnnouncementState#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetNewSteamAnnouncementState_Request, CPlayer_GetNewSteamAnnouncementState_Response>( "Player.GetNewSteamAnnouncementState#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_UpdateSteamAnnouncementLastRead_Response>> UpdateSteamAnnouncementLastRead( CPlayer_UpdateSteamAnnouncementLastRead_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_UpdateSteamAnnouncementLastRead_Request, CPlayer_UpdateSteamAnnouncementLastRead_Response>( "Player.UpdateSteamAnnouncementLastRead#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_UpdateSteamAnnouncementLastRead_Request, CPlayer_UpdateSteamAnnouncementLastRead_Response>( "Player.UpdateSteamAnnouncementLastRead#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetPrivacySettings_Response>> GetPrivacySettings( CPlayer_GetPrivacySettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetPrivacySettings_Request, CPlayer_GetPrivacySettings_Response>( "Player.GetPrivacySettings#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetPrivacySettings_Request, CPlayer_GetPrivacySettings_Response>( "Player.GetPrivacySettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetDurationControl_Response>> GetDurationControl( CPlayer_GetDurationControl_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_GetDurationControl_Request, CPlayer_GetDurationControl_Response>( "Player.GetDurationControl#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_GetDurationControl_Request, CPlayer_GetDurationControl_Response>( "Player.GetDurationControl#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_RecordDisconnectedPlaytime_Response>> RecordDisconnectedPlaytime( CPlayer_RecordDisconnectedPlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CPlayer_RecordDisconnectedPlaytime_Request, CPlayer_RecordDisconnectedPlaytime_Response>( "Player.RecordDisconnectedPlaytime#1", request );
+            return UnifiedMessages.SendMessage<CPlayer_RecordDisconnectedPlaytime_Request, CPlayer_RecordDisconnectedPlaytime_Response>( "Player.RecordDisconnectedPlaytime#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -5949,48 +5949,48 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class PlayerClient : SteamUnifiedMessages.UnifiedService
+    public partial class PlayerClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "PlayerClient";
 
         public void NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_LastPlayedTimes_Notification>( "PlayerClient.NotifyLastPlayedTimes#1", request );
+            UnifiedMessages.SendNotification<CPlayer_LastPlayedTimes_Notification>( "PlayerClient.NotifyLastPlayedTimes#1", request, Model );
         }
 
         public void NotifyFriendNicknameChanged(CPlayer_FriendNicknameChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_FriendNicknameChanged_Notification>( "PlayerClient.NotifyFriendNicknameChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_FriendNicknameChanged_Notification>( "PlayerClient.NotifyFriendNicknameChanged#1", request, Model );
         }
 
         public void NotifyFriendEquippedProfileItemsChanged(CPlayer_FriendEquippedProfileItemsChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_FriendEquippedProfileItemsChanged_Notification>( "PlayerClient.NotifyFriendEquippedProfileItemsChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_FriendEquippedProfileItemsChanged_Notification>( "PlayerClient.NotifyFriendEquippedProfileItemsChanged#1", request, Model );
         }
 
         public void NotifyNewSteamAnnouncementState(CPlayer_NewSteamAnnouncementState_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_NewSteamAnnouncementState_Notification>( "PlayerClient.NotifyNewSteamAnnouncementState#1", request );
+            UnifiedMessages.SendNotification<CPlayer_NewSteamAnnouncementState_Notification>( "PlayerClient.NotifyNewSteamAnnouncementState#1", request, Model );
         }
 
         public void NotifyCommunityPreferencesChanged(CPlayer_CommunityPreferencesChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_CommunityPreferencesChanged_Notification>( "PlayerClient.NotifyCommunityPreferencesChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_CommunityPreferencesChanged_Notification>( "PlayerClient.NotifyCommunityPreferencesChanged#1", request, Model );
         }
 
         public void NotifyTextFilterWordsChanged(CPlayer_TextFilterWordsChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_TextFilterWordsChanged_Notification>( "PlayerClient.NotifyTextFilterWordsChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_TextFilterWordsChanged_Notification>( "PlayerClient.NotifyTextFilterWordsChanged#1", request, Model );
         }
 
         public void NotifyPerFriendPreferencesChanged(CPlayer_PerFriendPreferencesChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_PerFriendPreferencesChanged_Notification>( "PlayerClient.NotifyPerFriendPreferencesChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_PerFriendPreferencesChanged_Notification>( "PlayerClient.NotifyPerFriendPreferencesChanged#1", request, Model );
         }
 
         public void NotifyPrivacyPrivacySettingsChanged(CPlayer_PrivacySettingsChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CPlayer_PrivacySettingsChanged_Notification>( "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1", request );
+            UnifiedMessages.SendNotification<CPlayer_PrivacySettingsChanged_Notification>( "PlayerClient.NotifyPrivacyPrivacySettingsChanged#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -6030,6 +6030,135 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetRecentPlaytimeSessionsForChild_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetRecentPlaytimeSessionsForChild_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPlayerLinkDetails_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPlayerLinkDetails_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetMutualFriendsForIncomingInvites_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetMutualFriendsForIncomingInvites_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetOwnedGames_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetOwnedGames_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPlayNext_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPlayNext_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetFriendsGameplayInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetFriendsGameplayInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetGameBadgeLevels_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetGameBadgeLevels_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileBackground_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileBackground_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetProfileBackground_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetProfileBackground_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetMiniProfileBackground_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetMiniProfileBackground_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetMiniProfileBackground_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetMiniProfileBackground_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetAvatarFrame_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetAvatarFrame_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetAvatarFrame_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetAvatarFrame_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetAnimatedAvatar_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetAnimatedAvatar_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetAnimatedAvatar_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetAnimatedAvatar_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetSteamDeckKeyboardSkin_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetSteamDeckKeyboardSkin_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetSteamDeckKeyboardSkin_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetSteamDeckKeyboardSkin_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileItemsOwned_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileItemsOwned_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileItemsEquipped_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileItemsEquipped_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetEquippedProfileItemFlags_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetEquippedProfileItemFlags_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetEmoticonList_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetEmoticonList_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetCommunityBadgeProgress_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetCommunityBadgeProgress_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetTopAchievementsForGames_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetTopAchievementsForGames_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetAchievementsProgress_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetAchievementsProgress_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetGameAchievements_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetGameAchievements_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetUserAchievements_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetUserAchievements_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetGlobalAchievementPercentages_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetGlobalAchievementPercentages_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetUserStats_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetUserStats_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetFavoriteBadge_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetFavoriteBadge_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetFavoriteBadge_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetFavoriteBadge_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileCustomization_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileCustomization_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPurchasedProfileCustomizations_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPurchasedProfileCustomizations_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPurchasedAndUpgradedProfileCustomizations_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileThemesAvailable_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetProfileThemesAvailable_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetProfileTheme_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetProfileTheme_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetProfilePreferences_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetProfilePreferences_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_PostStatusToFriends_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_PostStatusToFriends_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPostedStatus_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPostedStatus_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_DeletePostedStatus_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_DeletePostedStatus_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetLastPlayedTimes_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetLastPlayedTimes_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetTimeSSAAccepted_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetTimeSSAAccepted_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_AcceptSSA_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_AcceptSSA_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetNicknameList_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetNicknameList_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPerFriendPreferences_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPerFriendPreferences_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetPerFriendPreferences_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetPerFriendPreferences_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_AddFriend_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_AddFriend_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_RemoveFriend_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_RemoveFriend_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_IgnoreFriend_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_IgnoreFriend_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetCommunityPreferences_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetCommunityPreferences_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetCommunityPreferences_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_SetCommunityPreferences_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetTextFilterWords_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetTextFilterWords_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetNewSteamAnnouncementState_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetNewSteamAnnouncementState_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_UpdateSteamAnnouncementLastRead_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_UpdateSteamAnnouncementLastRead_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPrivacySettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetPrivacySettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetDurationControl_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_GetDurationControl_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_RecordDisconnectedPlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_RecordDisconnectedPlaytime_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_LastPlayedTimes_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_FriendNicknameChanged_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_FriendEquippedProfileItemsChanged_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_NewSteamAnnouncementState_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_CommunityPreferencesChanged_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_TextFilterWordsChanged_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_PerFriendPreferencesChanged_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPlayer_PrivacySettingsChanged_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

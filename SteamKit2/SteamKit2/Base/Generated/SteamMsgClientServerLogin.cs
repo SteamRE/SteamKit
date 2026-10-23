@@ -1276,5 +1276,30 @@ namespace SteamKit2.Internal
 
 }
 
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientHeartBeat))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientServerTimestampRequest))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientServerTimestampResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientSecret))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientHello))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientLogon))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientLogonResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRequestWebAPIAuthenticateUserNonce))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRequestWebAPIAuthenticateUserNonceResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientLogOff))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientLoggedOff))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientNewLoginKey))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientNewLoginKeyAccepted))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAccountInfo))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientChallengeRequest))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientChallengeResponse))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
+
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

@@ -48,9 +48,18 @@ namespace Tests
         public async Task ThrowsWebAPIRequestExceptionIfRequestUnsuccessful()
         {
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
-            await Assert.ThrowsAsync<WebAPIRequestException>( () => ( Task )iface.PerformFooOperation() );
+            await Assert.ThrowsAsync<WebAPIRequestException>( () => iface.CallAsync( "PerformFooOperation" ) );
+        }
+
+        [Fact]
+        public void ThrowsWebAPIRequestExceptionIfDynamicRequestUnsuccessful()
+        {
+            var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( new ServiceUnavailableHttpMessageHandler() ) ) );
+            dynamic iface = configuration.GetWebAPIInterface( "IFooService" );
+
+            Assert.Throws<WebAPIRequestException>( () => iface.PerformFooOperation() );
         }
 
         [Fact]
@@ -133,7 +142,7 @@ namespace Tests
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var handlerCalled = false;
             hookableHandler.OnRequest = request =>
@@ -158,7 +167,7 @@ namespace Tests
                 [ "b" ] = "bar",
             };
 
-            var response = await iface.PerformFooOperation2( args );
+            var response = await iface.CallAsync( "PerformFooOperation", 2, args );
             Assert.True( handlerCalled );
         }
 
@@ -168,7 +177,7 @@ namespace Tests
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var handlerCalled = false;
             hookableHandler.OnRequest = request =>
@@ -191,12 +200,12 @@ namespace Tests
         }
 
         [Fact]
-        public async Task UsesSingleParameterArgumentsDictionary()
+        public void UsesSingleParameterArgumentsDictionary()
         {
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c.WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            dynamic iface = configuration.GetWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
@@ -222,7 +231,7 @@ namespace Tests
                 handlerCalled = true;
             };
 
-            var response = await iface.PerformFooOperation2( args );
+            var response = iface.PerformFooOperation2( args );
             Assert.True( handlerCalled );
         }
 
@@ -234,7 +243,7 @@ namespace Tests
                 .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey( "MySecretApiKey" ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
@@ -260,7 +269,7 @@ namespace Tests
                 return Task.CompletedTask;
             };
 
-            var response = await iface.PerformFooOperation2( args );
+            var response = await iface.CallAsync( "PerformFooOperation", 2, args );
             Assert.True( handlerCalled );
         }
 

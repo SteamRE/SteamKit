@@ -201,18 +201,18 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class CloudConfigStore : SteamUnifiedMessages.UnifiedService
+    public partial class CloudConfigStore : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "CloudConfigStore";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Download_Response>> Download( CCloudConfigStore_Download_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Upload_Response>> Upload( CCloudConfigStore_Upload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -233,13 +233,13 @@ namespace SteamKit2.WebUI.Internal
         }
     }
 
-    public class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
+    public partial class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "CloudConfigStoreClient";
 
         public void NotifyChange(CCloudConfigStore_Change_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request );
+            UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -258,6 +258,20 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Download_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Download_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Upload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Upload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Change_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

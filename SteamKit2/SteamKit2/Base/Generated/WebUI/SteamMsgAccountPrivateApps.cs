@@ -85,18 +85,18 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class AccountPrivateApps : SteamUnifiedMessages.UnifiedService
+    public partial class AccountPrivateApps : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "AccountPrivateApps";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList( CAccountPrivateApps_GetPrivateAppList_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( "AccountPrivateApps.GetPrivateAppList#1", request );
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( "AccountPrivateApps.GetPrivateAppList#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_ToggleAppPrivacy_Response>> ToggleAppPrivacy( CAccountPrivateApps_ToggleAppPrivacy_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( "AccountPrivateApps.ToggleAppPrivacy#1", request );
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( "AccountPrivateApps.ToggleAppPrivacy#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -117,13 +117,13 @@ namespace SteamKit2.WebUI.Internal
         }
     }
 
-    public class AccountPrivateAppsClient : SteamUnifiedMessages.UnifiedService
+    public partial class AccountPrivateAppsClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "AccountPrivateAppsClient";
 
         public void NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request );
+            UnifiedMessages.SendNotification<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -142,6 +142,20 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_GetPrivateAppList_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_GetPrivateAppList_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_ToggleAppPrivacy_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_ToggleAppPrivacy_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

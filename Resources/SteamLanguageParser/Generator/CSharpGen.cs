@@ -433,13 +433,13 @@ namespace SteamLanguageParser
                         if (baseSize == 0)
                         {
                             // early exit
-                            sb.AppendLine(padding + "\tProtoBuf.Serializer.Serialize<" + typestr + ">(stream, " + GetUpperName(prop.Name) + ");");
+                            sb.AppendLine(padding + "\tSteamKit2.ProtobufUtil.Serialize<" + typestr + ">( SteamKit2.Internal.SteamKitProtobuf.Model, stream, " + GetUpperName(prop.Name) + " );");
                             sb.AppendLine(padding + "}");
                             return;
                         }
 
                         sb.AppendLine(padding + "\tusing MemoryStream ms" + GetUpperName(prop.Name) + " = new MemoryStream();");
-                        sb.AppendLine(padding + "\tProtoBuf.Serializer.Serialize<" + typestr + ">(ms" + GetUpperName(prop.Name) + ", " + GetUpperName(prop.Name) + ");");
+                        sb.AppendLine(padding + "\tSteamKit2.ProtobufUtil.Serialize<" + typestr + ">( SteamKit2.Internal.SteamKitProtobuf.Model, ms" + GetUpperName(prop.Name) + ", " + GetUpperName(prop.Name) + " );");
 
                         if (prop.FlagsOpt != null)
                         {
@@ -559,11 +559,11 @@ namespace SteamLanguageParser
                         if (prop.FlagsOpt != null)
                         {
                             sb.AppendLine(padding + "\tArgumentOutOfRangeException.ThrowIfNegative( " + GetUpperName( prop.FlagsOpt ) + " );" );
-                            sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + " = ProtoBuf.Serializer.Deserialize<" + typestr + ">( stream, length: " + GetUpperName( prop.FlagsOpt ) + " );");
+                            sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + " = SteamKit2.ProtobufUtil.Deserialize<" + typestr + ">( SteamKit2.Internal.SteamKitProtobuf.Model, stream, " + GetUpperName( prop.FlagsOpt ) + " );");
                         }
                         else
                         {
-                            sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + " = ProtoBuf.Serializer.Deserialize<" + typestr + ">( stream );");
+                            sb.AppendLine(padding + "\t" + GetUpperName(prop.Name) + " = SteamKit2.ProtobufUtil.Deserialize<" + typestr + ">( SteamKit2.Internal.SteamKitProtobuf.Model, stream );");
                         }
                     }
                     else

@@ -72,7 +72,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="AppOwnershipTicketCallback"/>.</returns>
         public AsyncJob<AppOwnershipTicketCallback> GetAppOwnershipTicket( uint appid )
         {
-            var request = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>( EMsg.ClientGetAppOwnershipTicket );
+            var request = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicket>( EMsg.ClientGetAppOwnershipTicket, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = appid;
@@ -92,7 +92,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="DepotKeyCallback"/>.</returns>
         public AsyncJob<DepotKeyCallback> GetDepotDecryptionKey( uint depotid, uint appid )
         {
-            var request = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKey>( EMsg.ClientGetDepotDecryptionKey );
+            var request = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKey>( EMsg.ClientGetDepotDecryptionKey, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.depot_id = depotid;
@@ -132,7 +132,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSTokensCallback"/>.</returns>
         public AsyncJob<PICSTokensCallback> PICSGetAccessTokens( IEnumerable<uint> appIds, IEnumerable<uint> packageIds )
         {
-            var request = new ClientMsgProtobuf<CMsgClientPICSAccessTokenRequest>( EMsg.ClientPICSAccessTokenRequest );
+            var request = new ClientMsgProtobuf<CMsgClientPICSAccessTokenRequest>( EMsg.ClientPICSAccessTokenRequest, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.packageids.AddRange( packageIds );
@@ -154,7 +154,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="PICSChangesCallback"/>.</returns>
         public AsyncJob<PICSChangesCallback> PICSGetChangesSince( uint lastChangeNumber = 0, bool sendAppChangelist = true, bool sendPackageChangelist = false )
         {
-            var request = new ClientMsgProtobuf<CMsgClientPICSChangesSinceRequest>( EMsg.ClientPICSChangesSinceRequest );
+            var request = new ClientMsgProtobuf<CMsgClientPICSChangesSinceRequest>( EMsg.ClientPICSChangesSinceRequest, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.since_change_number = lastChangeNumber;
@@ -201,7 +201,7 @@ namespace SteamKit2
 
             ArgumentNullException.ThrowIfNull( packages );
 
-            var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.ClientPICSProductInfoRequest );
+            var request = new ClientMsgProtobuf<CMsgClientPICSProductInfoRequest>( EMsg.ClientPICSProductInfoRequest, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             foreach ( var app_request in apps )
@@ -253,7 +253,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( apps );
 
-            var request = new ClientMsgProtobuf<CMsgClientRequestFreeLicense>( EMsg.ClientRequestFreeLicense );
+            var request = new ClientMsgProtobuf<CMsgClientRequestFreeLicense>( EMsg.ClientRequestFreeLicense, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.appids.AddRange( apps );
@@ -273,7 +273,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CheckAppBetaPasswordCallback"/>.</returns>
         public AsyncJob<CheckAppBetaPasswordCallback> CheckAppBetaPassword( uint app, string password )
         {
-            var request = new ClientMsgProtobuf<CMsgClientCheckAppBetaPassword>( EMsg.ClientCheckAppBetaPassword );
+            var request = new ClientMsgProtobuf<CMsgClientCheckAppBetaPassword>( EMsg.ClientCheckAppBetaPassword, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.app_id = app;
@@ -311,7 +311,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="CheckAppBetaPasswordCallback"/>.</returns>
         public AsyncJob<PrivateBetaCallback> PICSGetPrivateBeta( uint app, ulong accessToken, string branch, byte[] branchPasswordHash )
         {
-            var request = new ClientMsgProtobuf<CMsgClientPICSPrivateBetaRequest>( EMsg.ClientPICSPrivateBetaRequest );
+            var request = new ClientMsgProtobuf<CMsgClientPICSPrivateBetaRequest>( EMsg.ClientPICSPrivateBetaRequest, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.appid = app;

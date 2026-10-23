@@ -15,6 +15,7 @@ $ProtoGenSrc = Join-Path $PSScriptRoot 'ProtobufGen'
 $ProtoGenDll = Join-Path $ProtoGenSrc '\bin\Debug\ProtobufGen.dll'
 $ProtoBase = Join-Path $PSScriptRoot '..\Protobufs'
 $SK2Base = Join-Path $PSScriptRoot '..\..\SteamKit2\SteamKit2\Base\Generated'
+$ModelParams = @('--model', 'SteamKit2.Internal.SteamKitProtobufModel')
 
 & dotnet build --configuration Debug $ProtoGenSrc
 
@@ -27,10 +28,11 @@ $protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv') |
 
 # one-off
 Set-Location -LiteralPath $PSScriptRoot
-$params = $CommonParams + @(
+$params = $CommonParams + $ModelParams + @(
     '--proto', "gc.proto",
     '--output', (Join-Path $SK2Base 'GC\MsgBaseGC.cs'),
-    '--namespace', "SteamKit2.GC.Internal"
+    '--namespace', "SteamKit2.GC.Internal",
+    '--model-all-messages'
     )
 
 & dotnet $ProtoGenDll $params > $null
@@ -48,11 +50,16 @@ $params = $CommonParams + @(
 
 $protos | % {
     Set-Location -LiteralPath (Join-Path $ProtoBase $_.ProtoDir)
-    $params = $CommonParams + @(
+    $params = $CommonParams + $ModelParams + @(
         '--proto', $_.ProtoFileName
         '--output', (Join-Path $SK2Base $_.ClassFilePath),
         '--namespace', $_.Namespace
     )
+
+    # 'all' registers every top-level message on the model, 'services' only the service request and response types
+    if ($_.ModelRoots -eq 'all') {
+        $params += '--model-all-messages'
+    }
 
     & dotnet $ProtoGenDll -- $params > $null
     if ($LASTEXITCODE -ne 0) { $failed += "$($_.ProtoDir)/$($_.ProtoFileName)" }

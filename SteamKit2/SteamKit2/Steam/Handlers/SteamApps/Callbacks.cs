@@ -150,7 +150,7 @@ namespace SteamKit2
 
             internal LicenseListCallback( IPacketMsg packetMsg )
             {
-                var licenseList = new ClientMsgProtobuf<CMsgClientLicenseList>( packetMsg );
+                var licenseList = new ClientMsgProtobuf<CMsgClientLicenseList>( packetMsg, SteamKitProtobuf.Model );
                 var msg = licenseList.Body;
 
                 this.Result = ( EResult )msg.eresult;
@@ -191,7 +191,7 @@ namespace SteamKit2
 
             internal FreeLicenseCallback( IPacketMsg packetMsg )
             {
-                var grantedLicenses = new ClientMsgProtobuf<CMsgClientRequestFreeLicenseResponse>( packetMsg );
+                var grantedLicenses = new ClientMsgProtobuf<CMsgClientRequestFreeLicenseResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = grantedLicenses.Body;
 
                 this.JobID = grantedLicenses.TargetJobID;
@@ -224,7 +224,7 @@ namespace SteamKit2
 
             internal AppOwnershipTicketCallback( IPacketMsg packetMsg )
             {
-                var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg );
+                var ticketResponse = new ClientMsgProtobuf<CMsgClientGetAppOwnershipTicketResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = ticketResponse.Body;
 
                 this.JobID = ticketResponse.TargetJobID;
@@ -257,7 +257,7 @@ namespace SteamKit2
 
             internal DepotKeyCallback( IPacketMsg packetMsg )
             {
-                var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg );
+                var keyResponse = new ClientMsgProtobuf<CMsgClientGetDepotDecryptionKeyResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = keyResponse.Body;
 
                 JobID = keyResponse.TargetJobID;
@@ -321,7 +321,7 @@ namespace SteamKit2
 
             internal GameConnectTokensCallback( IPacketMsg packetMsg )
             {
-                var gcTokens = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg );
+                var gcTokens = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg, SteamKitProtobuf.Model );
                 var msg = gcTokens.Body;
 
                 TokensToKeep = msg.max_tokens_to_keep;
@@ -382,7 +382,7 @@ namespace SteamKit2
 
             internal PICSTokensCallback( IPacketMsg packetMsg )
             {
-                var tokensResponse = new ClientMsgProtobuf<CMsgClientPICSAccessTokenResponse>( packetMsg );
+                var tokensResponse = new ClientMsgProtobuf<CMsgClientPICSAccessTokenResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = tokensResponse.Body;
 
                 JobID = tokensResponse.TargetJobID;
@@ -474,7 +474,7 @@ namespace SteamKit2
 
             internal PICSChangesCallback( IPacketMsg packetMsg )
             {
-                var changesResponse = new ClientMsgProtobuf<CMsgClientPICSChangesSinceResponse>( packetMsg );
+                var changesResponse = new ClientMsgProtobuf<CMsgClientPICSChangesSinceResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = changesResponse.Body;
 
                 JobID = changesResponse.TargetJobID;
@@ -630,7 +630,7 @@ namespace SteamKit2
 
             internal PICSProductInfoCallback( IPacketMsg packetMsg )
             {
-                var productResponse = new ClientMsgProtobuf<CMsgClientPICSProductInfoResponse>( packetMsg );
+                var productResponse = new ClientMsgProtobuf<CMsgClientPICSProductInfoResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = productResponse.Body;
 
                 JobID = productResponse.TargetJobID;
@@ -717,7 +717,7 @@ namespace SteamKit2
 
             internal RedeemGuestPassResponseCallback( IPacketMsg packetMsg )
             {
-                var redeemedGuestPass = new ClientMsgProtobuf<CMsgClientRedeemGuestPassResponse>( packetMsg );
+                var redeemedGuestPass = new ClientMsgProtobuf<CMsgClientRedeemGuestPassResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = redeemedGuestPass.Body;
 
                 JobID = redeemedGuestPass.TargetJobID;
@@ -748,7 +748,7 @@ namespace SteamKit2
 
             internal PurchaseResponseCallback( IPacketMsg packetMsg )
             {
-                var purchaseResponse = new ClientMsgProtobuf<CMsgClientPurchaseResponse>( packetMsg );
+                var purchaseResponse = new ClientMsgProtobuf<CMsgClientPurchaseResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = purchaseResponse.Body;
 
                 JobID = purchaseResponse.TargetJobID;
@@ -782,7 +782,7 @@ namespace SteamKit2
 
             internal CheckAppBetaPasswordCallback( IPacketMsg packetMsg )
             {
-                var response = new ClientMsgProtobuf<CMsgClientCheckAppBetaPasswordResponse>( packetMsg );
+                var response = new ClientMsgProtobuf<CMsgClientCheckAppBetaPasswordResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = response.Body;
 
                 JobID = response.TargetJobID;
@@ -813,7 +813,7 @@ namespace SteamKit2
 
             internal PrivateBetaCallback( IPacketMsg packetMsg )
             {
-                var response = new ClientMsgProtobuf<CMsgClientPICSPrivateBetaResponse>( packetMsg );
+                var response = new ClientMsgProtobuf<CMsgClientPICSPrivateBetaResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = response.Body;
 
                 JobID = response.TargetJobID;

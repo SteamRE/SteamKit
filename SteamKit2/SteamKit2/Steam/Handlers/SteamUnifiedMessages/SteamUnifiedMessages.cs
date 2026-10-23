@@ -5,7 +5,10 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using ProtoBuf;
+using ProtoBuf.Meta;
+using SteamKit2.Internal;
 
 namespace SteamKit2
 {
@@ -51,7 +54,27 @@ namespace SteamKit2
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
         /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse{TResult}"/>.</returns>
-        public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<TRequest, TResult>( string name, TRequest message )
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
+        public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResult>( string name, TRequest message )
+            where TRequest : IExtensible, new() where TResult : IExtensible, new()
+            => SendMessage<TRequest, TResult>( name, message, RuntimeTypeModel.Default );
+
+        /// <summary>
+        /// Sends a message.
+        /// Results are returned in a <see cref="ServiceMethodResponse{TResult}"/>.
+        /// The returned <see cref="AsyncJob{T}"/> can also be awaited to retrieve the callback result.
+        /// </summary>
+        /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
+        /// <typeparam name="TResult">The type of the result of the request.</typeparam>
+        /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
+        /// <param name="message">The message to send.</param>
+        /// <param name="model">
+        /// The protobuf model used to serialize the request, such as <see cref="SteamKitProtobuf.Model"/>.
+        /// The response is deserialized by the <see cref="UnifiedService"/> registered for the service, using its <see cref="UnifiedService.Model"/>.
+        /// </param>
+        /// <returns>The JobID of the request. This can be used to find the appropriate <see cref="ServiceMethodResponse{TResult}"/>.</returns>
+        public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResult>( string name, TRequest message, TypeModel model )
             where TRequest : IExtensible, new() where TResult : IExtensible, new()
         {
             if ( message is null )
@@ -60,7 +83,7 @@ namespace SteamKit2
             }
 
             var eMsg = Client.SteamID is null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
-            var msg = new ClientMsgProtobuf<TRequest>( eMsg )
+            var msg = new ClientMsgProtobuf<TRequest>( eMsg, model )
             {
                 SourceJobID = Client.GetNextJobID()
             };
@@ -78,7 +101,20 @@ namespace SteamKit2
         /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
         /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
         /// <param name="message">The message to send.</param>
-        public void SendNotification<TRequest>( string name, TRequest message )
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
+        public void SendNotification<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest>( string name, TRequest message )
+            where TRequest : IExtensible, new()
+            => SendNotification( name, message, RuntimeTypeModel.Default );
+
+        /// <summary>
+        /// Sends a notification.
+        /// </summary>
+        /// <typeparam name="TRequest">The type of a protobuf object.</typeparam>
+        /// <param name="name">Name of the RPC endpoint. Takes the format ServiceName.RpcName</param>
+        /// <param name="message">The message to send.</param>
+        /// <param name="model">The protobuf model used to serialize the notification, such as <see cref="SteamKitProtobuf.Model"/>.</param>
+        public void SendNotification<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest>( string name, TRequest message, TypeModel model )
             where TRequest : IExtensible, new()
         {
             if ( message is null )
@@ -89,7 +125,7 @@ namespace SteamKit2
             // Notifications do not set source jobid, otherwise Steam server will actively reject this message
             // if the method being used is a "Notification"
             var eMsg = Client.SteamID is null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
-            var msg = new ClientMsgProtobuf<TRequest>( eMsg );
+            var msg = new ClientMsgProtobuf<TRequest>( eMsg, model );
             msg.Header.Proto.target_job_name = name;
             msg.Body = message;
             Client.Send( msg );
@@ -129,15 +165,15 @@ namespace SteamKit2
             }
         }
 
-        internal void HandleResponseMsg<TResponse>( PacketClientMsgProtobuf packetMsg ) where TResponse : IExtensible, new()
+        internal void HandleResponseMsg<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResponse>( PacketClientMsgProtobuf packetMsg, TypeModel model ) where TResponse : IExtensible, new()
         {
-            var callback = new ServiceMethodResponse<TResponse>( packetMsg );
+            var callback = new ServiceMethodResponse<TResponse>( packetMsg, model );
             Client.PostCallback( callback );
         }
 
-        internal void HandleNotificationMsg<TNotification>( PacketClientMsgProtobuf packetMsg ) where TNotification : IExtensible, new()
+        internal void HandleNotificationMsg<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TNotification>( PacketClientMsgProtobuf packetMsg, TypeModel model ) where TNotification : IExtensible, new()
         {
-            var callback = new ServiceMethodNotification<TNotification>( packetMsg );
+            var callback = new ServiceMethodNotification<TNotification>( packetMsg, model );
             Client.PostCallback( callback );
         }
 
@@ -165,9 +201,9 @@ namespace SteamKit2
             /// </summary>
             /// <param name="packetMsg">The packet message that contains the data.</param>
             /// <typeparam name="TResponse">The type of the response.</typeparam>
-            protected void PostResponseMsg<TResponse>( PacketClientMsgProtobuf packetMsg ) where TResponse : IExtensible, new()
+            protected void PostResponseMsg<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResponse>( PacketClientMsgProtobuf packetMsg ) where TResponse : IExtensible, new()
             {
-	            UnifiedMessages?.HandleResponseMsg<TResponse>( packetMsg );
+	            UnifiedMessages?.HandleResponseMsg<TResponse>( packetMsg, Model );
             }
 
             /// <summary>
@@ -175,10 +211,17 @@ namespace SteamKit2
             /// </summary>
             /// <param name="packetMsg">The packet message that contains the data.</param>
             /// <typeparam name="TNotification">The type of the notification.</typeparam>
-            protected void PostNotificationMsg<TNotification>( PacketClientMsgProtobuf packetMsg ) where TNotification : IExtensible, new()
+            protected void PostNotificationMsg<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TNotification>( PacketClientMsgProtobuf packetMsg ) where TNotification : IExtensible, new()
             {
-	            UnifiedMessages?.HandleNotificationMsg<TNotification>( packetMsg );
+	            UnifiedMessages?.HandleNotificationMsg<TNotification>( packetMsg, Model );
             }
+
+            /// <summary>
+            /// The protobuf model used to serialize the requests and deserialize the responses and notifications of this service.
+            /// Defaults to <see cref="SteamKitProtobuf.Model"/>; services generated from your own protobuf definitions should
+            /// override it to return a <c>[ProtoModel]</c> that contains their messages.
+            /// </summary>
+            protected virtual TypeModel Model => SteamKitProtobuf.Model;
 
             /// <summary>
             /// The name of the steam unified messages service.

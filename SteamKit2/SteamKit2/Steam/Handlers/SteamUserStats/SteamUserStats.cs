@@ -32,7 +32,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="NumberOfPlayersCallback"/>.</returns>
         public AsyncJob<NumberOfPlayersCallback> GetNumberOfCurrentPlayers( uint appId )
         {
-            var msg = new ClientMsgProtobuf<CMsgDPGetNumberOfCurrentPlayers>( EMsg.ClientGetNumberOfCurrentPlayersDP );
+            var msg = new ClientMsgProtobuf<CMsgDPGetNumberOfCurrentPlayers>( EMsg.ClientGetNumberOfCurrentPlayersDP, SteamKitProtobuf.Model );
             msg.SourceJobID = Client.GetNextJobID();
 
             msg.Body.appid = appId;
@@ -52,7 +52,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FindOrCreateLeaderboardCallback"/>.</returns>
         public AsyncJob<FindOrCreateLeaderboardCallback> FindLeaderboard( uint appId, string name )
         {
-            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLB>( EMsg.ClientLBSFindOrCreateLB );
+            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLB>( EMsg.ClientLBSFindOrCreateLB, SteamKitProtobuf.Model );
             msg.SourceJobID = Client.GetNextJobID();
 
             // routing_appid has to be set correctly to receive a response
@@ -78,7 +78,7 @@ namespace SteamKit2
         /// <returns>The Job ID of the request. This can be used to find the appropriate <see cref="FindOrCreateLeaderboardCallback"/>.</returns>
         public AsyncJob<FindOrCreateLeaderboardCallback> CreateLeaderboard( uint appId, string name, ELeaderboardSortMethod sortMethod, ELeaderboardDisplayType displayType )
         {
-            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLB>( EMsg.ClientLBSFindOrCreateLB );
+            var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLB>( EMsg.ClientLBSFindOrCreateLB, SteamKitProtobuf.Model );
             msg.SourceJobID = Client.GetNextJobID();
 
             // routing_appid has to be set correctly to receive a response
@@ -108,7 +108,7 @@ namespace SteamKit2
         /// <param name="dataRequest">Type of request.</param>
         public AsyncJob<LeaderboardEntriesCallback> GetLeaderboardEntries( uint appId, int id, int rangeStart, int rangeEnd, ELeaderboardDataRequest dataRequest )
         {
-            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntries>( EMsg.ClientLBSGetLBEntries );
+            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntries>( EMsg.ClientLBSGetLBEntries, SteamKitProtobuf.Model );
             msg.SourceJobID = Client.GetNextJobID();
 
             // routing_appid has to be set correctly to receive a response
@@ -136,7 +136,7 @@ namespace SteamKit2
         /// <param name="users">The IDs of each user to request leaderboard rows for.</param>
         public AsyncJob<LeaderboardEntriesCallback> DownloadLeaderboardEntriesForUsers( uint appId, int id, IEnumerable<SteamID> users )
         {
-            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntries>( EMsg.ClientLBSGetLBEntries );
+            var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntries>( EMsg.ClientLBSGetLBEntries, SteamKitProtobuf.Model );
             msg.SourceJobID = Client.GetNextJobID();
 
             // routing_appid has to be set correctly to receive a response

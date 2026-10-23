@@ -122,8 +122,8 @@ async void OnLoggedOn( SteamUser.LoggedOnCallback callback )
     var response = await playerService.GetGameBadgeLevels( req );
 
     // alternatively, the request can be made using SteamUnifiedMessages directly, but then you must build the service request name manually
-    // the name format is in the form of <Service>.<Method>#<Version>
-    response = await steamUnifiedMessages.SendMessage<CPlayer_GetGameBadgeLevels_Request, CPlayer_GetGameBadgeLevels_Response>( "Player.GetGameBadgeLevels#1", req );
+    // the name format is in the form of <Service>.<Method>#<Version>, and the protobuf model that serializes the request must be passed as well
+    response = await steamUnifiedMessages.SendMessage<CPlayer_GetGameBadgeLevels_Request, CPlayer_GetGameBadgeLevels_Response>( "Player.GetGameBadgeLevels#1", req, SteamKitProtobuf.Model );
 
     if ( response.Result != EResult.OK )
     {

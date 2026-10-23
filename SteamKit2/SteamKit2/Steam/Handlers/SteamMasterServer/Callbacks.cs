@@ -51,7 +51,7 @@ namespace SteamKit2
 
             internal QueryCallback( IPacketMsg packetMsg )
             {
-                var queryResponse = new ClientMsgProtobuf<CMsgGMSClientServerQueryResponse>( packetMsg );
+                var queryResponse = new ClientMsgProtobuf<CMsgGMSClientServerQueryResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = queryResponse.Body;
 
                 JobID = queryResponse.TargetJobID;
