@@ -352,38 +352,38 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Parties : SteamUnifiedMessages.UnifiedService
+    public partial class Parties : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Parties";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_JoinParty_Response>> JoinParty( CParties_JoinParty_Request request )
         {
-            return UnifiedMessages.SendMessage<CParties_JoinParty_Request, CParties_JoinParty_Response>( "Parties.JoinParty#1", request );
+            return UnifiedMessages.SendMessage<CParties_JoinParty_Request, CParties_JoinParty_Response>( "Parties.JoinParty#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_CreateBeacon_Response>> CreateBeacon( CParties_CreateBeacon_Request request )
         {
-            return UnifiedMessages.SendMessage<CParties_CreateBeacon_Request, CParties_CreateBeacon_Response>( "Parties.CreateBeacon#1", request );
+            return UnifiedMessages.SendMessage<CParties_CreateBeacon_Request, CParties_CreateBeacon_Response>( "Parties.CreateBeacon#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_OnReservationCompleted_Response>> OnReservationCompleted( CParties_OnReservationCompleted_Request request )
         {
-            return UnifiedMessages.SendMessage<CParties_OnReservationCompleted_Request, CParties_OnReservationCompleted_Response>( "Parties.OnReservationCompleted#1", request );
+            return UnifiedMessages.SendMessage<CParties_OnReservationCompleted_Request, CParties_OnReservationCompleted_Response>( "Parties.OnReservationCompleted#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_CancelReservation_Response>> CancelReservation( CParties_CancelReservation_Request request )
         {
-            return UnifiedMessages.SendMessage<CParties_CancelReservation_Request, CParties_CancelReservation_Response>( "Parties.CancelReservation#1", request );
+            return UnifiedMessages.SendMessage<CParties_CancelReservation_Request, CParties_CancelReservation_Response>( "Parties.CancelReservation#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_ChangeNumOpenSlots_Response>> ChangeNumOpenSlots( CParties_ChangeNumOpenSlots_Request request )
         {
-            return UnifiedMessages.SendMessage<CParties_ChangeNumOpenSlots_Request, CParties_ChangeNumOpenSlots_Response>( "Parties.ChangeNumOpenSlots#1", request );
+            return UnifiedMessages.SendMessage<CParties_ChangeNumOpenSlots_Request, CParties_ChangeNumOpenSlots_Response>( "Parties.ChangeNumOpenSlots#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_DestroyBeacon_Response>> DestroyBeacon( CParties_DestroyBeacon_Request request )
         {
-            return UnifiedMessages.SendMessage<CParties_DestroyBeacon_Request, CParties_DestroyBeacon_Response>( "Parties.DestroyBeacon#1", request );
+            return UnifiedMessages.SendMessage<CParties_DestroyBeacon_Request, CParties_DestroyBeacon_Response>( "Parties.DestroyBeacon#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -417,6 +417,27 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_JoinParty_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_JoinParty_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_CreateBeacon_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_CreateBeacon_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_OnReservationCompleted_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_OnReservationCompleted_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_CancelReservation_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_CancelReservation_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_ChangeNumOpenSlots_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_ChangeNumOpenSlots_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_DestroyBeacon_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParties_DestroyBeacon_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

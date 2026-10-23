@@ -670,38 +670,38 @@ namespace SteamKit2.Internal
 
     }
 
-    public class ContentBuilder : SteamUnifiedMessages.UnifiedService
+    public partial class ContentBuilder : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ContentBuilder";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_InitDepotBuild_Response>> InitDepotBuild( CContentBuilder_InitDepotBuild_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_InitDepotBuild_Request, CContentBuilder_InitDepotBuild_Response>( "ContentBuilder.InitDepotBuild#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_InitDepotBuild_Request, CContentBuilder_InitDepotBuild_Response>( "ContentBuilder.InitDepotBuild#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_StartDepotUpload_Response>> StartDepotUpload( CContentBuilder_StartDepotUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_StartDepotUpload_Request, CContentBuilder_StartDepotUpload_Response>( "ContentBuilder.StartDepotUpload#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_StartDepotUpload_Request, CContentBuilder_StartDepotUpload_Response>( "ContentBuilder.StartDepotUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_GetMissingDepotChunks_Response>> GetMissingDepotChunks( CContentBuilder_GetMissingDepotChunks_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_GetMissingDepotChunks_Request, CContentBuilder_GetMissingDepotChunks_Response>( "ContentBuilder.GetMissingDepotChunks#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_GetMissingDepotChunks_Request, CContentBuilder_GetMissingDepotChunks_Response>( "ContentBuilder.GetMissingDepotChunks#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_FinishDepotUpload_Response>> FinishDepotUpload( CContentBuilder_FinishDepotUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_FinishDepotUpload_Request, CContentBuilder_FinishDepotUpload_Response>( "ContentBuilder.FinishDepotUpload#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_FinishDepotUpload_Request, CContentBuilder_FinishDepotUpload_Response>( "ContentBuilder.FinishDepotUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_CommitAppBuild_Response>> CommitAppBuild( CContentBuilder_CommitAppBuild_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_CommitAppBuild_Request, CContentBuilder_CommitAppBuild_Response>( "ContentBuilder.CommitAppBuild#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_CommitAppBuild_Request, CContentBuilder_CommitAppBuild_Response>( "ContentBuilder.CommitAppBuild#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_SignInstallScript_Response>> SignInstallScript( CContentBuilder_SignInstallScript_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( "ContentBuilder.SignInstallScript#1", request );
+            return UnifiedMessages.SendMessage<CContentBuilder_SignInstallScript_Request, CContentBuilder_SignInstallScript_Response>( "ContentBuilder.SignInstallScript#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -735,6 +735,27 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_InitDepotBuild_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_InitDepotBuild_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_StartDepotUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_StartDepotUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_GetMissingDepotChunks_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_GetMissingDepotChunks_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_FinishDepotUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_FinishDepotUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_CommitAppBuild_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_CommitAppBuild_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_SignInstallScript_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentBuilder_SignInstallScript_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

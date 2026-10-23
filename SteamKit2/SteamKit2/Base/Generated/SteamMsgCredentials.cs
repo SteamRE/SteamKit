@@ -510,33 +510,33 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Credentials : SteamUnifiedMessages.UnifiedService
+    public partial class Credentials : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Credentials";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_GetSteamGuardDetails_Response>> GetSteamGuardDetails( CCredentials_GetSteamGuardDetails_Request request )
         {
-            return UnifiedMessages.SendMessage<CCredentials_GetSteamGuardDetails_Request, CCredentials_GetSteamGuardDetails_Response>( "Credentials.GetSteamGuardDetails#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_GetSteamGuardDetails_Request, CCredentials_GetSteamGuardDetails_Response>( "Credentials.GetSteamGuardDetails#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_ValidateEmailAddress_Response>> ValidateEmailAddress( CCredentials_ValidateEmailAddress_Request request )
         {
-            return UnifiedMessages.SendMessage<CCredentials_ValidateEmailAddress_Request, CCredentials_ValidateEmailAddress_Response>( "Credentials.ValidateEmailAddress#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_ValidateEmailAddress_Request, CCredentials_ValidateEmailAddress_Response>( "Credentials.ValidateEmailAddress#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_SteamGuardPhishingReport_Response>> SteamGuardPhishingReport( CCredentials_SteamGuardPhishingReport_Request request )
         {
-            return UnifiedMessages.SendMessage<CCredentials_SteamGuardPhishingReport_Request, CCredentials_SteamGuardPhishingReport_Response>( "Credentials.SteamGuardPhishingReport#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_SteamGuardPhishingReport_Request, CCredentials_SteamGuardPhishingReport_Response>( "Credentials.SteamGuardPhishingReport#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_LastCredentialChangeTime_Response>> GetCredentialChangeTimeDetails( CCredentials_LastCredentialChangeTime_Request request )
         {
-            return UnifiedMessages.SendMessage<CCredentials_LastCredentialChangeTime_Request, CCredentials_LastCredentialChangeTime_Response>( "Credentials.GetCredentialChangeTimeDetails#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_LastCredentialChangeTime_Request, CCredentials_LastCredentialChangeTime_Response>( "Credentials.GetCredentialChangeTimeDetails#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_GetAccountAuthSecret_Response>> GetAccountAuthSecret( CCredentials_GetAccountAuthSecret_Request request )
         {
-            return UnifiedMessages.SendMessage<CCredentials_GetAccountAuthSecret_Request, CCredentials_GetAccountAuthSecret_Response>( "Credentials.GetAccountAuthSecret#1", request );
+            return UnifiedMessages.SendMessage<CCredentials_GetAccountAuthSecret_Request, CCredentials_GetAccountAuthSecret_Response>( "Credentials.GetAccountAuthSecret#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -567,6 +567,25 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_GetSteamGuardDetails_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_GetSteamGuardDetails_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_ValidateEmailAddress_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_ValidateEmailAddress_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_SteamGuardPhishingReport_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_SteamGuardPhishingReport_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_LastCredentialChangeTime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_LastCredentialChangeTime_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_GetAccountAuthSecret_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCredentials_GetAccountAuthSecret_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

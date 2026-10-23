@@ -521,43 +521,43 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class AccountCart : SteamUnifiedMessages.UnifiedService
+    public partial class AccountCart : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "AccountCart";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_AddItemsToCart_Response>> AddItemsToCart( CAccountCart_AddItemsToCart_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountCart_AddItemsToCart_Request, CAccountCart_AddItemsToCart_Response>( "AccountCart.AddItemsToCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_AddItemsToCart_Request, CAccountCart_AddItemsToCart_Response>( "AccountCart.AddItemsToCart#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_DeleteCart_Response>> DeleteCart( CAccountCart_DeleteCart_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountCart_DeleteCart_Request, CAccountCart_DeleteCart_Response>( "AccountCart.DeleteCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_DeleteCart_Request, CAccountCart_DeleteCart_Response>( "AccountCart.DeleteCart#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_GetCart_Response>> GetCart( CAccountCart_GetCart_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountCart_GetCart_Request, CAccountCart_GetCart_Response>( "AccountCart.GetCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_GetCart_Request, CAccountCart_GetCart_Response>( "AccountCart.GetCart#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_GetRelevantCoupons_Response>> GetRelevantCoupons( CAccountCart_GetRelevantCoupons_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountCart_GetRelevantCoupons_Request, CAccountCart_GetRelevantCoupons_Response>( "AccountCart.GetRelevantCoupons#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_GetRelevantCoupons_Request, CAccountCart_GetRelevantCoupons_Response>( "AccountCart.GetRelevantCoupons#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_MergeShoppingCartContents_Response>> MergeShoppingCartContents( CAccountCart_MergeShoppingCartContents_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountCart_MergeShoppingCartContents_Request, CAccountCart_MergeShoppingCartContents_Response>( "AccountCart.MergeShoppingCartContents#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_MergeShoppingCartContents_Request, CAccountCart_MergeShoppingCartContents_Response>( "AccountCart.MergeShoppingCartContents#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_ModifyLineItem_Response>> ModifyLineItem( CAccountCart_ModifyLineItem_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountCart_ModifyLineItem_Request, CAccountCart_ModifyLineItem_Response>( "AccountCart.ModifyLineItem#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_ModifyLineItem_Request, CAccountCart_ModifyLineItem_Response>( "AccountCart.ModifyLineItem#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_RemoveItemFromCart_Response>> RemoveItemFromCart( CAccountCart_RemoveItemFromCart_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountCart_RemoveItemFromCart_Request, CAccountCart_RemoveItemFromCart_Response>( "AccountCart.RemoveItemFromCart#1", request );
+            return UnifiedMessages.SendMessage<CAccountCart_RemoveItemFromCart_Request, CAccountCart_RemoveItemFromCart_Response>( "AccountCart.RemoveItemFromCart#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -594,6 +594,29 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_AddItemsToCart_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_AddItemsToCart_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_DeleteCart_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_DeleteCart_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_GetCart_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_GetCart_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_GetRelevantCoupons_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_GetRelevantCoupons_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_MergeShoppingCartContents_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_MergeShoppingCartContents_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_ModifyLineItem_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_ModifyLineItem_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_RemoveItemFromCart_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountCart_RemoveItemFromCart_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

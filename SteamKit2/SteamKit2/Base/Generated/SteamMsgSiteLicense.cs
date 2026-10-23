@@ -409,18 +409,18 @@ namespace SteamKit2.Internal
 
     }
 
-    public class SiteManagerClient : SteamUnifiedMessages.UnifiedService
+    public partial class SiteManagerClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "SiteManagerClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteManagerClient_IncomingClient_Response>> IncomingClient( CSiteManagerClient_IncomingClient_Request request )
         {
-            return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( "SiteManagerClient.IncomingClient#1", request );
+            return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( "SiteManagerClient.IncomingClient#1", request, Model );
         }
 
         public void ClientSeatCheckoutNotification(CSiteLicense_ClientSeatCheckout_Notification request )
         {
-            UnifiedMessages.SendNotification<CSiteLicense_ClientSeatCheckout_Notification>( "SiteManagerClient.ClientSeatCheckoutNotification#1", request );
+            UnifiedMessages.SendNotification<CSiteLicense_ClientSeatCheckout_Notification>( "SiteManagerClient.ClientSeatCheckoutNotification#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -444,33 +444,33 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class SiteLicense : SteamUnifiedMessages.UnifiedService
+    public partial class SiteLicense : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "SiteLicense";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation( CSiteLicense_InitiateAssociation_Request request )
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_InitiateAssociation_Request, CSiteLicense_InitiateAssociation_Response>( "SiteLicense.InitiateAssociation#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_InitiateAssociation_Request, CSiteLicense_InitiateAssociation_Response>( "SiteLicense.InitiateAssociation#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_LCSAuthenticate_Response>> LCSAuthenticate( CSiteLicense_LCSAuthenticate_Request request )
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_LCSAuthenticate_Request, CSiteLicense_LCSAuthenticate_Response>( "SiteLicense.LCSAuthenticate#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAuthenticate_Request, CSiteLicense_LCSAuthenticate_Response>( "SiteLicense.LCSAuthenticate#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_LCSAssociateUser_Response>> LCSAssociateUser( CSiteLicense_LCSAssociateUser_Request request )
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_LCSAssociateUser_Request, CSiteLicense_LCSAssociateUser_Response>( "SiteLicense.LCSAssociateUser#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_LCSAssociateUser_Request, CSiteLicense_LCSAssociateUser_Response>( "SiteLicense.LCSAssociateUser#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_ClientSeatCheckout_Response>> ClientSeatCheckout( CSiteLicense_ClientSeatCheckout_Request request )
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Request, CSiteLicense_ClientSeatCheckout_Response>( "SiteLicense.ClientSeatCheckout#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientSeatCheckout_Request, CSiteLicense_ClientSeatCheckout_Response>( "SiteLicense.ClientSeatCheckout#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_ClientGetAvailableSeats_Response>> ClientGetAvailableSeats( CSiteLicense_ClientGetAvailableSeats_Request request )
         {
-            return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( "SiteLicense.ClientGetAvailableSeats#1", request );
+            return UnifiedMessages.SendMessage<CSiteLicense_ClientGetAvailableSeats_Request, CSiteLicense_ClientGetAvailableSeats_Response>( "SiteLicense.ClientGetAvailableSeats#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -501,6 +501,28 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteManagerClient_IncomingClient_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteManagerClient_IncomingClient_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_ClientSeatCheckout_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_InitiateAssociation_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_InitiateAssociation_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_LCSAuthenticate_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_LCSAuthenticate_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_LCSAssociateUser_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_LCSAssociateUser_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_ClientSeatCheckout_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_ClientSeatCheckout_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_ClientGetAvailableSeats_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSiteLicense_ClientGetAvailableSeats_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

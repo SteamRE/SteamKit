@@ -283,23 +283,23 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Video : SteamUnifiedMessages.UnifiedService
+    public partial class Video : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Video";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CVideo_ClientGetVideoURL_Response>> ClientGetVideoURL( CVideo_ClientGetVideoURL_Request request )
         {
-            return UnifiedMessages.SendMessage<CVideo_ClientGetVideoURL_Request, CVideo_ClientGetVideoURL_Response>( "Video.ClientGetVideoURL#1", request );
+            return UnifiedMessages.SendMessage<CVideo_ClientGetVideoURL_Request, CVideo_ClientGetVideoURL_Response>( "Video.ClientGetVideoURL#1", request, Model );
         }
 
         public void SetVideoBookmark(CVideo_SetVideoBookmark_Notification request )
         {
-            UnifiedMessages.SendNotification<CVideo_SetVideoBookmark_Notification>( "Video.SetVideoBookmark#1", request );
+            UnifiedMessages.SendNotification<CVideo_SetVideoBookmark_Notification>( "Video.SetVideoBookmark#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CVideo_GetVideoBookmarks_Response>> GetVideoBookmarks( CVideo_GetVideoBookmarks_Request request )
         {
-            return UnifiedMessages.SendMessage<CVideo_GetVideoBookmarks_Request, CVideo_GetVideoBookmarks_Response>( "Video.GetVideoBookmarks#1", request );
+            return UnifiedMessages.SendMessage<CVideo_GetVideoBookmarks_Request, CVideo_GetVideoBookmarks_Response>( "Video.GetVideoBookmarks#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -326,13 +326,13 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class VideoClient : SteamUnifiedMessages.UnifiedService
+    public partial class VideoClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "VideoClient";
 
         public void NotifyUnlockedH264(CVideo_UnlockedH264_Notification request )
         {
-            UnifiedMessages.SendNotification<CVideo_UnlockedH264_Notification>( "VideoClient.NotifyUnlockedH264#1", request );
+            UnifiedMessages.SendNotification<CVideo_UnlockedH264_Notification>( "VideoClient.NotifyUnlockedH264#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -350,13 +350,13 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class FovasVideo : SteamUnifiedMessages.UnifiedService
+    public partial class FovasVideo : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FovasVideo";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFovasVideo_ClientGetOPFSettings_Response>> ClientGetOPFSettings( CFovasVideo_ClientGetOPFSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CFovasVideo_ClientGetOPFSettings_Request, CFovasVideo_ClientGetOPFSettings_Response>( "FovasVideo.ClientGetOPFSettings#1", request );
+            return UnifiedMessages.SendMessage<CFovasVideo_ClientGetOPFSettings_Request, CFovasVideo_ClientGetOPFSettings_Response>( "FovasVideo.ClientGetOPFSettings#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -375,6 +375,23 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CVideo_ClientGetVideoURL_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CVideo_ClientGetVideoURL_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CVideo_SetVideoBookmark_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CVideo_GetVideoBookmarks_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CVideo_GetVideoBookmarks_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CVideo_UnlockedH264_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFovasVideo_ClientGetOPFSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFovasVideo_ClientGetOPFSettings_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

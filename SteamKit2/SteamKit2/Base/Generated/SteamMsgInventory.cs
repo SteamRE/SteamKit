@@ -906,88 +906,88 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Inventory : SteamUnifiedMessages.UnifiedService
+    public partial class Inventory : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Inventory";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> GetInventory( CInventory_GetInventory_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_GetInventory_Request, CInventory_Response>( "Inventory.GetInventory#1", request );
+            return UnifiedMessages.SendMessage<CInventory_GetInventory_Request, CInventory_Response>( "Inventory.GetInventory#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> ExchangeItem( CInventory_ExchangeItem_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_ExchangeItem_Request, CInventory_Response>( "Inventory.ExchangeItem#1", request );
+            return UnifiedMessages.SendMessage<CInventory_ExchangeItem_Request, CInventory_Response>( "Inventory.ExchangeItem#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_GetEligiblePromoItemDefIDs_Response>> GetEligiblePromoItemDefIDs( CInventory_GetEligiblePromoItemDefIDs_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_GetEligiblePromoItemDefIDs_Request, CInventory_GetEligiblePromoItemDefIDs_Response>( "Inventory.GetEligiblePromoItemDefIDs#1", request );
+            return UnifiedMessages.SendMessage<CInventory_GetEligiblePromoItemDefIDs_Request, CInventory_GetEligiblePromoItemDefIDs_Response>( "Inventory.GetEligiblePromoItemDefIDs#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> AddPromoItem( CInventory_AddItem_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_AddItem_Request, CInventory_Response>( "Inventory.AddPromoItem#1", request );
+            return UnifiedMessages.SendMessage<CInventory_AddItem_Request, CInventory_Response>( "Inventory.AddPromoItem#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> SafeModifyItems( CInventory_ModifyItems_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_ModifyItems_Request, CInventory_Response>( "Inventory.SafeModifyItems#1", request );
+            return UnifiedMessages.SendMessage<CInventory_ModifyItems_Request, CInventory_Response>( "Inventory.SafeModifyItems#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> ConsumePlaytime( CInventory_ConsumePlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_ConsumePlaytime_Request, CInventory_Response>( "Inventory.ConsumePlaytime#1", request );
+            return UnifiedMessages.SendMessage<CInventory_ConsumePlaytime_Request, CInventory_Response>( "Inventory.ConsumePlaytime#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> ConsumeItem( CInventory_ConsumeItem_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_ConsumeItem_Request, CInventory_Response>( "Inventory.ConsumeItem#1", request );
+            return UnifiedMessages.SendMessage<CInventory_ConsumeItem_Request, CInventory_Response>( "Inventory.ConsumeItem#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> DevGenerateItem( CInventory_AddItem_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_AddItem_Request, CInventory_Response>( "Inventory.DevGenerateItem#1", request );
+            return UnifiedMessages.SendMessage<CInventory_AddItem_Request, CInventory_Response>( "Inventory.DevGenerateItem#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> DevSetNextDrop( CInventory_DevSetNextDrop_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_DevSetNextDrop_Request, CInventory_Response>( "Inventory.DevSetNextDrop#1", request );
+            return UnifiedMessages.SendMessage<CInventory_DevSetNextDrop_Request, CInventory_Response>( "Inventory.DevSetNextDrop#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> SplitItemStack( CInventory_SplitItemStack_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_SplitItemStack_Request, CInventory_Response>( "Inventory.SplitItemStack#1", request );
+            return UnifiedMessages.SendMessage<CInventory_SplitItemStack_Request, CInventory_Response>( "Inventory.SplitItemStack#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> CombineItemStacks( CInventory_CombineItemStacks_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_CombineItemStacks_Request, CInventory_Response>( "Inventory.CombineItemStacks#1", request );
+            return UnifiedMessages.SendMessage<CInventory_CombineItemStacks_Request, CInventory_Response>( "Inventory.CombineItemStacks#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_GetItemDefMeta_Response>> GetItemDefMeta( CInventory_GetItemDefMeta_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_GetItemDefMeta_Request, CInventory_GetItemDefMeta_Response>( "Inventory.GetItemDefMeta#1", request );
+            return UnifiedMessages.SendMessage<CInventory_GetItemDefMeta_Request, CInventory_GetItemDefMeta_Response>( "Inventory.GetItemDefMeta#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_GetUserPurchaseInfo_Response>> GetUserPurchaseInfo( CInventory_GetUserPurchaseInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_GetUserPurchaseInfo_Request, CInventory_GetUserPurchaseInfo_Response>( "Inventory.GetUserPurchaseInfo#1", request );
+            return UnifiedMessages.SendMessage<CInventory_GetUserPurchaseInfo_Request, CInventory_GetUserPurchaseInfo_Response>( "Inventory.GetUserPurchaseInfo#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_PurchaseInit_Response>> PurchaseInit( CInventory_PurchaseInit_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_PurchaseInit_Request, CInventory_PurchaseInit_Response>( "Inventory.PurchaseInit#1", request );
+            return UnifiedMessages.SendMessage<CInventory_PurchaseInit_Request, CInventory_PurchaseInit_Response>( "Inventory.PurchaseInit#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> PurchaseFinalize( CInventory_PurchaseFinalize_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_PurchaseFinalize_Request, CInventory_Response>( "Inventory.PurchaseFinalize#1", request );
+            return UnifiedMessages.SendMessage<CInventory_PurchaseFinalize_Request, CInventory_Response>( "Inventory.PurchaseFinalize#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> InspectItem( CInventory_InspectItem_Request request )
         {
-            return UnifiedMessages.SendMessage<CInventory_InspectItem_Request, CInventory_Response>( "Inventory.InspectItem#1", request );
+            return UnifiedMessages.SendMessage<CInventory_InspectItem_Request, CInventory_Response>( "Inventory.InspectItem#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1050,13 +1050,13 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class InventoryClient : SteamUnifiedMessages.UnifiedService
+    public partial class InventoryClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "InventoryClient";
 
         public void NotifyNewItems(CInventoryClient_NewItems_Notification request )
         {
-            UnifiedMessages.SendNotification<CInventoryClient_NewItems_Notification>( "InventoryClient.NotifyNewItems#1", request );
+            UnifiedMessages.SendNotification<CInventoryClient_NewItems_Notification>( "InventoryClient.NotifyNewItems#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1075,6 +1075,36 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_GetInventory_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_ExchangeItem_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_GetEligiblePromoItemDefIDs_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_GetEligiblePromoItemDefIDs_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_AddItem_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_ModifyItems_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_ConsumePlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_ConsumeItem_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_DevSetNextDrop_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_SplitItemStack_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_CombineItemStacks_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_GetItemDefMeta_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_GetItemDefMeta_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_GetUserPurchaseInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_GetUserPurchaseInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_PurchaseInit_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_PurchaseInit_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_PurchaseFinalize_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventory_InspectItem_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CInventoryClient_NewItems_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

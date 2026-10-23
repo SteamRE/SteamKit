@@ -9,78 +9,78 @@
 namespace SteamKit2.Internal
 {
 
-    public class RemoteClient : SteamUnifiedMessages.UnifiedService
+    public partial class RemoteClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "RemoteClient";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_GetPairingInfo_Response>> GetPairingInfo( CRemoteClient_GetPairingInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemoteClient_GetPairingInfo_Request, CRemoteClient_GetPairingInfo_Response>( "RemoteClient.GetPairingInfo#1", request );
+            return UnifiedMessages.SendMessage<CRemoteClient_GetPairingInfo_Request, CRemoteClient_GetPairingInfo_Response>( "RemoteClient.GetPairingInfo#1", request, Model );
         }
 
         public void NotifyOnline(CRemoteClient_Online_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_Online_Notification>( "RemoteClient.NotifyOnline#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_Online_Notification>( "RemoteClient.NotifyOnline#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_GetRecentClients_Response>> GetRecentClients( CRemoteClient_GetRecentClients_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemoteClient_GetRecentClients_Request, CRemoteClient_GetRecentClients_Response>( "RemoteClient.GetRecentClients#1", request );
+            return UnifiedMessages.SendMessage<CRemoteClient_GetRecentClients_Request, CRemoteClient_GetRecentClients_Response>( "RemoteClient.GetRecentClients#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_MarkTaskComplete_Response>> MarkTaskComplete( CRemoteClient_MarkTaskComplete_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemoteClient_MarkTaskComplete_Request, CRemoteClient_MarkTaskComplete_Response>( "RemoteClient.MarkTaskComplete#1", request );
+            return UnifiedMessages.SendMessage<CRemoteClient_MarkTaskComplete_Request, CRemoteClient_MarkTaskComplete_Response>( "RemoteClient.MarkTaskComplete#1", request, Model );
         }
 
         public void NotifyReplyPacket(CRemoteClient_ReplyPacket_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_ReplyPacket_Notification>( "RemoteClient.NotifyReplyPacket#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_ReplyPacket_Notification>( "RemoteClient.NotifyReplyPacket#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_AllocateRelayServer_Response>> AllocateRelayServer( CRemoteClient_AllocateRelayServer_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemoteClient_AllocateRelayServer_Request, CRemoteClient_AllocateRelayServer_Response>( "RemoteClient.AllocateRelayServer#1", request );
+            return UnifiedMessages.SendMessage<CRemoteClient_AllocateRelayServer_Request, CRemoteClient_AllocateRelayServer_Response>( "RemoteClient.AllocateRelayServer#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_AllocateSDR_Response>> AllocateSDR( CRemoteClient_AllocateSDR_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemoteClient_AllocateSDR_Request, CRemoteClient_AllocateSDR_Response>( "RemoteClient.AllocateSDR#1", request );
+            return UnifiedMessages.SendMessage<CRemoteClient_AllocateSDR_Request, CRemoteClient_AllocateSDR_Response>( "RemoteClient.AllocateSDR#1", request, Model );
         }
 
         public void SendSteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_SteamBroadcast_Notification>( "RemoteClient.SendSteamBroadcastPacket#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_SteamBroadcast_Notification>( "RemoteClient.SendSteamBroadcastPacket#1", request, Model );
         }
 
         public void SendSteamToSteamPacket(CRemoteClient_SteamToSteam_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_SteamToSteam_Notification>( "RemoteClient.SendSteamToSteamPacket#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_SteamToSteam_Notification>( "RemoteClient.SendSteamToSteamPacket#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemotePlay_SessionStarted_Response>> SendRemotePlaySessionStarted( CRemotePlay_SessionStarted_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemotePlay_SessionStarted_Request, CRemotePlay_SessionStarted_Response>( "RemoteClient.SendRemotePlaySessionStarted#1", request );
+            return UnifiedMessages.SendMessage<CRemotePlay_SessionStarted_Request, CRemotePlay_SessionStarted_Response>( "RemoteClient.SendRemotePlaySessionStarted#1", request, Model );
         }
 
         public void SendRemotePlaySessionStopped(CRemotePlay_SessionStopped_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemotePlay_SessionStopped_Notification>( "RemoteClient.SendRemotePlaySessionStopped#1", request );
+            UnifiedMessages.SendNotification<CRemotePlay_SessionStopped_Notification>( "RemoteClient.SendRemotePlaySessionStopped#1", request, Model );
         }
 
         public void SendRemotePlayTogetherPacket(CRemotePlayTogether_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemotePlayTogether_Notification>( "RemoteClient.SendRemotePlayTogetherPacket#1", request );
+            UnifiedMessages.SendNotification<CRemotePlayTogether_Notification>( "RemoteClient.SendRemotePlayTogetherPacket#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_CreateRemotePlayTogetherInvitation_Response>> CreateRemotePlayTogetherInvitation( CRemoteClient_CreateRemotePlayTogetherInvitation_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemoteClient_CreateRemotePlayTogetherInvitation_Request, CRemoteClient_CreateRemotePlayTogetherInvitation_Response>( "RemoteClient.CreateRemotePlayTogetherInvitation#1", request );
+            return UnifiedMessages.SendMessage<CRemoteClient_CreateRemotePlayTogetherInvitation_Request, CRemoteClient_CreateRemotePlayTogetherInvitation_Response>( "RemoteClient.CreateRemotePlayTogetherInvitation#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>> DeleteRemotePlayTogetherInvitation( CRemoteClient_DeleteRemotePlayTogetherInvitation_Request request )
         {
-            return UnifiedMessages.SendMessage<CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( "RemoteClient.DeleteRemotePlayTogetherInvitation#1", request );
+            return UnifiedMessages.SendMessage<CRemoteClient_DeleteRemotePlayTogetherInvitation_Request, CRemoteClient_DeleteRemotePlayTogetherInvitation_Response>( "RemoteClient.DeleteRemotePlayTogetherInvitation#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -140,53 +140,53 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class RemoteClientSteamClient : SteamUnifiedMessages.UnifiedService
+    public partial class RemoteClientSteamClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "RemoteClientSteamClient";
 
         public void NotifyRegisterStatusUpdate(CRemoteClient_RegisterStatusUpdate_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_RegisterStatusUpdate_Notification>( "RemoteClientSteamClient.NotifyRegisterStatusUpdate#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_RegisterStatusUpdate_Notification>( "RemoteClientSteamClient.NotifyRegisterStatusUpdate#1", request, Model );
         }
 
         public void NotifyUnregisterStatusUpdate(CRemoteClient_UnregisterStatusUpdate_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_UnregisterStatusUpdate_Notification>( "RemoteClientSteamClient.NotifyUnregisterStatusUpdate#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_UnregisterStatusUpdate_Notification>( "RemoteClientSteamClient.NotifyUnregisterStatusUpdate#1", request, Model );
         }
 
         public void NotifyRemotePacket(CRemoteClient_RemotePacket_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_RemotePacket_Notification>( "RemoteClientSteamClient.NotifyRemotePacket#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_RemotePacket_Notification>( "RemoteClientSteamClient.NotifyRemotePacket#1", request, Model );
         }
 
         public void NotifyEnableSteamBroadcast(CRemoteClient_EnableSteamBroadcast_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_EnableSteamBroadcast_Notification>( "RemoteClientSteamClient.NotifyEnableSteamBroadcast#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_EnableSteamBroadcast_Notification>( "RemoteClientSteamClient.NotifyEnableSteamBroadcast#1", request, Model );
         }
 
         public void NotifyDisableSteamBroadcast(CRemoteClient_DisableSteamBroadcast_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_DisableSteamBroadcast_Notification>( "RemoteClientSteamClient.NotifyDisableSteamBroadcast#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_DisableSteamBroadcast_Notification>( "RemoteClientSteamClient.NotifyDisableSteamBroadcast#1", request, Model );
         }
 
         public void NotifySteamBroadcastPacket(CRemoteClient_SteamBroadcast_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_SteamBroadcast_Notification>( "RemoteClientSteamClient.NotifySteamBroadcastPacket#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_SteamBroadcast_Notification>( "RemoteClientSteamClient.NotifySteamBroadcastPacket#1", request, Model );
         }
 
         public void NotifySteamToSteamPacket(CRemoteClient_SteamToSteam_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_SteamToSteam_Notification>( "RemoteClientSteamClient.NotifySteamToSteamPacket#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_SteamToSteam_Notification>( "RemoteClientSteamClient.NotifySteamToSteamPacket#1", request, Model );
         }
 
         public void NotifyRemotePlayTogetherPacket(CRemotePlayTogether_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemotePlayTogether_Notification>( "RemoteClientSteamClient.NotifyRemotePlayTogetherPacket#1", request );
+            UnifiedMessages.SendNotification<CRemotePlayTogether_Notification>( "RemoteClientSteamClient.NotifyRemotePlayTogetherPacket#1", request, Model );
         }
 
         public void NotifyTaskList(CRemoteClient_TaskList_Notification request )
         {
-            UnifiedMessages.SendNotification<CRemoteClient_TaskList_Notification>( "RemoteClientSteamClient.NotifyTaskList#1", request );
+            UnifiedMessages.SendNotification<CRemoteClient_TaskList_Notification>( "RemoteClientSteamClient.NotifyTaskList#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -229,6 +229,43 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_GetPairingInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_GetPairingInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_Online_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_GetRecentClients_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_GetRecentClients_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_MarkTaskComplete_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_MarkTaskComplete_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_ReplyPacket_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_AllocateRelayServer_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_AllocateRelayServer_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_AllocateSDR_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_AllocateSDR_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_SteamBroadcast_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_SteamToSteam_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemotePlay_SessionStarted_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemotePlay_SessionStarted_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemotePlay_SessionStopped_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemotePlayTogether_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_CreateRemotePlayTogetherInvitation_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_CreateRemotePlayTogetherInvitation_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_DeleteRemotePlayTogetherInvitation_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_DeleteRemotePlayTogetherInvitation_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_RegisterStatusUpdate_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_UnregisterStatusUpdate_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_RemotePacket_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_EnableSteamBroadcast_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_DisableSteamBroadcast_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CRemoteClient_TaskList_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

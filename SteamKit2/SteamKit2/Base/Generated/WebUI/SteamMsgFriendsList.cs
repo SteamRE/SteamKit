@@ -258,28 +258,28 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class FriendsList : SteamUnifiedMessages.UnifiedService
+    public partial class FriendsList : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FriendsList";
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsList_GetCategories_Response>> GetCategories( CFriendsList_GetCategories_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendsList_GetCategories_Request, CFriendsList_GetCategories_Response>( "FriendsList.GetCategories#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_GetCategories_Request, CFriendsList_GetCategories_Response>( "FriendsList.GetCategories#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsList_GetFavorites_Response>> GetFavorites( CFriendsList_GetFavorites_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendsList_GetFavorites_Request, CFriendsList_GetFavorites_Response>( "FriendsList.GetFavorites#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_GetFavorites_Request, CFriendsList_GetFavorites_Response>( "FriendsList.GetFavorites#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsList_GetFriendsList_Response>> GetFriendsList( CFriendsList_GetFriendsList_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendsList_GetFriendsList_Request, CFriendsList_GetFriendsList_Response>( "FriendsList.GetFriendsList#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_GetFriendsList_Request, CFriendsList_GetFriendsList_Response>( "FriendsList.GetFriendsList#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsList_SetFavorites_Response>> SetFavorites( CFriendsList_SetFavorites_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendsList_SetFavorites_Request, CFriendsList_SetFavorites_Response>( "FriendsList.SetFavorites#1", request );
+            return UnifiedMessages.SendMessage<CFriendsList_SetFavorites_Request, CFriendsList_SetFavorites_Response>( "FriendsList.SetFavorites#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -306,13 +306,13 @@ namespace SteamKit2.WebUI.Internal
         }
     }
 
-    public class FriendsListClient : SteamUnifiedMessages.UnifiedService
+    public partial class FriendsListClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FriendsListClient";
 
         public void FavoritesChanged(CFriendsList_FavoritesChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CFriendsList_FavoritesChanged_Notification>( "FriendsListClient.FavoritesChanged#1", request );
+            UnifiedMessages.SendNotification<CFriendsList_FavoritesChanged_Notification>( "FriendsListClient.FavoritesChanged#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -331,6 +331,24 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_GetCategories_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_GetCategories_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_GetFavorites_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_GetFavorites_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_GetFriendsList_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_GetFriendsList_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_SetFavorites_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_SetFavorites_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CFriendsList_FavoritesChanged_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

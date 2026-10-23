@@ -403,5 +403,18 @@ namespace SteamKit2.Internal
 
 }
 
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.ContentManifestPayload))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.ContentManifestMetadata))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.ContentManifestSignature))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.ContentDeltaChunks))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
+
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion
