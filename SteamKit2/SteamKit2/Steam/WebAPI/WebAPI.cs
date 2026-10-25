@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using ProtoBuf;
@@ -58,9 +56,8 @@ namespace SteamKit2
 
         /// <summary>
         /// Represents a single interface that exists within the Web API.
-        /// This is a dynamic object that allows function calls to interfaces with minimal code.
         /// </summary>
-        public sealed class Interface : DynamicObject, IDisposable
+        public sealed class Interface : IDisposable
         {
             readonly AsyncInterface asyncInterface;
 
@@ -140,68 +137,18 @@ namespace SteamKit2
             {
                 asyncInterface.Dispose();
             }
-
-            /// <summary>
-            /// Provides the implementation for operations that invoke a member.
-            /// Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can
-            /// override this method to specify dynamic behavior for operations such as calling a method.
-            /// This method should not be called directly, it is  called through dynamic method calls.
-            /// </summary>
-            /// <param name="binder">
-            /// Provides information about the dynamic operation.
-            /// The binder.Name property provides the name of the member on which the dynamic operation is performed.
-            /// For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the
-            /// class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleMethod".
-            /// The binder.IgnoreCase property specifies whether the member name is case-sensitive.
-            /// </param>
-            /// <param name="args">
-            /// The arguments that are passed to the object member during the invoke operation. For example,
-            /// for the statement sampleObject.SampleMethod(100), where sampleObject is derived from the
-            /// <see cref="T:System.Dynamic.DynamicObject"/> class, the first argument to <paramref name="args"/> is equal to 100.
-            /// </param>
-            /// <param name="result">The result of the member invocation.</param>
-            /// <returns>
-            /// true if the operation is successful; otherwise, false. If this method returns false, the run-time
-            /// binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
-            /// </returns>
-            /// <exception cref="InvalidOperationException">
-            /// Dynamic method is called with non-named argument.
-            /// All parameters must be passed as name arguments to API calls.
-            /// - or -
-            /// The dynamic method name was not in the correct format.
-            /// All API function calls must be in the format 'FunctionName###' where the optional ###'s represent a version number.
-            /// </exception>
-            /// <exception cref="ArgumentOutOfRangeException">
-            /// The function version number specified was out of range.
-            /// </exception>
-            public override bool TryInvokeMember( InvokeMemberBinder binder, object?[]? args, out object result )
-            {
-                bool success = asyncInterface.TryInvokeMember( binder, args, out result );
-
-                if ( success )
-                {
-                    var resultTask = ( Task<KeyValue> )result;
-                    result = resultTask.GetAwaiter().GetResult();
-                }
-
-                return success;
-            }
         }
 
         /// <summary>
         /// Represents a single interface that exists within the Web API.
-        /// This is a dynamic object that allows function calls to interfaces with minimal code.
         /// This version of the <see cref="Interface"/> class makes use of TPL Tasks to provide an asynchronous API.
         /// </summary>
-        public sealed partial class AsyncInterface : DynamicObject, IDisposable
+        public sealed class AsyncInterface : IDisposable
         {
             internal readonly HttpClient httpClient;
 
             internal readonly string iface;
             internal readonly string apiKey;
-
-            [GeneratedRegex( @"(?<name>[a-zA-Z]+)(?<version>[0-9]*)" )]
-            private static partial Regex FuncNameRegex();
 
             /// <summary>
             /// Gets or sets the timeout value in milliseconds for any web requests made to the WebAPI.
@@ -401,26 +348,21 @@ namespace SteamKit2
                 {
                     foreach ( var (key, value) in args )
                     {
-                        paramBuilder.Append( '&' );
-                        paramBuilder.Append( Uri.EscapeDataString( key ) );
-                        paramBuilder.Append( '=' );
-
-                        switch ( value )
+                        // lists are sent as indexed arguments: key[0]=a&key[1]=b
+                        if ( value is IEnumerable enumerable && value is not string && value is not byte[] )
                         {
-                            case null:
-                                break;
+                            int index = 0;
 
-                            case byte[] byteArrayValue:
-                                paramBuilder.Append( HttpUtility.UrlEncode( byteArrayValue ) );
-                                break;
+                            foreach ( object? item in enumerable )
+                            {
+                                AppendParameter( paramBuilder, $"{key}[{index}]", item );
+                                index++;
+                            }
 
-                            default:
-                                if ( value.ToString() is { } valueString )
-                                {
-                                    paramBuilder.Append( Uri.EscapeDataString( valueString ) );
-                                }
-                                break;
+                            continue;
                         }
+
+                        AppendParameter( paramBuilder, key, value );
                     }
                 }
 
@@ -450,129 +392,38 @@ namespace SteamKit2
                 httpClient.Dispose();
             }
 
-            /// <summary>
-            /// Provides the implementation for operations that invoke a member.
-            /// Classes derived from the <see cref="T:System.Dynamic.DynamicObject"/> class can
-            /// override this method to specify dynamic behavior for operations such as calling a method.
-            /// This method should not be called directly, it is  called through dynamic method calls.
-            /// </summary>
-            /// <param name="binder">
-            /// Provides information about the dynamic operation.
-            /// The binder.Name property provides the name of the member on which the dynamic operation is performed.
-            /// For example, for the statement sampleObject.SampleMethod(100), where sampleObject is an instance of the
-            /// class derived from the <see cref="T:System.Dynamic.DynamicObject"/> class, binder.Name returns "SampleMethod".
-            /// The binder.IgnoreCase property specifies whether the member name is case-sensitive.
-            /// </param>
-            /// <param name="args">
-            /// The arguments that are passed to the object member during the invoke operation. For example,
-            /// for the statement sampleObject.SampleMethod(100), where sampleObject is derived from the
-            /// <see cref="T:System.Dynamic.DynamicObject"/> class, the first argument to <paramref name="args"/> is equal to 100.
-            /// </param>
-            /// <param name="result">The result of the member invocation.</param>
-            /// <returns>
-            /// true if the operation is successful; otherwise, false. If this method returns false, the run-time
-            /// binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)
-            /// </returns>
-            /// <exception cref="InvalidOperationException">
-            /// Dynamic method is called with non-named argument.
-            /// All parameters must be passed as name arguments to API calls.
-            /// - or -
-            /// The dynamic method name was not in the correct format.
-            /// All API function calls must be in the format 'FunctionName###' where the optional ###'s represent a version number.
-            /// </exception>
-            /// <exception cref="ArgumentOutOfRangeException">
-            /// The function version number specified was out of range.
-            /// </exception>
-            public override bool TryInvokeMember( InvokeMemberBinder binder, object?[]? args, out object result )
+            static void AppendParameter( StringBuilder paramBuilder, string key, object? value )
             {
-                IDictionary<string, object?> methodArgs;
-                args ??= [];
+                paramBuilder.Append( '&' );
+                paramBuilder.Append( Uri.EscapeDataString( key ) );
+                paramBuilder.Append( '=' );
 
-                if ( args.Length == 1 && binder.CallInfo.ArgumentNames.Count == 0 && args[ 0 ] is IDictionary<string, object?> explicitArgs )
+                switch ( value )
                 {
-                    methodArgs = explicitArgs;
-                }
-                else if ( binder.CallInfo.ArgumentNames.Count != args.Length )
-                {
-                    throw new InvalidOperationException( "Argument mismatch in API call. All parameters must be passed as named arguments, or as a single un-named dictionary argument." );
-                }
-                else
-                {
-                    methodArgs = Enumerable.Range( 0, args.Length )
-                        .ToDictionary(
-                            x => binder.CallInfo.ArgumentNames[ x ],
-                            x => args[ x ] );
-                }
+                    case null:
+                        break;
 
-                var apiArgs = new Dictionary<string, object?>();
-                var requestMethod = HttpMethod.Get;
+                    case byte[] byteArrayValue:
+                        paramBuilder.Append( HttpUtility.UrlEncode( byteArrayValue ) );
+                        break;
 
-                foreach ( var (argName, argValue) in methodArgs )
-                {
-                    // method is a reserved param for selecting the http request method
-                    if ( argName.Equals( "method", StringComparison.OrdinalIgnoreCase ) )
-                    {
-                        if ( !( argValue?.ToString() is { } argValueString ) )
+                    default:
+                        if ( value.ToString() is { } valueString )
                         {
-                            throw new ArgumentException( "The argument 'method' must not be null or have a null string representation." );
+                            paramBuilder.Append( Uri.EscapeDataString( valueString ) );
                         }
-
-                        requestMethod = new HttpMethod( argValueString );
-                        continue;
-                    }
-                    // flatten lists
-                    else if ( argValue is IEnumerable enumerable && !( argValue is string || argValue is byte[] ) )
-                    {
-                        int index = 0;
-
-                        foreach ( object value in enumerable )
-                        {
-                            apiArgs.Add( string.Format( "{0}[{1}]", argName, index++ ), value );
-                        }
-
-                        continue;
-                    }
-
-
-                    apiArgs.Add( argName, argValue );
+                        break;
                 }
-
-                Match match = FuncNameRegex().Match( binder.Name );
-
-                if ( !match.Success )
-                {
-                    throw new InvalidOperationException(
-                        "The called API function was invalid. It must be in the form of 'FunctionName###' where the optional ### represent the function version."
-                    );
-                }
-
-                string functionName = match.Groups[ "name" ].Value;
-
-                int version = 1; // assume version 1 unless specified
-                string versionString = match.Groups[ "version" ].Value;
-
-                if ( !string.IsNullOrEmpty( versionString ) )
-                {
-                    // the regex matches digits, but we should check for absurdly large numbers
-                    if ( !int.TryParse( versionString, out version ) )
-                    {
-                        throw new ArgumentOutOfRangeException( nameof( version ), "The function version number supplied was invalid or out of range." );
-                    }
-                }
-
-                result = CallAsync( requestMethod, functionName, version, apiArgs );
-
-                return true;
             }
         }
 
         /// <summary>
-        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
-        /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
+        /// <returns>An <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( Uri baseAddress, string iface, string apiKey = "" )
         {
             ArgumentNullException.ThrowIfNull( baseAddress );
@@ -583,11 +434,11 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
-        /// <returns>A dynamic <see cref="Interface"/> object to interact with the Web API.</returns>
+        /// <returns>An <see cref="Interface"/> object to interact with the Web API.</returns>
         public static Interface GetInterface( string iface, string apiKey = "" )
         {
             ArgumentNullException.ThrowIfNull( iface );
@@ -596,11 +447,11 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
-        /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
+        /// <returns>An <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
         public static AsyncInterface GetAsyncInterface( string iface, string apiKey = "" )
         {
             ArgumentNullException.ThrowIfNull( iface );
@@ -609,12 +460,12 @@ namespace SteamKit2
         }
 
         /// <summary>
-        /// Retrieves a dynamic handler capable of interacting with the specified interface on the Web API.
+        /// Retrieves a handler capable of interacting with the specified interface on the Web API.
         /// </summary>
         /// <param name="baseAddress">The base <see cref="Uri"/> of the Steam Web API.</param>
         /// <param name="iface">The interface to retrieve a handler for.</param>
         /// <param name="apiKey">An optional API key to be used for authorized requests.</param>
-        /// <returns>A dynamic <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
+        /// <returns>An <see cref="AsyncInterface"/> object to interact with the Web API.</returns>
         public static AsyncInterface GetAsyncInterface( Uri baseAddress, string iface, string apiKey = "" )
         {
             ArgumentNullException.ThrowIfNull( baseAddress );
