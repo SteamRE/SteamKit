@@ -84,7 +84,21 @@ namespace Tests
             }
 
             var provider = Setup();
-            GC.Collect();
+
+            // waiters wake before the thread pool worker finishes with the generation task, which holds the provider as its state
+            for (var attempt = 0; attempt < 10; attempt++)
+            {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                if (!provider.IsAlive)
+                {
+                    break;
+                }
+
+                Thread.Sleep(10);
+            }
+
             Assert.False(provider.IsAlive);
         }
 
