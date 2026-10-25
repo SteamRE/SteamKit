@@ -2641,5 +2641,51 @@ namespace SteamKit2.Internal
 
 }
 
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRegisterAuthTicketWithCM))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientTicketAuthComplete))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientP2PConnectionInfo))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientP2PConnectionFailInfo))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientNetworkingCertRequest))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientNetworkingCertReply))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientNetworkingMobileCertRequest))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientNetworkingMobileCertReply))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGetAppOwnershipTicket))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGetAppOwnershipTicketResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientSessionToken))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGameConnectTokens))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGamesPlayed))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgGSApprove))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgGSDeny))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgGSKick))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAuthList))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAuthListAck))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgGameServerPolicyUpdate))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientLicenseList))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientIsLimitedAccount))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRequestedClientStats))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientStat2))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientInviteToGame))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientChatInvite))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientConnectionStats))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientServersAvailable))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientReportOverlayDetourFailure))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRequestEncryptedAppTicket))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRequestEncryptedAppTicketResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientWalletInfoUpdate))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAMGetClanOfficers))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAMGetClanOfficersResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAMGetPersonaNameHistory))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAMGetPersonaNameHistoryResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientDeregisterWithServer))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientClanState))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
+
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

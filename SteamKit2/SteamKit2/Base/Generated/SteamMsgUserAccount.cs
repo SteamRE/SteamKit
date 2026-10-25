@@ -1404,73 +1404,75 @@ namespace SteamKit2.Internal
 
     }
 
-    public class UserAccount : SteamUnifiedMessages.UnifiedService
+    public partial class UserAccount : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "UserAccount";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetAvailableValveDiscountPromotions_Response>> GetAvailableValveDiscountPromotions( CUserAccount_GetAvailableValveDiscountPromotions_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_GetAvailableValveDiscountPromotions_Request, CUserAccount_GetAvailableValveDiscountPromotions_Response>( "UserAccount.GetAvailableValveDiscountPromotions#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_GetAvailableValveDiscountPromotions_Request, CUserAccount_GetAvailableValveDiscountPromotions_Response>( "UserAccount.GetAvailableValveDiscountPromotions#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetOptOutEmailOptions_Response>> GetOptOutEmailOptions( CUserAccount_GetOptOutEmailOptions_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_GetOptOutEmailOptions_Request, CUserAccount_GetOptOutEmailOptions_Response>( "UserAccount.GetOptOutEmailOptions#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_GetOptOutEmailOptions_Request, CUserAccount_GetOptOutEmailOptions_Response>( "UserAccount.GetOptOutEmailOptions#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_SetOptOutEmailOptions_Response>> SetOptOutEmailOptions( CUserAccount_SetOptOutEmailOptions_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_SetOptOutEmailOptions_Request, CUserAccount_SetOptOutEmailOptions_Response>( "UserAccount.SetOptOutEmailOptions#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_SetOptOutEmailOptions_Request, CUserAccount_SetOptOutEmailOptions_Response>( "UserAccount.SetOptOutEmailOptions#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetWalletDetails_Response>> GetClientWalletDetails( CUserAccount_GetClientWalletDetails_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_GetClientWalletDetails_Request, CUserAccount_GetWalletDetails_Response>( "UserAccount.GetClientWalletDetails#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_GetClientWalletDetails_Request, CUserAccount_GetWalletDetails_Response>( "UserAccount.GetClientWalletDetails#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetAccountLinkStatus_Response>> GetAccountLinkStatus( CUserAccount_GetAccountLinkStatus_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_GetAccountLinkStatus_Request, CUserAccount_GetAccountLinkStatus_Response>( "UserAccount.GetAccountLinkStatus#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_GetAccountLinkStatus_Request, CUserAccount_GetAccountLinkStatus_Response>( "UserAccount.GetAccountLinkStatus#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_CancelLicenseForApp_Response>> CancelLicenseForApp( CUserAccount_CancelLicenseForApp_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_CancelLicenseForApp_Request, CUserAccount_CancelLicenseForApp_Response>( "UserAccount.CancelLicenseForApp#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_CancelLicenseForApp_Request, CUserAccount_CancelLicenseForApp_Response>( "UserAccount.CancelLicenseForApp#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetUserCountry_Response>> GetUserCountry( CUserAccount_GetUserCountry_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_GetUserCountry_Request, CUserAccount_GetUserCountry_Response>( "UserAccount.GetUserCountry#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_GetUserCountry_Request, CUserAccount_GetUserCountry_Response>( "UserAccount.GetUserCountry#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_CreateFriendInviteToken_Response>> CreateFriendInviteToken( CUserAccount_CreateFriendInviteToken_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_CreateFriendInviteToken_Request, CUserAccount_CreateFriendInviteToken_Response>( "UserAccount.CreateFriendInviteToken#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_CreateFriendInviteToken_Request, CUserAccount_CreateFriendInviteToken_Response>( "UserAccount.CreateFriendInviteToken#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetFriendInviteTokens_Response>> GetFriendInviteTokens( CUserAccount_GetFriendInviteTokens_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_GetFriendInviteTokens_Request, CUserAccount_GetFriendInviteTokens_Response>( "UserAccount.GetFriendInviteTokens#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_GetFriendInviteTokens_Request, CUserAccount_GetFriendInviteTokens_Response>( "UserAccount.GetFriendInviteTokens#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_ViewFriendInviteToken_Response>> ViewFriendInviteToken( CUserAccount_ViewFriendInviteToken_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_ViewFriendInviteToken_Request, CUserAccount_ViewFriendInviteToken_Response>( "UserAccount.ViewFriendInviteToken#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_ViewFriendInviteToken_Request, CUserAccount_ViewFriendInviteToken_Response>( "UserAccount.ViewFriendInviteToken#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_RedeemFriendInviteToken_Response>> RedeemFriendInviteToken( CUserAccount_RedeemFriendInviteToken_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_RedeemFriendInviteToken_Request, CUserAccount_RedeemFriendInviteToken_Response>( "UserAccount.RedeemFriendInviteToken#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_RedeemFriendInviteToken_Request, CUserAccount_RedeemFriendInviteToken_Response>( "UserAccount.RedeemFriendInviteToken#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_RevokeFriendInviteToken_Response>> RevokeFriendInviteToken( CUserAccount_RevokeFriendInviteToken_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_RevokeFriendInviteToken_Request, CUserAccount_RevokeFriendInviteToken_Response>( "UserAccount.RevokeFriendInviteToken#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_RevokeFriendInviteToken_Request, CUserAccount_RevokeFriendInviteToken_Response>( "UserAccount.RevokeFriendInviteToken#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_RegisterCompatTool_Response>> RegisterCompatTool( CUserAccount_RegisterCompatTool_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserAccount_RegisterCompatTool_Request, CUserAccount_RegisterCompatTool_Response>( "UserAccount.RegisterCompatTool#1", request );
+            return UnifiedMessages.SendMessage<CUserAccount_RegisterCompatTool_Request, CUserAccount_RegisterCompatTool_Response>( "UserAccount.RegisterCompatTool#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1524,13 +1526,15 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class EmbeddedClient : SteamUnifiedMessages.UnifiedService
+    public partial class EmbeddedClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "EmbeddedClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEmbeddedClient_AuthorizeDevice_Response>> AuthorizeCurrentDevice( CEmbeddedClient_AuthorizeCurrentDevice_Request request )
         {
-            return UnifiedMessages.SendMessage<CEmbeddedClient_AuthorizeCurrentDevice_Request, CEmbeddedClient_AuthorizeDevice_Response>( "EmbeddedClient.AuthorizeCurrentDevice#1", request );
+            return UnifiedMessages.SendMessage<CEmbeddedClient_AuthorizeCurrentDevice_Request, CEmbeddedClient_AuthorizeDevice_Response>( "EmbeddedClient.AuthorizeCurrentDevice#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1549,6 +1553,43 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetAvailableValveDiscountPromotions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetAvailableValveDiscountPromotions_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetOptOutEmailOptions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetOptOutEmailOptions_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_SetOptOutEmailOptions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_SetOptOutEmailOptions_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetClientWalletDetails_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetWalletDetails_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetAccountLinkStatus_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetAccountLinkStatus_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_CancelLicenseForApp_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_CancelLicenseForApp_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetUserCountry_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetUserCountry_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_CreateFriendInviteToken_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_CreateFriendInviteToken_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetFriendInviteTokens_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_GetFriendInviteTokens_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_ViewFriendInviteToken_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_ViewFriendInviteToken_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_RedeemFriendInviteToken_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_RedeemFriendInviteToken_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_RevokeFriendInviteToken_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_RevokeFriendInviteToken_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_RegisterCompatTool_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CUserAccount_RegisterCompatTool_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEmbeddedClient_AuthorizeCurrentDevice_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEmbeddedClient_AuthorizeDevice_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

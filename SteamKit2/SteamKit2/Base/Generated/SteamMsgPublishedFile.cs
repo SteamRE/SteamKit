@@ -4993,183 +4993,185 @@ namespace SteamKit2.Internal
         k_EQueryFilesSearchTextTarget_Description = 2,
     }
 
-    public class PublishedFile : SteamUnifiedMessages.UnifiedService
+    public partial class PublishedFile : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "PublishedFile";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Vote_Response>> Vote( CPublishedFile_Vote_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_Vote_Request, CPublishedFile_Vote_Response>( "PublishedFile.Vote#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_Vote_Request, CPublishedFile_Vote_Response>( "PublishedFile.Vote#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Subscribe_Response>> Subscribe( CPublishedFile_Subscribe_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_Subscribe_Request, CPublishedFile_Subscribe_Response>( "PublishedFile.Subscribe#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_Subscribe_Request, CPublishedFile_Subscribe_Response>( "PublishedFile.Subscribe#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Unsubscribe_Response>> Unsubscribe( CPublishedFile_Unsubscribe_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_Unsubscribe_Request, CPublishedFile_Unsubscribe_Response>( "PublishedFile.Unsubscribe#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_Unsubscribe_Request, CPublishedFile_Unsubscribe_Response>( "PublishedFile.Unsubscribe#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_CanSubscribe_Response>> CanSubscribe( CPublishedFile_CanSubscribe_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_CanSubscribe_Request, CPublishedFile_CanSubscribe_Response>( "PublishedFile.CanSubscribe#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_CanSubscribe_Request, CPublishedFile_CanSubscribe_Response>( "PublishedFile.CanSubscribe#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetSubSectionData_Response>> GetSubSectionData( CPublishedFile_GetSubSectionData_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetSubSectionData_Request, CPublishedFile_GetSubSectionData_Response>( "PublishedFile.GetSubSectionData#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetSubSectionData_Request, CPublishedFile_GetSubSectionData_Response>( "PublishedFile.GetSubSectionData#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Publish_Response>> Publish( CPublishedFile_Publish_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_Publish_Request, CPublishedFile_Publish_Response>( "PublishedFile.Publish#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_Publish_Request, CPublishedFile_Publish_Response>( "PublishedFile.Publish#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetDetails_Response>> GetDetails( CPublishedFile_GetDetails_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetDetails_Request, CPublishedFile_GetDetails_Response>( "PublishedFile.GetDetails#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetDetails_Request, CPublishedFile_GetDetails_Response>( "PublishedFile.GetDetails#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetItemInfo_Response>> GetItemInfo( CPublishedFile_GetItemInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetItemInfo_Request, CPublishedFile_GetItemInfo_Response>( "PublishedFile.GetItemInfo#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetItemInfo_Request, CPublishedFile_GetItemInfo_Response>( "PublishedFile.GetItemInfo#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetUserFiles_Response>> GetUserFiles( CPublishedFile_GetUserFiles_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetUserFiles_Request, CPublishedFile_GetUserFiles_Response>( "PublishedFile.GetUserFiles#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetUserFiles_Request, CPublishedFile_GetUserFiles_Response>( "PublishedFile.GetUserFiles#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetUserFiles_Response>> GetUserFileCount( CPublishedFile_GetUserFiles_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetUserFiles_Request, CPublishedFile_GetUserFiles_Response>( "PublishedFile.GetUserFileCount#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetUserFiles_Request, CPublishedFile_GetUserFiles_Response>( "PublishedFile.GetUserFileCount#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AreFilesInSubscriptionList_Response>> AreFilesInSubscriptionList( CPublishedFile_AreFilesInSubscriptionList_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_AreFilesInSubscriptionList_Request, CPublishedFile_AreFilesInSubscriptionList_Response>( "PublishedFile.AreFilesInSubscriptionList#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_AreFilesInSubscriptionList_Request, CPublishedFile_AreFilesInSubscriptionList_Response>( "PublishedFile.AreFilesInSubscriptionList#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Update_Response>> Update( CPublishedFile_Update_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_Update_Request, CPublishedFile_Update_Response>( "PublishedFile.Update#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_Update_Request, CPublishedFile_Update_Response>( "PublishedFile.Update#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Delete_Response>> Delete( CPublishedFile_Delete_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_Delete_Request, CPublishedFile_Delete_Response>( "PublishedFile.Delete#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_Delete_Request, CPublishedFile_Delete_Response>( "PublishedFile.Delete#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetChangeHistoryEntry_Response>> GetChangeHistoryEntry( CPublishedFile_GetChangeHistoryEntry_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetChangeHistoryEntry_Request, CPublishedFile_GetChangeHistoryEntry_Response>( "PublishedFile.GetChangeHistoryEntry#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetChangeHistoryEntry_Request, CPublishedFile_GetChangeHistoryEntry_Response>( "PublishedFile.GetChangeHistoryEntry#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetChangeHistory_Response>> GetChangeHistory( CPublishedFile_GetChangeHistory_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetChangeHistory_Request, CPublishedFile_GetChangeHistory_Response>( "PublishedFile.GetChangeHistory#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetChangeHistory_Request, CPublishedFile_GetChangeHistory_Response>( "PublishedFile.GetChangeHistory#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_RefreshVotingQueue_Response>> RefreshVotingQueue( CPublishedFile_RefreshVotingQueue_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_RefreshVotingQueue_Request, CPublishedFile_RefreshVotingQueue_Response>( "PublishedFile.RefreshVotingQueue#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_RefreshVotingQueue_Request, CPublishedFile_RefreshVotingQueue_Response>( "PublishedFile.RefreshVotingQueue#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_QueryFiles_Response>> QueryFiles( CPublishedFile_QueryFiles_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_QueryFiles_Request, CPublishedFile_QueryFiles_Response>( "PublishedFile.QueryFiles#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_QueryFiles_Request, CPublishedFile_QueryFiles_Response>( "PublishedFile.QueryFiles#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AddAppRelationship_Response>> AddAppRelationship( CPublishedFile_AddAppRelationship_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_AddAppRelationship_Request, CPublishedFile_AddAppRelationship_Response>( "PublishedFile.AddAppRelationship#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_AddAppRelationship_Request, CPublishedFile_AddAppRelationship_Response>( "PublishedFile.AddAppRelationship#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_RemoveAppRelationship_Response>> RemoveAppRelationship( CPublishedFile_RemoveAppRelationship_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_RemoveAppRelationship_Request, CPublishedFile_RemoveAppRelationship_Response>( "PublishedFile.RemoveAppRelationship#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_RemoveAppRelationship_Request, CPublishedFile_RemoveAppRelationship_Response>( "PublishedFile.RemoveAppRelationship#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetAppRelationships_Response>> GetAppRelationships( CPublishedFile_GetAppRelationships_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetAppRelationships_Request, CPublishedFile_GetAppRelationships_Response>( "PublishedFile.GetAppRelationships#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetAppRelationships_Request, CPublishedFile_GetAppRelationships_Response>( "PublishedFile.GetAppRelationships#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetAppRelationshipsBatched_Response>> GetAppRelationshipsBatched( CPublishedFile_GetAppRelationshipsBatched_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetAppRelationshipsBatched_Request, CPublishedFile_GetAppRelationshipsBatched_Response>( "PublishedFile.GetAppRelationshipsBatched#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetAppRelationshipsBatched_Request, CPublishedFile_GetAppRelationshipsBatched_Response>( "PublishedFile.GetAppRelationshipsBatched#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_StartPlaytimeTracking_Response>> StartPlaytimeTracking( CPublishedFile_StartPlaytimeTracking_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_StartPlaytimeTracking_Request, CPublishedFile_StartPlaytimeTracking_Response>( "PublishedFile.StartPlaytimeTracking#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_StartPlaytimeTracking_Request, CPublishedFile_StartPlaytimeTracking_Response>( "PublishedFile.StartPlaytimeTracking#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_StopPlaytimeTracking_Response>> StopPlaytimeTracking( CPublishedFile_StopPlaytimeTracking_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_StopPlaytimeTracking_Request, CPublishedFile_StopPlaytimeTracking_Response>( "PublishedFile.StopPlaytimeTracking#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_StopPlaytimeTracking_Request, CPublishedFile_StopPlaytimeTracking_Response>( "PublishedFile.StopPlaytimeTracking#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>> StopPlaytimeTrackingForAllAppItems( CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request, CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>( "PublishedFile.StopPlaytimeTrackingForAllAppItems#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request, CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response>( "PublishedFile.StopPlaytimeTrackingForAllAppItems#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SetPlaytimeForControllerConfigs_Response>> SetPlaytimeForControllerConfigs( CPublishedFile_SetPlaytimeForControllerConfigs_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_SetPlaytimeForControllerConfigs_Request, CPublishedFile_SetPlaytimeForControllerConfigs_Response>( "PublishedFile.SetPlaytimeForControllerConfigs#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_SetPlaytimeForControllerConfigs_Request, CPublishedFile_SetPlaytimeForControllerConfigs_Response>( "PublishedFile.SetPlaytimeForControllerConfigs#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AddChild_Response>> AddChild( CPublishedFile_AddChild_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_AddChild_Request, CPublishedFile_AddChild_Response>( "PublishedFile.AddChild#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_AddChild_Request, CPublishedFile_AddChild_Response>( "PublishedFile.AddChild#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_RemoveChild_Response>> RemoveChild( CPublishedFile_RemoveChild_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_RemoveChild_Request, CPublishedFile_RemoveChild_Response>( "PublishedFile.RemoveChild#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_RemoveChild_Request, CPublishedFile_RemoveChild_Response>( "PublishedFile.RemoveChild#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SetCollectionChildren_Response>> SetCollectionChildren( CPublishedFile_SetCollectionChildren_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_SetCollectionChildren_Request, CPublishedFile_SetCollectionChildren_Response>( "PublishedFile.SetCollectionChildren#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_SetCollectionChildren_Request, CPublishedFile_SetCollectionChildren_Response>( "PublishedFile.SetCollectionChildren#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SetSubscriptionListFromCollection_Response>> SetSubscriptionListFromCollection( CPublishedFile_SetSubscriptionListFromCollection_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_SetSubscriptionListFromCollection_Request, CPublishedFile_SetSubscriptionListFromCollection_Response>( "PublishedFile.SetSubscriptionListFromCollection#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_SetSubscriptionListFromCollection_Request, CPublishedFile_SetSubscriptionListFromCollection_Response>( "PublishedFile.SetSubscriptionListFromCollection#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetUserVoteSummary_Response>> GetUserVoteSummary( CPublishedFile_GetUserVoteSummary_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetUserVoteSummary_Request, CPublishedFile_GetUserVoteSummary_Response>( "PublishedFile.GetUserVoteSummary#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetUserVoteSummary_Request, CPublishedFile_GetUserVoteSummary_Response>( "PublishedFile.GetUserVoteSummary#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetItemChanges_Response>> GetItemChanges( CPublishedFile_GetItemChanges_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetItemChanges_Request, CPublishedFile_GetItemChanges_Response>( "PublishedFile.GetItemChanges#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetItemChanges_Request, CPublishedFile_GetItemChanges_Response>( "PublishedFile.GetItemChanges#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_GetContentDescriptors_Response>> GetContentDescriptors( CPublishedFile_GetContentDescriptors_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_GetContentDescriptors_Request, CPublishedFile_GetContentDescriptors_Response>( "PublishedFile.GetContentDescriptors#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_GetContentDescriptors_Request, CPublishedFile_GetContentDescriptors_Response>( "PublishedFile.GetContentDescriptors#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_UpdateContentDescriptors_Response>> UpdateContentDescriptors( CPublishedFile_UpdateContentDescriptors_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_UpdateContentDescriptors_Request, CPublishedFile_UpdateContentDescriptors_Response>( "PublishedFile.UpdateContentDescriptors#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_UpdateContentDescriptors_Request, CPublishedFile_UpdateContentDescriptors_Response>( "PublishedFile.UpdateContentDescriptors#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_SanctionPublishedFile_Response>> SanctionPublishedFile( CPublishedFile_SanctionPublishedFile_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_SanctionPublishedFile_Request, CPublishedFile_SanctionPublishedFile_Response>( "PublishedFile.SanctionPublishedFile#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_SanctionPublishedFile_Request, CPublishedFile_SanctionPublishedFile_Response>( "PublishedFile.SanctionPublishedFile#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_AcquitPublishedFile_Response>> AcquitPublishedFile( CPublishedFile_AcquitPublishedFile_Request request )
         {
-            return UnifiedMessages.SendMessage<CPublishedFile_AcquitPublishedFile_Request, CPublishedFile_AcquitPublishedFile_Response>( "PublishedFile.AcquitPublishedFile#1", request );
+            return UnifiedMessages.SendMessage<CPublishedFile_AcquitPublishedFile_Request, CPublishedFile_AcquitPublishedFile_Response>( "PublishedFile.AcquitPublishedFile#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -5289,23 +5291,25 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class PublishedFileClient : SteamUnifiedMessages.UnifiedService
+    public partial class PublishedFileClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "PublishedFileClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request )
         {
-            UnifiedMessages.SendNotification<CPublishedFile_FileSubscribed_Notification>( "PublishedFileClient.NotifyFileSubscribed#1", request );
+            UnifiedMessages.SendNotification<CPublishedFile_FileSubscribed_Notification>( "PublishedFileClient.NotifyFileSubscribed#1", request, Model );
         }
 
         public void NotifyFileUnsubscribed(CPublishedFile_FileUnsubscribed_Notification request )
         {
-            UnifiedMessages.SendNotification<CPublishedFile_FileUnsubscribed_Notification>( "PublishedFileClient.NotifyFileUnsubscribed#1", request );
+            UnifiedMessages.SendNotification<CPublishedFile_FileUnsubscribed_Notification>( "PublishedFileClient.NotifyFileUnsubscribed#1", request, Model );
         }
 
         public void NotifyFileDeleted(CPublishedFile_FileDeleted_Client_Notification request )
         {
-            UnifiedMessages.SendNotification<CPublishedFile_FileDeleted_Client_Notification>( "PublishedFileClient.NotifyFileDeleted#1", request );
+            UnifiedMessages.SendNotification<CPublishedFile_FileDeleted_Client_Notification>( "PublishedFileClient.NotifyFileDeleted#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -5330,6 +5334,86 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Vote_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Vote_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Subscribe_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Subscribe_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Unsubscribe_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Unsubscribe_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_CanSubscribe_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_CanSubscribe_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetSubSectionData_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetSubSectionData_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Publish_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Publish_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetDetails_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetDetails_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetItemInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetItemInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetUserFiles_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetUserFiles_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AreFilesInSubscriptionList_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AreFilesInSubscriptionList_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Update_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Update_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Delete_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_Delete_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetChangeHistoryEntry_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetChangeHistoryEntry_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetChangeHistory_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetChangeHistory_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_RefreshVotingQueue_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_RefreshVotingQueue_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_QueryFiles_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_QueryFiles_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AddAppRelationship_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AddAppRelationship_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_RemoveAppRelationship_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_RemoveAppRelationship_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetAppRelationships_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetAppRelationships_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetAppRelationshipsBatched_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetAppRelationshipsBatched_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_StartPlaytimeTracking_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_StartPlaytimeTracking_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_StopPlaytimeTracking_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_StopPlaytimeTracking_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_StopPlaytimeTrackingForAllAppItems_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SetPlaytimeForControllerConfigs_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SetPlaytimeForControllerConfigs_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AddChild_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AddChild_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_RemoveChild_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_RemoveChild_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SetCollectionChildren_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SetCollectionChildren_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SetSubscriptionListFromCollection_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SetSubscriptionListFromCollection_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetUserVoteSummary_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetUserVoteSummary_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetItemChanges_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetItemChanges_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetContentDescriptors_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_GetContentDescriptors_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_UpdateContentDescriptors_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_UpdateContentDescriptors_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SanctionPublishedFile_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_SanctionPublishedFile_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AcquitPublishedFile_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_AcquitPublishedFile_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_FileSubscribed_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_FileUnsubscribed_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPublishedFile_FileDeleted_Client_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

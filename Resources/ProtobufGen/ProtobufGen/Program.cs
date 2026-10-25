@@ -30,6 +30,18 @@ namespace ProtobufGen
 
         static int Run( Options arguments )
         {
+            if ( arguments.ModelClassName != null && !arguments.ModelClassName.Contains( '.' ) )
+            {
+                Console.Error.WriteLine( "--model must be a namespace-qualified class name." );
+                return -1;
+            }
+
+            if ( arguments.ModelAllMessages && arguments.ModelClassName == null )
+            {
+                Console.Error.WriteLine( "--model-all-messages requires --model." );
+                return -1;
+            }
+
             var set = ParseFiles( arguments );
 
             if ( set == null )
@@ -54,7 +66,7 @@ namespace ProtobufGen
                 Debug.Assert( !reparse, "Should not have to reparse after second pass." );
             }
 
-            var codegen = new SteamKitCSharpCodeGenerator();
+            var codegen = new SteamKitCSharpCodeGenerator( set, arguments.ModelClassName, arguments.ModelAllMessages );
 
             var options = new Dictionary<string, string>
             {
@@ -160,5 +172,11 @@ namespace ProtobufGen
 
         [Option( "output", Required = true )]
         public string Output { get; set; }
+
+        [Option( "model", HelpText = "Full name of a partial [ProtoModel] class, e.g. SteamKit2.Internal.SteamKitProtobufModel, to register the generated types on and to serialize the generated services with." )]
+        public string ModelClassName { get; set; }
+
+        [Option( "model-all-messages", HelpText = "Register every top-level message on the --model class, instead of only service request and response types." )]
+        public bool ModelAllMessages { get; set; }
     }
 }

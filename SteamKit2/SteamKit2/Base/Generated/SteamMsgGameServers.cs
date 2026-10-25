@@ -746,43 +746,45 @@ namespace SteamKit2.Internal
 
     }
 
-    public class GameServers : SteamUnifiedMessages.UnifiedService
+    public partial class GameServers : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "GameServers";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_IPsWithSteamIDs_Response>> GetServerSteamIDsByIP( CGameServers_GetServerSteamIDsByIP_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameServers_GetServerSteamIDsByIP_Request, CGameServers_IPsWithSteamIDs_Response>( "GameServers.GetServerSteamIDsByIP#1", request );
+            return UnifiedMessages.SendMessage<CGameServers_GetServerSteamIDsByIP_Request, CGameServers_IPsWithSteamIDs_Response>( "GameServers.GetServerSteamIDsByIP#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_IPsWithSteamIDs_Response>> GetServerIPsBySteamID( CGameServers_GetServerIPsBySteamID_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameServers_GetServerIPsBySteamID_Request, CGameServers_IPsWithSteamIDs_Response>( "GameServers.GetServerIPsBySteamID#1", request );
+            return UnifiedMessages.SendMessage<CGameServers_GetServerIPsBySteamID_Request, CGameServers_IPsWithSteamIDs_Response>( "GameServers.GetServerIPsBySteamID#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_GameServerQuery_Response>> QueryByFakeIP( CGameServers_QueryByFakeIP_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameServers_QueryByFakeIP_Request, CGameServers_GameServerQuery_Response>( "GameServers.QueryByFakeIP#1", request );
+            return UnifiedMessages.SendMessage<CGameServers_QueryByFakeIP_Request, CGameServers_GameServerQuery_Response>( "GameServers.QueryByFakeIP#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_FriendsQuery_Response>> FriendsQuery( CGameServers_FriendsQuery_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameServers_FriendsQuery_Request, CGameServers_FriendsQuery_Response>( "GameServers.FriendsQuery#1", request );
+            return UnifiedMessages.SendMessage<CGameServers_FriendsQuery_Request, CGameServers_FriendsQuery_Response>( "GameServers.FriendsQuery#1", request, Model );
         }
 
         public void ReportServerPingReply(CGameServers_ReportServerPingReply_Notification request )
         {
-            UnifiedMessages.SendNotification<CGameServers_ReportServerPingReply_Notification>( "GameServers.ReportServerPingReply#1", request );
+            UnifiedMessages.SendNotification<CGameServers_ReportServerPingReply_Notification>( "GameServers.ReportServerPingReply#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_MasterServerQuery_Response>> MasterServerQuery( CGameServers_MasterServerQuery_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameServers_MasterServerQuery_Request, CGameServers_MasterServerQuery_Response>( "GameServers.MasterServerQuery#1", request );
+            return UnifiedMessages.SendMessage<CGameServers_MasterServerQuery_Request, CGameServers_MasterServerQuery_Response>( "GameServers.MasterServerQuery#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_RestrictPlayersToSteamClan_Response>> RestrictPlayersToSteamClan( CGameServers_RestrictPlayersToSteamClan_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameServers_RestrictPlayersToSteamClan_Request, CGameServers_RestrictPlayersToSteamClan_Response>( "GameServers.RestrictPlayersToSteamClan#1", request );
+            return UnifiedMessages.SendMessage<CGameServers_RestrictPlayersToSteamClan_Request, CGameServers_RestrictPlayersToSteamClan_Response>( "GameServers.RestrictPlayersToSteamClan#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -821,13 +823,15 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class GameServerClient : SteamUnifiedMessages.UnifiedService
+    public partial class GameServerClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "GameServerClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<GameServerClient_QueryServerData_Response>> QueryServerData( GameServerClient_QueryServerData_Request request )
         {
-            return UnifiedMessages.SendMessage<GameServerClient_QueryServerData_Request, GameServerClient_QueryServerData_Response>( "GameServerClient.QueryServerData#1", request );
+            return UnifiedMessages.SendMessage<GameServerClient_QueryServerData_Request, GameServerClient_QueryServerData_Response>( "GameServerClient.QueryServerData#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -846,6 +850,29 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_GetServerSteamIDsByIP_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_IPsWithSteamIDs_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_GetServerIPsBySteamID_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_QueryByFakeIP_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_GameServerQuery_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_FriendsQuery_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_FriendsQuery_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_ReportServerPingReply_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_MasterServerQuery_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_MasterServerQuery_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_RestrictPlayersToSteamClan_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameServers_RestrictPlayersToSteamClan_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.GameServerClient_QueryServerData_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.GameServerClient_QueryServerData_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

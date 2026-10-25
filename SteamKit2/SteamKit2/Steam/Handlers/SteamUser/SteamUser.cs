@@ -237,7 +237,7 @@ namespace SteamKit2
                 return;
             }
 
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon, SteamKitProtobuf.Model );
 
             SteamID steamId = new SteamID( details.AccountID, details.AccountInstance, Client.Universe, EAccountType.Individual );
 
@@ -329,7 +329,7 @@ namespace SteamKit2
                 return;
             }
 
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon, SteamKitProtobuf.Model );
 
             SteamID auId = new SteamID( 0, 0, Client.Universe, EAccountType.AnonUser );
 
@@ -354,7 +354,7 @@ namespace SteamKit2
         {
             ExpectDisconnection = true;
 
-            var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
+            var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff, SteamKitProtobuf.Model );
             this.Client.Send( logOff );
         }
 

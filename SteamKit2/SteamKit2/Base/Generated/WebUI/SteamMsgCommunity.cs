@@ -2962,153 +2962,155 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class Community : SteamUnifiedMessages.UnifiedService
+    public partial class Community : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Community";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_ClearSinglePartnerEventsAppPriority_Response>> ClearSinglePartnerEventsAppPriority( CCommunity_ClearSinglePartnerEventsAppPriority_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_ClearSinglePartnerEventsAppPriority_Request, CCommunity_ClearSinglePartnerEventsAppPriority_Response>( "Community.ClearSinglePartnerEventsAppPriority#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_ClearSinglePartnerEventsAppPriority_Request, CCommunity_ClearSinglePartnerEventsAppPriority_Response>( "Community.ClearSinglePartnerEventsAppPriority#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_ClearUserPartnerEventsAppPriorities_Response>> ClearUserPartnerEventsAppPriorities( CCommunity_ClearUserPartnerEventsAppPriorities_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_ClearUserPartnerEventsAppPriorities_Request, CCommunity_ClearUserPartnerEventsAppPriorities_Response>( "Community.ClearUserPartnerEventsAppPriorities#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_ClearUserPartnerEventsAppPriorities_Request, CCommunity_ClearUserPartnerEventsAppPriorities_Response>( "Community.ClearUserPartnerEventsAppPriorities#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_DeleteCommentFromThread_Response>> DeleteCommentFromThread( CCommunity_DeleteCommentFromThread_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_DeleteCommentFromThread_Request, CCommunity_DeleteCommentFromThread_Response>( "Community.DeleteCommentFromThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_DeleteCommentFromThread_Request, CCommunity_DeleteCommentFromThread_Response>( "Community.DeleteCommentFromThread#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_FetchTranslationFromCrowdIn_Response>> FetchTranslationFromCrowdIn( CCommunity_FetchTranslationFromCrowdIn_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_FetchTranslationFromCrowdIn_Request, CCommunity_FetchTranslationFromCrowdIn_Response>( "Community.FetchTranslationFromCrowdIn#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_FetchTranslationFromCrowdIn_Request, CCommunity_FetchTranslationFromCrowdIn_Response>( "Community.FetchTranslationFromCrowdIn#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetAppRichPresenceLocalization_Response>> GetAppRichPresenceLocalization( CCommunity_GetAppRichPresenceLocalization_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetAppRichPresenceLocalization_Request, CCommunity_GetAppRichPresenceLocalization_Response>( "Community.GetAppRichPresenceLocalization#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetAppRichPresenceLocalization_Request, CCommunity_GetAppRichPresenceLocalization_Response>( "Community.GetAppRichPresenceLocalization#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetApps_Response>> GetApps( CCommunity_GetApps_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetApps_Request, CCommunity_GetApps_Response>( "Community.GetApps#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetApps_Request, CCommunity_GetApps_Response>( "Community.GetApps#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetAvatarHistory_Response>> GetAvatarHistory( CCommunity_GetAvatarHistory_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetAvatarHistory_Request, CCommunity_GetAvatarHistory_Response>( "Community.GetAvatarHistory#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetAvatarHistory_Request, CCommunity_GetAvatarHistory_Response>( "Community.GetAvatarHistory#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetBestEventsForUser_Response>> GetBestEventsForUser( CCommunity_GetBestEventsForUser_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetBestEventsForUser_Request, CCommunity_GetBestEventsForUser_Response>( "Community.GetBestEventsForUser#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetBestEventsForUser_Request, CCommunity_GetBestEventsForUser_Response>( "Community.GetBestEventsForUser#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanAnnouncementVoteForUser_Response>> GetClanAnnouncementVoteForUser( CCommunity_GetClanAnnouncementVoteForUser_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetClanAnnouncementVoteForUser_Request, CCommunity_GetClanAnnouncementVoteForUser_Response>( "Community.GetClanAnnouncementVoteForUser#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetClanAnnouncementVoteForUser_Request, CCommunity_GetClanAnnouncementVoteForUser_Response>( "Community.GetClanAnnouncementVoteForUser#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanCrowdInMetadata_Response>> GetClanCrowdInMetadata( CCommunity_GetClanCrowdInMetadata_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetClanCrowdInMetadata_Request, CCommunity_GetClanCrowdInMetadata_Response>( "Community.GetClanCrowdInMetadata#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetClanCrowdInMetadata_Request, CCommunity_GetClanCrowdInMetadata_Response>( "Community.GetClanCrowdInMetadata#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanEventCrowdInMetadata_Response>> GetClanEventCrowdInMetadata( CCommunity_GetClanEventCrowdInMetadata_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetClanEventCrowdInMetadata_Request, CCommunity_GetClanEventCrowdInMetadata_Response>( "Community.GetClanEventCrowdInMetadata#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetClanEventCrowdInMetadata_Request, CCommunity_GetClanEventCrowdInMetadata_Response>( "Community.GetClanEventCrowdInMetadata#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanLocGroupImages_Response>> GetClanLocGroupImages( CCommunity_GetClanLocGroupImages_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetClanLocGroupImages_Request, CCommunity_GetClanLocGroupImages_Response>( "Community.GetClanLocGroupImages#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetClanLocGroupImages_Request, CCommunity_GetClanLocGroupImages_Response>( "Community.GetClanLocGroupImages#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetClanMetadata_Response>> GetClanMetadata( CCommunity_GetClanMetadata_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetClanMetadata_Request, CCommunity_GetClanMetadata_Response>( "Community.GetClanMetadata#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetClanMetadata_Request, CCommunity_GetClanMetadata_Response>( "Community.GetClanMetadata#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetComment_Response>> GetComment( CCommunity_GetComment_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetComment_Request, CCommunity_GetComment_Response>( "Community.GetComment#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetComment_Request, CCommunity_GetComment_Response>( "Community.GetComment#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetCommentThread_Response>> GetCommentThread( CCommunity_GetCommentThread_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( "Community.GetCommentThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetCommentThread_Request, CCommunity_GetCommentThread_Response>( "Community.GetCommentThread#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetCommentThreadRatings_Response>> GetCommentThreadRatings( CCommunity_GetCommentThreadRatings_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetCommentThreadRatings_Request, CCommunity_GetCommentThreadRatings_Response>( "Community.GetCommentThreadRatings#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetCommentThreadRatings_Request, CCommunity_GetCommentThreadRatings_Response>( "Community.GetCommentThreadRatings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetUserPartnerEventNews_Response>> GetUserPartnerEventNews( CCommunity_GetUserPartnerEventNews_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventNews_Request, CCommunity_GetUserPartnerEventNews_Response>( "Community.GetUserPartnerEventNews#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventNews_Request, CCommunity_GetUserPartnerEventNews_Response>( "Community.GetUserPartnerEventNews#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetUserPartnerEventsAppPriorities_Response>> GetUserPartnerEventsAppPriorities( CCommunity_GetUserPartnerEventsAppPriorities_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventsAppPriorities_Request, CCommunity_GetUserPartnerEventsAppPriorities_Response>( "Community.GetUserPartnerEventsAppPriorities#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventsAppPriorities_Request, CCommunity_GetUserPartnerEventsAppPriorities_Response>( "Community.GetUserPartnerEventsAppPriorities#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetUserPartnerEventViewStatus_Response>> GetUserPartnerEventViewStatus( CCommunity_GetUserPartnerEventViewStatus_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventViewStatus_Request, CCommunity_GetUserPartnerEventViewStatus_Response>( "Community.GetUserPartnerEventViewStatus#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetUserPartnerEventViewStatus_Request, CCommunity_GetUserPartnerEventViewStatus_Response>( "Community.GetUserPartnerEventViewStatus#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_HideAndReportComment_Response>> HideAndReportComment( CCommunity_HideAndReportComment_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_HideAndReportComment_Request, CCommunity_HideAndReportComment_Response>( "Community.HideAndReportComment#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_HideAndReportComment_Request, CCommunity_HideAndReportComment_Response>( "Community.HideAndReportComment#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_MarkPartnerEventsForUser_Response>> MarkPartnerEventsForUser( CCommunity_MarkPartnerEventsForUser_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_MarkPartnerEventsForUser_Request, CCommunity_MarkPartnerEventsForUser_Response>( "Community.MarkPartnerEventsForUser#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_MarkPartnerEventsForUser_Request, CCommunity_MarkPartnerEventsForUser_Response>( "Community.MarkPartnerEventsForUser#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_PartnerEventsShowLessForApp_Response>> PartnerEventsShowLessForApp( CCommunity_PartnerEventsShowLessForApp_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowLessForApp_Request, CCommunity_PartnerEventsShowLessForApp_Response>( "Community.PartnerEventsShowLessForApp#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowLessForApp_Request, CCommunity_PartnerEventsShowLessForApp_Response>( "Community.PartnerEventsShowLessForApp#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_PartnerEventsShowMoreForApp_Response>> PartnerEventsShowMoreForApp( CCommunity_PartnerEventsShowMoreForApp_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowMoreForApp_Request, CCommunity_PartnerEventsShowMoreForApp_Response>( "Community.PartnerEventsShowMoreForApp#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_PartnerEventsShowMoreForApp_Request, CCommunity_PartnerEventsShowMoreForApp_Response>( "Community.PartnerEventsShowMoreForApp#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_PostCommentToThread_Response>> PostCommentToThread( CCommunity_PostCommentToThread_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_PostCommentToThread_Request, CCommunity_PostCommentToThread_Response>( "Community.PostCommentToThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_PostCommentToThread_Request, CCommunity_PostCommentToThread_Response>( "Community.PostCommentToThread#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_RateClanAnnouncement_Response>> RateClanAnnouncement( CCommunity_RateClanAnnouncement_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_RateClanAnnouncement_Request, CCommunity_RateClanAnnouncement_Response>( "Community.RateClanAnnouncement#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_RateClanAnnouncement_Request, CCommunity_RateClanAnnouncement_Response>( "Community.RateClanAnnouncement#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_RateCommentThread_Response>> RateCommentThread( CCommunity_RateCommentThread_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( "Community.RateCommentThread#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_RateCommentThread_Request, CCommunity_RateCommentThread_Response>( "Community.RateCommentThread#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_SanctionComment_Response>> SanctionComment( CCommunity_SanctionComment_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_SanctionComment_Request, CCommunity_SanctionComment_Response>( "Community.SanctionComment#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_SanctionComment_Request, CCommunity_SanctionComment_Response>( "Community.SanctionComment#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_SetRecommendationBotReviewStatus_Response>> SetRecommendationBotReviewStatus( CCommunity_SetRecommendationBotReviewStatus_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_SetRecommendationBotReviewStatus_Request, CCommunity_SetRecommendationBotReviewStatus_Response>( "Community.SetRecommendationBotReviewStatus#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_SetRecommendationBotReviewStatus_Request, CCommunity_SetRecommendationBotReviewStatus_Response>( "Community.SetRecommendationBotReviewStatus#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_VerifyClanMembership_Response>> VerifyClanMembership( CCommunity_VerifyClanMembership_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_VerifyClanMembership_Request, CCommunity_VerifyClanMembership_Response>( "Community.VerifyClanMembership#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_VerifyClanMembership_Request, CCommunity_VerifyClanMembership_Response>( "Community.VerifyClanMembership#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -3211,6 +3213,73 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_ClearSinglePartnerEventsAppPriority_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_ClearSinglePartnerEventsAppPriority_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_ClearUserPartnerEventsAppPriorities_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_ClearUserPartnerEventsAppPriorities_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_DeleteCommentFromThread_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_DeleteCommentFromThread_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_FetchTranslationFromCrowdIn_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_FetchTranslationFromCrowdIn_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetAppRichPresenceLocalization_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetAppRichPresenceLocalization_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetApps_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetApps_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetAvatarHistory_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetAvatarHistory_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetBestEventsForUser_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetBestEventsForUser_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanAnnouncementVoteForUser_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanAnnouncementVoteForUser_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanCrowdInMetadata_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanCrowdInMetadata_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanEventCrowdInMetadata_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanEventCrowdInMetadata_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanLocGroupImages_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanLocGroupImages_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanMetadata_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetClanMetadata_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetComment_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetComment_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetCommentThread_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetCommentThread_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetCommentThreadRatings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetCommentThreadRatings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetUserPartnerEventNews_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetUserPartnerEventNews_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetUserPartnerEventsAppPriorities_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetUserPartnerEventsAppPriorities_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetUserPartnerEventViewStatus_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_GetUserPartnerEventViewStatus_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_HideAndReportComment_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_HideAndReportComment_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_MarkPartnerEventsForUser_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_MarkPartnerEventsForUser_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_PartnerEventsShowLessForApp_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_PartnerEventsShowLessForApp_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_PartnerEventsShowMoreForApp_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_PartnerEventsShowMoreForApp_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_PostCommentToThread_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_PostCommentToThread_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_RateClanAnnouncement_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_RateClanAnnouncement_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_RateCommentThread_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_RateCommentThread_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_SanctionComment_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_SanctionComment_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_SetRecommendationBotReviewStatus_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_SetRecommendationBotReviewStatus_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_VerifyClanMembership_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCommunity_VerifyClanMembership_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

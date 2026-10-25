@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using ProtoBuf;
@@ -180,7 +181,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
-        public IDisposable SubscribeServiceNotification<TService, TNotification>( Action<SteamUnifiedMessages.ServiceMethodNotification<TNotification>> callbackFunc )
+        public IDisposable SubscribeServiceNotification<TService, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TNotification>( Action<SteamUnifiedMessages.ServiceMethodNotification<TNotification>> callbackFunc )
             where TService : SteamUnifiedMessages.UnifiedService, new()
             where TNotification : IExtensible, new()
         {
@@ -199,7 +200,7 @@ namespace SteamKit2
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <remarks>When subscribing to asynchronous methods, <see cref="RunWaitCallbackAsync"/> should be used for awaiting callbacks.</remarks>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
-        public IDisposable SubscribeServiceNotification<TService, TNotification>( Func<SteamUnifiedMessages.ServiceMethodNotification<TNotification>, Task> callbackFunc )
+        public IDisposable SubscribeServiceNotification<TService, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TNotification>( Func<SteamUnifiedMessages.ServiceMethodNotification<TNotification>, Task> callbackFunc )
             where TService : SteamUnifiedMessages.UnifiedService, new()
             where TNotification : IExtensible, new()
         {
@@ -217,7 +218,7 @@ namespace SteamKit2
         /// </summary>
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
-        public IDisposable SubscribeServiceResponse<TService, TResponse>( Action<SteamUnifiedMessages.ServiceMethodResponse<TResponse>> callbackFunc )
+        public IDisposable SubscribeServiceResponse<TService, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResponse>( Action<SteamUnifiedMessages.ServiceMethodResponse<TResponse>> callbackFunc )
             where TService : SteamUnifiedMessages.UnifiedService, new()
             where TResponse : IExtensible, new()
         {
@@ -236,7 +237,7 @@ namespace SteamKit2
         /// <param name="callbackFunc">The function to invoke with the callback.</param>
         /// <remarks>When subscribing to asynchronous methods, <see cref="RunWaitCallbackAsync"/> should be used for awaiting callbacks.</remarks>
         /// <returns>An <see cref="IDisposable"/>. Disposing of the return value will unsubscribe the <paramref name="callbackFunc"/>.</returns>
-        public IDisposable SubscribeServiceResponse<TService, TResponse>( Func<SteamUnifiedMessages.ServiceMethodResponse<TResponse>, Task> callbackFunc )
+        public IDisposable SubscribeServiceResponse<TService, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResponse>( Func<SteamUnifiedMessages.ServiceMethodResponse<TResponse>, Task> callbackFunc )
             where TService : SteamUnifiedMessages.UnifiedService, new()
             where TResponse : IExtensible, new()
         {

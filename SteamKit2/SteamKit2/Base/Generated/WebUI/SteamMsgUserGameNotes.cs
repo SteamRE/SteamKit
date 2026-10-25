@@ -418,28 +418,30 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class UserGameNotes : SteamUnifiedMessages.UnifiedService
+    public partial class UserGameNotes : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "UserGameNotes";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameNotes_DeleteNote_Response>> DeleteNote( CUserGameNotes_DeleteNote_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserGameNotes_DeleteNote_Request, CUserGameNotes_DeleteNote_Response>( "UserGameNotes.DeleteNote#1", request );
+            return UnifiedMessages.SendMessage<CUserGameNotes_DeleteNote_Request, CUserGameNotes_DeleteNote_Response>( "UserGameNotes.DeleteNote#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameNotes_GetGamesWithNotes_Response>> GetGamesWithNotes( CUserGameNotes_GetGamesWithNotes_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserGameNotes_GetGamesWithNotes_Request, CUserGameNotes_GetGamesWithNotes_Response>( "UserGameNotes.GetGamesWithNotes#1", request );
+            return UnifiedMessages.SendMessage<CUserGameNotes_GetGamesWithNotes_Request, CUserGameNotes_GetGamesWithNotes_Response>( "UserGameNotes.GetGamesWithNotes#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameNotes_GetNotesForGame_Response>> GetNotesForGame( CUserGameNotes_GetNotesForGame_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserGameNotes_GetNotesForGame_Request, CUserGameNotes_GetNotesForGame_Response>( "UserGameNotes.GetNotesForGame#1", request );
+            return UnifiedMessages.SendMessage<CUserGameNotes_GetNotesForGame_Request, CUserGameNotes_GetNotesForGame_Response>( "UserGameNotes.GetNotesForGame#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameNotes_SaveNote_Response>> SaveNote( CUserGameNotes_SaveNote_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserGameNotes_SaveNote_Request, CUserGameNotes_SaveNote_Response>( "UserGameNotes.SaveNote#1", request );
+            return UnifiedMessages.SendMessage<CUserGameNotes_SaveNote_Request, CUserGameNotes_SaveNote_Response>( "UserGameNotes.SaveNote#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -467,6 +469,23 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_DeleteNote_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_DeleteNote_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_GetGamesWithNotes_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_GetGamesWithNotes_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_GetNotesForGame_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_GetNotesForGame_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_SaveNote_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserGameNotes_SaveNote_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

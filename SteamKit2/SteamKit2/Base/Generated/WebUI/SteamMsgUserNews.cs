@@ -434,18 +434,20 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class UserNews : SteamUnifiedMessages.UnifiedService
+    public partial class UserNews : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "UserNews";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserNews_GetAppDetailsSpotlight_Response>> GetAppDetailsSpotlight( CUserNews_GetAppDetailsSpotlight_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserNews_GetAppDetailsSpotlight_Request, CUserNews_GetAppDetailsSpotlight_Response>( "UserNews.GetAppDetailsSpotlight#1", request );
+            return UnifiedMessages.SendMessage<CUserNews_GetAppDetailsSpotlight_Request, CUserNews_GetAppDetailsSpotlight_Response>( "UserNews.GetAppDetailsSpotlight#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserNews_GetUserNews_Response>> GetUserNews( CUserNews_GetUserNews_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserNews_GetUserNews_Request, CUserNews_GetUserNews_Response>( "UserNews.GetUserNews#1", request );
+            return UnifiedMessages.SendMessage<CUserNews_GetUserNews_Request, CUserNews_GetUserNews_Response>( "UserNews.GetUserNews#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -467,6 +469,19 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserNews_GetAppDetailsSpotlight_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserNews_GetAppDetailsSpotlight_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserNews_GetUserNews_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserNews_GetUserNews_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

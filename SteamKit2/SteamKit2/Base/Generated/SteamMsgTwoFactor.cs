@@ -1060,48 +1060,50 @@ namespace SteamKit2.Internal
         k_ETwoFactorUsageType_Login = 3,
     }
 
-    public class TwoFactor : SteamUnifiedMessages.UnifiedService
+    public partial class TwoFactor : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "TwoFactor";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_Time_Response>> QueryTime( CTwoFactor_Time_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_Time_Request, CTwoFactor_Time_Response>( "TwoFactor.QueryTime#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_Time_Request, CTwoFactor_Time_Response>( "TwoFactor.QueryTime#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_Status_Response>> QueryStatus( CTwoFactor_Status_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_Status_Request, CTwoFactor_Status_Response>( "TwoFactor.QueryStatus#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_Status_Request, CTwoFactor_Status_Response>( "TwoFactor.QueryStatus#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_AddAuthenticator_Response>> AddAuthenticator( CTwoFactor_AddAuthenticator_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_AddAuthenticator_Request, CTwoFactor_AddAuthenticator_Response>( "TwoFactor.AddAuthenticator#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_AddAuthenticator_Request, CTwoFactor_AddAuthenticator_Response>( "TwoFactor.AddAuthenticator#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_FinalizeAddAuthenticator_Response>> FinalizeAddAuthenticator( CTwoFactor_FinalizeAddAuthenticator_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_FinalizeAddAuthenticator_Request, CTwoFactor_FinalizeAddAuthenticator_Response>( "TwoFactor.FinalizeAddAuthenticator#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_FinalizeAddAuthenticator_Request, CTwoFactor_FinalizeAddAuthenticator_Response>( "TwoFactor.FinalizeAddAuthenticator#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_UpdateTokenVersion_Response>> UpdateTokenVersion( CTwoFactor_UpdateTokenVersion_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_UpdateTokenVersion_Request, CTwoFactor_UpdateTokenVersion_Response>( "TwoFactor.UpdateTokenVersion#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_UpdateTokenVersion_Request, CTwoFactor_UpdateTokenVersion_Response>( "TwoFactor.UpdateTokenVersion#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_RemoveAuthenticator_Response>> RemoveAuthenticator( CTwoFactor_RemoveAuthenticator_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticator_Request, CTwoFactor_RemoveAuthenticator_Response>( "TwoFactor.RemoveAuthenticator#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticator_Request, CTwoFactor_RemoveAuthenticator_Response>( "TwoFactor.RemoveAuthenticator#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>> RemoveAuthenticatorViaChallengeStart( CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request, CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>( "TwoFactor.RemoveAuthenticatorViaChallengeStart#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request, CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response>( "TwoFactor.RemoveAuthenticatorViaChallengeStart#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>> RemoveAuthenticatorViaChallengeContinue( CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request request )
         {
-            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request, CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( "TwoFactor.RemoveAuthenticatorViaChallengeContinue#1", request );
+            return UnifiedMessages.SendMessage<CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request, CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response>( "TwoFactor.RemoveAuthenticatorViaChallengeContinue#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1141,6 +1143,31 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_Time_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_Time_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_Status_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_Status_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_AddAuthenticator_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_AddAuthenticator_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_FinalizeAddAuthenticator_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_FinalizeAddAuthenticator_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_UpdateTokenVersion_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_UpdateTokenVersion_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_RemoveAuthenticator_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_RemoveAuthenticator_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_RemoveAuthenticatorViaChallengeStart_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTwoFactor_RemoveAuthenticatorViaChallengeContinue_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

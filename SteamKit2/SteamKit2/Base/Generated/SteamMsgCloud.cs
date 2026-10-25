@@ -2588,148 +2588,150 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Cloud : SteamUnifiedMessages.UnifiedService
+    public partial class Cloud : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Cloud";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void ClientLogUploadCheck(CCloud_ClientLogUploadCheck_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_ClientLogUploadCheck_Notification>( "Cloud.ClientLogUploadCheck#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientLogUploadCheck_Notification>( "Cloud.ClientLogUploadCheck#1", request, Model );
         }
 
         public void ClientLogUploadComplete(CCloud_ClientLogUploadComplete_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_ClientLogUploadComplete_Notification>( "Cloud.ClientLogUploadComplete#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientLogUploadComplete_Notification>( "Cloud.ClientLogUploadComplete#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_BeginHTTPUpload_Response>> BeginHTTPUpload( CCloud_BeginHTTPUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_BeginHTTPUpload_Request, CCloud_BeginHTTPUpload_Response>( "Cloud.BeginHTTPUpload#1", request );
+            return UnifiedMessages.SendMessage<CCloud_BeginHTTPUpload_Request, CCloud_BeginHTTPUpload_Response>( "Cloud.BeginHTTPUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_CommitHTTPUpload_Response>> CommitHTTPUpload( CCloud_CommitHTTPUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_CommitHTTPUpload_Request, CCloud_CommitHTTPUpload_Response>( "Cloud.CommitHTTPUpload#1", request );
+            return UnifiedMessages.SendMessage<CCloud_CommitHTTPUpload_Request, CCloud_CommitHTTPUpload_Response>( "Cloud.CommitHTTPUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_BeginUGCUpload_Response>> BeginUGCUpload( CCloud_BeginUGCUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_BeginUGCUpload_Request, CCloud_BeginUGCUpload_Response>( "Cloud.BeginUGCUpload#1", request );
+            return UnifiedMessages.SendMessage<CCloud_BeginUGCUpload_Request, CCloud_BeginUGCUpload_Response>( "Cloud.BeginUGCUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_CommitUGCUpload_Response>> CommitUGCUpload( CCloud_CommitUGCUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_CommitUGCUpload_Request, CCloud_CommitUGCUpload_Response>( "Cloud.CommitUGCUpload#1", request );
+            return UnifiedMessages.SendMessage<CCloud_CommitUGCUpload_Request, CCloud_CommitUGCUpload_Response>( "Cloud.CommitUGCUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_GetFileDetails_Response>> GetFileDetails( CCloud_GetFileDetails_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_GetFileDetails_Request, CCloud_GetFileDetails_Response>( "Cloud.GetFileDetails#1", request );
+            return UnifiedMessages.SendMessage<CCloud_GetFileDetails_Request, CCloud_GetFileDetails_Response>( "Cloud.GetFileDetails#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_GetSingleFileInfo_Response>> GetSingleFileInfo( CCloud_GetSingleFileInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_GetSingleFileInfo_Request, CCloud_GetSingleFileInfo_Response>( "Cloud.GetSingleFileInfo#1", request );
+            return UnifiedMessages.SendMessage<CCloud_GetSingleFileInfo_Request, CCloud_GetSingleFileInfo_Response>( "Cloud.GetSingleFileInfo#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_ShareFile_Response>> ShareFile( CCloud_ShareFile_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_ShareFile_Request, CCloud_ShareFile_Response>( "Cloud.ShareFile#1", request );
+            return UnifiedMessages.SendMessage<CCloud_ShareFile_Request, CCloud_ShareFile_Response>( "Cloud.ShareFile#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_EnumerateUserFiles_Response>> EnumerateUserFiles( CCloud_EnumerateUserFiles_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_EnumerateUserFiles_Request, CCloud_EnumerateUserFiles_Response>( "Cloud.EnumerateUserFiles#1", request );
+            return UnifiedMessages.SendMessage<CCloud_EnumerateUserFiles_Request, CCloud_EnumerateUserFiles_Response>( "Cloud.EnumerateUserFiles#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_Delete_Response>> Delete( CCloud_Delete_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_Delete_Request, CCloud_Delete_Response>( "Cloud.Delete#1", request );
+            return UnifiedMessages.SendMessage<CCloud_Delete_Request, CCloud_Delete_Response>( "Cloud.Delete#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_GetClientEncryptionKey_Response>> GetClientEncryptionKey( CCloud_GetClientEncryptionKey_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_GetClientEncryptionKey_Request, CCloud_GetClientEncryptionKey_Response>( "Cloud.GetClientEncryptionKey#1", request );
+            return UnifiedMessages.SendMessage<CCloud_GetClientEncryptionKey_Request, CCloud_GetClientEncryptionKey_Response>( "Cloud.GetClientEncryptionKey#1", request, Model );
         }
 
         public void CDNReport(CCloud_CDNReport_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_CDNReport_Notification>( "Cloud.CDNReport#1", request );
+            UnifiedMessages.SendNotification<CCloud_CDNReport_Notification>( "Cloud.CDNReport#1", request, Model );
         }
 
         public void ExternalStorageTransferReport(CCloud_ExternalStorageTransferReport_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_ExternalStorageTransferReport_Notification>( "Cloud.ExternalStorageTransferReport#1", request );
+            UnifiedMessages.SendNotification<CCloud_ExternalStorageTransferReport_Notification>( "Cloud.ExternalStorageTransferReport#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_BeginAppUploadBatch_Response>> BeginAppUploadBatch( CCloud_BeginAppUploadBatch_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_BeginAppUploadBatch_Request, CCloud_BeginAppUploadBatch_Response>( "Cloud.BeginAppUploadBatch#1", request );
+            return UnifiedMessages.SendMessage<CCloud_BeginAppUploadBatch_Request, CCloud_BeginAppUploadBatch_Response>( "Cloud.BeginAppUploadBatch#1", request, Model );
         }
 
         public void CompleteAppUploadBatch(CCloud_CompleteAppUploadBatch_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_CompleteAppUploadBatch_Notification>( "Cloud.CompleteAppUploadBatch#1", request );
+            UnifiedMessages.SendNotification<CCloud_CompleteAppUploadBatch_Notification>( "Cloud.CompleteAppUploadBatch#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_CompleteAppUploadBatch_Response>> CompleteAppUploadBatchBlocking( CCloud_CompleteAppUploadBatch_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_CompleteAppUploadBatch_Request, CCloud_CompleteAppUploadBatch_Response>( "Cloud.CompleteAppUploadBatchBlocking#1", request );
+            return UnifiedMessages.SendMessage<CCloud_CompleteAppUploadBatch_Request, CCloud_CompleteAppUploadBatch_Response>( "Cloud.CompleteAppUploadBatchBlocking#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_ClientBeginFileUpload_Response>> ClientBeginFileUpload( CCloud_ClientBeginFileUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientBeginFileUpload_Request, CCloud_ClientBeginFileUpload_Response>( "Cloud.ClientBeginFileUpload#1", request );
+            return UnifiedMessages.SendMessage<CCloud_ClientBeginFileUpload_Request, CCloud_ClientBeginFileUpload_Response>( "Cloud.ClientBeginFileUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_ClientCommitFileUpload_Response>> ClientCommitFileUpload( CCloud_ClientCommitFileUpload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientCommitFileUpload_Request, CCloud_ClientCommitFileUpload_Response>( "Cloud.ClientCommitFileUpload#1", request );
+            return UnifiedMessages.SendMessage<CCloud_ClientCommitFileUpload_Request, CCloud_ClientCommitFileUpload_Response>( "Cloud.ClientCommitFileUpload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_ClientFileDownload_Response>> ClientFileDownload( CCloud_ClientFileDownload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientFileDownload_Request, CCloud_ClientFileDownload_Response>( "Cloud.ClientFileDownload#1", request );
+            return UnifiedMessages.SendMessage<CCloud_ClientFileDownload_Request, CCloud_ClientFileDownload_Response>( "Cloud.ClientFileDownload#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_ClientDeleteFile_Response>> ClientDeleteFile( CCloud_ClientDeleteFile_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientDeleteFile_Request, CCloud_ClientDeleteFile_Response>( "Cloud.ClientDeleteFile#1", request );
+            return UnifiedMessages.SendMessage<CCloud_ClientDeleteFile_Request, CCloud_ClientDeleteFile_Response>( "Cloud.ClientDeleteFile#1", request, Model );
         }
 
         public void ClientConflictResolution(CCloud_ClientConflictResolution_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_ClientConflictResolution_Notification>( "Cloud.ClientConflictResolution#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientConflictResolution_Notification>( "Cloud.ClientConflictResolution#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_GetAppFileChangelist_Response>> GetAppFileChangelist( CCloud_GetAppFileChangelist_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_GetAppFileChangelist_Request, CCloud_GetAppFileChangelist_Response>( "Cloud.GetAppFileChangelist#1", request );
+            return UnifiedMessages.SendMessage<CCloud_GetAppFileChangelist_Request, CCloud_GetAppFileChangelist_Response>( "Cloud.GetAppFileChangelist#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_AppSessionSuspend_Response>> SuspendAppSession( CCloud_AppSessionSuspend_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_AppSessionSuspend_Request, CCloud_AppSessionSuspend_Response>( "Cloud.SuspendAppSession#1", request );
+            return UnifiedMessages.SendMessage<CCloud_AppSessionSuspend_Request, CCloud_AppSessionSuspend_Response>( "Cloud.SuspendAppSession#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_AppSessionResume_Response>> ResumeAppSession( CCloud_AppSessionResume_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_AppSessionResume_Request, CCloud_AppSessionResume_Response>( "Cloud.ResumeAppSession#1", request );
+            return UnifiedMessages.SendMessage<CCloud_AppSessionResume_Request, CCloud_AppSessionResume_Response>( "Cloud.ResumeAppSession#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_AppLaunchIntent_Response>> SignalAppLaunchIntent( CCloud_AppLaunchIntent_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_AppLaunchIntent_Request, CCloud_AppLaunchIntent_Response>( "Cloud.SignalAppLaunchIntent#1", request );
+            return UnifiedMessages.SendMessage<CCloud_AppLaunchIntent_Request, CCloud_AppLaunchIntent_Response>( "Cloud.SignalAppLaunchIntent#1", request, Model );
         }
 
         public void SignalAppExitSyncDone(CCloud_AppExitSyncDone_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_AppExitSyncDone_Notification>( "Cloud.SignalAppExitSyncDone#1", request );
+            UnifiedMessages.SendNotification<CCloud_AppExitSyncDone_Notification>( "Cloud.SignalAppExitSyncDone#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloud_ClientGetAppQuotaUsage_Response>> ClientGetAppQuotaUsage( CCloud_ClientGetAppQuotaUsage_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloud_ClientGetAppQuotaUsage_Request, CCloud_ClientGetAppQuotaUsage_Response>( "Cloud.ClientGetAppQuotaUsage#1", request );
+            return UnifiedMessages.SendMessage<CCloud_ClientGetAppQuotaUsage_Request, CCloud_ClientGetAppQuotaUsage_Response>( "Cloud.ClientGetAppQuotaUsage#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -2831,18 +2833,20 @@ namespace SteamKit2.Internal
         }
     }
 
-    public class CloudClient : SteamUnifiedMessages.UnifiedService
+    public partial class CloudClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "CloudClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void NotifyAppStateChange(CCloud_AppCloudStateChange_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_AppCloudStateChange_Notification>( "CloudClient.NotifyAppStateChange#1", request );
+            UnifiedMessages.SendNotification<CCloud_AppCloudStateChange_Notification>( "CloudClient.NotifyAppStateChange#1", request, Model );
         }
 
         public void ClientLogUploadRequest(CCloud_ClientLogUploadRequest_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloud_ClientLogUploadRequest_Notification>( "CloudClient.ClientLogUploadRequest#1", request );
+            UnifiedMessages.SendNotification<CCloud_ClientLogUploadRequest_Notification>( "CloudClient.ClientLogUploadRequest#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -2864,6 +2868,66 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientLogUploadCheck_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientLogUploadComplete_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_BeginHTTPUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_BeginHTTPUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CommitHTTPUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CommitHTTPUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_BeginUGCUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_BeginUGCUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CommitUGCUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CommitUGCUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetFileDetails_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetFileDetails_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetSingleFileInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetSingleFileInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ShareFile_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ShareFile_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_EnumerateUserFiles_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_EnumerateUserFiles_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_Delete_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_Delete_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetClientEncryptionKey_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetClientEncryptionKey_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CDNReport_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ExternalStorageTransferReport_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_BeginAppUploadBatch_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_BeginAppUploadBatch_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CompleteAppUploadBatch_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CompleteAppUploadBatch_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_CompleteAppUploadBatch_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientBeginFileUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientBeginFileUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientCommitFileUpload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientCommitFileUpload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientFileDownload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientFileDownload_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientDeleteFile_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientDeleteFile_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientConflictResolution_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetAppFileChangelist_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_GetAppFileChangelist_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppSessionSuspend_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppSessionSuspend_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppSessionResume_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppSessionResume_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppLaunchIntent_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppLaunchIntent_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppExitSyncDone_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientGetAppQuotaUsage_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientGetAppQuotaUsage_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_AppCloudStateChange_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCloud_ClientLogUploadRequest_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

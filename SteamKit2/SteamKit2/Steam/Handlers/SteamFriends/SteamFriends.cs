@@ -68,7 +68,7 @@ namespace SteamKit2
             // cache the local name right away, so that early calls to SetPersonaState don't reset the set name
             cache.LocalUser.Name = name ?? throw new ArgumentNullException( nameof(name) );
 
-            var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
+            var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus, SteamKitProtobuf.Model );
 
             stateMsg.Body.persona_state = ( uint )cache.LocalUser.PersonaState;
             stateMsg.Body.player_name = name;
@@ -92,7 +92,7 @@ namespace SteamKit2
         {
             cache.LocalUser.PersonaState = state;
 
-            var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus );
+            var stateMsg = new ClientMsgProtobuf<CMsgClientChangeStatus>( EMsg.ClientChangeStatus, SteamKitProtobuf.Model );
 
             stateMsg.Body.persona_state = ( uint )state;
 
@@ -266,7 +266,7 @@ namespace SteamKit2
 
             ArgumentNullException.ThrowIfNull( message );
 
-            var chatMsg = new ClientMsgProtobuf<CMsgClientFriendMsg>( EMsg.ClientFriendMsg );
+            var chatMsg = new ClientMsgProtobuf<CMsgClientFriendMsg>( EMsg.ClientFriendMsg, SteamKitProtobuf.Model );
 
             chatMsg.Body.steamid = target;
             chatMsg.Body.chat_entry_type = ( int )type;
@@ -283,7 +283,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( accountNameOrEmail );
 
-            var addFriend = new ClientMsgProtobuf<CMsgClientAddFriend>( EMsg.ClientAddFriend );
+            var addFriend = new ClientMsgProtobuf<CMsgClientAddFriend>( EMsg.ClientAddFriend, SteamKitProtobuf.Model );
 
             addFriend.Body.accountname_or_email_to_add = accountNameOrEmail;
 
@@ -297,7 +297,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( steamId );
 
-            var addFriend = new ClientMsgProtobuf<CMsgClientAddFriend>( EMsg.ClientAddFriend );
+            var addFriend = new ClientMsgProtobuf<CMsgClientAddFriend>( EMsg.ClientAddFriend, SteamKitProtobuf.Model );
 
             addFriend.Body.steamid_to_add = steamId;
 
@@ -311,7 +311,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( steamId );
 
-            var removeFriend = new ClientMsgProtobuf<CMsgClientRemoveFriend>( EMsg.ClientRemoveFriend );
+            var removeFriend = new ClientMsgProtobuf<CMsgClientRemoveFriend>( EMsg.ClientRemoveFriend, SteamKitProtobuf.Model );
 
             removeFriend.Body.friendid = steamId;
 
@@ -425,7 +425,7 @@ namespace SteamKit2
                 chatId.AccountType = EAccountType.Chat;
             }
 
-            var inviteMsg = new ClientMsgProtobuf<CMsgClientChatInvite>( EMsg.ClientChatInvite );
+            var inviteMsg = new ClientMsgProtobuf<CMsgClientChatInvite>( EMsg.ClientChatInvite, SteamKitProtobuf.Model );
 
             inviteMsg.Body.steam_id_chat = chatId;
             inviteMsg.Body.steam_id_invited = steamIdUser;
@@ -540,7 +540,7 @@ namespace SteamKit2
                 requestedInfo = Client.Configuration.DefaultPersonaStateFlags;
             }
 
-            var request = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
+            var request = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData, SteamKitProtobuf.Model );
 
             request.Body.friends.AddRange( steamIdList.Select( sID => sID.ConvertToUInt64() ) );
             request.Body.persona_state_requested = ( uint )requestedInfo;
@@ -596,7 +596,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( steamId );
 
-            var request = new ClientMsgProtobuf<CMsgClientFriendProfileInfo>( EMsg.ClientFriendProfileInfo );
+            var request = new ClientMsgProtobuf<CMsgClientFriendProfileInfo>( EMsg.ClientFriendProfileInfo, SteamKitProtobuf.Model );
             request.SourceJobID = Client.GetNextJobID();
 
             request.Body.steamid_friend = steamId;
@@ -615,7 +615,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( steamId );
 
-            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistory>( EMsg.ClientChatGetFriendMessageHistory );
+            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistory>( EMsg.ClientChatGetFriendMessageHistory, SteamKitProtobuf.Model );
 
             request.Body.steamid = steamId;
 
@@ -629,7 +629,7 @@ namespace SteamKit2
         /// </summary>
         public void RequestOfflineMessages()
         {
-            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryForOfflineMessages>( EMsg.ClientChatGetFriendMessageHistoryForOfflineMessages );
+            var request = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryForOfflineMessages>( EMsg.ClientChatGetFriendMessageHistoryForOfflineMessages, SteamKitProtobuf.Model );
             
             this.Client.Send( request );
         }
@@ -679,7 +679,7 @@ namespace SteamKit2
         #region ClientMsg Handlers
         void HandleAccountInfo( IPacketMsg packetMsg )
         {
-            var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
+            var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg, SteamKitProtobuf.Model );
 
             // cache off our local name
             cache.LocalUser.Name = accInfo.Body.persona_name;
@@ -687,7 +687,7 @@ namespace SteamKit2
 
         private void HandleFriendMessageHistoryResponse( IPacketMsg packetMsg )
         {
-            var historyResponse = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryResponse>( packetMsg );
+            var historyResponse = new ClientMsgProtobuf<CMsgClientChatGetFriendMessageHistoryResponse>( packetMsg, SteamKitProtobuf.Model );
 
             var callback = new FriendMsgHistoryCallback( historyResponse.Body, this.Client.Universe );
             this.Client.PostCallback( callback );
@@ -695,7 +695,7 @@ namespace SteamKit2
 
         void HandleFriendsList( IPacketMsg packetMsg )
         {
-            var list = new ClientMsgProtobuf<CMsgClientFriendsList>( packetMsg );
+            var list = new ClientMsgProtobuf<CMsgClientFriendsList>( packetMsg, SteamKitProtobuf.Model );
 
             cache.LocalUser.SteamID = this.Client.SteamID!;
 
@@ -710,7 +710,7 @@ namespace SteamKit2
             }
 
             // we have to request information for all of our friends because steam only sends persona information for online friends
-            var reqInfo = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData );
+            var reqInfo = new ClientMsgProtobuf<CMsgClientRequestFriendData>( EMsg.ClientRequestFriendData, SteamKitProtobuf.Model );
 
             reqInfo.Body.persona_state_requested = ( uint )Client.Configuration.DefaultPersonaStateFlags;
 
@@ -785,7 +785,7 @@ namespace SteamKit2
         }
         void HandlePersonaState( IPacketMsg packetMsg )
         {
-            var perState = new ClientMsgProtobuf<CMsgClientPersonaState>( packetMsg );
+            var perState = new ClientMsgProtobuf<CMsgClientPersonaState>( packetMsg, SteamKitProtobuf.Model );
 
             EClientPersonaStateFlag flags = ( EClientPersonaStateFlag )perState.Body.status_flags;
 
@@ -843,7 +843,7 @@ namespace SteamKit2
         }
         void HandlePersonaChangeResponse( IPacketMsg packetMsg )
         {
-            var response = new ClientMsgProtobuf<CMsgPersonaChangeResponse>( packetMsg );
+            var response = new ClientMsgProtobuf<CMsgPersonaChangeResponse>( packetMsg, SteamKitProtobuf.Model );
 
             // update our cache to what steam says our name is
             cache.LocalUser.Name = response.Body.player_name;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using SteamKit2;
 using SteamKit2.Authentication;
 
@@ -145,10 +146,14 @@ void ParseJsonWebToken( string token, string name )
     var payload = JsonDocument.Parse( payloadBytes );
 
     // For brevity we will simply output formatted json to console
-    var formatted = JsonSerializer.Serialize( payload, new JsonSerializerOptions
-    {
-        WriteIndented = true,
-    } );
+    var formatted = JsonSerializer.Serialize( payload, IndentedJsonContext.Default.JsonDocument );
     Console.WriteLine( $"{name}: {formatted}" );
     Console.WriteLine();
+}
+
+// Source generated serialization keeps the sample compatible with trimming and native AOT
+[JsonSourceGenerationOptions( WriteIndented = true )]
+[JsonSerializable( typeof( JsonDocument ) )]
+partial class IndentedJsonContext : JsonSerializerContext
+{
 }

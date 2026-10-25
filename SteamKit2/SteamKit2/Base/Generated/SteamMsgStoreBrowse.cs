@@ -4892,43 +4892,45 @@ namespace SteamKit2.Internal
         k_EStoreCategoryType_MAX = 5,
     }
 
-    public class StoreBrowse : SteamUnifiedMessages.UnifiedService
+    public partial class StoreBrowse : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "StoreBrowse";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetItems_Response>> GetItems( CStoreBrowse_GetItems_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( "StoreBrowse.GetItems#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( "StoreBrowse.GetItems#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetStoreCategories_Response>> GetStoreCategories( CStoreBrowse_GetStoreCategories_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( "StoreBrowse.GetStoreCategories#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetStoreCategories_Request, CStoreBrowse_GetStoreCategories_Response>( "StoreBrowse.GetStoreCategories#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetContentHubConfig_Response>> GetContentHubConfig( CStoreBrowse_GetContentHubConfig_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetContentHubConfig_Request, CStoreBrowse_GetContentHubConfig_Response>( "StoreBrowse.GetContentHubConfig#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetContentHubConfig_Request, CStoreBrowse_GetContentHubConfig_Response>( "StoreBrowse.GetContentHubConfig#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetPriceStops_Response>> GetPriceStops( CStoreBrowse_GetPriceStops_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetPriceStops_Request, CStoreBrowse_GetPriceStops_Response>( "StoreBrowse.GetPriceStops#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetPriceStops_Request, CStoreBrowse_GetPriceStops_Response>( "StoreBrowse.GetPriceStops#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetDLCForApps_Response>> GetDLCForApps( CStoreBrowse_GetDLCForApps_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForApps_Request, CStoreBrowse_GetDLCForApps_Response>( "StoreBrowse.GetDLCForApps#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForApps_Request, CStoreBrowse_GetDLCForApps_Response>( "StoreBrowse.GetDLCForApps#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetDLCForAppsSolr_Response>> GetDLCForAppsSolr( CStoreBrowse_GetDLCForAppsSolr_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForAppsSolr_Request, CStoreBrowse_GetDLCForAppsSolr_Response>( "StoreBrowse.GetDLCForAppsSolr#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetDLCForAppsSolr_Request, CStoreBrowse_GetDLCForAppsSolr_Response>( "StoreBrowse.GetDLCForAppsSolr#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetHardwareItems_Response>> GetHardwareItems( CStoreBrowse_GetHardwareItems_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( "StoreBrowse.GetHardwareItems#1", request );
+            return UnifiedMessages.SendMessage<CStoreBrowse_GetHardwareItems_Request, CStoreBrowse_GetHardwareItems_Response>( "StoreBrowse.GetHardwareItems#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -4965,6 +4967,29 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetItems_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetItems_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetStoreCategories_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetStoreCategories_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetContentHubConfig_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetContentHubConfig_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetPriceStops_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetPriceStops_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetDLCForApps_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetDLCForApps_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetDLCForAppsSolr_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetDLCForAppsSolr_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetHardwareItems_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CStoreBrowse_GetHardwareItems_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

@@ -516,43 +516,45 @@ namespace SteamKit2.Internal
 
     }
 
-    public class Shader : SteamUnifiedMessages.UnifiedService
+    public partial class Shader : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "Shader";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_GetShaderReportingCadence_Response>> GetShaderReportingCadence( CShader_GetShaderReportingCadence_Request request )
         {
-            return UnifiedMessages.SendMessage<CShader_GetShaderReportingCadence_Request, CShader_GetShaderReportingCadence_Response>( "Shader.GetShaderReportingCadence#1", request );
+            return UnifiedMessages.SendMessage<CShader_GetShaderReportingCadence_Request, CShader_GetShaderReportingCadence_Response>( "Shader.GetShaderReportingCadence#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_RegisterShader_Response>> RegisterShader( CShader_RegisterShader_Request request )
         {
-            return UnifiedMessages.SendMessage<CShader_RegisterShader_Request, CShader_RegisterShader_Response>( "Shader.RegisterShader#1", request );
+            return UnifiedMessages.SendMessage<CShader_RegisterShader_Request, CShader_RegisterShader_Response>( "Shader.RegisterShader#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_SendShader_Response>> SendShader( CShader_SendShader_Request request )
         {
-            return UnifiedMessages.SendMessage<CShader_SendShader_Request, CShader_SendShader_Response>( "Shader.SendShader#1", request );
+            return UnifiedMessages.SendMessage<CShader_SendShader_Request, CShader_SendShader_Response>( "Shader.SendShader#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_GetBucketManifest_Response>> GetBucketManifest( CShader_GetBucketManifest_Request request )
         {
-            return UnifiedMessages.SendMessage<CShader_GetBucketManifest_Request, CShader_GetBucketManifest_Response>( "Shader.GetBucketManifest#1", request );
+            return UnifiedMessages.SendMessage<CShader_GetBucketManifest_Request, CShader_GetBucketManifest_Response>( "Shader.GetBucketManifest#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_GetStaleBucket_Response>> GetStaleBucket( CShader_GetStaleBucket_Request request )
         {
-            return UnifiedMessages.SendMessage<CShader_GetStaleBucket_Request, CShader_GetStaleBucket_Response>( "Shader.GetStaleBucket#1", request );
+            return UnifiedMessages.SendMessage<CShader_GetStaleBucket_Request, CShader_GetStaleBucket_Response>( "Shader.GetStaleBucket#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_ReportExternalBuild_Response>> ReportExternalBuild( CShader_ReportExternalBuild_Request request )
         {
-            return UnifiedMessages.SendMessage<CShader_ReportExternalBuild_Request, CShader_ReportExternalBuild_Response>( "Shader.ReportExternalBuild#1", request );
+            return UnifiedMessages.SendMessage<CShader_ReportExternalBuild_Request, CShader_ReportExternalBuild_Response>( "Shader.ReportExternalBuild#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_ReportBucketProcessingComplete_Response>> ReportBucketProcessingComplete( CShader_ReportBucketProcessingComplete_Request request )
         {
-            return UnifiedMessages.SendMessage<CShader_ReportBucketProcessingComplete_Request, CShader_ReportBucketProcessingComplete_Response>( "Shader.ReportBucketProcessingComplete#1", request );
+            return UnifiedMessages.SendMessage<CShader_ReportBucketProcessingComplete_Request, CShader_ReportBucketProcessingComplete_Response>( "Shader.ReportBucketProcessingComplete#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -589,6 +591,29 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_GetShaderReportingCadence_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_GetShaderReportingCadence_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_RegisterShader_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_RegisterShader_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_SendShader_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_SendShader_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_GetBucketManifest_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_GetBucketManifest_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_GetStaleBucket_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_GetStaleBucket_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_ReportExternalBuild_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_ReportExternalBuild_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_ReportBucketProcessingComplete_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CShader_ReportBucketProcessingComplete_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

@@ -381,18 +381,18 @@ namespace SteamKit2
                         return;
 
                     case DepotManifest.PROTOBUF_PAYLOAD_MAGIC:
-                        uint payload_length = br.ReadUInt32();
-                        payload = Serializer.Deserialize<ContentManifestPayload>( stream, length: payload_length );
+                        int payload_length = br.ReadInt32();
+                        payload = ProtobufUtil.Deserialize<ContentManifestPayload>( SteamKitProtobuf.Model, stream, payload_length );
                         break;
 
                     case DepotManifest.PROTOBUF_METADATA_MAGIC:
-                        uint metadata_length = br.ReadUInt32();
-                        metadata = Serializer.Deserialize<ContentManifestMetadata>( stream, length: metadata_length );
+                        int metadata_length = br.ReadInt32();
+                        metadata = ProtobufUtil.Deserialize<ContentManifestMetadata>( SteamKitProtobuf.Model, stream, metadata_length );
                         break;
 
                     case DepotManifest.PROTOBUF_SIGNATURE_MAGIC:
-                        uint signature_length = br.ReadUInt32();
-                        signature = Serializer.Deserialize<ContentManifestSignature>( stream, length: signature_length );
+                        int signature_length = br.ReadInt32();
+                        signature = ProtobufUtil.Deserialize<ContentManifestSignature>( SteamKitProtobuf.Model, stream, signature_length );
                         break;
 
                     default:
@@ -542,7 +542,7 @@ namespace SteamKit2
             // Calculate payload CRC
             using ( var ms_payload = new MemoryStream() )
             {
-                Serializer.Serialize<ContentManifestPayload>( ms_payload, payload );
+                SteamKitProtobuf.Model.Serialize<ContentManifestPayload>( ms_payload, payload );
 
                 int len = ( int )ms_payload.Length;
                 byte[] data = new byte[ 4 + len ];
@@ -567,7 +567,7 @@ namespace SteamKit2
             // Write Protobuf payload
             using ( var ms_payload = new MemoryStream() )
             {
-                Serializer.Serialize<ContentManifestPayload>( ms_payload, payload );
+                SteamKitProtobuf.Model.Serialize<ContentManifestPayload>( ms_payload, payload );
                 bw.Write( DepotManifest.PROTOBUF_PAYLOAD_MAGIC );
                 bw.Write( ( int )ms_payload.Length );
                 bw.Write( ms_payload.GetBuffer().AsSpan( 0, ( int )ms_payload.Length ) );
@@ -576,7 +576,7 @@ namespace SteamKit2
             // Write Protobuf metadata
             using ( var ms_metadata = new MemoryStream() )
             {
-                Serializer.Serialize<ContentManifestMetadata>( ms_metadata, metadata );
+                SteamKitProtobuf.Model.Serialize<ContentManifestMetadata>( ms_metadata, metadata );
                 bw.Write( DepotManifest.PROTOBUF_METADATA_MAGIC );
                 bw.Write( ( int )ms_metadata.Length );
                 bw.Write( ms_metadata.GetBuffer().AsSpan( 0, ( int )ms_metadata.Length ) );

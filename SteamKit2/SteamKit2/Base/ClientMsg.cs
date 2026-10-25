@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ProtoBuf;
+using ProtoBuf.Meta;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -132,9 +133,10 @@ namespace SteamKit2
     /// Represents a protobuf backed client message.
     /// </summary>
     /// <typeparam name="TBody">The body type of this message.</typeparam>
-    public sealed class ClientMsgProtobuf<TBody> : ClientMsgProtobuf
+    public sealed class ClientMsgProtobuf<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TBody> : ClientMsgProtobuf
         where TBody : IExtensible, new()
     {
+        private readonly TypeModel _model;
         private TBody _body;
 
         /// <summary>
@@ -153,9 +155,26 @@ namespace SteamKit2
         /// </summary>
         /// <param name="eMsg">The network message type this client message represents.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
         public ClientMsgProtobuf( EMsg eMsg, int payloadReserve = 0 )
+            : this( eMsg, RuntimeTypeModel.Default, payloadReserve )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// This is a client send constructor.
+        /// </summary>
+        /// <param name="eMsg">The network message type this client message represents.</param>
+        /// <param name="model">The protobuf model used to serialize the body, such as <see cref="SteamKitProtobuf.Model"/>.</param>
+        /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        public ClientMsgProtobuf( EMsg eMsg, TypeModel model, int payloadReserve = 0 )
             : base( payloadReserve )
         {
+            ArgumentNullException.ThrowIfNull( model );
+
+            _model = model;
             _body = new TBody();
 
             // set our emsg
@@ -169,8 +188,23 @@ namespace SteamKit2
         /// <param name="eMsg">The network message type this client message represents.</param>
         /// <param name="msg">The message that this instance is a reply for.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
         public ClientMsgProtobuf( EMsg eMsg, MsgBase<MsgHdrProtoBuf> msg, int payloadReserve = 0 )
-            : this( eMsg, payloadReserve )
+            : this( eMsg, msg, RuntimeTypeModel.Default, payloadReserve )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// This a reply constructor.
+        /// </summary>
+        /// <param name="eMsg">The network message type this client message represents.</param>
+        /// <param name="msg">The message that this instance is a reply for.</param>
+        /// <param name="model">The protobuf model used to serialize the body, such as <see cref="SteamKitProtobuf.Model"/>.</param>
+        /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        public ClientMsgProtobuf( EMsg eMsg, MsgBase<MsgHdrProtoBuf> msg, TypeModel model, int payloadReserve = 0 )
+            : this( eMsg, model, payloadReserve )
         {
             // our target is where the message came from
             Header.Proto.jobid_target = msg.Header.Proto.jobid_source;
@@ -181,8 +215,21 @@ namespace SteamKit2
         /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this client message from.</param>
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
         public ClientMsgProtobuf( IPacketMsg msg )
-            : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
+            : this( msg, RuntimeTypeModel.Default )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// This is a receive constructor.
+        /// </summary>
+        /// <param name="msg">The packet message to build this client message from.</param>
+        /// <param name="model">The protobuf model used to deserialize the body, such as <see cref="SteamKitProtobuf.Model"/>.</param>
+        public ClientMsgProtobuf( IPacketMsg msg, TypeModel model )
+            : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ), model )
         {
             if ( msg is not PacketClientMsgProtobuf packetMsg )
             {
@@ -195,7 +242,7 @@ namespace SteamKit2
             var offset = (int)packetMsg.BodyOffset;
             using MemoryStream ms = new MemoryStream( data, offset, data.Length - offset );
 
-            Body = Serializer.Deserialize<TBody>( ms );
+            Body = ProtobufUtil.Deserialize<TBody>( _model, ms );
 
             // the rest of the data is the payload
             int payloadLen = ( int )( ms.Length - ms.Position );
@@ -217,7 +264,7 @@ namespace SteamKit2
         {
             using MemoryStream ms = new MemoryStream();
             Header.Serialize( ms );
-            Serializer.Serialize( ms, Body );
+            ProtobufUtil.Serialize( _model, ms, Body );
             Payload.WriteTo( ms );
 
             return ms.ToArray();

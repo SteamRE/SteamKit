@@ -25,7 +25,7 @@ namespace SteamKit2
 
             internal StatusReplyCallback( IPacketMsg packetMsg )
             {
-                var statusReply = new ClientMsgProtobuf<CMsgGSStatusReply>( packetMsg );
+                var statusReply = new ClientMsgProtobuf<CMsgGSStatusReply>( packetMsg, SteamKitProtobuf.Model );
 
                 IsSecure = statusReply.Body.is_secure;
             }
@@ -67,7 +67,7 @@ namespace SteamKit2
 
             internal TicketAuthCallback( IPacketMsg packetMsg )
             {
-                var authComplete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg );
+                var authComplete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg, SteamKitProtobuf.Model );
                 var tickAuth = authComplete.Body;
 
                 SteamID = tickAuth.steam_id;

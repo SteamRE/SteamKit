@@ -183,23 +183,25 @@ namespace SteamKit2.Internal
 
     }
 
-    public class TimedTrial : SteamUnifiedMessages.UnifiedService
+    public partial class TimedTrial : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "TimedTrial";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining( CTimedTrial_GetTimeRemaining_Request request )
         {
-            return UnifiedMessages.SendMessage<CTimedTrial_GetTimeRemaining_Request, CTimedTrial_GetTimeRemaining_Response>( "TimedTrial.GetTimeRemaining#1", request );
+            return UnifiedMessages.SendMessage<CTimedTrial_GetTimeRemaining_Request, CTimedTrial_GetTimeRemaining_Response>( "TimedTrial.GetTimeRemaining#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_RecordPlaytime_Response>> RecordPlaytime( CTimedTrial_RecordPlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CTimedTrial_RecordPlaytime_Request, CTimedTrial_RecordPlaytime_Response>( "TimedTrial.RecordPlaytime#1", request );
+            return UnifiedMessages.SendMessage<CTimedTrial_RecordPlaytime_Request, CTimedTrial_RecordPlaytime_Response>( "TimedTrial.RecordPlaytime#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_ResetPlaytime_Response>> ResetPlaytime( CTimedTrial_ResetPlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( "TimedTrial.ResetPlaytime#1", request );
+            return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( "TimedTrial.ResetPlaytime#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -224,6 +226,21 @@ namespace SteamKit2.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_GetTimeRemaining_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_GetTimeRemaining_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_RecordPlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_RecordPlaytime_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_ResetPlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_ResetPlaytime_Response))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

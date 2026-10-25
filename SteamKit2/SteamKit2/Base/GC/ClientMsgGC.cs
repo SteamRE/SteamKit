@@ -5,8 +5,10 @@
 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ProtoBuf;
+using ProtoBuf.Meta;
 using SteamKit2.Internal;
 using CMsgProtoBufHeader = SteamKit2.GC.Internal.CMsgProtoBufHeader;
 using MsgGCHdr = SteamKit2.Internal.MsgGCHdr;
@@ -18,9 +20,11 @@ namespace SteamKit2.GC
     /// Represents a protobuf backed game coordinator message.
     /// </summary>
     /// <typeparam name="TBody">The body type of this message.</typeparam>
-    public sealed class ClientGCMsgProtobuf<TBody> : GCMsgBase<MsgGCHdrProtoBuf>
+    public sealed class ClientGCMsgProtobuf<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TBody> : GCMsgBase<MsgGCHdrProtoBuf>
         where TBody : IExtensible, new()
     {
+        readonly TypeModel model;
+
         /// <summary>
         /// Gets a value indicating whether this gc message is protobuf backed.
         /// Client messages of this type are always protobuf backed.
@@ -78,9 +82,26 @@ namespace SteamKit2.GC
         /// </summary>
         /// <param name="eMsg">The network message type this gc message represents.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
         public ClientGCMsgProtobuf( uint eMsg, int payloadReserve = 0 )
+            : this( eMsg, RuntimeTypeModel.Default, payloadReserve )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientGCMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// This is a client send constructor.
+        /// </summary>
+        /// <param name="eMsg">The network message type this gc message represents.</param>
+        /// <param name="model">The protobuf model used to serialize the body, such as your own <c>[ProtoModel]</c> containing the game coordinator messages.</param>
+        /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        public ClientGCMsgProtobuf( uint eMsg, TypeModel model, int payloadReserve = 0 )
             : base( payloadReserve )
         {
+            ArgumentNullException.ThrowIfNull( model );
+
+            this.model = model;
             Body = new TBody();
 
             // set our emsg
@@ -94,8 +115,23 @@ namespace SteamKit2.GC
         /// <param name="eMsg">The network message type this gc message represents.</param>
         /// <param name="msg">The message that this instance is a reply for.</param>
         /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
         public ClientGCMsgProtobuf( uint eMsg, GCMsgBase<MsgGCHdrProtoBuf> msg, int payloadReserve = 0 )
-            : this( eMsg, payloadReserve )
+            : this( eMsg, msg, RuntimeTypeModel.Default, payloadReserve )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientGCMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// This a reply constructor.
+        /// </summary>
+        /// <param name="eMsg">The network message type this gc message represents.</param>
+        /// <param name="msg">The message that this instance is a reply for.</param>
+        /// <param name="model">The protobuf model used to serialize the body, such as your own <c>[ProtoModel]</c> containing the game coordinator messages.</param>
+        /// <param name="payloadReserve">The number of bytes to initialize the payload capacity to.</param>
+        public ClientGCMsgProtobuf( uint eMsg, GCMsgBase<MsgGCHdrProtoBuf> msg, TypeModel model, int payloadReserve = 0 )
+            : this( eMsg, model, payloadReserve )
         {
             ArgumentNullException.ThrowIfNull( msg );
 
@@ -108,8 +144,21 @@ namespace SteamKit2.GC
         /// This is a receive constructor.
         /// </summary>
         /// <param name="msg">The packet message to build this gc message from.</param>
+        [RequiresUnreferencedCode( ProtobufUtil.RequiresModelMessage )]
+        [RequiresDynamicCode( ProtobufUtil.RequiresModelMessage )]
         public ClientGCMsgProtobuf( IPacketGCMsg msg )
-            : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ) )
+            : this( msg, RuntimeTypeModel.Default )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientGCMsgProtobuf&lt;BodyType&gt;"/> class.
+        /// This is a receive constructor.
+        /// </summary>
+        /// <param name="msg">The packet message to build this gc message from.</param>
+        /// <param name="model">The protobuf model used to deserialize the body, such as your own <c>[ProtoModel]</c> containing the game coordinator messages.</param>
+        public ClientGCMsgProtobuf( IPacketGCMsg msg, TypeModel model )
+            : this( msg.GetMsgTypeWithNullCheck( nameof(msg) ), model )
         {
             DebugLog.Assert( msg.IsProto, "ClientGCMsgProtobuf", "ClientGCMsgProtobuf used for non-proto message!" );
 
@@ -126,7 +175,7 @@ namespace SteamKit2.GC
         {
             using MemoryStream ms = new MemoryStream();
             Header.Serialize( ms );
-            Serializer.Serialize( ms, Body );
+            ProtobufUtil.Serialize( model, ms, Body );
             Payload.WriteTo( ms );
 
             return ms.ToArray();
@@ -141,7 +190,7 @@ namespace SteamKit2.GC
 
             using MemoryStream ms = new MemoryStream( data );
             Header.Deserialize( ms );
-            Body = Serializer.Deserialize<TBody>( ms );
+            Body = ProtobufUtil.Deserialize<TBody>( model, ms );
 
             // the rest of the data is the payload
             int payloadOffset = ( int )ms.Position;

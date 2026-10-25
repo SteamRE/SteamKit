@@ -454,38 +454,40 @@ namespace SteamKit2.WebUI.Internal
 
     }
 
-    public class SteamNotification : SteamUnifiedMessages.UnifiedService
+    public partial class SteamNotification : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "SteamNotification";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_GetPreferences_Response>> GetPreferences( CSteamNotification_GetPreferences_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_GetPreferences_Request, CSteamNotification_GetPreferences_Response>( "SteamNotification.GetPreferences#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_GetPreferences_Request, CSteamNotification_GetPreferences_Response>( "SteamNotification.GetPreferences#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_GetSteamNotifications_Response>> GetSteamNotifications( CSteamNotification_GetSteamNotifications_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_GetSteamNotifications_Request, CSteamNotification_GetSteamNotifications_Response>( "SteamNotification.GetSteamNotifications#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_GetSteamNotifications_Request, CSteamNotification_GetSteamNotifications_Response>( "SteamNotification.GetSteamNotifications#1", request, Model );
         }
 
         public void HideNotification(CSteamNotification_HideNotification_Notification request )
         {
-            UnifiedMessages.SendNotification<CSteamNotification_HideNotification_Notification>( "SteamNotification.HideNotification#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_HideNotification_Notification>( "SteamNotification.HideNotification#1", request, Model );
         }
 
         public void MarkNotificationsRead(CSteamNotification_MarkNotificationsRead_Notification request )
         {
-            UnifiedMessages.SendNotification<CSteamNotification_MarkNotificationsRead_Notification>( "SteamNotification.MarkNotificationsRead#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_MarkNotificationsRead_Notification>( "SteamNotification.MarkNotificationsRead#1", request, Model );
         }
 
         public void MarkNotificationsViewed(CSteamNotification_MarkNotificationsViewed_Notification request )
         {
-            UnifiedMessages.SendNotification<CSteamNotification_MarkNotificationsViewed_Notification>( "SteamNotification.MarkNotificationsViewed#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_MarkNotificationsViewed_Notification>( "SteamNotification.MarkNotificationsViewed#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_SetPreferences_Response>> SetPreferences( CSteamNotification_SetPreferences_Request request )
         {
-            return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( "SteamNotification.SetPreferences#1", request );
+            return UnifiedMessages.SendMessage<CSteamNotification_SetPreferences_Request, CSteamNotification_SetPreferences_Response>( "SteamNotification.SetPreferences#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -521,18 +523,20 @@ namespace SteamKit2.WebUI.Internal
         }
     }
 
-    public class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
+    public partial class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "SteamNotificationClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request )
         {
-            UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request, Model );
         }
 
         public void PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request )
         {
-            UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -554,6 +558,26 @@ namespace SteamKit2.WebUI.Internal
     }
 
 }
+
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_GetPreferences_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_GetPreferences_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_GetSteamNotifications_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_GetSteamNotifications_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_HideNotification_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_MarkNotificationsRead_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_MarkNotificationsViewed_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_SetPreferences_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_SetPreferences_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_NotificationsReceived_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CSteamNotification_PreferencesUpdated_Notification))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
 
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

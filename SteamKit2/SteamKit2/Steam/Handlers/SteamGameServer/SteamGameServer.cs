@@ -103,7 +103,7 @@ namespace SteamKit2
                 return;
             }
 
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer );
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogonGameServer, SteamKitProtobuf.Model );
 
             SteamID gsId = new SteamID( 0, 0, Client.Universe, EAccountType.GameServer );
 
@@ -137,7 +137,7 @@ namespace SteamKit2
                 return;
             }
 
-            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon );
+            var logon = new ClientMsgProtobuf<CMsgClientLogon>( EMsg.ClientLogon, SteamKitProtobuf.Model );
 
             SteamID gsId = new SteamID( 0, 0, Client.Universe, EAccountType.AnonGameServer );
 
@@ -163,7 +163,7 @@ namespace SteamKit2
         {
             ExpectDisconnection = true;
 
-            var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
+            var logOff = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff, SteamKitProtobuf.Model );
             this.Client.Send( logOff );
         }
 
@@ -181,7 +181,7 @@ namespace SteamKit2
                 throw new ArgumentException("Only IPv4 addresses are supported.");
             }
 
-            var status = new ClientMsgProtobuf<CMsgGSServerType>(EMsg.GSServerType);
+            var status = new ClientMsgProtobuf<CMsgGSServerType>(EMsg.GSServerType, SteamKitProtobuf.Model);
             status.Body.app_id_served = details.AppID;
             status.Body.flags = (uint)details.ServerFlags;
             status.Body.game_dir = details.GameDirectory;

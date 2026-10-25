@@ -78,6 +78,7 @@ namespace SteamKit2
                 HttpMethod.Get,
                 nameof( ContentServerDirectory.GetServersForSteamPipe ),
                 request,
+                SteamKitProtobuf.Model,
                 version: 1
             ).ConfigureAwait( false );
 
