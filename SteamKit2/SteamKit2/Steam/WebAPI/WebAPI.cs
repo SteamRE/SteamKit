@@ -59,6 +59,8 @@ namespace SteamKit2
 
         internal static TimeSpan DefaultTimeout { get; } = TimeSpan.FromSeconds( 100 );
 
+        const string DynamicObjectJustification = "Constructing a DynamicObject generates no code. Calls through 'dynamic' are warned at the caller's call site by the C# runtime binder, and the typed Call methods do not need dynamic code.";
+
         /// <summary>
         /// Represents a single interface that exists within the Web API.
         /// This is a dynamic object that allows function calls to interfaces with minimal code.
@@ -81,6 +83,7 @@ namespace SteamKit2
             }
 
 
+            [UnconditionalSuppressMessage( "AotAnalysis", "IL3050", Justification = DynamicObjectJustification )]
             internal Interface( HttpClient httpClient, string iface, string apiKey )
             {
                 asyncInterface = new AsyncInterface( httpClient, iface, apiKey );
@@ -218,6 +221,7 @@ namespace SteamKit2
                 set => httpClient.Timeout = value;
             }
 
+            [UnconditionalSuppressMessage( "AotAnalysis", "IL3050", Justification = DynamicObjectJustification )]
             internal AsyncInterface( HttpClient httpClient, string iface, string apiKey )
             {
                 this.httpClient = httpClient;
