@@ -525,6 +525,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "AccountCart";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountCart_AddItemsToCart_Response>> AddItemsToCart( CAccountCart_AddItemsToCart_Request request )
         {
             return UnifiedMessages.SendMessage<CAccountCart_AddItemsToCart_Request, CAccountCart_AddItemsToCart_Response>( "AccountCart.AddItemsToCart#1", request, Model );

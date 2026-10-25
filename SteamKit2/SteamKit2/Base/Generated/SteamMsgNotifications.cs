@@ -234,6 +234,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "SteamNotificationClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request )
         {
             UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request, Model );

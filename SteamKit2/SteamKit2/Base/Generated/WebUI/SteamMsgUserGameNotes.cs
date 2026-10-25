@@ -422,6 +422,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "UserGameNotes";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameNotes_DeleteNote_Response>> DeleteNote( CUserGameNotes_DeleteNote_Request request )
         {
             return UnifiedMessages.SendMessage<CUserGameNotes_DeleteNote_Request, CUserGameNotes_DeleteNote_Response>( "UserGameNotes.DeleteNote#1", request, Model );

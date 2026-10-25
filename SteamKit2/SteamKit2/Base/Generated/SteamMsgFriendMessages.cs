@@ -1112,6 +1112,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "FriendMessages";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_GetRecentMessages_Response>> GetRecentMessages( CFriendMessages_GetRecentMessages_Request request )
         {
             return UnifiedMessages.SendMessage<CFriendMessages_GetRecentMessages_Request, CFriendMessages_GetRecentMessages_Response>( "FriendMessages.GetRecentMessages#1", request, Model );
@@ -1210,6 +1212,8 @@ namespace SteamKit2.Internal
     public partial class FriendMessagesClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FriendMessagesClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void IncomingMessage(CFriendMessages_IncomingMessage_Notification request )
         {

@@ -1267,6 +1267,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Econ";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetInventoryItemsWithDescriptions_Response>> GetInventoryItemsWithDescriptions( CEcon_GetInventoryItemsWithDescriptions_Request request )
         {
             return UnifiedMessages.SendMessage<CEcon_GetInventoryItemsWithDescriptions_Request, CEcon_GetInventoryItemsWithDescriptions_Response>( "Econ.GetInventoryItemsWithDescriptions#1", request, Model );

@@ -14,7 +14,8 @@ namespace ProtobufGen
 
         /// <param name="descriptorSet">The descriptor set the generated files come from.</param>
         /// <param name="modelClassName">
-        /// The full name of a partial <c>[ProtoModel]</c> class to register the generated types on, or <c>null</c> to not register them.
+        /// The full name of a partial <c>[ProtoModel]</c> class to register the generated types on and to return from the generated
+        /// services' <c>Model</c>, or <c>null</c> to not register them.
         /// </param>
         /// <param name="modelAllMessages">
         /// Whether to register every top-level message of the file, instead of only the request and response types of its services.
@@ -60,6 +61,12 @@ namespace ProtobufGen
                 .Indent()
                 .WriteLine( $"public override string ServiceName {{ get; }} = \"{Escape( service.Name )}\";" )
                 .WriteLine();
+
+            if ( modelClassName != null )
+            {
+                ctx.WriteLine( $"protected override global::ProtoBuf.Meta.TypeModel Model => global::{modelClassName}.Instance;" )
+                    .WriteLine();
+            }
         }
 
         protected override void WriteServiceFooter( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )

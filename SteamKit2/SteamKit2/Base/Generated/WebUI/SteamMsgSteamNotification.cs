@@ -458,6 +458,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "SteamNotification";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamNotification_GetPreferences_Response>> GetPreferences( CSteamNotification_GetPreferences_Request request )
         {
             return UnifiedMessages.SendMessage<CSteamNotification_GetPreferences_Request, CSteamNotification_GetPreferences_Response>( "SteamNotification.GetPreferences#1", request, Model );
@@ -524,6 +526,8 @@ namespace SteamKit2.WebUI.Internal
     public partial class SteamNotificationClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "SteamNotificationClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request )
         {

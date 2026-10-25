@@ -262,6 +262,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "FriendsList";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsList_GetCategories_Response>> GetCategories( CFriendsList_GetCategories_Request request )
         {
             return UnifiedMessages.SendMessage<CFriendsList_GetCategories_Request, CFriendsList_GetCategories_Response>( "FriendsList.GetCategories#1", request, Model );
@@ -309,6 +311,8 @@ namespace SteamKit2.WebUI.Internal
     public partial class FriendsListClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FriendsListClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void FavoritesChanged(CFriendsList_FavoritesChanged_Notification request )
         {

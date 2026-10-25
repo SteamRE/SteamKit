@@ -287,6 +287,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Video";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CVideo_ClientGetVideoURL_Response>> ClientGetVideoURL( CVideo_ClientGetVideoURL_Request request )
         {
             return UnifiedMessages.SendMessage<CVideo_ClientGetVideoURL_Request, CVideo_ClientGetVideoURL_Response>( "Video.ClientGetVideoURL#1", request, Model );
@@ -330,6 +332,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "VideoClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void NotifyUnlockedH264(CVideo_UnlockedH264_Notification request )
         {
             UnifiedMessages.SendNotification<CVideo_UnlockedH264_Notification>( "VideoClient.NotifyUnlockedH264#1", request, Model );
@@ -353,6 +357,8 @@ namespace SteamKit2.Internal
     public partial class FovasVideo : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FovasVideo";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFovasVideo_ClientGetOPFSettings_Response>> ClientGetOPFSettings( CFovasVideo_ClientGetOPFSettings_Request request )
         {

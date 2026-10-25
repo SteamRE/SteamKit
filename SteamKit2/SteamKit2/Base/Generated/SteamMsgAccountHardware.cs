@@ -1173,6 +1173,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "AccountHardware";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountHardware_RegisterSteamController_Response>> RegisterSteamController( CAccountHardware_RegisterSteamController_Request request )
         {
             return UnifiedMessages.SendMessage<CAccountHardware_RegisterSteamController_Request, CAccountHardware_RegisterSteamController_Response>( "AccountHardware.RegisterSteamController#1", request, Model );
@@ -1316,6 +1318,8 @@ namespace SteamKit2.Internal
     public partial class AccountHardwarePromotions : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "AccountHardwarePromotions";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountHardwarePromotions_RedeemFramePromoPackage_Response>> RedeemFramePromoPackage( CAccountHardwarePromotions_RedeemFramePromoPackage_Request request )
         {

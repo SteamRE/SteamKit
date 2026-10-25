@@ -356,6 +356,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Parties";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParties_JoinParty_Response>> JoinParty( CParties_JoinParty_Request request )
         {
             return UnifiedMessages.SendMessage<CParties_JoinParty_Request, CParties_JoinParty_Response>( "Parties.JoinParty#1", request, Model );

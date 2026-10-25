@@ -563,6 +563,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "PartnerApps";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPartnerApps_RequestUploadToken_Response>> RequestKVSignUploadToken( CPartnerApps_RequestUploadToken_Request request )
         {
             return UnifiedMessages.SendMessage<CPartnerApps_RequestUploadToken_Request, CPartnerApps_RequestUploadToken_Response>( "PartnerApps.RequestKVSignUploadToken#1", request, Model );

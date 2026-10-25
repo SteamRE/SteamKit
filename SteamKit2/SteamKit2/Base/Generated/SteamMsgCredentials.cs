@@ -514,6 +514,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Credentials";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCredentials_GetSteamGuardDetails_Response>> GetSteamGuardDetails( CCredentials_GetSteamGuardDetails_Request request )
         {
             return UnifiedMessages.SendMessage<CCredentials_GetSteamGuardDetails_Request, CCredentials_GetSteamGuardDetails_Response>( "Credentials.GetSteamGuardDetails#1", request, Model );

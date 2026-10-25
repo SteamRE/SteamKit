@@ -4896,6 +4896,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "StoreBrowse";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreBrowse_GetItems_Response>> GetItems( CStoreBrowse_GetItems_Request request )
         {
             return UnifiedMessages.SendMessage<CStoreBrowse_GetItems_Request, CStoreBrowse_GetItems_Response>( "StoreBrowse.GetItems#1", request, Model );

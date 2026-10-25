@@ -612,6 +612,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "GameNotifications";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_CreateSession_Response>> UserCreateSession( CGameNotifications_CreateSession_Request request )
         {
             return UnifiedMessages.SendMessage<CGameNotifications_CreateSession_Request, CGameNotifications_CreateSession_Response>( "GameNotifications.UserCreateSession#1", request, Model );
@@ -675,6 +677,8 @@ namespace SteamKit2.Internal
     public partial class GameNotificationsClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "GameNotificationsClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request )
         {

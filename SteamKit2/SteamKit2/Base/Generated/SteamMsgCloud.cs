@@ -2592,6 +2592,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Cloud";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void ClientLogUploadCheck(CCloud_ClientLogUploadCheck_Notification request )
         {
             UnifiedMessages.SendNotification<CCloud_ClientLogUploadCheck_Notification>( "Cloud.ClientLogUploadCheck#1", request, Model );
@@ -2834,6 +2836,8 @@ namespace SteamKit2.Internal
     public partial class CloudClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "CloudClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyAppStateChange(CCloud_AppCloudStateChange_Notification request )
         {

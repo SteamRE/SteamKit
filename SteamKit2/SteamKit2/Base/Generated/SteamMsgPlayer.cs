@@ -5489,6 +5489,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Player";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPlayer_GetRecentPlaytimeSessionsForChild_Response>> GetRecentPlaytimeSessionsForChild( CPlayer_GetRecentPlaytimeSessionsForChild_Request request )
         {
             return UnifiedMessages.SendMessage<CPlayer_GetRecentPlaytimeSessionsForChild_Request, CPlayer_GetRecentPlaytimeSessionsForChild_Response>( "Player.GetRecentPlaytimeSessionsForChild#1", request, Model );
@@ -5952,6 +5954,8 @@ namespace SteamKit2.Internal
     public partial class PlayerClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "PlayerClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyLastPlayedTimes(CPlayer_LastPlayedTimes_Notification request )
         {

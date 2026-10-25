@@ -2278,6 +2278,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Store";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStore_RegisterCDKey_Response>> RegisterCDKey( CStore_RegisterCDKey_Request request )
         {
             return UnifiedMessages.SendMessage<CStore_RegisterCDKey_Request, CStore_RegisterCDKey_Response>( "Store.RegisterCDKey#1", request, Model );
@@ -2496,6 +2498,8 @@ namespace SteamKit2.Internal
     public partial class StoreClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "StoreClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyStorePreferencesChanged(CStore_StorePreferencesChanged_Notification request )
         {

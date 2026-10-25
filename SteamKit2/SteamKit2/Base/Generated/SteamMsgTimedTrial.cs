@@ -187,6 +187,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "TimedTrial";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining( CTimedTrial_GetTimeRemaining_Request request )
         {
             return UnifiedMessages.SendMessage<CTimedTrial_GetTimeRemaining_Request, CTimedTrial_GetTimeRemaining_Response>( "TimedTrial.GetTimeRemaining#1", request, Model );

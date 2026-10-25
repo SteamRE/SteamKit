@@ -1408,6 +1408,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "UserAccount";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserAccount_GetAvailableValveDiscountPromotions_Response>> GetAvailableValveDiscountPromotions( CUserAccount_GetAvailableValveDiscountPromotions_Request request )
         {
             return UnifiedMessages.SendMessage<CUserAccount_GetAvailableValveDiscountPromotions_Request, CUserAccount_GetAvailableValveDiscountPromotions_Response>( "UserAccount.GetAvailableValveDiscountPromotions#1", request, Model );
@@ -1527,6 +1529,8 @@ namespace SteamKit2.Internal
     public partial class EmbeddedClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "EmbeddedClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEmbeddedClient_AuthorizeDevice_Response>> AuthorizeCurrentDevice( CEmbeddedClient_AuthorizeCurrentDevice_Request request )
         {

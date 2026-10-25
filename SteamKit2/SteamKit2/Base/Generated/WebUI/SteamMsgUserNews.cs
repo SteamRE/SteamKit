@@ -438,6 +438,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "UserNews";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserNews_GetAppDetailsSpotlight_Response>> GetAppDetailsSpotlight( CUserNews_GetAppDetailsSpotlight_Request request )
         {
             return UnifiedMessages.SendMessage<CUserNews_GetAppDetailsSpotlight_Request, CUserNews_GetAppDetailsSpotlight_Response>( "UserNews.GetAppDetailsSpotlight#1", request, Model );

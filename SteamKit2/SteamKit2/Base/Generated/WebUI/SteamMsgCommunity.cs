@@ -2966,6 +2966,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "Community";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_ClearSinglePartnerEventsAppPriority_Response>> ClearSinglePartnerEventsAppPriority( CCommunity_ClearSinglePartnerEventsAppPriority_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_ClearSinglePartnerEventsAppPriority_Request, CCommunity_ClearSinglePartnerEventsAppPriority_Response>( "Community.ClearSinglePartnerEventsAppPriority#1", request, Model );

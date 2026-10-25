@@ -669,6 +669,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "DataPublisher";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request )
         {
             UnifiedMessages.SendNotification<CDataPublisher_ClientContentCorruptionReport_Notification>( "DataPublisher.ClientContentCorruptionReport#1", request, Model );
@@ -727,6 +729,8 @@ namespace SteamKit2.Internal
     public partial class ValveHWSurvey : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ValveHWSurvey";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CValveHWSurvey_GetSurveySchedule_Response>> GetSurveySchedule( CValveHWSurvey_GetSurveySchedule_Request request )
         {

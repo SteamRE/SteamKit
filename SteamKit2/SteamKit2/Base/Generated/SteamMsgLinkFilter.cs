@@ -164,6 +164,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "CommunityLinkFilter";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetLinkFilterHashPrefixes_Response>> GetLinkFilterHashPrefixes( CCommunity_GetLinkFilterHashPrefixes_Request request )
         {
             return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashPrefixes_Request, CCommunity_GetLinkFilterHashPrefixes_Response>( "CommunityLinkFilter.GetLinkFilterHashPrefixes#1", request, Model );

@@ -2198,6 +2198,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "FamilyGroups";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFamilyGroups_CreateFamilyGroup_Response>> CreateFamilyGroup( CFamilyGroups_CreateFamilyGroup_Request request )
         {
             return UnifiedMessages.SendMessage<CFamilyGroups_CreateFamilyGroup_Request, CFamilyGroups_CreateFamilyGroup_Response>( "FamilyGroups.CreateFamilyGroup#1", request, Model );
@@ -2429,6 +2431,8 @@ namespace SteamKit2.Internal
     public partial class FamilyGroupsClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FamilyGroupsClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyRunningApps(CFamilyGroupsClient_NotifyRunningApps_Notification request )
         {

@@ -205,6 +205,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "CloudConfigStore";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Download_Response>> Download( CCloudConfigStore_Download_Request request )
         {
             return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request, Model );
@@ -236,6 +238,8 @@ namespace SteamKit2.WebUI.Internal
     public partial class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "CloudConfigStoreClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyChange(CCloudConfigStore_Change_Notification request )
         {

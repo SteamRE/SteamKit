@@ -1658,6 +1658,8 @@ namespace SteamKit2.GC.Dota.Internal
     {
         public override string ServiceName { get; } = "SteamLearn";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_RegisterDataSource_Response>> RegisterDataSource( CMsgSteamLearn_RegisterDataSource_Request request )
         {
             return UnifiedMessages.SendMessage<CMsgSteamLearn_RegisterDataSource_Request, CMsgSteamLearn_RegisterDataSource_Response>( "SteamLearn.RegisterDataSource#1", request, Model );

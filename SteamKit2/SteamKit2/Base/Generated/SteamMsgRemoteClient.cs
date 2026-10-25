@@ -13,6 +13,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "RemoteClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CRemoteClient_GetPairingInfo_Response>> GetPairingInfo( CRemoteClient_GetPairingInfo_Request request )
         {
             return UnifiedMessages.SendMessage<CRemoteClient_GetPairingInfo_Request, CRemoteClient_GetPairingInfo_Response>( "RemoteClient.GetPairingInfo#1", request, Model );
@@ -143,6 +145,8 @@ namespace SteamKit2.Internal
     public partial class RemoteClientSteamClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "RemoteClientSteamClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyRegisterStatusUpdate(CRemoteClient_RegisterStatusUpdate_Notification request )
         {

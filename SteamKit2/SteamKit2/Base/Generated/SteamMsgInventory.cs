@@ -910,6 +910,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Inventory";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CInventory_Response>> GetInventory( CInventory_GetInventory_Request request )
         {
             return UnifiedMessages.SendMessage<CInventory_GetInventory_Request, CInventory_Response>( "Inventory.GetInventory#1", request, Model );
@@ -1053,6 +1055,8 @@ namespace SteamKit2.Internal
     public partial class InventoryClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "InventoryClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyNewItems(CInventoryClient_NewItems_Notification request )
         {

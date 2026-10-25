@@ -89,6 +89,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "AccountPrivateApps";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList( CAccountPrivateApps_GetPrivateAppList_Request request )
         {
             return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( "AccountPrivateApps.GetPrivateAppList#1", request, Model );
@@ -120,6 +122,8 @@ namespace SteamKit2.WebUI.Internal
     public partial class AccountPrivateAppsClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "AccountPrivateAppsClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request )
         {

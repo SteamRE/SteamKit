@@ -3495,6 +3495,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Broadcast";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CBroadcast_BeginBroadcastSession_Response>> BeginBroadcastSession( CBroadcast_BeginBroadcastSession_Request request )
         {
             return UnifiedMessages.SendMessage<CBroadcast_BeginBroadcastSession_Request, CBroadcast_BeginBroadcastSession_Response>( "Broadcast.BeginBroadcastSession#1", request, Model );
@@ -3785,6 +3787,8 @@ namespace SteamKit2.Internal
     public partial class BroadcastClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "BroadcastClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyBroadcastViewerState(CBroadcast_BroadcastViewerState_Notification request )
         {

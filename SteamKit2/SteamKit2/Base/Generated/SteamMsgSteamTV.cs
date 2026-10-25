@@ -2694,6 +2694,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "SteamTV";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSteamTV_CreateBroadcastChannel_Response>> CreateBroadcastChannel( CSteamTV_CreateBroadcastChannel_Request request )
         {
             return UnifiedMessages.SendMessage<CSteamTV_CreateBroadcastChannel_Request, CSteamTV_CreateBroadcastChannel_Response>( "SteamTV.CreateBroadcastChannel#1", request, Model );

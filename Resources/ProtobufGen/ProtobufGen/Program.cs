@@ -173,7 +173,7 @@ namespace ProtobufGen
         [Option( "output", Required = true )]
         public string Output { get; set; }
 
-        [Option( "model", HelpText = "Full name of a partial [ProtoModel] class, e.g. SteamKit2.Internal.SteamKitProtobufModel, to register the generated types on." )]
+        [Option( "model", HelpText = "Full name of a partial [ProtoModel] class, e.g. SteamKit2.Internal.SteamKitProtobufModel, to register the generated types on and to serialize the generated services with." )]
         public string ModelClassName { get; set; }
 
         [Option( "model-all-messages", HelpText = "Register every top-level message on the --model class, instead of only service request and response types." )]

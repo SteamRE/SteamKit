@@ -81,6 +81,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Workshop";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CWorkshop_GetEULAStatus_Response>> GetEULAStatus( CWorkshop_GetEULAStatus_Request request )
         {
             return UnifiedMessages.SendMessage<CWorkshop_GetEULAStatus_Request, CWorkshop_GetEULAStatus_Response>( "Workshop.GetEULAStatus#1", request, Model );

@@ -185,6 +185,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Secrets";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CKeyEscrow_Response>> KeyEscrow( CKeyEscrow_Request request )
         {
             return UnifiedMessages.SendMessage<CKeyEscrow_Request, CKeyEscrow_Response>( "Secrets.KeyEscrow#1", request, Model );

@@ -1265,6 +1265,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "LoyaltyRewards";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CLoyaltyRewards_AddReaction_Response>> AddReaction( CLoyaltyRewards_AddReaction_Request request )
         {
             return UnifiedMessages.SendMessage<CLoyaltyRewards_AddReaction_Request, CLoyaltyRewards_AddReaction_Response>( "LoyaltyRewards.AddReaction#1", request, Model );

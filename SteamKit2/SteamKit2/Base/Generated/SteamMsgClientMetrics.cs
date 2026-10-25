@@ -1695,6 +1695,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ClientMetrics";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void ClientAppInterfaceStatsReport(CClientMetrics_AppInterfaceStats_Notification request )
         {
             UnifiedMessages.SendNotification<CClientMetrics_AppInterfaceStats_Notification>( "ClientMetrics.ClientAppInterfaceStatsReport#1", request, Model );

@@ -569,6 +569,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "QueuedMatchmaking";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmaking_SearchForGame_Response>> SearchForGame( CQueuedMatchmaking_SearchForGame_Request request )
         {
             return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( "QueuedMatchmaking.SearchForGame#1", request, Model );
@@ -592,6 +594,8 @@ namespace SteamKit2.Internal
     public partial class QueuedMatchmakingGameHost : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "QueuedMatchmakingGameHost";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmakingGameHost_SearchForPlayers_Response>> SearchForPlayers( CQueuedMatchmakingGameHost_SearchForPlayers_Request request )
         {

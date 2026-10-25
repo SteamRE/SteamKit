@@ -520,6 +520,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Shader";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CShader_GetShaderReportingCadence_Response>> GetShaderReportingCadence( CShader_GetShaderReportingCadence_Request request )
         {
             return UnifiedMessages.SendMessage<CShader_GetShaderReportingCadence_Request, CShader_GetShaderReportingCadence_Response>( "Shader.GetShaderReportingCadence#1", request, Model );

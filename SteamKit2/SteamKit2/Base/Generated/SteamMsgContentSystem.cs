@@ -834,6 +834,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ContentServerDirectory";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetServersForSteamPipe_Response>> GetServersForSteamPipe( CContentServerDirectory_GetServersForSteamPipe_Request request )
         {
             return UnifiedMessages.SendMessage<CContentServerDirectory_GetServersForSteamPipe_Request, CContentServerDirectory_GetServersForSteamPipe_Response>( "ContentServerDirectory.GetServersForSteamPipe#1", request, Model );
@@ -905,6 +907,8 @@ namespace SteamKit2.Internal
     public partial class DepotContentDetection : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "DepotContentDetection";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDepotContentDetection_GetAllDetectedAppContent_Response>> GetAllDetectedAppContent( CDepotContentDetection_GetAllDetectedAppContent_Request request )
         {

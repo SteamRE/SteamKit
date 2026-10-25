@@ -750,6 +750,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "GameServers";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameServers_IPsWithSteamIDs_Response>> GetServerSteamIDsByIP( CGameServers_GetServerSteamIDsByIP_Request request )
         {
             return UnifiedMessages.SendMessage<CGameServers_GetServerSteamIDsByIP_Request, CGameServers_IPsWithSteamIDs_Response>( "GameServers.GetServerSteamIDsByIP#1", request, Model );
@@ -824,6 +826,8 @@ namespace SteamKit2.Internal
     public partial class GameServerClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "GameServerClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<GameServerClient_QueryServerData_Response>> QueryServerData( GameServerClient_QueryServerData_Request request )
         {

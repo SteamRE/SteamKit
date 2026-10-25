@@ -1460,6 +1460,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "MarketingMessages";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMarketingMessages_GetActiveMarketingMessages_Response>> GetActiveMarketingMessages( CMarketingMessages_GetActiveMarketingMessages_Request request )
         {
             return UnifiedMessages.SendMessage<CMarketingMessages_GetActiveMarketingMessages_Request, CMarketingMessages_GetActiveMarketingMessages_Response>( "MarketingMessages.GetActiveMarketingMessages#1", request, Model );

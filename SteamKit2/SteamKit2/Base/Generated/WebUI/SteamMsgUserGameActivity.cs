@@ -223,6 +223,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "UserGameActivity";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserGameActivity_GetActivity_Response>> GetActivity( CUserGameActivity_GetActivity_Request request )
         {
             return UnifiedMessages.SendMessage<CUserGameActivity_GetActivity_Request, CUserGameActivity_GetActivity_Response>( "UserGameActivity.GetActivity#1", request, Model );

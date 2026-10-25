@@ -1068,6 +1068,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "StoreQuery";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_GetItemByUserCombinedTagsPriority_Response>> GetItemByUserCombinedTagsPriority( CStoreQuery_GetItemByUserCombinedTagsPriority_Request request )
         {
             return UnifiedMessages.SendMessage<CStoreQuery_GetItemByUserCombinedTagsPriority_Request, CStoreQuery_GetItemByUserCombinedTagsPriority_Response>( "StoreQuery.GetItemByUserCombinedTagsPriority#1", request, Model );

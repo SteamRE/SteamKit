@@ -2115,6 +2115,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Authentication";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAuthentication_GetPasswordRSAPublicKey_Response>> GetPasswordRSAPublicKey( CAuthentication_GetPasswordRSAPublicKey_Request request )
         {
             return UnifiedMessages.SendMessage<CAuthentication_GetPasswordRSAPublicKey_Request, CAuthentication_GetPasswordRSAPublicKey_Response>( "Authentication.GetPasswordRSAPublicKey#1", request, Model );
@@ -2246,6 +2248,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "AuthenticationSupport";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAuthenticationSupport_QueryRefreshTokensByAccount_Response>> QueryRefreshTokensByAccount( CAuthenticationSupport_QueryRefreshTokensByAccount_Request request )
         {
             return UnifiedMessages.SendMessage<CAuthenticationSupport_QueryRefreshTokensByAccount_Request, CAuthenticationSupport_QueryRefreshTokensByAccount_Response>( "AuthenticationSupport.QueryRefreshTokensByAccount#1", request, Model );
@@ -2301,6 +2305,8 @@ namespace SteamKit2.Internal
     public partial class CloudGaming : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "CloudGaming";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudGaming_GetTimeRemaining_Response>> GetTimeRemaining( CCloudGaming_GetTimeRemaining_Request request )
         {

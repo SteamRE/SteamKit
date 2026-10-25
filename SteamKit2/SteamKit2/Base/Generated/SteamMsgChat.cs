@@ -6011,6 +6011,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Chat";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChat_RequestFriendPersonaStates_Response>> RequestFriendPersonaStates( CChat_RequestFriendPersonaStates_Request request )
         {
             return UnifiedMessages.SendMessage<CChat_RequestFriendPersonaStates_Request, CChat_RequestFriendPersonaStates_Response>( "Chat.RequestFriendPersonaStates#1", request, Model );
@@ -6034,6 +6036,8 @@ namespace SteamKit2.Internal
     public partial class ChatRoom : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ChatRoom";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CChatRoom_CreateChatRoomGroup_Response>> CreateChatRoomGroup( CChatRoom_CreateChatRoomGroup_Request request )
         {
@@ -6494,6 +6498,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ClanChatRooms";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CClanChatRooms_GetClanChatRoomInfo_Response>> GetClanChatRoomInfo( CClanChatRooms_GetClanChatRoomInfo_Request request )
         {
             return UnifiedMessages.SendMessage<CClanChatRooms_GetClanChatRoomInfo_Request, CClanChatRooms_GetClanChatRoomInfo_Response>( "ClanChatRooms.GetClanChatRoomInfo#1", request, Model );
@@ -6525,6 +6531,8 @@ namespace SteamKit2.Internal
     public partial class ChatRoomClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ChatRoomClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyIncomingChatMessage(CChatRoom_IncomingChatMessage_Notification request )
         {
@@ -6638,6 +6646,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ChatUsability";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public void NotifyClientUsabilityMetrics(CChatUsability_ClientUsabilityMetrics_Notification request )
         {
             UnifiedMessages.SendNotification<CChatUsability_ClientUsabilityMetrics_Notification>( "ChatUsability.NotifyClientUsabilityMetrics#1", request, Model );
@@ -6661,6 +6671,8 @@ namespace SteamKit2.Internal
     public partial class ChatUsabilityClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ChatUsabilityClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyRequestClientUsabilityMetrics(CChatUsability_RequestClientUsabilityMetrics_Notification request )
         {

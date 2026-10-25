@@ -872,6 +872,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "UserReviews";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_BackfillSavedHardware_Response>> BackfillSavedHardware( CUserReviews_BackfillSavedHardware_Request request )
         {
             return UnifiedMessages.SendMessage<CUserReviews_BackfillSavedHardware_Request, CUserReviews_BackfillSavedHardware_Response>( "UserReviews.BackfillSavedHardware#1", request, Model );

@@ -1064,6 +1064,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "TwoFactor";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTwoFactor_Time_Response>> QueryTime( CTwoFactor_Time_Request request )
         {
             return UnifiedMessages.SendMessage<CTwoFactor_Time_Request, CTwoFactor_Time_Response>( "TwoFactor.QueryTime#1", request, Model );

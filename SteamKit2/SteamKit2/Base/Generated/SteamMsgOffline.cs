@@ -124,6 +124,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Offline";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COffline_GetOfflineLogonTicket_Response>> GetOfflineLogonTicket( COffline_GetOfflineLogonTicket_Request request )
         {
             return UnifiedMessages.SendMessage<COffline_GetOfflineLogonTicket_Request, COffline_GetOfflineLogonTicket_Response>( "Offline.GetOfflineLogonTicket#1", request, Model );

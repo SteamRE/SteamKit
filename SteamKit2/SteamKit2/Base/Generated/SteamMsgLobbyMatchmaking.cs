@@ -121,6 +121,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "LobbyMatchmakingLegacy";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<LobbyMatchmakingLegacy_GetLobbyStatus_Response>> GetLobbyStatus( LobbyMatchmakingLegacy_GetLobbyStatus_Request request )
         {
             return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( "LobbyMatchmakingLegacy.GetLobbyStatus#1", request, Model );

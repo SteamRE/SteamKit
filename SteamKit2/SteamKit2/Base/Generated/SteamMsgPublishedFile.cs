@@ -4997,6 +4997,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "PublishedFile";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CPublishedFile_Vote_Response>> Vote( CPublishedFile_Vote_Request request )
         {
             return UnifiedMessages.SendMessage<CPublishedFile_Vote_Request, CPublishedFile_Vote_Response>( "PublishedFile.Vote#1", request, Model );
@@ -5292,6 +5294,8 @@ namespace SteamKit2.Internal
     public partial class PublishedFileClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "PublishedFileClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifyFileSubscribed(CPublishedFile_FileSubscribed_Notification request )
         {

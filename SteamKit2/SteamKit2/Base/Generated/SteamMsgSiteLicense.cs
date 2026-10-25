@@ -413,6 +413,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "SiteManagerClient";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteManagerClient_IncomingClient_Response>> IncomingClient( CSiteManagerClient_IncomingClient_Request request )
         {
             return UnifiedMessages.SendMessage<CSiteManagerClient_IncomingClient_Request, CSiteManagerClient_IncomingClient_Response>( "SiteManagerClient.IncomingClient#1", request, Model );
@@ -447,6 +449,8 @@ namespace SteamKit2.Internal
     public partial class SiteLicense : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "SiteLicense";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CSiteLicense_InitiateAssociation_Response>> InitiateAssociation( CSiteLicense_InitiateAssociation_Request request )
         {

@@ -674,6 +674,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ContentBuilder";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentBuilder_InitDepotBuild_Response>> InitDepotBuild( CContentBuilder_InitDepotBuild_Request request )
         {
             return UnifiedMessages.SendMessage<CContentBuilder_InitDepotBuild_Request, CContentBuilder_InitDepotBuild_Response>( "ContentBuilder.InitDepotBuild#1", request, Model );

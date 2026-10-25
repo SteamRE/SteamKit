@@ -836,6 +836,8 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Parental";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_EnableParentalSettings_Response>> EnableParentalSettings( CParental_EnableParentalSettings_Request request )
         {
             return UnifiedMessages.SendMessage<CParental_EnableParentalSettings_Request, CParental_EnableParentalSettings_Response>( "Parental.EnableParentalSettings#1", request, Model );
@@ -971,6 +973,8 @@ namespace SteamKit2.Internal
     public partial class ParentalClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ParentalClient";
+
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
 
         public void NotifySettingsChange(CParental_ParentalSettingsChange_Notification request )
         {

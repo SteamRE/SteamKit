@@ -505,6 +505,8 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "Checkout";
 
+        protected override global::ProtoBuf.Meta.TypeModel Model => global::SteamKit2.Internal.SteamKitProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_AddFreeLicense_Response>> AddFreeLicense( CCheckout_AddFreeLicense_Request request )
         {
             return UnifiedMessages.SendMessage<CCheckout_AddFreeLicense_Request, CCheckout_AddFreeLicense_Response>( "Checkout.AddFreeLicense#1", request, Model );
