@@ -172,6 +172,8 @@ namespace SteamKit2
         public ClientMsgProtobuf( EMsg eMsg, MsgBase<MsgHdrProtoBuf> msg, int payloadReserve = 0 )
             : this( eMsg, payloadReserve )
         {
+            ArgumentNullException.ThrowIfNull( msg );
+
             // our target is where the message came from
             Header.Proto.jobid_target = msg.Header.Proto.jobid_source;
         }
