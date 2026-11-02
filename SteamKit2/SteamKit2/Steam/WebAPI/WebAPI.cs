@@ -384,7 +384,7 @@ namespace SteamKit2
                     urlBuilder.Append( '?' );
                 }
 
-                if ( !string.IsNullOrEmpty( apiKey ) && args != null && !args.ContainsKey( "key" ) )
+                if ( !string.IsNullOrEmpty( apiKey ) && ( args == null || !args.ContainsKey( "key" ) ) )
                 {
                     paramBuilder.Append( "key=" );
                     paramBuilder.Append( Uri.EscapeDataString( apiKey ) );
