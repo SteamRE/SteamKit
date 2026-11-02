@@ -872,24 +872,26 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "UserReviews";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => UserReviewsProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_BackfillSavedHardware_Response>> BackfillSavedHardware( CUserReviews_BackfillSavedHardware_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserReviews_BackfillSavedHardware_Request, CUserReviews_BackfillSavedHardware_Response>( "UserReviews.BackfillSavedHardware#1", request );
+            return UnifiedMessages.SendMessage<CUserReviews_BackfillSavedHardware_Request, CUserReviews_BackfillSavedHardware_Response>( "UserReviews.BackfillSavedHardware#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_GetFriendsRecommendedApp_Response>> GetFriendsRecommendedApp( CUserReviews_GetFriendsRecommendedApp_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserReviews_GetFriendsRecommendedApp_Request, CUserReviews_GetFriendsRecommendedApp_Response>( "UserReviews.GetFriendsRecommendedApp#1", request );
+            return UnifiedMessages.SendMessage<CUserReviews_GetFriendsRecommendedApp_Request, CUserReviews_GetFriendsRecommendedApp_Response>( "UserReviews.GetFriendsRecommendedApp#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_GetIndividualRecommendations_Response>> GetIndividualRecommendations( CUserReviews_GetIndividualRecommendations_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserReviews_GetIndividualRecommendations_Request, CUserReviews_GetIndividualRecommendations_Response>( "UserReviews.GetIndividualRecommendations#1", request );
+            return UnifiedMessages.SendMessage<CUserReviews_GetIndividualRecommendations_Request, CUserReviews_GetIndividualRecommendations_Response>( "UserReviews.GetIndividualRecommendations#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CUserReviews_Update_Response>> Update( CUserReviews_Update_Request request )
         {
-            return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( "UserReviews.Update#1", request );
+            return UnifiedMessages.SendMessage<CUserReviews_Update_Request, CUserReviews_Update_Response>( "UserReviews.Update#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -915,6 +917,21 @@ namespace SteamKit2.WebUI.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_BackfillSavedHardware_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_BackfillSavedHardware_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_GetFriendsRecommendedApp_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_GetFriendsRecommendedApp_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_GetIndividualRecommendations_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_GetIndividualRecommendations_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_Update_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CUserReviews_Update_Response))]
+    internal sealed partial class UserReviewsProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

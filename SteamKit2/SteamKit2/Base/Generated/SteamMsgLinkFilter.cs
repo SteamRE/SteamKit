@@ -164,19 +164,21 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "CommunityLinkFilter";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => CommunityLinkFilterProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetLinkFilterHashPrefixes_Response>> GetLinkFilterHashPrefixes( CCommunity_GetLinkFilterHashPrefixes_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashPrefixes_Request, CCommunity_GetLinkFilterHashPrefixes_Response>( "CommunityLinkFilter.GetLinkFilterHashPrefixes#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashPrefixes_Request, CCommunity_GetLinkFilterHashPrefixes_Response>( "CommunityLinkFilter.GetLinkFilterHashPrefixes#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetLinkFilterHashes_Response>> GetLinkFilterHashes( CCommunity_GetLinkFilterHashes_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashes_Request, CCommunity_GetLinkFilterHashes_Response>( "CommunityLinkFilter.GetLinkFilterHashes#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterHashes_Request, CCommunity_GetLinkFilterHashes_Response>( "CommunityLinkFilter.GetLinkFilterHashes#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCommunity_GetLinkFilterListVersion_Response>> GetLinkFilterListVersion( CCommunity_GetLinkFilterListVersion_Request request )
         {
-            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( "CommunityLinkFilter.GetLinkFilterListVersion#1", request );
+            return UnifiedMessages.SendMessage<CCommunity_GetLinkFilterListVersion_Request, CCommunity_GetLinkFilterListVersion_Response>( "CommunityLinkFilter.GetLinkFilterListVersion#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -199,6 +201,19 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCommunity_GetLinkFilterHashPrefixes_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCommunity_GetLinkFilterHashPrefixes_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCommunity_GetLinkFilterHashes_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCommunity_GetLinkFilterHashes_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCommunity_GetLinkFilterListVersion_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCommunity_GetLinkFilterListVersion_Response))]
+    internal sealed partial class CommunityLinkFilterProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

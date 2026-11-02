@@ -187,19 +187,21 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "TimedTrial";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => TimedTrialProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_GetTimeRemaining_Response>> GetTimeRemaining( CTimedTrial_GetTimeRemaining_Request request )
         {
-            return UnifiedMessages.SendMessage<CTimedTrial_GetTimeRemaining_Request, CTimedTrial_GetTimeRemaining_Response>( "TimedTrial.GetTimeRemaining#1", request );
+            return UnifiedMessages.SendMessage<CTimedTrial_GetTimeRemaining_Request, CTimedTrial_GetTimeRemaining_Response>( "TimedTrial.GetTimeRemaining#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_RecordPlaytime_Response>> RecordPlaytime( CTimedTrial_RecordPlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CTimedTrial_RecordPlaytime_Request, CTimedTrial_RecordPlaytime_Response>( "TimedTrial.RecordPlaytime#1", request );
+            return UnifiedMessages.SendMessage<CTimedTrial_RecordPlaytime_Request, CTimedTrial_RecordPlaytime_Response>( "TimedTrial.RecordPlaytime#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CTimedTrial_ResetPlaytime_Response>> ResetPlaytime( CTimedTrial_ResetPlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( "TimedTrial.ResetPlaytime#1", request );
+            return UnifiedMessages.SendMessage<CTimedTrial_ResetPlaytime_Request, CTimedTrial_ResetPlaytime_Response>( "TimedTrial.ResetPlaytime#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -222,6 +224,19 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_GetTimeRemaining_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_GetTimeRemaining_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_RecordPlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_RecordPlaytime_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_ResetPlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CTimedTrial_ResetPlaytime_Response))]
+    internal sealed partial class TimedTrialProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

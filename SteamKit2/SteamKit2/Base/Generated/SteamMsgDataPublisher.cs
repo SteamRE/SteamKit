@@ -669,29 +669,31 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "DataPublisher";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => DataPublisherProtobufModel.Instance;
+
         public void ClientContentCorruptionReport(CDataPublisher_ClientContentCorruptionReport_Notification request )
         {
-            UnifiedMessages.SendNotification<CDataPublisher_ClientContentCorruptionReport_Notification>( "DataPublisher.ClientContentCorruptionReport#1", request );
+            UnifiedMessages.SendNotification<CDataPublisher_ClientContentCorruptionReport_Notification>( "DataPublisher.ClientContentCorruptionReport#1", request, Model );
         }
 
         public void ClientUpdateAppJobReport(CDataPublisher_ClientUpdateAppJob_Notification request )
         {
-            UnifiedMessages.SendNotification<CDataPublisher_ClientUpdateAppJob_Notification>( "DataPublisher.ClientUpdateAppJobReport#1", request );
+            UnifiedMessages.SendNotification<CDataPublisher_ClientUpdateAppJob_Notification>( "DataPublisher.ClientUpdateAppJobReport#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDataPublisher_GetVRDeviceInfo_Response>> GetVRDeviceInfo( CDataPublisher_GetVRDeviceInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CDataPublisher_GetVRDeviceInfo_Request, CDataPublisher_GetVRDeviceInfo_Response>( "DataPublisher.GetVRDeviceInfo#1", request );
+            return UnifiedMessages.SendMessage<CDataPublisher_GetVRDeviceInfo_Request, CDataPublisher_GetVRDeviceInfo_Response>( "DataPublisher.GetVRDeviceInfo#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDataPublisher_SetVRDeviceInfoAggregationReference_Response>> SetVRDeviceInfoAggregationReference( CDataPublisher_SetVRDeviceInfoAggregationReference_Request request )
         {
-            return UnifiedMessages.SendMessage<CDataPublisher_SetVRDeviceInfoAggregationReference_Request, CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( "DataPublisher.SetVRDeviceInfoAggregationReference#1", request );
+            return UnifiedMessages.SendMessage<CDataPublisher_SetVRDeviceInfoAggregationReference_Request, CDataPublisher_SetVRDeviceInfoAggregationReference_Response>( "DataPublisher.SetVRDeviceInfoAggregationReference#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDataPublisher_AddVRDeviceInfo_Response>> AddVRDeviceInfo( CDataPublisher_AddVRDeviceInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CDataPublisher_AddVRDeviceInfo_Request, CDataPublisher_AddVRDeviceInfo_Response>( "DataPublisher.AddVRDeviceInfo#1", request );
+            return UnifiedMessages.SendMessage<CDataPublisher_AddVRDeviceInfo_Request, CDataPublisher_AddVRDeviceInfo_Response>( "DataPublisher.AddVRDeviceInfo#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -724,13 +726,30 @@ namespace SteamKit2.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_ClientContentCorruptionReport_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_ClientUpdateAppJob_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_GetVRDeviceInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_GetVRDeviceInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_SetVRDeviceInfoAggregationReference_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_SetVRDeviceInfoAggregationReference_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_AddVRDeviceInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDataPublisher_AddVRDeviceInfo_Response))]
+    internal sealed partial class DataPublisherProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class ValveHWSurvey : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ValveHWSurvey";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => ValveHWSurveyProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CValveHWSurvey_GetSurveySchedule_Response>> GetSurveySchedule( CValveHWSurvey_GetSurveySchedule_Request request )
         {
-            return UnifiedMessages.SendMessage<CValveHWSurvey_GetSurveySchedule_Request, CValveHWSurvey_GetSurveySchedule_Response>( "ValveHWSurvey.GetSurveySchedule#1", request );
+            return UnifiedMessages.SendMessage<CValveHWSurvey_GetSurveySchedule_Request, CValveHWSurvey_GetSurveySchedule_Response>( "ValveHWSurvey.GetSurveySchedule#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -747,6 +766,15 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CValveHWSurvey_GetSurveySchedule_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CValveHWSurvey_GetSurveySchedule_Response))]
+    internal sealed partial class ValveHWSurveyProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

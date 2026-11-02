@@ -185,9 +185,11 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Secrets";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => SecretsProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CKeyEscrow_Response>> KeyEscrow( CKeyEscrow_Request request )
         {
-            return UnifiedMessages.SendMessage<CKeyEscrow_Request, CKeyEscrow_Response>( "Secrets.KeyEscrow#1", request );
+            return UnifiedMessages.SendMessage<CKeyEscrow_Request, CKeyEscrow_Response>( "Secrets.KeyEscrow#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -204,6 +206,15 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CKeyEscrow_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CKeyEscrow_Response))]
+    internal sealed partial class SecretsProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

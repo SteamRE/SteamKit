@@ -2640,5 +2640,37 @@ namespace SteamKit2.Internal
 
 }
 
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgIPAddress))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgIPAddressBucket))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgGCRoutingProtoBufHeader))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgProtoBufHeader))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgKubeRPCPacket))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgMulti))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgProtobufWrapped))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgAuthTicket))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCDDBAppDetailCommon))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgAppRights))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCuratorPreferences))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CLocalizationToken))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CClanEventUserNewsTuple))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CClanMatchEventByRange))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CCommunity_ClanAnnouncementInfo))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CClanEventData))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CBilling_Address))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CPackageReservationStatus))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgKeyValuePair))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgKeyValueSet))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.UserContentDescriptorPreferences))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.UserSystemInformation))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.GamePerformanceSettings))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
+
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
+    <PublishAot>true</PublishAot>
     <Company>SteamRE</Company>
     <Product>Sample1c_WebCookie</Product>
     <Authors />

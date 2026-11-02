@@ -124,14 +124,16 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Offline";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => OfflineProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COffline_GetOfflineLogonTicket_Response>> GetOfflineLogonTicket( COffline_GetOfflineLogonTicket_Request request )
         {
-            return UnifiedMessages.SendMessage<COffline_GetOfflineLogonTicket_Request, COffline_GetOfflineLogonTicket_Response>( "Offline.GetOfflineLogonTicket#1", request );
+            return UnifiedMessages.SendMessage<COffline_GetOfflineLogonTicket_Request, COffline_GetOfflineLogonTicket_Response>( "Offline.GetOfflineLogonTicket#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COffline_GetUnsignedOfflineLogonTicket_Response>> GetUnsignedOfflineLogonTicket( COffline_GetUnsignedOfflineLogonTicket_Request request )
         {
-            return UnifiedMessages.SendMessage<COffline_GetUnsignedOfflineLogonTicket_Request, COffline_GetUnsignedOfflineLogonTicket_Response>( "Offline.GetUnsignedOfflineLogonTicket#1", request );
+            return UnifiedMessages.SendMessage<COffline_GetUnsignedOfflineLogonTicket_Request, COffline_GetUnsignedOfflineLogonTicket_Response>( "Offline.GetUnsignedOfflineLogonTicket#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -151,6 +153,17 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.COffline_GetOfflineLogonTicket_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.COffline_GetOfflineLogonTicket_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.COffline_GetUnsignedOfflineLogonTicket_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.COffline_GetUnsignedOfflineLogonTicket_Response))]
+    internal sealed partial class OfflineProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

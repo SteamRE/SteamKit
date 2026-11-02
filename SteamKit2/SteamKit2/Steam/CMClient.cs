@@ -150,7 +150,7 @@ namespace SteamKit2.Internal
 
             heartBeatFunc = new ScheduledFunction( () =>
             {
-                Send( new ClientMsgProtobuf<CMsgClientHeartBeat>( EMsg.ClientHeartBeat ) );
+                Send( new ClientMsgProtobuf<CMsgClientHeartBeat>( EMsg.ClientHeartBeat, SteamKitProtobuf.Model ) );
             } );
         }
 
@@ -396,7 +396,7 @@ namespace SteamKit2.Internal
         /// </summary>
         protected virtual void OnClientConnected()
         {
-            var request = new ClientMsgProtobuf<CMsgClientHello>( EMsg.ClientHello );
+            var request = new ClientMsgProtobuf<CMsgClientHello>( EMsg.ClientHello, SteamKitProtobuf.Model );
             request.Body.protocol_version = MsgClientLogon.CurrentProtocol;
 
             Send( request );
@@ -540,7 +540,7 @@ namespace SteamKit2.Internal
                 return;
             }
 
-            var msgMulti = new ClientMsgProtobuf<CMsgMulti>( packetMsg );
+            var msgMulti = new ClientMsgProtobuf<CMsgMulti>( packetMsg, SteamKitProtobuf.Model );
             using var payloadStream = new MemoryStream( msgMulti.Body.message_body );
             Stream stream = payloadStream;
 
@@ -578,7 +578,7 @@ namespace SteamKit2.Internal
                 return;
             }
 
-            var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
+            var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg, SteamKitProtobuf.Model );
             var logonResult = ( EResult )logonResp.Body.eresult;
 
             if ( logonResult == EResult.OK )
@@ -620,7 +620,7 @@ namespace SteamKit2.Internal
 
             if ( packetMsg.IsProto )
             {
-                var logoffMsg = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
+                var logoffMsg = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg, SteamKitProtobuf.Model );
                 var logoffResult = ( EResult )logoffMsg.Body.eresult;
 
                 if ( logoffResult == EResult.TryAnotherCM || logoffResult == EResult.ServiceUnavailable )
@@ -643,7 +643,7 @@ namespace SteamKit2.Internal
 
         void HandleSessionToken( IPacketMsg packetMsg )
         {
-            var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
+            var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg, SteamKitProtobuf.Model );
 
             SessionToken = sessToken.Body.token;
         }

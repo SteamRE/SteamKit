@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading.Tasks;
-using ProtoBuf;
+using SteamKit2.Internal;
 
 namespace SteamKit2.Discovery
 {
@@ -41,7 +41,8 @@ namespace SteamKit2.Discovery
                 try
                 {
                     using var fileStream = isolatedStorage.OpenFile( FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite );
-                    return Serializer.DeserializeItems<BasicServerListProto>( fileStream, PrefixStyle.Base128, 1 )
+                    var serverList = SteamKitProtobuf.Model.Deserialize<BasicServerList>( fileStream );
+                    return serverList.Servers
                         .Select( item => ServerRecord.CreateServer( item.Address, item.Port, item.Protocols ) )
                         .ToList();
                 }
@@ -67,16 +68,7 @@ namespace SteamKit2.Discovery
                 try
                 {
                     using IsolatedStorageFileStream fileStream = isolatedStorage.OpenFile( FileName, FileMode.Create );
-                    Serializer.Serialize( fileStream,
-                        endpoints.Select( ep =>
-                        {
-                            return new BasicServerListProto
-                            {
-                                Address = ep.GetHost(),
-                                Port = ep.GetPort(),
-                                Protocols = ep.ProtocolTypes
-                            };
-                        } ) );
+                    SteamKitProtobuf.Model.Serialize( fileStream, BasicServerList.FromServerRecords( endpoints ) );
                     fileStream.SetLength( fileStream.Position );
                 }
                 catch (IOException ex)

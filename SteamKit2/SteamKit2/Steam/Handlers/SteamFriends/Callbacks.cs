@@ -314,7 +314,7 @@ namespace SteamKit2
 
             internal ClanStateCallback( IPacketMsg packetMsg )
             {
-                var clanState = new ClientMsgProtobuf<CMsgClientClanState>( packetMsg );
+                var clanState = new ClientMsgProtobuf<CMsgClientClanState>( packetMsg, SteamKitProtobuf.Model );
                 var msg = clanState.Body;
 
                 ClanID = msg.steamid_clan;
@@ -432,7 +432,7 @@ namespace SteamKit2
 
             internal FriendMsgCallback( IPacketMsg packetMsg )
             {
-                var friendMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
+                var friendMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg, SteamKitProtobuf.Model );
                 var msg = friendMsg.Body;
 
                 this.Sender = msg.steamid_from;
@@ -479,7 +479,7 @@ namespace SteamKit2
 
             internal FriendMsgEchoCallback( IPacketMsg packetMsg )
             {
-                var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg );
+                var friendEchoMsg = new ClientMsgProtobuf<CMsgClientFriendMsgIncoming>( packetMsg, SteamKitProtobuf.Model );
                 var msg = friendEchoMsg.Body;
 
                 this.Recipient = msg.steamid_from;
@@ -598,7 +598,7 @@ namespace SteamKit2
 
             internal FriendAddedCallback( IPacketMsg packetMsg )
             {
-                var friendResponse = new ClientMsgProtobuf<CMsgClientAddFriendResponse>( packetMsg );
+                var friendResponse = new ClientMsgProtobuf<CMsgClientAddFriendResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = friendResponse.Body;
 
                 this.Result = ( EResult )msg.eresult;
@@ -940,7 +940,7 @@ namespace SteamKit2
 
             internal ChatInviteCallback( IPacketMsg packetMsg )
             {
-                var chatInvite = new ClientMsgProtobuf<CMsgClientChatInvite>( packetMsg );
+                var chatInvite = new ClientMsgProtobuf<CMsgClientChatInvite>( packetMsg, SteamKitProtobuf.Model );
                 var invite = chatInvite.Body;
 
                 this.InvitedID = invite.steam_id_invited;
@@ -1029,7 +1029,7 @@ namespace SteamKit2
 
             internal ProfileInfoCallback( IPacketMsg packetMsg )
             {
-                var responseMsg = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg );
+                var responseMsg = new ClientMsgProtobuf<CMsgClientFriendProfileInfoResponse>( packetMsg, SteamKitProtobuf.Model );
                 var response = responseMsg.Body;
 
                 JobID = responseMsg.TargetJobID;

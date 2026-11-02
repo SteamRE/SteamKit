@@ -1658,39 +1658,41 @@ namespace SteamKit2.GC.Deadlock.Internal
     {
         public override string ServiceName { get; } = "SteamLearn";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => SteamLearnProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_RegisterDataSource_Response>> RegisterDataSource( CMsgSteamLearn_RegisterDataSource_Request request )
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_RegisterDataSource_Request, CMsgSteamLearn_RegisterDataSource_Response>( "SteamLearn.RegisterDataSource#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_RegisterDataSource_Request, CMsgSteamLearn_RegisterDataSource_Response>( "SteamLearn.RegisterDataSource#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_CacheData_Response>> CacheData( CMsgSteamLearn_CacheData_Request request )
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_CacheData_Request, CMsgSteamLearn_CacheData_Response>( "SteamLearn.CacheData#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_CacheData_Request, CMsgSteamLearn_CacheData_Response>( "SteamLearn.CacheData#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_SnapshotProject_Response>> SnapshotProject( CMsgSteamLearn_SnapshotProject_Request request )
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_SnapshotProject_Request, CMsgSteamLearn_SnapshotProject_Response>( "SteamLearn.SnapshotProject#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_SnapshotProject_Request, CMsgSteamLearn_SnapshotProject_Response>( "SteamLearn.SnapshotProject#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_BatchOperation_Response>> BatchOperation( CMsgSteamLearn_BatchOperation_Request request )
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_BatchOperation_Request, CMsgSteamLearn_BatchOperation_Response>( "SteamLearn.BatchOperation#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_BatchOperation_Request, CMsgSteamLearn_BatchOperation_Response>( "SteamLearn.BatchOperation#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_GetAccessTokens_Response>> GetAccessTokens( CMsgSteamLearn_GetAccessTokens_Request request )
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_GetAccessTokens_Request, CMsgSteamLearn_GetAccessTokens_Response>( "SteamLearn.GetAccessTokens#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_GetAccessTokens_Request, CMsgSteamLearn_GetAccessTokens_Response>( "SteamLearn.GetAccessTokens#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_Inference_Response>> Inference( CMsgSteamLearn_Inference_Request request )
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_Inference_Request, CMsgSteamLearn_Inference_Response>( "SteamLearn.Inference#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_Inference_Request, CMsgSteamLearn_Inference_Response>( "SteamLearn.Inference#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CMsgSteamLearn_InferenceMetadata_Response>> InferenceMetadata( CMsgSteamLearn_InferenceMetadata_Request request )
         {
-            return UnifiedMessages.SendMessage<CMsgSteamLearn_InferenceMetadata_Request, CMsgSteamLearn_InferenceMetadata_Response>( "SteamLearn.InferenceMetadata#1", request );
+            return UnifiedMessages.SendMessage<CMsgSteamLearn_InferenceMetadata_Request, CMsgSteamLearn_InferenceMetadata_Response>( "SteamLearn.InferenceMetadata#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1725,6 +1727,27 @@ namespace SteamKit2.GC.Deadlock.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_RegisterDataSource_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_RegisterDataSource_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_CacheData_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_CacheData_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_SnapshotProject_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_SnapshotProject_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_BatchOperation_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_BatchOperation_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_GetAccessTokens_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_GetAccessTokens_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_Inference_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_Inference_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_InferenceMetadata_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.GC.Deadlock.Internal.CMsgSteamLearn_InferenceMetadata_Response))]
+    internal sealed partial class SteamLearnProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 
