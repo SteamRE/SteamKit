@@ -382,23 +382,22 @@ namespace SteamKit2
 
                 var paramsGoInQueryString = HttpMethod.Get.Equals( method );
 
-                var urlBuilder = paramsGoInQueryString ? paramBuilder : new StringBuilder();
+                var urlBuilder = new StringBuilder();
                 urlBuilder.Append( $"{iface}/{func}/v{version}/" );
-
-                if ( paramsGoInQueryString )
-                {
-                    urlBuilder.Append( '?' );
-                }
 
                 if ( !string.IsNullOrEmpty( apiKey ) && ( args == null || !args.ContainsKey( "key" ) ) )
                 {
                     paramBuilder.Append( "key=" );
                     paramBuilder.Append( Uri.EscapeDataString( apiKey ) );
-                    paramBuilder.Append( '&' );
                 }
 
                 if ( !formatProvided )
                 {
+                    if ( paramBuilder.Length > 0 )
+                    {
+                        paramBuilder.Append( '&' );
+                    }
+
                     paramBuilder.Append( "format=" );
                     paramBuilder.Append( expectedFormat );
                 }
@@ -407,7 +406,11 @@ namespace SteamKit2
                 {
                     foreach ( var (key, value) in args )
                     {
-                        paramBuilder.Append( '&' );
+                        if ( paramBuilder.Length > 0 )
+                        {
+                            paramBuilder.Append( '&' );
+                        }
+
                         paramBuilder.Append( Uri.EscapeDataString( key ) );
                         paramBuilder.Append( '=' );
 
@@ -428,6 +431,12 @@ namespace SteamKit2
                                 break;
                         }
                     }
+                }
+
+                if ( paramsGoInQueryString )
+                {
+                    urlBuilder.Append( '?' );
+                    urlBuilder.Append( paramBuilder );
                 }
 
                 using var request = new HttpRequestMessage( method, urlBuilder.ToString() );

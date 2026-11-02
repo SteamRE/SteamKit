@@ -410,6 +410,38 @@ namespace Tests
             Assert.False( requestSent );
         }
 
+        [Theory]
+        [InlineData( "" )]
+        [InlineData( "MySecretApiKey" )]
+        public async Task DoesNotProduceEmptyQueryParameter( string apiKey )
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
+                .WithWebAPIKey( apiKey ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "vdf",
+                [ "f" ] = "foo",
+            };
+
+            string query = null;
+            hookableHandler.OnRequest = request =>
+            {
+                query = request.RequestUri.Query;
+                return Task.CompletedTask;
+            };
+
+            await iface.CallAsync( "PerformFooOperation", 2, args );
+
+            Assert.DoesNotContain( "?&", query );
+            Assert.DoesNotContain( "&&", query );
+            Assert.Equal( "foo", HttpUtility.ParseQueryString( query )[ "f" ] );
+        }
+
         sealed class ServiceUnavailableHttpMessageHandler : HttpMessageHandler
         {
             protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
