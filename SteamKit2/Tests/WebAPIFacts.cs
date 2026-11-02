@@ -295,7 +295,7 @@ namespace Tests
                 .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey( "MySecretApiKey" ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
@@ -321,7 +321,7 @@ namespace Tests
                 return Task.CompletedTask;
             };
 
-            var response = await iface.PerformFooOperation2( args );
+            var response = await iface.CallAsync( "PerformFooOperation", 2, args );
             Assert.True( handlerCalled );
         }
 
@@ -332,7 +332,7 @@ namespace Tests
             var configuration = SteamConfiguration.Create( c => c
                 .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
 
-            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
