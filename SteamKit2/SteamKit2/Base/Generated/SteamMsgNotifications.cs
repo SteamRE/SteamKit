@@ -234,14 +234,16 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "SteamNotificationClient";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => SteamNotificationClientProtobufModel.Instance;
+
         public void NotificationsReceived(CSteamNotification_NotificationsReceived_Notification request )
         {
-            UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_NotificationsReceived_Notification>( "SteamNotificationClient.NotificationsReceived#1", request, Model );
         }
 
         public void PreferencesUpdated(CSteamNotification_PreferencesUpdated_Notification request )
         {
-            UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request );
+            UnifiedMessages.SendNotification<CSteamNotification_PreferencesUpdated_Notification>( "SteamNotificationClient.PreferencesUpdated#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -261,6 +263,15 @@ namespace SteamKit2.Internal
             }
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamNotification_NotificationsReceived_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CSteamNotification_PreferencesUpdated_Notification))]
+    internal sealed partial class SteamNotificationClientProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

@@ -122,7 +122,7 @@ namespace SteamKit2
                     return;
                 }
 
-                var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
+                var logonResp = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg, SteamKitProtobuf.Model );
                 var resp = logonResp.Body;
 
                 this.Result = ( EResult )resp.eresult;
@@ -157,7 +157,7 @@ namespace SteamKit2
                 if ( resp.parental_settings != null )
                 {
                     using var ms = new MemoryStream( resp.parental_settings );
-                    this.ParentalSettings = Serializer.Deserialize<ParentalSettings>( ms );
+                    this.ParentalSettings = SteamKitProtobuf.Model.Deserialize<ParentalSettings>( ms );
                 }
             }
 
@@ -202,7 +202,7 @@ namespace SteamKit2
             {
                 if ( packetMsg.IsProto )
                 {
-                    var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg );
+                    var loggedOff = new ClientMsgProtobuf<CMsgClientLoggedOff>( packetMsg, SteamKitProtobuf.Model );
                     this.Result = ( EResult )loggedOff.Body.eresult;
                 }
                 else
@@ -226,7 +226,7 @@ namespace SteamKit2
 
             internal SessionTokenCallback( IPacketMsg packetMsg )
             {
-                var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg );
+                var sessToken = new ClientMsgProtobuf<CMsgClientSessionToken>( packetMsg, SteamKitProtobuf.Model );
 
                 this.SessionToken = sessToken.Body.token;
             }
@@ -259,7 +259,7 @@ namespace SteamKit2
 
             internal AccountInfoCallback( IPacketMsg packetMsg )
             {
-                var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg );
+                var accInfo = new ClientMsgProtobuf<CMsgClientAccountInfo>( packetMsg, SteamKitProtobuf.Model );
                 var msg = accInfo.Body;
 
                 PersonaName = msg.persona_name;
@@ -287,7 +287,7 @@ namespace SteamKit2
 
             internal EmailAddrInfoCallback( IPacketMsg packetMsg )
             {
-                var emailAddrInfo = new ClientMsgProtobuf<CMsgClientEmailAddrInfo>( packetMsg );
+                var emailAddrInfo = new ClientMsgProtobuf<CMsgClientEmailAddrInfo>( packetMsg, SteamKitProtobuf.Model );
                 var msg = emailAddrInfo.Body;
 
                 EmailAddress = msg.email_address;
@@ -335,7 +335,7 @@ namespace SteamKit2
 
             internal WalletInfoCallback( IPacketMsg packetMsg )
             {
-                var walletInfo = new ClientMsgProtobuf<CMsgClientWalletInfoUpdate>( packetMsg );
+                var walletInfo = new ClientMsgProtobuf<CMsgClientWalletInfoUpdate>( packetMsg, SteamKitProtobuf.Model );
                 var wallet = walletInfo.Body;
 
                 HasWallet = wallet.has_wallet;
@@ -366,7 +366,7 @@ namespace SteamKit2
 
             internal WebAPIUserNonceCallback( IPacketMsg packetMsg )
             {
-                var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg );
+                var userNonce = new ClientMsgProtobuf<CMsgClientRequestWebAPIAuthenticateUserNonceResponse>( packetMsg, SteamKitProtobuf.Model );
                 var body = userNonce.Body;
 
                 this.JobID = userNonce.TargetJobID;
@@ -389,7 +389,7 @@ namespace SteamKit2
 
             internal VanityURLChangedCallback( IPacketMsg packetMsg )
             {
-                var vanityUrl = new ClientMsgProtobuf<CMsgClientVanityURLChangedNotification>( packetMsg );
+                var vanityUrl = new ClientMsgProtobuf<CMsgClientVanityURLChangedNotification>( packetMsg, SteamKitProtobuf.Model );
 
                 this.JobID = vanityUrl.TargetJobID;
                 this.VanityURL = vanityUrl.Body.vanity_url;
@@ -485,7 +485,7 @@ namespace SteamKit2
 
             internal PlayingSessionStateCallback( IPacketMsg packetMsg )
             {
-                var playingSessionState = new ClientMsgProtobuf<CMsgClientPlayingSessionState>( packetMsg );
+                var playingSessionState = new ClientMsgProtobuf<CMsgClientPlayingSessionState>( packetMsg, SteamKitProtobuf.Model );
                 var msg = playingSessionState.Body;
 
                 JobID = playingSessionState.TargetJobID;

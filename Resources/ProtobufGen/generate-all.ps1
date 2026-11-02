@@ -15,6 +15,8 @@ $ProtoGenSrc = Join-Path $PSScriptRoot 'ProtobufGen'
 $ProtoGenDll = Join-Path $ProtoGenSrc '\bin\Debug\ProtobufGen.dll'
 $ProtoBase = Join-Path $PSScriptRoot '..\Protobufs'
 $SK2Base = Join-Path $PSScriptRoot '..\..\SteamKit2\SteamKit2\Base\Generated'
+$ModelParams = @('--model', 'SteamKit2.Internal.SteamKitProtobufModel')
+$ServiceModelParams = @('--service-models')
 
 & dotnet build --configuration Debug $ProtoGenSrc
 
@@ -27,7 +29,7 @@ $protos = Import-Csv -LiteralPath (Join-Path $PSScriptRoot 'protos.csv') |
 
 # one-off
 Set-Location -LiteralPath $PSScriptRoot
-$params = $CommonParams + @(
+$params = $CommonParams + $ModelParams + @(
     '--proto', "gc.proto",
     '--output', (Join-Path $SK2Base 'GC\MsgBaseGC.cs'),
     '--namespace', "SteamKit2.GC.Internal"
@@ -48,11 +50,16 @@ $params = $CommonParams + @(
 
 $protos | % {
     Set-Location -LiteralPath (Join-Path $ProtoBase $_.ProtoDir)
-    $params = $CommonParams + @(
+    $params = $CommonParams + $ServiceModelParams + @(
         '--proto', $_.ProtoFileName
         '--output', (Join-Path $SK2Base $_.ClassFilePath),
         '--namespace', $_.Namespace
     )
+
+    # 'all' also registers every top-level message on the model; every service gets a model of its own
+    if ($_.ModelRoots -eq 'all') {
+        $params += $ModelParams
+    }
 
     & dotnet $ProtoGenDll -- $params > $null
     if ($LASTEXITCODE -ne 0) { $failed += "$($_.ProtoDir)/$($_.ProtoFileName)" }

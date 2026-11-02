@@ -836,79 +836,81 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Parental";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => ParentalProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_EnableParentalSettings_Response>> EnableParentalSettings( CParental_EnableParentalSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_EnableParentalSettings_Request, CParental_EnableParentalSettings_Response>( "Parental.EnableParentalSettings#1", request );
+            return UnifiedMessages.SendMessage<CParental_EnableParentalSettings_Request, CParental_EnableParentalSettings_Response>( "Parental.EnableParentalSettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_DisableParentalSettings_Response>> DisableParentalSettings( CParental_DisableParentalSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_DisableParentalSettings_Request, CParental_DisableParentalSettings_Response>( "Parental.DisableParentalSettings#1", request );
+            return UnifiedMessages.SendMessage<CParental_DisableParentalSettings_Request, CParental_DisableParentalSettings_Response>( "Parental.DisableParentalSettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_GetParentalSettings_Response>> GetParentalSettings( CParental_GetParentalSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_GetParentalSettings_Request, CParental_GetParentalSettings_Response>( "Parental.GetParentalSettings#1", request );
+            return UnifiedMessages.SendMessage<CParental_GetParentalSettings_Request, CParental_GetParentalSettings_Response>( "Parental.GetParentalSettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_GetSignedParentalSettings_Response>> GetSignedParentalSettings( CParental_GetSignedParentalSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_GetSignedParentalSettings_Request, CParental_GetSignedParentalSettings_Response>( "Parental.GetSignedParentalSettings#1", request );
+            return UnifiedMessages.SendMessage<CParental_GetSignedParentalSettings_Request, CParental_GetSignedParentalSettings_Response>( "Parental.GetSignedParentalSettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_SetParentalSettings_Response>> SetParentalSettings( CParental_SetParentalSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_SetParentalSettings_Request, CParental_SetParentalSettings_Response>( "Parental.SetParentalSettings#1", request );
+            return UnifiedMessages.SendMessage<CParental_SetParentalSettings_Request, CParental_SetParentalSettings_Response>( "Parental.SetParentalSettings#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ValidateToken_Response>> ValidateToken( CParental_ValidateToken_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_ValidateToken_Request, CParental_ValidateToken_Response>( "Parental.ValidateToken#1", request );
+            return UnifiedMessages.SendMessage<CParental_ValidateToken_Request, CParental_ValidateToken_Response>( "Parental.ValidateToken#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ValidatePassword_Response>> ValidatePassword( CParental_ValidatePassword_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_ValidatePassword_Request, CParental_ValidatePassword_Response>( "Parental.ValidatePassword#1", request );
+            return UnifiedMessages.SendMessage<CParental_ValidatePassword_Request, CParental_ValidatePassword_Response>( "Parental.ValidatePassword#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_LockClient_Response>> LockClient( CParental_LockClient_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_LockClient_Request, CParental_LockClient_Response>( "Parental.LockClient#1", request );
+            return UnifiedMessages.SendMessage<CParental_LockClient_Request, CParental_LockClient_Response>( "Parental.LockClient#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_RequestRecoveryCode_Response>> RequestRecoveryCode( CParental_RequestRecoveryCode_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_RequestRecoveryCode_Request, CParental_RequestRecoveryCode_Response>( "Parental.RequestRecoveryCode#1", request );
+            return UnifiedMessages.SendMessage<CParental_RequestRecoveryCode_Request, CParental_RequestRecoveryCode_Response>( "Parental.RequestRecoveryCode#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_RequestFeatureAccess_Response>> RequestFeatureAccess( CParental_RequestFeatureAccess_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_RequestFeatureAccess_Request, CParental_RequestFeatureAccess_Response>( "Parental.RequestFeatureAccess#1", request );
+            return UnifiedMessages.SendMessage<CParental_RequestFeatureAccess_Request, CParental_RequestFeatureAccess_Response>( "Parental.RequestFeatureAccess#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ApproveFeatureAccess_Response>> ApproveFeatureAccess( CParental_ApproveFeatureAccess_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_ApproveFeatureAccess_Request, CParental_ApproveFeatureAccess_Response>( "Parental.ApproveFeatureAccess#1", request );
+            return UnifiedMessages.SendMessage<CParental_ApproveFeatureAccess_Request, CParental_ApproveFeatureAccess_Response>( "Parental.ApproveFeatureAccess#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_RequestPlaytime_Response>> RequestPlaytime( CParental_RequestPlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_RequestPlaytime_Request, CParental_RequestPlaytime_Response>( "Parental.RequestPlaytime#1", request );
+            return UnifiedMessages.SendMessage<CParental_RequestPlaytime_Request, CParental_RequestPlaytime_Response>( "Parental.RequestPlaytime#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ApprovePlaytime_Response>> ApprovePlaytime( CParental_ApprovePlaytime_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_ApprovePlaytime_Request, CParental_ApprovePlaytime_Response>( "Parental.ApprovePlaytime#1", request );
+            return UnifiedMessages.SendMessage<CParental_ApprovePlaytime_Request, CParental_ApprovePlaytime_Response>( "Parental.ApprovePlaytime#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_GetRequests_Response>> GetRequests( CParental_GetRequests_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_GetRequests_Request, CParental_GetRequests_Response>( "Parental.GetRequests#1", request );
+            return UnifiedMessages.SendMessage<CParental_GetRequests_Request, CParental_GetRequests_Response>( "Parental.GetRequests#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CParental_ReportPlaytimeAndNotify_Response>> ReportPlaytimeAndNotify( CParental_ReportPlaytimeAndNotify_Request request )
         {
-            return UnifiedMessages.SendMessage<CParental_ReportPlaytimeAndNotify_Request, CParental_ReportPlaytimeAndNotify_Response>( "Parental.ReportPlaytimeAndNotify#1", request );
+            return UnifiedMessages.SendMessage<CParental_ReportPlaytimeAndNotify_Request, CParental_ReportPlaytimeAndNotify_Response>( "Parental.ReportPlaytimeAndNotify#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -968,28 +970,67 @@ namespace SteamKit2.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_EnableParentalSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_EnableParentalSettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_DisableParentalSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_DisableParentalSettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_GetParentalSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_GetParentalSettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_GetSignedParentalSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_GetSignedParentalSettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_SetParentalSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_SetParentalSettings_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ValidateToken_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ValidateToken_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ValidatePassword_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ValidatePassword_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_LockClient_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_LockClient_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_RequestRecoveryCode_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_RequestRecoveryCode_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_RequestFeatureAccess_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_RequestFeatureAccess_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ApproveFeatureAccess_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ApproveFeatureAccess_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_RequestPlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_RequestPlaytime_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ApprovePlaytime_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ApprovePlaytime_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_GetRequests_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_GetRequests_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ReportPlaytimeAndNotify_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ReportPlaytimeAndNotify_Response))]
+    internal sealed partial class ParentalProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class ParentalClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "ParentalClient";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => ParentalClientProtobufModel.Instance;
+
         public void NotifySettingsChange(CParental_ParentalSettingsChange_Notification request )
         {
-            UnifiedMessages.SendNotification<CParental_ParentalSettingsChange_Notification>( "ParentalClient.NotifySettingsChange#1", request );
+            UnifiedMessages.SendNotification<CParental_ParentalSettingsChange_Notification>( "ParentalClient.NotifySettingsChange#1", request, Model );
         }
 
         public void NotifyUnlock(CParental_ParentalUnlock_Notification request )
         {
-            UnifiedMessages.SendNotification<CParental_ParentalUnlock_Notification>( "ParentalClient.NotifyUnlock#1", request );
+            UnifiedMessages.SendNotification<CParental_ParentalUnlock_Notification>( "ParentalClient.NotifyUnlock#1", request, Model );
         }
 
         public void NotifyLock(CParental_ParentalLock_Notification request )
         {
-            UnifiedMessages.SendNotification<CParental_ParentalLock_Notification>( "ParentalClient.NotifyLock#1", request );
+            UnifiedMessages.SendNotification<CParental_ParentalLock_Notification>( "ParentalClient.NotifyLock#1", request, Model );
         }
 
         public void NotifyPlaytimeUsed(CParental_PlaytimeUsed_Notification request )
         {
-            UnifiedMessages.SendNotification<CParental_PlaytimeUsed_Notification>( "ParentalClient.NotifyPlaytimeUsed#1", request );
+            UnifiedMessages.SendNotification<CParental_PlaytimeUsed_Notification>( "ParentalClient.NotifyPlaytimeUsed#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1015,6 +1056,17 @@ namespace SteamKit2.Internal
             }
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ParentalSettingsChange_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ParentalUnlock_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_ParentalLock_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CParental_PlaytimeUsed_Notification))]
+    internal sealed partial class ParentalClientProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

@@ -60,7 +60,7 @@ namespace SteamKit2
 
             internal UserActionPublishedFilesCallback( IPacketMsg packetMsg )
             {
-                var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg );
+                var response = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserActionResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = response.Body;
 
                 this.JobID = response.TargetJobID;

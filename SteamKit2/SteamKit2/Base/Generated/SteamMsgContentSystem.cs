@@ -834,39 +834,41 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "ContentServerDirectory";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => ContentServerDirectoryProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetServersForSteamPipe_Response>> GetServersForSteamPipe( CContentServerDirectory_GetServersForSteamPipe_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetServersForSteamPipe_Request, CContentServerDirectory_GetServersForSteamPipe_Response>( "ContentServerDirectory.GetServersForSteamPipe#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetServersForSteamPipe_Request, CContentServerDirectory_GetServersForSteamPipe_Response>( "ContentServerDirectory.GetServersForSteamPipe#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetDepotPatchInfo_Response>> GetDepotPatchInfo( CContentServerDirectory_GetDepotPatchInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetDepotPatchInfo_Request, CContentServerDirectory_GetDepotPatchInfo_Response>( "ContentServerDirectory.GetDepotPatchInfo#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetDepotPatchInfo_Request, CContentServerDirectory_GetDepotPatchInfo_Response>( "ContentServerDirectory.GetDepotPatchInfo#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetClientUpdateHosts_Response>> GetClientUpdateHosts( CContentServerDirectory_GetClientUpdateHosts_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetClientUpdateHosts_Request, CContentServerDirectory_GetClientUpdateHosts_Response>( "ContentServerDirectory.GetClientUpdateHosts#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetClientUpdateHosts_Request, CContentServerDirectory_GetClientUpdateHosts_Response>( "ContentServerDirectory.GetClientUpdateHosts#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetManifestRequestCode_Response>> GetManifestRequestCode( CContentServerDirectory_GetManifestRequestCode_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetManifestRequestCode_Request, CContentServerDirectory_GetManifestRequestCode_Response>( "ContentServerDirectory.GetManifestRequestCode#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetManifestRequestCode_Request, CContentServerDirectory_GetManifestRequestCode_Response>( "ContentServerDirectory.GetManifestRequestCode#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetCDNAuthToken_Response>> GetCDNAuthToken( CContentServerDirectory_GetCDNAuthToken_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetCDNAuthToken_Request, CContentServerDirectory_GetCDNAuthToken_Response>( "ContentServerDirectory.GetCDNAuthToken#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetCDNAuthToken_Request, CContentServerDirectory_GetCDNAuthToken_Response>( "ContentServerDirectory.GetCDNAuthToken#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_RequestPeerContentServer_Response>> RequestPeerContentServer( CContentServerDirectory_RequestPeerContentServer_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_RequestPeerContentServer_Request, CContentServerDirectory_RequestPeerContentServer_Response>( "ContentServerDirectory.RequestPeerContentServer#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_RequestPeerContentServer_Request, CContentServerDirectory_RequestPeerContentServer_Response>( "ContentServerDirectory.RequestPeerContentServer#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CContentServerDirectory_GetPeerContentInfo_Response>> GetPeerContentInfo( CContentServerDirectory_GetPeerContentInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CContentServerDirectory_GetPeerContentInfo_Request, CContentServerDirectory_GetPeerContentInfo_Response>( "ContentServerDirectory.GetPeerContentInfo#1", request );
+            return UnifiedMessages.SendMessage<CContentServerDirectory_GetPeerContentInfo_Request, CContentServerDirectory_GetPeerContentInfo_Response>( "ContentServerDirectory.GetPeerContentInfo#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -902,13 +904,36 @@ namespace SteamKit2.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetServersForSteamPipe_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetServersForSteamPipe_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetDepotPatchInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetDepotPatchInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetClientUpdateHosts_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetClientUpdateHosts_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetManifestRequestCode_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetManifestRequestCode_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetCDNAuthToken_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetCDNAuthToken_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_RequestPeerContentServer_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_RequestPeerContentServer_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetPeerContentInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CContentServerDirectory_GetPeerContentInfo_Response))]
+    internal sealed partial class ContentServerDirectoryProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class DepotContentDetection : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "DepotContentDetection";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => DepotContentDetectionProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CDepotContentDetection_GetAllDetectedAppContent_Response>> GetAllDetectedAppContent( CDepotContentDetection_GetAllDetectedAppContent_Request request )
         {
-            return UnifiedMessages.SendMessage<CDepotContentDetection_GetAllDetectedAppContent_Request, CDepotContentDetection_GetAllDetectedAppContent_Response>( "DepotContentDetection.GetAllDetectedAppContent#1", request );
+            return UnifiedMessages.SendMessage<CDepotContentDetection_GetAllDetectedAppContent_Request, CDepotContentDetection_GetAllDetectedAppContent_Response>( "DepotContentDetection.GetAllDetectedAppContent#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -925,6 +950,15 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDepotContentDetection_GetAllDetectedAppContent_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CDepotContentDetection_GetAllDetectedAppContent_Response))]
+    internal sealed partial class DepotContentDetectionProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

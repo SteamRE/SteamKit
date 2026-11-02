@@ -236,7 +236,7 @@ namespace SteamKit2
         }
         private void SendTickets()
         {
-            var auth = new ClientMsgProtobuf<CMsgClientAuthList>( EMsg.ClientAuthList );
+            var auth = new ClientMsgProtobuf<CMsgClientAuthList>( EMsg.ClientAuthList, SteamKitProtobuf.Model );
             auth.Body.tokens_left = ( uint )GameConnectTokens.Count;
 
             lock ( TicketChangeLock )
@@ -272,7 +272,7 @@ namespace SteamKit2
         }
         private void HandleGameConnectTokens( IPacketMsg packetMsg )
         {
-            var body = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg ).Body;
+            var body = new ClientMsgProtobuf<CMsgClientGameConnectTokens>( packetMsg, SteamKitProtobuf.Model ).Body;
 
             // Add tokens
             foreach ( var tok in body.tokens )
@@ -289,14 +289,14 @@ namespace SteamKit2
         private void HandleTicketAuthComplete( IPacketMsg packetMsg )
         {
             // Ticket successfully used to authorize user
-            var complete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg );
+            var complete = new ClientMsgProtobuf<CMsgClientTicketAuthComplete>( packetMsg, SteamKitProtobuf.Model );
             var inUse = new TicketAuthCompleteCallback( complete.TargetJobID, complete.Body );
             Client.PostCallback( inUse );
         }
         private void HandleTicketAcknowledged( IPacketMsg packetMsg )
         {
             // Ticket acknowledged as valid by Steam
-            var authAck = new ClientMsgProtobuf<CMsgClientAuthListAck>( packetMsg );
+            var authAck = new ClientMsgProtobuf<CMsgClientAuthListAck>( packetMsg, SteamKitProtobuf.Model );
 
             // Complete per-CRC ack waiters: correlate on the acknowledged ticket CRCs rather than the JobID,
             // which Steam stopped echoing on repeated auth lists after its 2025-08 change (see issue #1567).

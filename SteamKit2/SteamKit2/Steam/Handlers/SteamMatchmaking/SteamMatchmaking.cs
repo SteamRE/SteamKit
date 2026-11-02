@@ -49,7 +49,7 @@ namespace SteamKit2
 
             var personaName = Client.GetHandler<SteamFriends>()!.GetPersonaName();
 
-            var createLobby = new ClientMsgProtobuf<CMsgClientMMSCreateLobby>( EMsg.ClientMMSCreateLobby )
+            var createLobby = new ClientMsgProtobuf<CMsgClientMMSCreateLobby>( EMsg.ClientMMSCreateLobby, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -85,7 +85,7 @@ namespace SteamKit2
         public AsyncJob<SetLobbyDataCallback> SetLobbyData( uint appId, SteamID lobbySteamId, ELobbyType lobbyType, int maxMembers, int lobbyFlags = 0,
             IReadOnlyDictionary<string, string>? metadata = null )
         {
-            var setLobbyData = new ClientMsgProtobuf<CMsgClientMMSSetLobbyData>( EMsg.ClientMMSSetLobbyData )
+            var setLobbyData = new ClientMsgProtobuf<CMsgClientMMSSetLobbyData>( EMsg.ClientMMSSetLobbyData, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -121,7 +121,7 @@ namespace SteamKit2
                 return null;
             }
 
-            var setLobbyData = new ClientMsgProtobuf<CMsgClientMMSSetLobbyData>( EMsg.ClientMMSSetLobbyData )
+            var setLobbyData = new ClientMsgProtobuf<CMsgClientMMSSetLobbyData>( EMsg.ClientMMSSetLobbyData, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -149,7 +149,7 @@ namespace SteamKit2
         /// <returns>An <see cref="AsyncJob{SetLobbyOwnerCallback}"/>.</returns>
         public AsyncJob<SetLobbyOwnerCallback> SetLobbyOwner( uint appId, SteamID lobbySteamId, SteamID newOwner )
         {
-            var setLobbyOwner = new ClientMsgProtobuf<CMsgClientMMSSetLobbyOwner>( EMsg.ClientMMSSetLobbyOwner )
+            var setLobbyOwner = new ClientMsgProtobuf<CMsgClientMMSSetLobbyOwner>( EMsg.ClientMMSSetLobbyOwner, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -180,7 +180,7 @@ namespace SteamKit2
                 return null;
             }
 
-            var getLobbies = new ClientMsgProtobuf<CMsgClientMMSGetLobbyList>( EMsg.ClientMMSGetLobbyList )
+            var getLobbies = new ClientMsgProtobuf<CMsgClientMMSGetLobbyList>( EMsg.ClientMMSGetLobbyList, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -220,7 +220,7 @@ namespace SteamKit2
                 return null;
             }
 
-            var joinLobby = new ClientMsgProtobuf<CMsgClientMMSJoinLobby>( EMsg.ClientMMSJoinLobby )
+            var joinLobby = new ClientMsgProtobuf<CMsgClientMMSJoinLobby>( EMsg.ClientMMSJoinLobby, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -244,7 +244,7 @@ namespace SteamKit2
         /// <returns>An <see cref="AsyncJob{LeaveLobbyCallback}"/>.</returns>
         public AsyncJob<LeaveLobbyCallback> LeaveLobby( uint appId, SteamID lobbySteamId )
         {
-            var leaveLobby = new ClientMsgProtobuf<CMsgClientMMSLeaveLobby>( EMsg.ClientMMSLeaveLobby )
+            var leaveLobby = new ClientMsgProtobuf<CMsgClientMMSLeaveLobby>( EMsg.ClientMMSLeaveLobby, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -267,7 +267,7 @@ namespace SteamKit2
         /// <returns>An <see cref="AsyncJob{LobbyDataCallback}"/>.</returns>
         public AsyncJob<LobbyDataCallback> GetLobbyData( uint appId, SteamID lobbySteamId )
         {
-            var getLobbyData = new ClientMsgProtobuf<CMsgClientMMSGetLobbyData>( EMsg.ClientMMSGetLobbyData )
+            var getLobbyData = new ClientMsgProtobuf<CMsgClientMMSGetLobbyData>( EMsg.ClientMMSGetLobbyData, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -291,7 +291,7 @@ namespace SteamKit2
         /// <param name="userSteamId">The SteamID of the user we're inviting.</param>
         public void InviteToLobby( uint appId, SteamID lobbySteamId, SteamID userSteamId )
         {
-            var getLobbyData = new ClientMsgProtobuf<CMsgClientMMSInviteToLobby>( EMsg.ClientMMSInviteToLobby )
+            var getLobbyData = new ClientMsgProtobuf<CMsgClientMMSInviteToLobby>( EMsg.ClientMMSInviteToLobby, SteamKitProtobuf.Model )
             {
                 Body =
                 {
@@ -362,7 +362,7 @@ namespace SteamKit2
 
         void HandleCreateLobbyResponse( IPacketMsg packetMsg )
         {
-            var createLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSCreateLobbyResponse>( packetMsg );
+            var createLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSCreateLobbyResponse>( packetMsg, SteamKitProtobuf.Model );
             var body = createLobbyResponse.Body;
 
             if ( lobbyManipulationRequests.TryRemove( createLobbyResponse.TargetJobID, out var request ) )
@@ -400,7 +400,7 @@ namespace SteamKit2
 
         void HandleSetLobbyDataResponse( IPacketMsg packetMsg )
         {
-            var setLobbyDataResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyDataResponse>( packetMsg );
+            var setLobbyDataResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyDataResponse>( packetMsg, SteamKitProtobuf.Model );
             var body = setLobbyDataResponse.Body;
 
             if ( lobbyManipulationRequests.TryRemove( setLobbyDataResponse.TargetJobID, out var request ) )
@@ -454,7 +454,7 @@ namespace SteamKit2
 
         void HandleSetLobbyOwnerResponse( IPacketMsg packetMsg )
         {
-            var setLobbyOwnerResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyOwnerResponse>( packetMsg );
+            var setLobbyOwnerResponse = new ClientMsgProtobuf<CMsgClientMMSSetLobbyOwnerResponse>( packetMsg, SteamKitProtobuf.Model );
             var body = setLobbyOwnerResponse.Body;
 
             if ( lobbyManipulationRequests.TryRemove( setLobbyOwnerResponse.TargetJobID, out var request ) )
@@ -476,7 +476,7 @@ namespace SteamKit2
 
         void HandleGetLobbyListResponse( IPacketMsg packetMsg )
         {
-            var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSGetLobbyListResponse>( packetMsg );
+            var lobbyListResponse = new ClientMsgProtobuf<CMsgClientMMSGetLobbyListResponse>( packetMsg, SteamKitProtobuf.Model );
             var body = lobbyListResponse.Body;
 
             var lobbyList =
@@ -514,7 +514,7 @@ namespace SteamKit2
 
         void HandleJoinLobbyResponse( IPacketMsg packetMsg )
         {
-            var joinLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSJoinLobbyResponse>( packetMsg );
+            var joinLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSJoinLobbyResponse>( packetMsg, SteamKitProtobuf.Model );
             var body = joinLobbyResponse.Body;
 
             Lobby? joinedLobby = null;
@@ -556,7 +556,7 @@ namespace SteamKit2
 
         void HandleLeaveLobbyResponse( IPacketMsg packetMsg )
         {
-            var leaveLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSLeaveLobbyResponse>( packetMsg );
+            var leaveLobbyResponse = new ClientMsgProtobuf<CMsgClientMMSLeaveLobbyResponse>( packetMsg, SteamKitProtobuf.Model );
             var body = leaveLobbyResponse.Body;
 
             if ( body.eresult == ( int )EResult.OK )
@@ -574,7 +574,7 @@ namespace SteamKit2
 
         void HandleLobbyData( IPacketMsg packetMsg )
         {
-            var lobbyDataResponse = new ClientMsgProtobuf<CMsgClientMMSLobbyData>( packetMsg );
+            var lobbyDataResponse = new ClientMsgProtobuf<CMsgClientMMSLobbyData>( packetMsg, SteamKitProtobuf.Model );
 
             var body = lobbyDataResponse.Body;
 
@@ -611,7 +611,7 @@ namespace SteamKit2
 
         void HandleUserJoinedLobby( IPacketMsg packetMsg )
         {
-            var userJoinedLobby = new ClientMsgProtobuf<CMsgClientMMSUserJoinedLobby>( packetMsg );
+            var userJoinedLobby = new ClientMsgProtobuf<CMsgClientMMSUserJoinedLobby>( packetMsg, SteamKitProtobuf.Model );
             var body = userJoinedLobby.Body;
 
             var lobby = lobbyCache.GetLobby( body.app_id, body.steam_id_lobby );
@@ -633,7 +633,7 @@ namespace SteamKit2
 
         void HandleUserLeftLobby( IPacketMsg packetMsg )
         {
-            var userLeftLobby = new ClientMsgProtobuf<CMsgClientMMSUserLeftLobby>( packetMsg );
+            var userLeftLobby = new ClientMsgProtobuf<CMsgClientMMSUserLeftLobby>( packetMsg, SteamKitProtobuf.Model );
             var body = userLeftLobby.Body;
 
             var lobby = lobbyCache.GetLobby( body.app_id, body.steam_id_lobby );

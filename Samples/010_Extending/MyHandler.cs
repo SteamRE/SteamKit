@@ -25,7 +25,8 @@ class MyHandler : ClientMsgHandler
     // handlers can also define functions which can send data to the steam servers
     public void LogOff( string user, string pass )
     {
-        var logOffMessage = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff );
+        // messages are serialized with a protobuf model, SteamKitProtobuf.Model contains SteamKit's own messages
+        var logOffMessage = new ClientMsgProtobuf<CMsgClientLogOff>( EMsg.ClientLogOff, SteamKitProtobuf.Model );
 
         Client.Send( logOffMessage );
     }
@@ -61,7 +62,7 @@ class MyHandler : ClientMsgHandler
     {
         // in order to get at the message contents, we need to wrap the packet message
         // in an object that gives us access to the message body
-        var logonResponse = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg );
+        var logonResponse = new ClientMsgProtobuf<CMsgClientLogonResponse>( packetMsg, SteamKitProtobuf.Model );
 
         // the raw body of the message often doesn't make use of useful types, so we need to
         // cast them to types that are prettier for the user to handle
