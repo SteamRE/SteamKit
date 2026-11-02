@@ -32,7 +32,7 @@ namespace SteamKit2
 
             internal NumberOfPlayersCallback( IPacketMsg packetMsg )
             {
-                var msg = new ClientMsgProtobuf<CMsgDPGetNumberOfCurrentPlayersResponse>( packetMsg );
+                var msg = new ClientMsgProtobuf<CMsgDPGetNumberOfCurrentPlayersResponse>( packetMsg, SteamKitProtobuf.Model );
                 var resp = msg.Body;
 
                 this.JobID = msg.TargetJobID;
@@ -70,7 +70,7 @@ namespace SteamKit2
 
             internal FindOrCreateLeaderboardCallback( IPacketMsg packetMsg )
             {
-                var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLBResponse>( packetMsg );
+                var msg = new ClientMsgProtobuf<CMsgClientLBSFindOrCreateLBResponse>( packetMsg, SteamKitProtobuf.Model );
                 var resp = msg.Body;
 
                 this.JobID = msg.TargetJobID;
@@ -154,7 +154,7 @@ namespace SteamKit2
 
             internal LeaderboardEntriesCallback( IPacketMsg packetMsg )
             {
-                var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntriesResponse>( packetMsg );
+                var msg = new ClientMsgProtobuf<CMsgClientLBSGetLBEntriesResponse>( packetMsg, SteamKitProtobuf.Model );
                 var resp = msg.Body;
 
                 this.JobID = msg.TargetJobID;

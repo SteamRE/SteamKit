@@ -62,7 +62,7 @@ namespace SteamKit2
         {
             ArgumentNullException.ThrowIfNull( details );
 
-            var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserAction>( EMsg.ClientUCMEnumeratePublishedFilesByUserAction );
+            var enumRequest = new ClientMsgProtobuf<CMsgClientUCMEnumeratePublishedFilesByUserAction>( EMsg.ClientUCMEnumeratePublishedFilesByUserAction, SteamKitProtobuf.Model );
             enumRequest.SourceJobID = Client.GetNextJobID();
 
             enumRequest.Body.action = ( int )details.UserAction;

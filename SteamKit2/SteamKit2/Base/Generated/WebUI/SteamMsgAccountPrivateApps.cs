@@ -89,14 +89,16 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "AccountPrivateApps";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => AccountPrivateAppsProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_GetPrivateAppList_Response>> GetPrivateAppList( CAccountPrivateApps_GetPrivateAppList_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( "AccountPrivateApps.GetPrivateAppList#1", request );
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_GetPrivateAppList_Request, CAccountPrivateApps_GetPrivateAppList_Response>( "AccountPrivateApps.GetPrivateAppList#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CAccountPrivateApps_ToggleAppPrivacy_Response>> ToggleAppPrivacy( CAccountPrivateApps_ToggleAppPrivacy_Request request )
         {
-            return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( "AccountPrivateApps.ToggleAppPrivacy#1", request );
+            return UnifiedMessages.SendMessage<CAccountPrivateApps_ToggleAppPrivacy_Request, CAccountPrivateApps_ToggleAppPrivacy_Response>( "AccountPrivateApps.ToggleAppPrivacy#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -117,13 +119,26 @@ namespace SteamKit2.WebUI.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_GetPrivateAppList_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_GetPrivateAppList_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_ToggleAppPrivacy_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApps_ToggleAppPrivacy_Response))]
+    internal sealed partial class AccountPrivateAppsProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class AccountPrivateAppsClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "AccountPrivateAppsClient";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => AccountPrivateAppsClientProtobufModel.Instance;
+
         public void NotifyPrivateAppListChanged(CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request );
+            UnifiedMessages.SendNotification<CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification>( "AccountPrivateAppsClient.NotifyPrivateAppListChanged#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -140,6 +155,14 @@ namespace SteamKit2.WebUI.Internal
             }
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CAccountPrivateApsClient_NotifyPrivateAppListChanged_Notification))]
+    internal sealed partial class AccountPrivateAppsClientProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

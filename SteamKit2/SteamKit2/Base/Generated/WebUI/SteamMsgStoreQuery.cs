@@ -1068,29 +1068,31 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "StoreQuery";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => StoreQueryProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_GetItemByUserCombinedTagsPriority_Response>> GetItemByUserCombinedTagsPriority( CStoreQuery_GetItemByUserCombinedTagsPriority_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_GetItemByUserCombinedTagsPriority_Request, CStoreQuery_GetItemByUserCombinedTagsPriority_Response>( "StoreQuery.GetItemByUserCombinedTagsPriority#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_GetItemByUserCombinedTagsPriority_Request, CStoreQuery_GetItemByUserCombinedTagsPriority_Response>( "StoreQuery.GetItemByUserCombinedTagsPriority#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_GetItemsByUserRecommendedTags_Response>> GetItemsByUserRecommendedTags( CStoreQuery_GetItemsByUserRecommendedTags_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_GetItemsByUserRecommendedTags_Request, CStoreQuery_GetItemsByUserRecommendedTags_Response>( "StoreQuery.GetItemsByUserRecommendedTags#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_GetItemsByUserRecommendedTags_Request, CStoreQuery_GetItemsByUserRecommendedTags_Response>( "StoreQuery.GetItemsByUserRecommendedTags#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_MoreLikeThis_Response>> MoreLikeThis( CStoreQuery_MoreLikeThis_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_MoreLikeThis_Request, CStoreQuery_MoreLikeThis_Response>( "StoreQuery.MoreLikeThis#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_MoreLikeThis_Request, CStoreQuery_MoreLikeThis_Response>( "StoreQuery.MoreLikeThis#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_Query_Response>> Query( CStoreQuery_Query_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_Query_Request, CStoreQuery_Query_Response>( "StoreQuery.Query#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_Query_Request, CStoreQuery_Query_Response>( "StoreQuery.Query#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CStoreQuery_SearchSuggestions_Response>> SearchSuggestions( CStoreQuery_SearchSuggestions_Request request )
         {
-            return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( "StoreQuery.SearchSuggestions#1", request );
+            return UnifiedMessages.SendMessage<CStoreQuery_SearchSuggestions_Request, CStoreQuery_SearchSuggestions_Response>( "StoreQuery.SearchSuggestions#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1119,6 +1121,23 @@ namespace SteamKit2.WebUI.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_GetItemByUserCombinedTagsPriority_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_GetItemByUserCombinedTagsPriority_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_GetItemsByUserRecommendedTags_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_GetItemsByUserRecommendedTags_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_MoreLikeThis_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_MoreLikeThis_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_Query_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_Query_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_SearchSuggestions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CStoreQuery_SearchSuggestions_Response))]
+    internal sealed partial class StoreQueryProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

@@ -949,5 +949,30 @@ namespace SteamKit2.Internal
 
 }
 
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientUDSP2PSessionStarted))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientUDSP2PSessionEnded))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGetClientDetails))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGetClientDetailsResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGetClientAppList))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGetClientAppListResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientInstallClientApp))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientInstallClientAppResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientUninstallClientApp))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientUninstallClientAppResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientSetClientAppUpdateState))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientSetClientAppUpdateStateResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientLaunchClientApp))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientLaunchClientAppResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientEnableOrDisableDownloads))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientEnableOrDisableDownloadsResponse))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
+
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

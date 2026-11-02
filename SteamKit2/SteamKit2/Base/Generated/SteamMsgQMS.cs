@@ -569,9 +569,11 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "QueuedMatchmaking";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => QueuedMatchmakingProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmaking_SearchForGame_Response>> SearchForGame( CQueuedMatchmaking_SearchForGame_Request request )
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( "QueuedMatchmaking.SearchForGame#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmaking_SearchForGame_Request, CQueuedMatchmaking_SearchForGame_Response>( "QueuedMatchmaking.SearchForGame#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -589,23 +591,34 @@ namespace SteamKit2.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmaking_SearchForGame_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmaking_SearchForGame_Response))]
+    internal sealed partial class QueuedMatchmakingProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class QueuedMatchmakingGameHost : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "QueuedMatchmakingGameHost";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => QueuedMatchmakingGameHostProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmakingGameHost_SearchForPlayers_Response>> SearchForPlayers( CQueuedMatchmakingGameHost_SearchForPlayers_Request request )
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SearchForPlayers_Request, CQueuedMatchmakingGameHost_SearchForPlayers_Response>( "QueuedMatchmakingGameHost.SearchForPlayers#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SearchForPlayers_Request, CQueuedMatchmakingGameHost_SearchForPlayers_Response>( "QueuedMatchmakingGameHost.SearchForPlayers#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>> SubmitPlayerResult( CQueuedMatchmakingGameHost_SubmitPlayerResult_Request request )
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SubmitPlayerResult_Request, CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( "QueuedMatchmakingGameHost.SubmitPlayerResult#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_SubmitPlayerResult_Request, CQueuedMatchmakingGameHost_SubmitPlayerResult_Response>( "QueuedMatchmakingGameHost.SubmitPlayerResult#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CQueuedMatchmakingGameHost_EndGame_Response>> EndGame( CQueuedMatchmakingGameHost_EndGame_Request request )
         {
-            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( "QueuedMatchmakingGameHost.EndGame#1", request );
+            return UnifiedMessages.SendMessage<CQueuedMatchmakingGameHost_EndGame_Request, CQueuedMatchmakingGameHost_EndGame_Response>( "QueuedMatchmakingGameHost.EndGame#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -628,6 +641,19 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmakingGameHost_SearchForPlayers_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmakingGameHost_SearchForPlayers_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmakingGameHost_SubmitPlayerResult_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmakingGameHost_SubmitPlayerResult_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmakingGameHost_EndGame_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CQueuedMatchmakingGameHost_EndGame_Response))]
+    internal sealed partial class QueuedMatchmakingGameHostProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

@@ -1267,29 +1267,31 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "Econ";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => EconProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetInventoryItemsWithDescriptions_Response>> GetInventoryItemsWithDescriptions( CEcon_GetInventoryItemsWithDescriptions_Request request )
         {
-            return UnifiedMessages.SendMessage<CEcon_GetInventoryItemsWithDescriptions_Request, CEcon_GetInventoryItemsWithDescriptions_Response>( "Econ.GetInventoryItemsWithDescriptions#1", request );
+            return UnifiedMessages.SendMessage<CEcon_GetInventoryItemsWithDescriptions_Request, CEcon_GetInventoryItemsWithDescriptions_Response>( "Econ.GetInventoryItemsWithDescriptions#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetTradeOfferAccessToken_Response>> GetTradeOfferAccessToken( CEcon_GetTradeOfferAccessToken_Request request )
         {
-            return UnifiedMessages.SendMessage<CEcon_GetTradeOfferAccessToken_Request, CEcon_GetTradeOfferAccessToken_Response>( "Econ.GetTradeOfferAccessToken#1", request );
+            return UnifiedMessages.SendMessage<CEcon_GetTradeOfferAccessToken_Request, CEcon_GetTradeOfferAccessToken_Response>( "Econ.GetTradeOfferAccessToken#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_ClientGetItemShopOverlayAuthURL_Response>> ClientGetItemShopOverlayAuthURL( CEcon_ClientGetItemShopOverlayAuthURL_Request request )
         {
-            return UnifiedMessages.SendMessage<CEcon_ClientGetItemShopOverlayAuthURL_Request, CEcon_ClientGetItemShopOverlayAuthURL_Response>( "Econ.ClientGetItemShopOverlayAuthURL#1", request );
+            return UnifiedMessages.SendMessage<CEcon_ClientGetItemShopOverlayAuthURL_Request, CEcon_ClientGetItemShopOverlayAuthURL_Response>( "Econ.ClientGetItemShopOverlayAuthURL#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetAssetClassInfo_Response>> GetAssetClassInfo( CEcon_GetAssetClassInfo_Request request )
         {
-            return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( "Econ.GetAssetClassInfo#1", request );
+            return UnifiedMessages.SendMessage<CEcon_GetAssetClassInfo_Request, CEcon_GetAssetClassInfo_Response>( "Econ.GetAssetClassInfo#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CEcon_GetAssetPropertySchema_Response>> GetAssetPropertySchema( CEcon_GetAssetPropertySchema_Request request )
         {
-            return UnifiedMessages.SendMessage<CEcon_GetAssetPropertySchema_Request, CEcon_GetAssetPropertySchema_Response>( "Econ.GetAssetPropertySchema#1", request );
+            return UnifiedMessages.SendMessage<CEcon_GetAssetPropertySchema_Request, CEcon_GetAssetPropertySchema_Response>( "Econ.GetAssetPropertySchema#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1318,6 +1320,23 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetInventoryItemsWithDescriptions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetInventoryItemsWithDescriptions_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetTradeOfferAccessToken_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetTradeOfferAccessToken_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_ClientGetItemShopOverlayAuthURL_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_ClientGetItemShopOverlayAuthURL_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetAssetClassInfo_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetAssetClassInfo_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetAssetPropertySchema_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CEcon_GetAssetPropertySchema_Response))]
+    internal sealed partial class EconProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

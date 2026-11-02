@@ -505,19 +505,21 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "Checkout";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => CheckoutProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_AddFreeLicense_Response>> AddFreeLicense( CCheckout_AddFreeLicense_Request request )
         {
-            return UnifiedMessages.SendMessage<CCheckout_AddFreeLicense_Request, CCheckout_AddFreeLicense_Response>( "Checkout.AddFreeLicense#1", request );
+            return UnifiedMessages.SendMessage<CCheckout_AddFreeLicense_Request, CCheckout_AddFreeLicense_Response>( "Checkout.AddFreeLicense#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_GetFriendOwnershipForGifting_Response>> GetFriendOwnershipForGifting( CCheckout_GetFriendOwnershipForGifting_Request request )
         {
-            return UnifiedMessages.SendMessage<CCheckout_GetFriendOwnershipForGifting_Request, CCheckout_GetFriendOwnershipForGifting_Response>( "Checkout.GetFriendOwnershipForGifting#1", request );
+            return UnifiedMessages.SendMessage<CCheckout_GetFriendOwnershipForGifting_Request, CCheckout_GetFriendOwnershipForGifting_Response>( "Checkout.GetFriendOwnershipForGifting#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCheckout_ValidateCart_Response>> ValidateCart( CCheckout_ValidateCart_Request request )
         {
-            return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( "Checkout.ValidateCart#1", request );
+            return UnifiedMessages.SendMessage<CCheckout_ValidateCart_Request, CCheckout_ValidateCart_Response>( "Checkout.ValidateCart#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -540,6 +542,19 @@ namespace SteamKit2.WebUI.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCheckout_AddFreeLicense_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCheckout_AddFreeLicense_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCheckout_GetFriendOwnershipForGifting_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCheckout_GetFriendOwnershipForGifting_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCheckout_ValidateCart_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCheckout_ValidateCart_Response))]
+    internal sealed partial class CheckoutProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

@@ -1726,5 +1726,43 @@ namespace SteamKit2.Internal
 
 }
 
+#pragma warning disable PBN9001
+namespace SteamKit2.Internal
+{
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientFriendMsg))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientFriendMsgIncoming))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAddFriend))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAddFriendResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRemoveFriend))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientHideFriend))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientFriendsList))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientFriendsGroupsList))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientPlayerNicknameList))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientSetPlayerNickname))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientSetPlayerNicknameResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRequestFriendData))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientChangeStatus))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgPersonaChangeResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientPersonaState))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientFriendProfileInfo))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientFriendProfileInfoResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientCreateFriendsGroup))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientCreateFriendsGroupResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientDeleteFriendsGroup))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientDeleteFriendsGroupResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientManageFriendsGroup))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientManageFriendsGroupResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAddFriendToGroup))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientAddFriendToGroupResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRemoveFriendFromGroup))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientRemoveFriendFromGroupResponse))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientGetEmoticonList))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CMsgClientEmoticonList))]
+    partial class SteamKitProtobufModel
+    {
+    }
+}
+#pragma warning restore PBN9001
+
 #pragma warning restore CS0612, CS0618, CS1591, CS3021, CS8981, IDE0079, IDE1006, RCS1036, RCS1057, RCS1085, RCS1192
 #endregion

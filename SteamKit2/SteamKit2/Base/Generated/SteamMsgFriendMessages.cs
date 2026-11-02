@@ -1112,54 +1112,56 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "FriendMessages";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => FriendMessagesProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_GetRecentMessages_Response>> GetRecentMessages( CFriendMessages_GetRecentMessages_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_GetRecentMessages_Request, CFriendMessages_GetRecentMessages_Response>( "FriendMessages.GetRecentMessages#1", request );
+            return UnifiedMessages.SendMessage<CFriendMessages_GetRecentMessages_Request, CFriendMessages_GetRecentMessages_Response>( "FriendMessages.GetRecentMessages#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendsMessages_GetActiveMessageSessions_Response>> GetActiveMessageSessions( CFriendsMessages_GetActiveMessageSessions_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendsMessages_GetActiveMessageSessions_Request, CFriendsMessages_GetActiveMessageSessions_Response>( "FriendMessages.GetActiveMessageSessions#1", request );
+            return UnifiedMessages.SendMessage<CFriendsMessages_GetActiveMessageSessions_Request, CFriendsMessages_GetActiveMessageSessions_Response>( "FriendMessages.GetActiveMessageSessions#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_SendMessage_Response>> SendMessage( CFriendMessages_SendMessage_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_SendMessage_Request, CFriendMessages_SendMessage_Response>( "FriendMessages.SendMessage#1", request );
+            return UnifiedMessages.SendMessage<CFriendMessages_SendMessage_Request, CFriendMessages_SendMessage_Response>( "FriendMessages.SendMessage#1", request, Model );
         }
 
         public void AckMessage(CFriendMessages_AckMessage_Notification request )
         {
-            UnifiedMessages.SendNotification<CFriendMessages_AckMessage_Notification>( "FriendMessages.AckMessage#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_AckMessage_Notification>( "FriendMessages.AckMessage#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_IsInFriendsUIBeta_Response>> IsInFriendsUIBeta( CFriendMessages_IsInFriendsUIBeta_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_IsInFriendsUIBeta_Request, CFriendMessages_IsInFriendsUIBeta_Response>( "FriendMessages.IsInFriendsUIBeta#1", request );
+            return UnifiedMessages.SendMessage<CFriendMessages_IsInFriendsUIBeta_Request, CFriendMessages_IsInFriendsUIBeta_Response>( "FriendMessages.IsInFriendsUIBeta#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_GetPartnerSharedChatGroup_Response>> GetPartnerSharedChatGroup( CFriendMessages_GetPartnerSharedChatGroup_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_GetPartnerSharedChatGroup_Request, CFriendMessages_GetPartnerSharedChatGroup_Response>( "FriendMessages.GetPartnerSharedChatGroup#1", request );
+            return UnifiedMessages.SendMessage<CFriendMessages_GetPartnerSharedChatGroup_Request, CFriendMessages_GetPartnerSharedChatGroup_Response>( "FriendMessages.GetPartnerSharedChatGroup#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_UpdateMessageReaction_Response>> UpdateMessageReaction( CFriendMessages_UpdateMessageReaction_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( "FriendMessages.UpdateMessageReaction#1", request );
+            return UnifiedMessages.SendMessage<CFriendMessages_UpdateMessageReaction_Request, CFriendMessages_UpdateMessageReaction_Response>( "FriendMessages.UpdateMessageReaction#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_ReportMessage_Response>> ReportMessage( CFriendMessages_ReportMessage_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_ReportMessage_Request, CFriendMessages_ReportMessage_Response>( "FriendMessages.ReportMessage#1", request );
+            return UnifiedMessages.SendMessage<CFriendMessages_ReportMessage_Request, CFriendMessages_ReportMessage_Response>( "FriendMessages.ReportMessage#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CFriendMessages_ResolveReport_Response>> ResolveReport( CFriendMessages_ResolveReport_Request request )
         {
-            return UnifiedMessages.SendMessage<CFriendMessages_ResolveReport_Request, CFriendMessages_ResolveReport_Response>( "FriendMessages.ResolveReport#1", request );
+            return UnifiedMessages.SendMessage<CFriendMessages_ResolveReport_Request, CFriendMessages_ResolveReport_Response>( "FriendMessages.ResolveReport#1", request, Model );
         }
 
         public void DismissSessionNotice(CFriendMessages_DismissSessionNotice_Notification request )
         {
-            UnifiedMessages.SendNotification<CFriendMessages_DismissSessionNotice_Notification>( "FriendMessages.DismissSessionNotice#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_DismissSessionNotice_Notification>( "FriendMessages.DismissSessionNotice#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1207,28 +1209,55 @@ namespace SteamKit2.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_GetRecentMessages_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_GetRecentMessages_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendsMessages_GetActiveMessageSessions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendsMessages_GetActiveMessageSessions_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_SendMessage_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_SendMessage_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_AckMessage_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_IsInFriendsUIBeta_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_IsInFriendsUIBeta_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_GetPartnerSharedChatGroup_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_GetPartnerSharedChatGroup_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_UpdateMessageReaction_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_UpdateMessageReaction_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_ReportMessage_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_ReportMessage_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_ResolveReport_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_ResolveReport_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_DismissSessionNotice_Notification))]
+    internal sealed partial class FriendMessagesProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class FriendMessagesClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "FriendMessagesClient";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => FriendMessagesClientProtobufModel.Instance;
+
         public void IncomingMessage(CFriendMessages_IncomingMessage_Notification request )
         {
-            UnifiedMessages.SendNotification<CFriendMessages_IncomingMessage_Notification>( "FriendMessagesClient.IncomingMessage#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_IncomingMessage_Notification>( "FriendMessagesClient.IncomingMessage#1", request, Model );
         }
 
         public void NotifyAckMessageEcho(CFriendMessages_AckMessage_Notification request )
         {
-            UnifiedMessages.SendNotification<CFriendMessages_AckMessage_Notification>( "FriendMessagesClient.NotifyAckMessageEcho#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_AckMessage_Notification>( "FriendMessagesClient.NotifyAckMessageEcho#1", request, Model );
         }
 
         public void MessageReaction(CFriendMessages_MessageReaction_Notification request )
         {
-            UnifiedMessages.SendNotification<CFriendMessages_MessageReaction_Notification>( "FriendMessagesClient.MessageReaction#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_MessageReaction_Notification>( "FriendMessagesClient.MessageReaction#1", request, Model );
         }
 
         public void SessionNotice(CFriendMessages_SessionNotice_Notification request )
         {
-            UnifiedMessages.SendNotification<CFriendMessages_SessionNotice_Notification>( "FriendMessagesClient.SessionNotice#1", request );
+            UnifiedMessages.SendNotification<CFriendMessages_SessionNotice_Notification>( "FriendMessagesClient.SessionNotice#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -1254,6 +1283,17 @@ namespace SteamKit2.Internal
             }
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_IncomingMessage_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_AckMessage_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_MessageReaction_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CFriendMessages_SessionNotice_Notification))]
+    internal sealed partial class FriendMessagesClientProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

@@ -350,7 +350,7 @@ namespace SteamKit2.Internal
 		public void Serialize(Stream stream)
 		{
 			using MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<SteamKit2.Internal.CMsgProtoBufHeader>(msProto, Proto);
+			SteamKit2.ProtobufUtil.Serialize<SteamKit2.Internal.CMsgProtoBufHeader>( SteamKit2.Internal.SteamKitProtobuf.Model, msProto, Proto );
 			HeaderLength = (int)msProto.Length;
 			using BinaryWriter bw = new BinaryWriter( stream, Encoding.UTF8, leaveOpen: true );
 
@@ -367,7 +367,7 @@ namespace SteamKit2.Internal
 			Msg = (EMsg)MsgUtil.GetMsg( (uint)br.ReadInt32() );
 			HeaderLength = br.ReadInt32();
 			ArgumentOutOfRangeException.ThrowIfNegative( HeaderLength );
-			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.Internal.CMsgProtoBufHeader>( stream, length: HeaderLength );
+			Proto = SteamKit2.ProtobufUtil.Deserialize<SteamKit2.Internal.CMsgProtoBufHeader>( SteamKit2.Internal.SteamKitProtobuf.Model, stream, HeaderLength );
 		}
 	}
 
@@ -393,7 +393,7 @@ namespace SteamKit2.Internal
 		public void Serialize(Stream stream)
 		{
 			using MemoryStream msProto = new MemoryStream();
-			ProtoBuf.Serializer.Serialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>(msProto, Proto);
+			SteamKit2.ProtobufUtil.Serialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>( SteamKit2.Internal.SteamKitProtobuf.Model, msProto, Proto );
 			HeaderLength = (int)msProto.Length;
 			using BinaryWriter bw = new BinaryWriter( stream, Encoding.UTF8, leaveOpen: true );
 
@@ -410,7 +410,7 @@ namespace SteamKit2.Internal
 			Msg = MsgUtil.GetGCMsg( (uint)br.ReadUInt32() );
 			HeaderLength = br.ReadInt32();
 			ArgumentOutOfRangeException.ThrowIfNegative( HeaderLength );
-			Proto = ProtoBuf.Serializer.Deserialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>( stream, length: HeaderLength );
+			Proto = SteamKit2.ProtobufUtil.Deserialize<SteamKit2.GC.Internal.CMsgProtoBufHeader>( SteamKit2.Internal.SteamKitProtobuf.Model, stream, HeaderLength );
 		}
 	}
 

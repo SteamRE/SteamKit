@@ -612,34 +612,36 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "GameNotifications";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => GameNotificationsProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_CreateSession_Response>> UserCreateSession( CGameNotifications_CreateSession_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_CreateSession_Request, CGameNotifications_CreateSession_Response>( "GameNotifications.UserCreateSession#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_CreateSession_Request, CGameNotifications_CreateSession_Response>( "GameNotifications.UserCreateSession#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_DeleteSession_Response>> UserDeleteSession( CGameNotifications_DeleteSession_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_DeleteSession_Request, CGameNotifications_DeleteSession_Response>( "GameNotifications.UserDeleteSession#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_DeleteSession_Request, CGameNotifications_DeleteSession_Response>( "GameNotifications.UserDeleteSession#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_UpdateSession_Response>> UserUpdateSession( CGameNotifications_UpdateSession_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_UpdateSession_Request, CGameNotifications_UpdateSession_Response>( "GameNotifications.UserUpdateSession#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_UpdateSession_Request, CGameNotifications_UpdateSession_Response>( "GameNotifications.UserUpdateSession#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_EnumerateSessions_Response>> EnumerateSessions( CGameNotifications_EnumerateSessions_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_EnumerateSessions_Request, CGameNotifications_EnumerateSessions_Response>( "GameNotifications.EnumerateSessions#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_EnumerateSessions_Request, CGameNotifications_EnumerateSessions_Response>( "GameNotifications.EnumerateSessions#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_GetSessionDetails_Response>> GetSessionDetails( CGameNotifications_GetSessionDetails_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_GetSessionDetails_Request, CGameNotifications_GetSessionDetails_Response>( "GameNotifications.GetSessionDetails#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_GetSessionDetails_Request, CGameNotifications_GetSessionDetails_Response>( "GameNotifications.GetSessionDetails#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CGameNotifications_UpdateNotificationSettings_Response>> UpdateNotificationSettings( CGameNotifications_UpdateNotificationSettings_Request request )
         {
-            return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( "GameNotifications.UpdateNotificationSettings#1", request );
+            return UnifiedMessages.SendMessage<CGameNotifications_UpdateNotificationSettings_Request, CGameNotifications_UpdateNotificationSettings_Response>( "GameNotifications.UpdateNotificationSettings#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -672,18 +674,39 @@ namespace SteamKit2.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_CreateSession_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_CreateSession_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_DeleteSession_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_DeleteSession_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_UpdateSession_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_UpdateSession_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_EnumerateSessions_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_EnumerateSessions_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_GetSessionDetails_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_GetSessionDetails_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_UpdateNotificationSettings_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_UpdateNotificationSettings_Response))]
+    internal sealed partial class GameNotificationsProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class GameNotificationsClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "GameNotificationsClient";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => GameNotificationsClientProtobufModel.Instance;
+
         public void OnNotificationsRequested(CGameNotifications_OnNotificationsRequested_Notification request )
         {
-            UnifiedMessages.SendNotification<CGameNotifications_OnNotificationsRequested_Notification>( "GameNotificationsClient.OnNotificationsRequested#1", request );
+            UnifiedMessages.SendNotification<CGameNotifications_OnNotificationsRequested_Notification>( "GameNotificationsClient.OnNotificationsRequested#1", request, Model );
         }
 
         public void OnUserStatusChanged(CGameNotifications_OnUserStatusChanged_Notification request )
         {
-            UnifiedMessages.SendNotification<CGameNotifications_OnUserStatusChanged_Notification>( "GameNotificationsClient.OnUserStatusChanged#1", request );
+            UnifiedMessages.SendNotification<CGameNotifications_OnUserStatusChanged_Notification>( "GameNotificationsClient.OnUserStatusChanged#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -703,6 +726,15 @@ namespace SteamKit2.Internal
             }
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_OnNotificationsRequested_Notification))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.CGameNotifications_OnUserStatusChanged_Notification))]
+    internal sealed partial class GameNotificationsClientProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

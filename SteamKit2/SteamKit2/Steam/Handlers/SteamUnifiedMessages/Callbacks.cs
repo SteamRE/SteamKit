@@ -3,7 +3,9 @@
  * file 'license.txt', which is part of this source code package.
  */
 
+using System.Diagnostics.CodeAnalysis;
 using ProtoBuf;
+using ProtoBuf.Meta;
 
 namespace SteamKit2
 {
@@ -12,7 +14,7 @@ namespace SteamKit2
         /// <summary>
         /// This callback is returned in response to a service method sent through <see cref="SteamUnifiedMessages"/>.
         /// </summary>
-        public class ServiceMethodResponse<T> : CallbackMsg where T : IExtensible, new()
+        public class ServiceMethodResponse<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] T> : CallbackMsg where T : IExtensible, new()
         {
             /// <summary>
             /// The result of the message.
@@ -24,19 +26,19 @@ namespace SteamKit2
             /// </summary>
             public T Body { get; }
 
-            internal ServiceMethodResponse( PacketClientMsgProtobuf packetMsg )
+            internal ServiceMethodResponse( PacketClientMsgProtobuf packetMsg, TypeModel model )
             {
                 var protoHeader = packetMsg.Header.Proto;
                 JobID = protoHeader.jobid_target;
                 Result = ( EResult )protoHeader.eresult;
-                Body = new ClientMsgProtobuf<T>( packetMsg ).Body;
+                Body = new ClientMsgProtobuf<T>( packetMsg, model ).Body;
             }
         }
 
         /// <summary>
         /// This callback represents a service notification received though <see cref="SteamUnifiedMessages"/>.
         /// </summary>
-        public class ServiceMethodNotification<T> : CallbackMsg where T : IExtensible, new()
+        public class ServiceMethodNotification<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] T> : CallbackMsg where T : IExtensible, new()
         {
             /// <summary>
             /// The name of the job, in the format Service.Method#Version.
@@ -48,11 +50,11 @@ namespace SteamKit2
             /// </summary>
             public T Body { get; }
 
-            internal ServiceMethodNotification( PacketClientMsgProtobuf packetMsg)
+            internal ServiceMethodNotification( PacketClientMsgProtobuf packetMsg, TypeModel model )
             {
                 JobID = JobID.Invalid;
                 JobName = packetMsg.Header.Proto.target_job_name;
-                Body = new ClientMsgProtobuf<T>( packetMsg ).Body;
+                Body = new ClientMsgProtobuf<T>( packetMsg, model ).Body;
             }
         }
     }

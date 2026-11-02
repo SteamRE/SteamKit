@@ -205,14 +205,16 @@ namespace SteamKit2.WebUI.Internal
     {
         public override string ServiceName { get; } = "CloudConfigStore";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => CloudConfigStoreProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Download_Response>> Download( CCloudConfigStore_Download_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Download_Request, CCloudConfigStore_Download_Response>( "CloudConfigStore.Download#1", request, Model );
         }
 
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<CCloudConfigStore_Upload_Response>> Upload( CCloudConfigStore_Upload_Request request )
         {
-            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request );
+            return UnifiedMessages.SendMessage<CCloudConfigStore_Upload_Request, CCloudConfigStore_Upload_Response>( "CloudConfigStore.Upload#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -233,13 +235,26 @@ namespace SteamKit2.WebUI.Internal
         }
     }
 
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Download_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Download_Response))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Upload_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Upload_Response))]
+    internal sealed partial class CloudConfigStoreProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
+
     public class CloudConfigStoreClient : SteamUnifiedMessages.UnifiedService
     {
         public override string ServiceName { get; } = "CloudConfigStoreClient";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => CloudConfigStoreClientProtobufModel.Instance;
+
         public void NotifyChange(CCloudConfigStore_Change_Notification request )
         {
-            UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request );
+            UnifiedMessages.SendNotification<CCloudConfigStore_Change_Notification>( "CloudConfigStoreClient.NotifyChange#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -256,6 +271,14 @@ namespace SteamKit2.WebUI.Internal
             }
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.WebUI.Internal.CCloudConfigStore_Change_Notification))]
+    internal sealed partial class CloudConfigStoreClientProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

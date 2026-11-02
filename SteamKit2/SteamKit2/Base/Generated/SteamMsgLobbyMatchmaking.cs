@@ -121,9 +121,11 @@ namespace SteamKit2.Internal
     {
         public override string ServiceName { get; } = "LobbyMatchmakingLegacy";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => LobbyMatchmakingLegacyProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<LobbyMatchmakingLegacy_GetLobbyStatus_Response>> GetLobbyStatus( LobbyMatchmakingLegacy_GetLobbyStatus_Request request )
         {
-            return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( "LobbyMatchmakingLegacy.GetLobbyStatus#1", request );
+            return UnifiedMessages.SendMessage<LobbyMatchmakingLegacy_GetLobbyStatus_Request, LobbyMatchmakingLegacy_GetLobbyStatus_Response>( "LobbyMatchmakingLegacy.GetLobbyStatus#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -140,6 +142,15 @@ namespace SteamKit2.Internal
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.LobbyMatchmakingLegacy_GetLobbyStatus_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.LobbyMatchmakingLegacy_GetLobbyStatus_Response))]
+    internal sealed partial class LobbyMatchmakingLegacyProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 

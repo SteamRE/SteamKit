@@ -21,7 +21,7 @@ namespace SteamKit2
 
 			internal ScreenshotAddedCallback( IPacketMsg packetMsg )
 			{
-                var resp = new ClientMsgProtobuf<CMsgClientUCMAddScreenshotResponse>( packetMsg );
+                var resp = new ClientMsgProtobuf<CMsgClientUCMAddScreenshotResponse>( packetMsg, SteamKitProtobuf.Model );
                 var msg = resp.Body;
                 
                 JobID = resp.TargetJobID;

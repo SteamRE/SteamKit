@@ -64,9 +64,11 @@ namespace SteamKit2.Internal.Steamworks
     {
         public override string ServiceName { get; } = "OAuthToken";
 
+        public override global::ProtoBuf.Meta.TypeModel Model => OAuthTokenProtobufModel.Instance;
+
         public AsyncJob<SteamUnifiedMessages.ServiceMethodResponse<COAuthToken_ImplicitGrantNoPrompt_Response>> ImplicitGrantNoPrompt( COAuthToken_ImplicitGrantNoPrompt_Request request )
         {
-            return UnifiedMessages.SendMessage<COAuthToken_ImplicitGrantNoPrompt_Request, COAuthToken_ImplicitGrantNoPrompt_Response>( "OAuthToken.ImplicitGrantNoPrompt#1", request );
+            return UnifiedMessages.SendMessage<COAuthToken_ImplicitGrantNoPrompt_Request, COAuthToken_ImplicitGrantNoPrompt_Response>( "OAuthToken.ImplicitGrantNoPrompt#1", request, Model );
         }
 
         public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )
@@ -83,6 +85,15 @@ namespace SteamKit2.Internal.Steamworks
         {
         }
     }
+
+    #pragma warning disable PBN9001
+    [global::ProtoBuf.ProtoModel]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.Steamworks.COAuthToken_ImplicitGrantNoPrompt_Request))]
+    [global::ProtoBuf.ProtoSerializable(typeof(global::SteamKit2.Internal.Steamworks.COAuthToken_ImplicitGrantNoPrompt_Response))]
+    internal sealed partial class OAuthTokenProtobufModel : global::ProtoBuf.Meta.TypeModel
+    {
+    }
+    #pragma warning restore PBN9001
 
 }
 
