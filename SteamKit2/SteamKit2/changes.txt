@@ -1,4 +1,19 @@
 ------------------------------------------------------------------------------
+v 4.0.0
+------------------------------------------------------------------------------
+
+* Added native AOT and trimming support with compile-time protobuf-net models (`SteamKitProtobuf.Model`, `UnifiedService.Model`).
+* Added `TypeModel` overloads to `ClientMsgProtobuf`, `ClientGCMsgProtobuf`, `SendMessage`, `SendNotification` and `CallProtobufAsync`.
+* WebAPI `Call` and `CallAsync` now flatten list arguments to `name[0]`, `name[1]`.
+* Fixed WebAPI key not being sent when a call had no arguments.
+* Fixed `CallProtobufAsync` rejecting `format=protobuf_raw` in arguments.
+* Fixed empty parameters in WebAPI query strings.
+* Updated dependencies.
+
+BREAKING CHANGES
+* Removed `dynamic` support from `WebAPI.Interface` and `WebAPI.AsyncInterface`, use `Call`, `CallAsync` or `CallProtobufAsync` instead.
+
+------------------------------------------------------------------------------
 v 3.5.0			October 19 2026
 ------------------------------------------------------------------------------
 
