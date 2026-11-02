@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -237,6 +238,8 @@ namespace SteamKit2
             /// <exception cref="ProtoException">An error occurred when parsing the response from the WebAPI.</exception>
             public async Task<T> CallProtobufAsync<T>( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
             {
+                ThrowIfUnexpectedFormat( args, "protobuf_raw", nameof( args ) );
+
                 var response = await CallAsyncInternal( method, func, version, args, "protobuf_raw" ).ConfigureAwait( false );
 
                 using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
@@ -273,6 +276,8 @@ namespace SteamKit2
                 {
                     throw new ArgumentNullException( nameof( request ) );
                 }
+
+                ThrowIfUnexpectedFormat( extraArgs, "protobuf_raw", nameof( extraArgs ) );
 
                 using var inputPayload = new MemoryStream();
                 Serializer.Serialize<TRequest>( inputPayload, request );
@@ -335,6 +340,7 @@ namespace SteamKit2
             /// <exception cref="InvalidDataException">An error occurred when parsing the response from the WebAPI.</exception>
             public async Task<KeyValue> CallAsync( HttpMethod method, string func, int version = 1, Dictionary<string, object?>? args = null )
             {
+                ThrowIfUnexpectedFormat( args, "vdf", nameof( args ) );
                 var response = await CallAsyncInternal( method, func, version, args, "vdf" ).ConfigureAwait( false );
 
                 using var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait( false );
@@ -366,7 +372,7 @@ namespace SteamKit2
                 {
                     formatProvided = true;
 
-                    if ( format is not string formatText || formatText != "vdf" )
+                    if ( format is not string formatText || formatText is not ( "vdf" or "protobuf_raw" ) )
                     {
                         throw new ArgumentException( $"Unsupported 'format' value '{format}'. Format must either be '{expectedFormat}' or omitted.", nameof( args ) );
                     }
@@ -633,6 +639,19 @@ namespace SteamKit2
             };
 
             return client;
+        }
+
+        static void ThrowIfUnexpectedFormat( Dictionary<string, object?>? args, string expectedFormat, string parameterName, [CallerMemberName] string callerName = "" )
+        {
+            if ( args is null || !args.TryGetValue( "format", out var format ) || format is not string formatText )
+            {
+                return;
+            }
+
+            if ( !string.Equals( formatText, expectedFormat, StringComparison.Ordinal ) )
+            {
+                throw new ArgumentException( $"Unsupported 'format' value: {formatText} when calling {callerName}. Format must either be '{expectedFormat}' or omitted. (Parameter: '{parameterName}')" );
+            }
         }
     }
 }
