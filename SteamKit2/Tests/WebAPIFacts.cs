@@ -363,6 +363,84 @@ namespace Tests
             Assert.True( handlerCalled );
         }
 
+        [Fact]
+        public async Task FormatsProtobufRequests()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "protobuf_raw",
+            };
+
+            string query = null;
+            hookableHandler.OnRequest = request =>
+            {
+                query = request.RequestUri.Query;
+                return Task.CompletedTask;
+            };
+
+            // the error message says 'protobuf_raw' is the accepted value, so this must not throw
+            await iface.CallProtobufAsync<SteamKit2.Internal.CMsgClientHello>( HttpMethod.Get, "PerformFooOperation", 2, args );
+
+            var values = HttpUtility.ParseQueryString( query );
+            Assert.Equal( "protobuf_raw", values[ "format" ] );
+        }
+
+        [Fact]
+        public async Task RejectsVdfFormatWhenCallingProtobuf()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "vdf",
+            };
+
+            var requestSent = false;
+            hookableHandler.OnRequest = request =>
+            {
+                requestSent = true;
+                return Task.CompletedTask;
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>( () => iface.CallProtobufAsync<SteamKit2.Internal.CMsgClientHello>( HttpMethod.Get, "PerformFooOperation", 2, args ) );
+            Assert.False( requestSent );
+        }
+
+        [Fact]
+        public async Task RejectsProtobufFormatWhenCallingVdf()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "protobuf_raw",
+            };
+
+            var requestSent = false;
+            hookableHandler.OnRequest = request =>
+            {
+                requestSent = true;
+                return Task.CompletedTask;
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>( () => iface.CallAsync( HttpMethod.Get, "PerformFooOperation", 2, args ) );
+            Assert.False( requestSent );
+        }
+
         sealed class ServiceUnavailableHttpMessageHandler : HttpMessageHandler
         {
             protected override Task<HttpResponseMessage> SendAsync( HttpRequestMessage request, CancellationToken cancellationToken )
