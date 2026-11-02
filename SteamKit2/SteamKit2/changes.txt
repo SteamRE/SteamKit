@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-v 4.0.0
+v 4.0.0			November 2 2026
 ------------------------------------------------------------------------------
 
 * Added native AOT and trimming support with compile-time protobuf-net models (`SteamKitProtobuf.Model`, `UnifiedService.Model`).
