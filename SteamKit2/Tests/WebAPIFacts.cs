@@ -258,14 +258,44 @@ namespace Tests
         }
 
         [Fact]
-        public async Task IncludesApiKeyInParams()
+        public async Task IncludesApiKeyInParamsNoArgs()
         {
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c
                 .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey( "MySecretApiKey" ) );
 
-            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var handlerCalled = false;
+            hookableHandler.OnRequest = request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( HttpMethod.Get, request.Method );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+                var values = HttpUtility.ParseQueryString( request.RequestUri.Query );
+                Assert.Equal( 2, values.Count );
+                Assert.Equal( "MySecretApiKey", values[ "key" ] );
+                Assert.Equal( "vdf", values[ "format" ] );
+
+                handlerCalled = true;
+                return Task.CompletedTask;
+            };
+
+            var response = await iface.CallAsync( "PerformFooOperation", 2 );
+            Assert.True( handlerCalled );
+        }
+
+        [Fact]
+        public async Task IncludesApiKeyInParamsWithArgs()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
+                .WithWebAPIKey( "MySecretApiKey" ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
@@ -293,6 +323,154 @@ namespace Tests
 
             var response = await iface.CallAsync( "PerformFooOperation", 2, args );
             Assert.True( handlerCalled );
+        }
+
+        [Fact]
+        public async Task UsesApiKeyFromArgs()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "key" ] = "MySecretApiKey",
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+            };
+
+            var handlerCalled = false;
+            hookableHandler.OnRequest = request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( HttpMethod.Get, request.Method );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+                var values = HttpUtility.ParseQueryString( request.RequestUri.Query );
+                Assert.Equal( 4, values.Count );
+                Assert.Equal( "MySecretApiKey", values[ "key" ] );
+                Assert.Equal( "foo", values[ "f" ] );
+                Assert.Equal( "bar", values[ "b" ] );
+                Assert.Equal( "vdf", values[ "format" ] );
+
+                handlerCalled = true;
+                return Task.CompletedTask;
+            };
+
+            var response = await iface.CallAsync( "PerformFooOperation", 2, args );
+            Assert.True( handlerCalled );
+        }
+
+        [Fact]
+        public async Task FormatsProtobufRequests()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "protobuf_raw",
+            };
+
+            string query = null;
+            hookableHandler.OnRequest = request =>
+            {
+                query = request.RequestUri.Query;
+                return Task.CompletedTask;
+            };
+
+            // the error message says 'protobuf_raw' is the accepted value, so this must not throw
+            await iface.CallProtobufAsync<SteamKit2.Internal.CMsgClientHello>( HttpMethod.Get, "PerformFooOperation", 2, args );
+
+            var values = HttpUtility.ParseQueryString( query );
+            Assert.Equal( "protobuf_raw", values[ "format" ] );
+        }
+
+        [Fact]
+        public async Task RejectsVdfFormatWhenCallingProtobuf()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "vdf",
+            };
+
+            var requestSent = false;
+            hookableHandler.OnRequest = request =>
+            {
+                requestSent = true;
+                return Task.CompletedTask;
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>( () => iface.CallProtobufAsync<SteamKit2.Internal.CMsgClientHello>( HttpMethod.Get, "PerformFooOperation", 2, args ) );
+            Assert.False( requestSent );
+        }
+
+        [Fact]
+        public async Task RejectsProtobufFormatWhenCallingVdf()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "protobuf_raw",
+            };
+
+            var requestSent = false;
+            hookableHandler.OnRequest = request =>
+            {
+                requestSent = true;
+                return Task.CompletedTask;
+            };
+
+            await Assert.ThrowsAsync<ArgumentException>( () => iface.CallAsync( HttpMethod.Get, "PerformFooOperation", 2, args ) );
+            Assert.False( requestSent );
+        }
+
+        [Theory]
+        [InlineData( "" )]
+        [InlineData( "MySecretApiKey" )]
+        public async Task DoesNotProduceEmptyQueryParameter( string apiKey )
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
+                .WithWebAPIKey( apiKey ) );
+
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "format" ] = "vdf",
+                [ "f" ] = "foo",
+            };
+
+            string query = null;
+            hookableHandler.OnRequest = request =>
+            {
+                query = request.RequestUri.Query;
+                return Task.CompletedTask;
+            };
+
+            await iface.CallAsync( "PerformFooOperation", 2, args );
+
+            Assert.DoesNotContain( "?&", query );
+            Assert.DoesNotContain( "&&", query );
+            Assert.Equal( "foo", HttpUtility.ParseQueryString( query )[ "f" ] );
         }
 
         sealed class ServiceUnavailableHttpMessageHandler : HttpMessageHandler
