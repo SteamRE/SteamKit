@@ -16,17 +16,18 @@ using SteamKit2;
 
 // in order to interact with the Web APIs, you must first acquire an interface
 // for a certain API
-using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
+using ( WebAPI.AsyncInterface steamNews = WebAPI.GetAsyncInterface( "ISteamNews" ) )
 {
-    // note the usage of c#'s dynamic feature, which can be used
-    // to make the api a breeze to use
-
     // the ISteamNews WebAPI has only 1 function: GetNewsForApp,
     // so we'll be using that
 
-    // when making use of dynamic, we call the interface function directly
-    // and pass any parameters as named arguments
-    KeyValue kvNews = steamNews.GetNewsForApp( appid: 440 ); // get news for tf2
+    // interface functions are called by name, with their arguments passed in a dictionary
+    var newsArgs = new Dictionary<string, object>
+    {
+        [ "appid" ] = 440, // get news for tf2
+    };
+
+    KeyValue kvNews = await steamNews.CallAsync( "GetNewsForApp", version: 1, newsArgs );
 
     // the return of every WebAPI call is a KeyValue class that contains the result data
 
@@ -36,12 +37,9 @@ using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
         Console.WriteLine( "News: {0}", news[ "title" ].AsString() );
     }
 
-    // for functions with multiple versions, the version can be specified by
-    // adding a number after the function name when calling the API
-
-    kvNews = steamNews.GetNewsForApp2( appid: 570 );
-
-    // if a number is not specified, version 1 is assumed by default
+    // for functions with multiple versions, the version can be specified
+    newsArgs[ "appid" ] = 570;
+    kvNews = await steamNews.CallAsync( "GetNewsForApp", version: 2, newsArgs );
 
     // notice that the output of this version differs from the first version
     foreach ( KeyValue news in kvNews[ "newsitems" ].Children )
@@ -49,12 +47,19 @@ using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
         Console.WriteLine( "News: {0}", news[ "title" ].AsString() );
     }
 
-    // note that the interface functions can throw WebExceptions when the API
+    // note that the interface functions can throw exceptions when the API
     // is otherwise inaccessible (networking issues, server downtime, etc)
     // and these should be handled appropriately
     try
     {
-        kvNews = steamNews.GetNewsForApp002( appid: 730, maxlength: 100, count: 5 );
+        var limitedArgs = new Dictionary<string, object>
+        {
+            [ "appid" ] = 730,
+            [ "maxlength" ] = 100,
+            [ "count" ] = 5,
+        };
+
+        kvNews = await steamNews.CallAsync( "GetNewsForApp", version: 2, limitedArgs );
     }
     catch ( Exception ex )
     {
@@ -62,38 +67,25 @@ using ( dynamic steamNews = WebAPI.GetInterface( "ISteamNews" ) )
     }
 }
 
-// for WebAPIs that require an API key, the key can be specified in the GetInterface function
-using ( dynamic steamUserAuth = WebAPI.GetInterface( "ISteamUserAuth", "APIKEYGOESHERE" ) )
+// for WebAPIs that require an API key, the key can be specified in the GetAsyncInterface function
+using ( WebAPI.AsyncInterface steamUserAuth = WebAPI.GetAsyncInterface( "ISteamUserAuth", "APIKEYGOESHERE" ) )
 {
-    // as the interface functions are synchronous, it may be beneficial to specify a timeout for calls
+    // it may be beneficial to specify a timeout for calls
     steamUserAuth.Timeout = TimeSpan.FromSeconds( 5 );
 
     // additionally, if the API you are using requires you to POST,
-    // you may specify with the "method" reserved parameter
+    // you may specify the http method
     try
     {
-        steamUserAuth.AuthenticateUser( someParam: "someValue", method: HttpMethod.Post );
+        var authArgs = new Dictionary<string, object>
+        {
+            [ "someParam" ] = "someValue",
+        };
+
+        await steamUserAuth.CallAsync( HttpMethod.Post, "AuthenticateUser", version: 1, authArgs );
     }
     catch ( Exception ex )
     {
         Console.WriteLine( "Unable to make AuthenticateUser API Request: {0}", ex.Message );
     }
 }
-
-// if you are using a language that does not have dynamic object support, or you otherwise don't wish to use it
-// you can call interface functions through a Call method
-using ( WebAPI.Interface steamNews = WebAPI.GetInterface( "ISteamNews" ) )
-{
-    var newsArgs = new Dictionary<string, object>
-    {
-        [ "appid" ] = "440"
-    };
-
-    KeyValue results = steamNews.Call( "GetNewsForApp", /* version */ 1, newsArgs );
-
-    foreach ( KeyValue news in results[ "newsitems" ][ "newsitem" ].Children )
-    {
-        Console.WriteLine( "News: {0}", news[ "title" ].AsString() );
-    }
-}
-
