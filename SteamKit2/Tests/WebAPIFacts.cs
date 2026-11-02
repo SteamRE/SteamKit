@@ -258,17 +258,85 @@ namespace Tests
         }
 
         [Fact]
-        public async Task IncludesApiKeyInParams()
+        public async Task IncludesApiKeyInParamsNoArgs()
         {
             using var hookableHandler = new HookableHandler();
             var configuration = SteamConfiguration.Create( c => c
                 .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
                 .WithWebAPIKey( "MySecretApiKey" ) );
 
-            WebAPI.AsyncInterface iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+            var iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var handlerCalled = false;
+            hookableHandler.OnRequest = request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( HttpMethod.Get, request.Method );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+                var values = HttpUtility.ParseQueryString( request.RequestUri.Query );
+                Assert.Equal( 2, values.Count );
+                Assert.Equal( "MySecretApiKey", values[ "key" ] );
+                Assert.Equal( "vdf", values[ "format" ] );
+
+                handlerCalled = true;
+                return Task.CompletedTask;
+            };
+
+            var response = await iface.CallAsync( "PerformFooOperation", 2 );
+            Assert.True( handlerCalled );
+        }
+
+        [Fact]
+        public async Task IncludesApiKeyInParamsWithArgs()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) )
+                .WithWebAPIKey( "MySecretApiKey" ) );
+
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
 
             var args = new Dictionary<string, object>
             {
+                [ "f" ] = "foo",
+                [ "b" ] = "bar",
+            };
+
+            var handlerCalled = false;
+            hookableHandler.OnRequest = request =>
+            {
+                Assert.NotNull( request );
+                Assert.Equal( HttpMethod.Get, request.Method );
+                Assert.Equal( "/IFooService/PerformFooOperation/v2/", request.RequestUri.AbsolutePath );
+
+                var values = HttpUtility.ParseQueryString( request.RequestUri.Query );
+                Assert.Equal( 4, values.Count );
+                Assert.Equal( "MySecretApiKey", values[ "key" ] );
+                Assert.Equal( "foo", values[ "f" ] );
+                Assert.Equal( "bar", values[ "b" ] );
+                Assert.Equal( "vdf", values[ "format" ] );
+
+                handlerCalled = true;
+                return Task.CompletedTask;
+            };
+
+            var response = await iface.PerformFooOperation2( args );
+            Assert.True( handlerCalled );
+        }
+
+        [Fact]
+        public async Task UsesApiKeyFromArgs()
+        {
+            using var hookableHandler = new HookableHandler();
+            var configuration = SteamConfiguration.Create( c => c
+                .WithHttpClientFactory( ( purpose ) => new HttpClient( hookableHandler ) ) );
+
+            dynamic iface = configuration.GetAsyncWebAPIInterface( "IFooService" );
+
+            var args = new Dictionary<string, object>
+            {
+                [ "key" ] = "MySecretApiKey",
                 [ "f" ] = "foo",
                 [ "b" ] = "bar",
             };
