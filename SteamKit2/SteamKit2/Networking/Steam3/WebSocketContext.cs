@@ -119,6 +119,18 @@ namespace SteamKit2
                     return;
                 }
 
+                if ( socket.State == WebSocketState.Open || socket.State == WebSocketState.CloseReceived )
+                {
+                    try
+                    {
+                        socket.CloseOutputAsync( WebSocketCloseStatus.NormalClosure, null, CancellationToken.None ).GetAwaiter().GetResult();
+                    }
+                    catch ( Exception ex )
+                    {
+                        connection.log.LogDebug( nameof( WebSocketContext ), "Exception closing websocket: {0} - {1}", ex.GetType().FullName, ex.Message );
+                    }
+                }
+
                 cts.Cancel();
                 cts.Dispose();
                 runloopTask = null;

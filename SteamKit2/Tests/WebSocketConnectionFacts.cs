@@ -297,7 +297,7 @@ public class WebSocketConnectionFacts
         Assert.False( fixture.TryReadDisconnected( out _ ) );
 
         await WaitForCloseAsync( server );
-        Assert.NotEqual( WebSocketState.Open, server.State );
+        Assert.Equal( WebSocketState.CloseReceived, server.State );
     }
 
     [Fact]
@@ -402,16 +402,10 @@ public class WebSocketConnectionFacts
         var buffer = new byte[ 1024 ];
         using var cts = new CancellationTokenSource( WaitTimeout );
 
-        try
+        var result = await server.ReceiveAsync( buffer, cts.Token );
+        while ( result.MessageType != WebSocketMessageType.Close )
         {
-            var result = await server.ReceiveAsync( buffer, cts.Token );
-            while ( result.MessageType != WebSocketMessageType.Close )
-            {
-                result = await server.ReceiveAsync( buffer, cts.Token );
-            }
-        }
-        catch ( WebSocketException )
-        {
+            result = await server.ReceiveAsync( buffer, cts.Token );
         }
     }
 
