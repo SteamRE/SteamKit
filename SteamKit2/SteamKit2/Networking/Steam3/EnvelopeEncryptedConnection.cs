@@ -25,8 +25,8 @@ namespace SteamKit2
         readonly IConnection inner;
         readonly EUniverse universe;
         readonly ILogContext log;
-        EncryptionState state;
-        NetFilterEncryptionWithHMAC? encryption;
+        volatile EncryptionState state;
+        volatile NetFilterEncryptionWithHMAC? encryption;
         IDebugNetworkListener? debugNetworkListener;
 
         public EndPoint? CurrentEndPoint => inner.CurrentEndPoint;
@@ -95,6 +95,11 @@ namespace SteamKit2
 
         void OnNetMsgReceived( object? sender, NetMsgEventArgs e )
         {
+            if ( state == EncryptionState.Disconnected )
+            {
+                return;
+            }
+
             if ( state == EncryptionState.Encrypted )
             {
                 // A disconnect on another thread can clear the encryption between the state check and here
