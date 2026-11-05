@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.WebSockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Channels;
@@ -163,11 +164,7 @@ public class WebSocketConnectionFacts
         using var fixture = new Fixture();
         var server = await fixture.ConnectAsync();
 
-        var payload = new byte[ 100 * 1024 ];
-        for ( var i = 0; i < payload.Length; i++ )
-        {
-            payload[ i ] = ( byte )( i * 31 + i / 256 );
-        }
+        var payload = RandomNumberGenerator.GetBytes( 100 * 1024 );
 
         await server.SendAsync( payload, WebSocketMessageType.Binary, true, CancellationToken.None );
         var args = await fixture.ReadReceivedAsync();
@@ -436,6 +433,7 @@ public class WebSocketConnectionFacts
         readonly Channel<bool> connected = Channel.CreateUnbounded<bool>();
         readonly Channel<DisconnectedEventArgs> disconnected = Channel.CreateUnbounded<DisconnectedEventArgs>();
         readonly Channel<NetMsgEventArgs> received = Channel.CreateUnbounded<NetMsgEventArgs>();
+        readonly HttpMessageHandler handler;
         readonly HttpMessageInvoker invoker;
 
         public Fixture()
@@ -445,7 +443,7 @@ public class WebSocketConnectionFacts
 
         public Fixture( HttpMessageHandler handler )
         {
-            Handler = handler as LoopbackWebSocketHandler;
+            this.handler = handler;
             invoker = new HttpMessageInvoker( handler );
             Connection = new WebSocketConnection( DebugLogContext.Instance, invoker );
             Connection.Connected += ( sender, e ) => connected.Writer.TryWrite( true );
@@ -453,7 +451,7 @@ public class WebSocketConnectionFacts
             Connection.NetMsgReceived += ( sender, e ) => received.Writer.TryWrite( e );
         }
 
-        public LoopbackWebSocketHandler Handler { get; }
+        public LoopbackWebSocketHandler Handler => ( LoopbackWebSocketHandler )handler;
         public WebSocketConnection Connection { get; }
         public EndPoint EndPoint { get; } = new IPEndPoint( IPAddress.Loopback, 1 );
 
