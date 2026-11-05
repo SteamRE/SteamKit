@@ -429,6 +429,12 @@ namespace SteamKit2.Internal
 
         void NetMsgReceived( object? sender, NetMsgEventArgs e )
         {
+            // A released connection can still raise events from its network thread after Disconnected
+            if ( sender != connection )
+            {
+                return;
+            }
+
             OnClientMsgReceived( GetPacketMsg( e.Data, this ) );
         }
 
@@ -439,10 +445,16 @@ namespace SteamKit2.Internal
 
         void Connected( object? sender, EventArgs e )
         {
-            DebugLog.Assert( connection != null, nameof( CMClient ), "No connection object after connecting." );
-            DebugLog.Assert( connection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint after connecting - cannot update server list" );
+            var currentConnection = connection;
 
-            Servers.TryMark( connection.CurrentEndPoint, connection.ProtocolTypes, ServerQuality.Good );
+            if ( currentConnection == null || currentConnection != sender )
+            {
+                return;
+            }
+
+            DebugLog.Assert( currentConnection.CurrentEndPoint != null, nameof( CMClient ), "No connection endpoint after connecting - cannot update server list" );
+
+            Servers.TryMark( currentConnection.CurrentEndPoint, currentConnection.ProtocolTypes, ServerQuality.Good );
 
             IsConnected = true;
 
