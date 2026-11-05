@@ -49,20 +49,24 @@ namespace SteamKit2
 
         public void Send(Memory<byte> data)
         {
+            var context = currentContext;
+
             try
             {
-                currentContext?.SendAsync(data).GetAwaiter().GetResult();
+                context?.SendAsync(data).GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
                 log.LogDebug(nameof(WebSocketConnection), "Exception while sending data: {0} - {1}", ex.GetType().FullName, ex.Message);
-                DisconnectCore(userInitiated: false, specificContext: null);
+                DisconnectCore(userInitiated: false, specificContext: context);
             }
         }
 
         void DisconnectCore(bool userInitiated, WebSocketContext? specificContext)
         {
-            var oldContext = Interlocked.Exchange(ref currentContext, null);
+            var oldContext = specificContext == null
+                ? Interlocked.Exchange(ref currentContext, null)
+                : Interlocked.CompareExchange(ref currentContext, null, specificContext);
             if (oldContext != null && (specificContext == null || oldContext == specificContext))
             {
                 oldContext.Dispose();
