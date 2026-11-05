@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
-v 4.0.0			November 2 2026
+v 4.0.0			November 6 2026
 ------------------------------------------------------------------------------
 
 * Added native AOT and trimming support with compile-time protobuf-net models (`SteamKitProtobuf.Model`, `UnifiedService.Model`).
@@ -8,6 +8,9 @@ v 4.0.0			November 2 2026
 * Fixed WebAPI key not being sent when a call had no arguments.
 * Fixed `CallProtobufAsync` rejecting `format=protobuf_raw` in arguments.
 * Fixed empty parameters in WebAPI query strings.
+* Fixed handling of short or undecryptable encrypted packets, and ignored packets received after disconnect.
+* Ignored stale events from released connections in `CMClient`.
+* Fixed WebSocket teardown throwing and leaving stale connection state.
 * Updated dependencies.
 
 BREAKING CHANGES
