@@ -60,6 +60,11 @@ namespace SteamKit2
         /// </summary>
         byte[] SymmetricDecryptHMACIV( Span<byte> input )
         {
+            if ( input.Length < InitializationVectorLength )
+            {
+                throw new CryptographicException( "Packet is shorter than the initialization vector." );
+            }
+
             Span<byte> iv = stackalloc byte[ InitializationVectorLength ];
             byte[] plainText;
 
