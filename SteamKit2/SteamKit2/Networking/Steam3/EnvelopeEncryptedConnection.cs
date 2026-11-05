@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers;
+using System.IO;
 using System.IO.Hashing;
 using System.Net;
 using System.Security.Cryptography;
@@ -96,7 +97,27 @@ namespace SteamKit2
         {
             if ( state == EncryptionState.Encrypted )
             {
-                var plaintextData = encryption!.ProcessIncoming( e.Data );
+                // A disconnect on another thread can clear the encryption between the state check and here
+                var currentEncryption = encryption;
+
+                if ( currentEncryption == null )
+                {
+                    return;
+                }
+
+                byte[] plaintextData;
+
+                try
+                {
+                    plaintextData = currentEncryption.ProcessIncoming( e.Data );
+                }
+                catch ( IOException )
+                {
+                    log.LogDebug( nameof( EnvelopeEncryptedConnection ), "Failed to decrypt incoming packet, shutting down connection" );
+                    Disconnect( userInitiated: false );
+                    return;
+                }
+
                 NetMsgReceived?.Invoke( this, e.WithData( plaintextData ) );
                 return;
             }
