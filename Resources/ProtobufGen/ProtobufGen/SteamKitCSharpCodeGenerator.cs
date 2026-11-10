@@ -73,7 +73,7 @@ namespace ProtobufGen
         protected override void WriteServiceFooter( GeneratorContext ctx, ServiceDescriptorProto service, ref object state )
         {
             var services = service.Methods
-                .Where( static serviceMethod => serviceMethod.OutputType.AsSpan()[ 1.. ] is not "NoResponse")
+                .Where( static serviceMethod => serviceMethod.OutputType.AsSpan( 1 ) is not "NoResponse")
                 .ToList();
 
             ctx.WriteLine( "public override void HandleResponseMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
@@ -104,7 +104,7 @@ namespace ProtobufGen
                 .WriteLine();
 
             var notifications = service.Methods
-                .Where( static serviceMethod => serviceMethod.OutputType.AsSpan()[ 1.. ] is "NoResponse")
+                .Where( static serviceMethod => serviceMethod.OutputType.AsSpan( 1 ) is "NoResponse")
                 .ToList();
 
             ctx.WriteLine( "public override void HandleNotificationMsg( string methodName, PacketClientMsgProtobuf packetMsg )" )
@@ -151,7 +151,7 @@ namespace ProtobufGen
             {
                 AddModelType( typeNames, globalTypeNames, method.InputType );
 
-                if ( method.OutputType.AsSpan()[ 1.. ] is not "NoResponse" )
+                if ( method.OutputType.AsSpan( 1 ) is not "NoResponse" )
                 {
                     AddModelType( typeNames, globalTypeNames, method.OutputType );
                 }
@@ -178,7 +178,7 @@ namespace ProtobufGen
         {
             var modelArgument = serviceModels ? ", Model" : "";
 
-            if ( method.OutputType.AsSpan()[ 1.. ] is "NoResponse" )
+            if ( method.OutputType.AsSpan( 1 ) is "NoResponse" )
             {
                 ctx.WriteLine( $"public void {Escape( method.Name )}({Escape( MakeRelativeName( ctx, method.InputType ) )} request )" )
                     .WriteLine( "{" )

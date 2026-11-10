@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.IO;
 using System.Linq;
 using NetHookAnalyzer2.Specializations;
@@ -106,10 +107,10 @@ namespace NetHookAnalyzer2
 
 		static uint PeekUInt(Stream stream)
 		{
-			var data = new byte[sizeof(uint)];
+			Span<byte> data = stackalloc byte[sizeof(uint)];
 			stream.ReadExactly(data);
 			stream.Seek(-sizeof(uint), SeekOrigin.Current);
-			return BitConverter.ToUInt32(data, 0);
+			return BinaryPrimitives.ReadUInt32LittleEndian(data);
 		}
 
 		static object ReadMessageBody(uint rawEMsg, Stream stream)

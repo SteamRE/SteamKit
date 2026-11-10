@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.IO;
 using SteamKit2;
 using SteamKit2.Internal;
@@ -60,7 +61,7 @@ namespace Tests
             var msgHdr = new MsgHdrProtoBuf { Msg = msg };
 
             var data = Serialize(msgHdr);
-            Array.Copy(BitConverter.GetBytes(-1), 0, data, 4, 4);
+            BinaryPrimitives.WriteInt32LittleEndian(data.AsSpan(4), -1);
             var packetMsg = CMClient.GetPacketMsg(data, DebugLogContext.Instance);
             Assert.Null(packetMsg);
         }

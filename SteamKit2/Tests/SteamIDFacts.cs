@@ -456,14 +456,14 @@ namespace Tests
         public void EUniverseEnumHasNotChanged()
         {
             // If this enum has changed, update SteamID.IsValid
-            Assert.Equal( 5, Enum.GetValues( typeof( EUniverse ) ).Length );
+            Assert.Equal( 5, Enum.GetValues<EUniverse>().Length );
         }
 
         [Fact]
         public void EAccountTypeEnumHasNotChanged()
         {
             // If this enum has changed, update SteamID.IsValid
-            Assert.Equal( 11, Enum.GetValues( typeof( EAccountType ) ).Length );
+            Assert.Equal( 11, Enum.GetValues<EAccountType>().Length );
         }
     }
 }

@@ -20,8 +20,9 @@ namespace NetHookAnalyzer2
 
 			foreach ( var enumType in eMsgEnums )
 			{
-				if ( Enum.IsDefined( enumType, ( int )eMsg ) )
-					return Enum.GetName( enumType, ( int )eMsg );
+				var name = Enum.GetName( enumType, ( int )eMsg );
+				if ( name != null )
+					return name;
 			}
 
 			return eMsg.ToString( CultureInfo.InvariantCulture );

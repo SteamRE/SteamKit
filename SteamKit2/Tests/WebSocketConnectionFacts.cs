@@ -399,10 +399,10 @@ public class WebSocketConnectionFacts
         var buffer = new byte[ 1024 ];
         using var cts = new CancellationTokenSource( WaitTimeout );
 
-        var result = await server.ReceiveAsync( buffer, cts.Token );
+        var result = await server.ReceiveAsync( buffer.AsMemory(), cts.Token );
         while ( result.MessageType != WebSocketMessageType.Close )
         {
-            result = await server.ReceiveAsync( buffer, cts.Token );
+            result = await server.ReceiveAsync( buffer.AsMemory(), cts.Token );
         }
     }
 

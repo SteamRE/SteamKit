@@ -20,6 +20,7 @@ namespace ProtobufDumper
         static void ScanFile( byte[] data, ProcessCandidate processCandidate )
         {
             const byte markerStart = 0x0A;
+            const string protoSuffix = ".proto";
 
             var i = 0;
             while ( i < data.Length - 1 )
@@ -53,13 +54,15 @@ namespace ProtobufDumper
                     continue;
                 }
 
-                var protoName = Encoding.ASCII.GetString( data, i + markerLength, expectedLength );
+                var nameBytes = data.AsSpan( i + markerLength, expectedLength );
 
-                if ( !protoName.EndsWith( ".proto", StringComparison.OrdinalIgnoreCase ) )
+                if ( nameBytes.Length < protoSuffix.Length || !Ascii.EqualsIgnoreCase( nameBytes[ ^protoSuffix.Length.. ], protoSuffix ) )
                 {
                     i++;
                     continue;
                 }
+
+                var protoName = Encoding.ASCII.GetString( nameBytes );
 
                 if ( !ProtoFileNameRegex().IsMatch( protoName ) )
                 {

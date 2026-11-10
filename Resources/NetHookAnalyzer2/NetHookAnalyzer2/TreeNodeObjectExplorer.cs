@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.Collections;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -136,7 +137,7 @@ namespace NetHookAnalyzer2
 		void DisplayDataAsHexadecimal(object sender, EventArgs e)
 		{
 			var data = (byte[])value;
-			var hexString = data.Aggregate(new StringBuilder(), (str, val) => str.Append(val.ToString("X2"))).ToString();
+			var hexString = Convert.ToHexString(data);
 			SetValueForDisplay(hexString);
 
 		}
@@ -244,11 +245,8 @@ namespace NetHookAnalyzer2
 		void DisplayAsIPAddress(object sender, EventArgs e)
 		{
 			var addressInteger = (long)Convert.ChangeType(value, typeof(long));
-			var addressScratch = BitConverter.GetBytes(addressInteger);
-			Array.Reverse(addressScratch);
-
-			var addressBytes = new byte[sizeof(uint)];
-			Array.Copy(addressScratch, sizeof(uint), addressBytes, 0, addressBytes.Length);
+			Span<byte> addressBytes = stackalloc byte[sizeof(uint)];
+			BinaryPrimitives.WriteUInt32BigEndian(addressBytes, (uint)addressInteger);
 
 			var address = new IPAddress(addressBytes);
 			SetValueForDisplay(address.ToString());
@@ -308,11 +306,9 @@ namespace NetHookAnalyzer2
 
 		void DisplayAsPosixTimestamp(object sender, EventArgs e)
 		{
-			var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
 			try
 			{
-				var dateTimeValue = unixEpoch.AddSeconds((double)Convert.ChangeType(value, typeof(double))).ToString("yyyy-MM-dd HH:mm:ss");
+				var dateTimeValue = DateTime.UnixEpoch.AddSeconds((double)Convert.ChangeType(value, typeof(double))).ToString("yyyy-MM-dd HH:mm:ss");
 				SetValueForDisplay(dateTimeValue);
 			}
 			catch (ArgumentOutOfRangeException)
@@ -359,9 +355,10 @@ namespace NetHookAnalyzer2
 			}
 			else
 			{
-				if (Enum.IsDefined(enumType, enumValue))
+				var enumName = Enum.GetName(enumType, enumValue);
+				if (enumName != null)
 				{
-					SetValueForDisplay(Enum.GetName(enumType, enumValue));
+					SetValueForDisplay(enumName);
 				}
 				else
 				{
@@ -601,7 +598,7 @@ namespace NetHookAnalyzer2
 				}
 				else
 				{
-					var hexadecimalValue = data.Aggregate(new StringBuilder(), (str, val) => str.Append(val.ToString("X2"))).ToString();
+					var hexadecimalValue = Convert.ToHexString(data);
 					SetValueForDisplay(hexadecimalValue);
 				}
 			}
@@ -626,8 +623,8 @@ namespace NetHookAnalyzer2
 			{
 				if ( msgIpAddr.ShouldSerializev4() )
 				{
-					byte[] addrBytes = BitConverter.GetBytes( msgIpAddr.v4 );
-					Array.Reverse( addrBytes );
+					Span<byte> addrBytes = stackalloc byte[ sizeof( uint ) ];
+					BinaryPrimitives.WriteUInt32BigEndian( addrBytes, msgIpAddr.v4 );
 					SetValueForDisplay( new IPAddress( addrBytes ).ToString() );
 				}
 				else if ( msgIpAddr.ShouldSerializev6() )
@@ -639,7 +636,7 @@ namespace NetHookAnalyzer2
 					SetValueForDisplay( "<null>" );
 				}
 			}
-			else if (objectType.IsDictionaryType())
+			else if (typeof(IDictionary).IsAssignableFrom(objectType))
 			{
 				var childNodes = new List<TreeNode>();
 
@@ -653,7 +650,7 @@ namespace NetHookAnalyzer2
 
 				SetValueForDisplay(null, childNodes: childNodes.ToArray());
 			}
-			else if (objectType.IsEnumerableType())
+			else if (typeof(IEnumerable).IsAssignableFrom(objectType))
 			{
 				Type innerType = null;
 				var index = 0;

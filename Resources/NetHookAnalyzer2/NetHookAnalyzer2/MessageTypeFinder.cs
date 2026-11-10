@@ -19,13 +19,13 @@ namespace NetHookAnalyzer2
 				return wellKnownType;
 			}
 
-			var protomsgType = SteamKit2Assembly.GetTypes().ToList().Find(t => FilterProtobufMessageBodyType(t, eMsg));
+			var protomsgType = Array.Find(SteamKit2Assembly.GetTypes(), t => FilterProtobufMessageBodyType(t, eMsg));
 			return protomsgType;
 		}
 
 		public static Type GetSteamKitType(string name)
 		{
-			return SteamKit2Assembly.GetTypes().ToList().Find(type => type.FullName == name);
+			return Array.Find(SteamKit2Assembly.GetTypes(), type => type.FullName == name);
 		}
 
 		public static IEnumerable<Type> GetGCMessageBodyTypeCandidates(uint rawEMsg, uint gcAppid)
@@ -61,7 +61,7 @@ namespace NetHookAnalyzer2
 		public static Type GetNonProtobufMessageBodyType(EMsg eMsg)
 		{
 			// lets first find the type by checking all EMsgs we have
-			var msgType = SteamKit2Assembly.GetTypes().ToList().Find(type =>
+			var msgType = Array.Find(SteamKit2Assembly.GetTypes(), type =>
 			{
 				if (type.GetInterfaces().ToList().Find(@interface => @interface == typeof(ISteamSerializableMessage)) == null)
 					return false;
@@ -92,7 +92,7 @@ namespace NetHookAnalyzer2
 
 		static bool FilterProtobufMessageBodyType(Type type, EMsg eMsg)
 		{
-			if (type.GetInterfaces().ToList().Find(inter => inter == typeof(IExtensible)) == null)
+			if (!typeof(IExtensible).IsAssignableFrom(type))
 			{
 				return false;
 			}

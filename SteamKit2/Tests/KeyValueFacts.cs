@@ -229,7 +229,7 @@ namespace Tests
                 kv.SaveToFile( tempFileName, asBinary: true );
 
                 var binaryValue = File.ReadAllBytes( tempFileName );
-                var hexValue = BitConverter.ToString( binaryValue ).Replace( "-", "", StringComparison.Ordinal );
+                var hexValue = Convert.ToHexString( binaryValue );
 
                 Assert.Equal( expectedHexValue, hexValue );
             }
@@ -262,7 +262,7 @@ namespace Tests
                 binaryValue = ms.ToArray();
             }
 
-            var hexValue = BitConverter.ToString( binaryValue ).Replace( "-", "", StringComparison.Ordinal );
+            var hexValue = Convert.ToHexString( binaryValue );
 
             Assert.Equal( expectedHexValue, hexValue );
         }
@@ -320,7 +320,7 @@ namespace Tests
         [Fact]
         public void KeyValuesReadsBinaryWithLeftoverData()
         {
-            var binary = Convert.FromHexString( TestObjectHex + Guid.NewGuid().ToString().Replace("-", "", StringComparison.Ordinal) );
+            var binary = Convert.FromHexString( TestObjectHex + Guid.NewGuid().ToString( "N" ) );
             var kv = new KeyValue();
             bool success;
             using ( var ms = new MemoryStream( binary ) )
@@ -606,7 +606,7 @@ namespace Tests
                 deserializedKv.TryReadAsBinary( ms );
             }
 
-            var hexValue = BitConverter.ToString( binaryValue ).Replace( "-", "", StringComparison.Ordinal );
+            var hexValue = Convert.ToHexString( binaryValue );
 
             Assert.Equal( expectedHexString, hexValue );
             Assert.Null( deserializedKv["emptyObj"].Value );

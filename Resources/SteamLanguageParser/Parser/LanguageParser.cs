@@ -49,7 +49,7 @@ namespace SteamLanguageParser
         public static Queue<Token> TokenizeString(string buffer, string fileName = "")
         {
             var regexPattern = RegexPattern();
-            var bufferLines = buffer.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var bufferLines = buffer.Split(Environment.NewLine);
 
             MatchCollection matches = regexPattern.Matches(buffer);
 
