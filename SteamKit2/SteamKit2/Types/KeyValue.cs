@@ -180,7 +180,6 @@ namespace SteamKit2
             }
 
             bool bConditionalStart = false;
-            int count = 0;
             sb.Clear();
             while ( !EndOfStream )
             {
@@ -198,14 +197,7 @@ namespace SteamKit2
                 if ( char.IsWhiteSpace( next ) )
                     break;
 
-                if ( count < 1023 )
-                {
-                    sb.Append( next );
-                }
-                else
-                {
-                    throw new Exception( "ReadToken overflow" );
-                }
+                sb.Append( next );
 
                 Read();
             }
@@ -840,25 +832,25 @@ namespace SteamKit2
                     case Type.Color:
                     case Type.Pointer:
                         {
-                            current.Value = Convert.ToString( input.ReadInt32() );
+                            current.Value = Convert.ToString( input.ReadInt32(), CultureInfo.InvariantCulture );
                             break;
                         }
 
                     case Type.UInt64:
                         {
-                            current.Value = Convert.ToString( input.ReadUInt64() );
+                            current.Value = Convert.ToString( input.ReadUInt64(), CultureInfo.InvariantCulture );
                             break;
                         }
 
                     case Type.Float32:
                         {
-                            current.Value = Convert.ToString( input.ReadFloat() );
+                            current.Value = Convert.ToString( input.ReadFloat(), CultureInfo.InvariantCulture );
                             break;
                         }
 
                     case Type.Int64:
                         {
-                            current.Value = Convert.ToString( input.ReadInt64() );
+                            current.Value = Convert.ToString( input.ReadInt64(), CultureInfo.InvariantCulture );
                             break;
                         }
 
