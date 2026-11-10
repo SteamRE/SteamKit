@@ -309,7 +309,7 @@ namespace SteamKit2
                 }
 
                 // Trim the ending null byte, safe for UTF-8
-                if ( filenameLength > 0 && bufferDecrypted[ filenameLength ] == 0 )
+                if ( filenameLength > 0 && bufferDecrypted[ filenameLength - 1 ] == 0 )
                 {
                     filenameLength--;
                 }

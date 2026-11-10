@@ -159,7 +159,14 @@ namespace SteamKit2
                 mapping.Deserialize(ds);
                 Mapping.Add(mapping);
 
-                i -= (uint)(ds.BaseStream.Position - start);
+                long consumed = ds.BaseStream.Position - start;
+
+                if ( consumed > i )
+                {
+                    throw new InvalidDataException( "data is not a valid steam3 manifest: file mapping exceeds the declared size." );
+                }
+
+                i -= (uint)consumed;
             }
         }
 
