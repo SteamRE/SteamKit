@@ -15,6 +15,32 @@ namespace SteamKit2
 {
     public sealed partial class SteamApps
     {
+        /// <summary>
+        /// Populates a <see cref="KeyValue"/> from a text buffer, which may end with a null byte.
+        /// </summary>
+        /// <returns><c>true</c> if the buffer was read; otherwise, <c>false</c>, and <paramref name="keyValues"/> may be partially populated.</returns>
+        private static bool TryReadTextBuffer( KeyValue keyValues, byte[] buffer, out string? error )
+        {
+            var textLength = buffer.Length;
+            if ( buffer[ textLength - 1 ] == 0 )
+            {
+                textLength--;
+            }
+
+            using var ms = new MemoryStream( buffer, 0, textLength );
+
+            try
+            {
+                keyValues.ReadAsText( ms );
+                error = null;
+                return true;
+            }
+            catch ( Exception ex )
+            {
+                error = ex.Message;
+                return false;
+            }
+        }
 
         /// <summary>
         /// This callback is fired during logon, informing the client of its available licenses.
@@ -569,17 +595,27 @@ namespace SteamKit2
 
                     if ( app_info.buffer != null && app_info.buffer.Length > 0 )
                     {
-                        // we don't want to read the trailing null byte
-                        using var ms = new MemoryStream( app_info.buffer, 0, app_info.buffer.Length - 1 );
-                        this.KeyValues.ReadAsText( ms );
+                        if ( !TryReadTextBuffer( this.KeyValues, app_info.buffer, out var error ) )
+                        {
+                            this.KeyValues = new KeyValue();
+                            DebugLog.WriteLine( nameof( PICSProductInfo ), $"Failed to load text buffer for app {this.ID}, change number {this.ChangeNumber}: {error}" );
+                        }
+                    }
+                    else if ( !parentResponse.meta_data_only && !app_info.missing_token )
+                    {
+                        DebugLog.WriteLine( nameof( PICSProductInfo ), $"Empty buffer for app {this.ID}, change number {this.ChangeNumber}" );
                     }
 
                     this.OnlyPublic = app_info.only_public;
                     this.HttpHost = parentResponse.http_host;
-                    this.UseHttp = this.HasValidHttpUri && app_info.size >= parentResponse.http_min_size;
+
+                    // a minimum size of zero means HTTP is not available for this response
+                    var httpMinSize = parentResponse.http_min_size;
+                    var httpAvailable = parentResponse.meta_data_only && httpMinSize > 0;
+                    this.UseHttp = httpAvailable && this.HasValidHttpUri && app_info.size >= httpMinSize;
                 }
 
-                internal PICSProductInfo( CMsgClientPICSProductInfoResponse.PackageInfo package_info )
+                internal PICSProductInfo( CMsgClientPICSProductInfoResponse parentResponse, CMsgClientPICSProductInfoResponse.PackageInfo package_info )
                 {
                     this.ID = package_info.packageid;
                     this.ChangeNumber = package_info.change_number;
@@ -588,16 +624,24 @@ namespace SteamKit2
 
                     this.KeyValues = new KeyValue();
 
-                    if ( package_info.buffer != null )
+                    if ( package_info.buffer != null && package_info.buffer.Length >= sizeof( uint ) )
                     {
                         using MemoryStream ms = new MemoryStream( package_info.buffer );
                         using var br = new BinaryReader( ms );
-                        // steamclient checks this value == 1 before it attempts to read the KV from the buffer
-                        // see: CPackageInfo::UpdateFromBuffer(CSHA const&,uint,CUtlBuffer &)
-                        // todo: we've apparently ignored this with zero ill effects, but perhaps we want to respect it?
-                        br.ReadUInt32();
+                        var format = br.ReadUInt32();
 
-                        this.KeyValues.TryReadAsBinary( ms );
+                        if ( format != 1 )
+                        {
+                            DebugLog.WriteLine( nameof( PICSProductInfo ), $"Unknown package info format {format} for package {this.ID}, size {package_info.buffer.Length}" );
+                        }
+                        else if ( !this.KeyValues.TryReadAsBinary( ms ) )
+                        {
+                            DebugLog.WriteLine( nameof( PICSProductInfo ), $"Failed to parse binary buffer for package {this.ID}, change number {this.ChangeNumber}" );
+                        }
+                    }
+                    else if ( !parentResponse.meta_data_only && !package_info.missing_token )
+                    {
+                        DebugLog.WriteLine( nameof( PICSProductInfo ), $"Empty or truncated buffer for package {this.ID}, change number {this.ChangeNumber}" );
                     }
                 }
             }
@@ -644,7 +688,7 @@ namespace SteamKit2
 
                 foreach ( var package_info in msg.packages )
                 {
-                    Packages[ package_info.packageid ] = new PICSProductInfo( package_info );
+                    Packages[ package_info.packageid ] = new PICSProductInfo( msg, package_info );
                 }
 
                 foreach ( var app_info in msg.apps )
@@ -824,9 +868,11 @@ namespace SteamKit2
 
                 if ( msg.depot_section != null && msg.depot_section.Length > 0 )
                 {
-                    // we don't want to read the trailing null byte
-                    using var ms = new MemoryStream( msg.depot_section, 0, msg.depot_section.Length - 1 );
-                    this.DepotSection.ReadAsText( ms );
+                    if ( !TryReadTextBuffer( this.DepotSection, msg.depot_section, out var error ) )
+                    {
+                        this.DepotSection = new KeyValue();
+                        DebugLog.WriteLine( nameof( PrivateBetaCallback ), $"Failed to load text buffer for depot section: {error}" );
+                    }
                 }
             }
         }
