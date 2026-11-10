@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Buffers.Binary;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Hashing;
-using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
@@ -19,14 +19,14 @@ namespace SteamKit2
                 throw new InvalidDataException( $"VZstd data is too short (was {buffer.Length} bytes)." );
             }
 
-            if ( MemoryMarshal.Read<uint>( buffer ) != VZstdHeader )
+            if ( BinaryPrimitives.ReadUInt32LittleEndian( buffer ) != VZstdHeader )
             {
                 throw new InvalidDataException( "Expecting VZstdHeader at start of stream" );
             }
 
-            var crc32 = MemoryMarshal.Read<int>( buffer[ 4.. ] );
-            var crc32_footer = MemoryMarshal.Read<int>( buffer[ ^FooterLength.. ] );
-            var sizeDecompressed = MemoryMarshal.Read<int>( buffer[ ^11.. ] );
+            var crc32 = BinaryPrimitives.ReadUInt32LittleEndian( buffer[ 4.. ] );
+            var crc32_footer = BinaryPrimitives.ReadUInt32LittleEndian( buffer[ ^FooterLength.. ] );
+            var sizeDecompressed = BinaryPrimitives.ReadInt32LittleEndian( buffer[ ^11.. ] );
 
             Debug.Assert( crc32 == crc32_footer ); // They write CRC32 twice?
 
@@ -56,7 +56,7 @@ namespace SteamKit2
                 throw new InvalidDataException( "Failed to decompress Zstd.", ex );
             }
 
-            if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan()[ ..sizeDecompressed ] ) != crc32_footer )
+            if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan( 0, sizeDecompressed ) ) != crc32_footer )
             {
                 throw new InvalidDataException( "CRC does not match decompressed data. VZstd data may be corrupted." );
             }
