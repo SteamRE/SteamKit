@@ -7,7 +7,6 @@
 using System;
 using System.Buffers;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace SteamKit2
@@ -111,7 +110,7 @@ namespace SteamKit2
 
             try
             {
-                var hmacBufferSpan = hmacBuffer.AsSpan()[ ..hmacBufferLength ];
+                var hmacBufferSpan = hmacBuffer.AsSpan( 0, hmacBufferLength );
 
                 // Random(3) + Plaintext
                 iv[ ^InitializationVectorRandomLength.. ].CopyTo( hmacBufferSpan[ ..InitializationVectorRandomLength ] );
@@ -137,7 +136,7 @@ namespace SteamKit2
 
             try
             {
-                var hmacBufferSpan = hmacBuffer.AsSpan()[ ..hmacBufferLength ];
+                var hmacBufferSpan = hmacBuffer.AsSpan( 0, hmacBufferLength );
 
                 // Random(3) + Plaintext
                 iv[ ^InitializationVectorRandomLength.. ].CopyTo( hmacBufferSpan[ ..InitializationVectorRandomLength ] );
@@ -147,7 +146,7 @@ namespace SteamKit2
 
                 HMACSHA1.HashData( hmacSecret, hmacBufferSpan, hashValue );
 
-                if ( !hashValue[ ..hashLength ].SequenceEqual( iv[ ..hashLength ] ) )
+                if ( !CryptographicOperations.FixedTimeEquals( hashValue[ ..hashLength ], iv[ ..hashLength ] ) )
                 {
                     throw new CryptographicException( "HMAC from server did not match computed HMAC." );
                 }
