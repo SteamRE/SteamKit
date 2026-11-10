@@ -5,11 +5,11 @@
 
 using System;
 using System.Buffers;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Hashing;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using ProtoBuf;
@@ -298,7 +298,7 @@ namespace SteamKit2
                 int filenameLength;
                 try
                 {
-                    var encryptedFilename = bufferDecoded.AsSpan()[ ..decodedLength ];
+                    var encryptedFilename = bufferDecoded.AsSpan( 0, decodedLength );
                     aes.DecryptEcb( encryptedFilename[ ..iv.Length ], iv, PaddingMode.None );
                     filenameLength = aes.DecryptCbc( encryptedFilename[ iv.Length.. ], iv, bufferDecrypted, PaddingMode.PKCS7 );
                 }
@@ -315,7 +315,7 @@ namespace SteamKit2
                 }
 
                 // ASCII is subset of UTF-8, so it safe to replace the raw bytes here
-                MemoryExtensions.Replace( bufferDecrypted.AsSpan(), ( byte )altDirChar, ( byte )Path.DirectorySeparatorChar );
+                MemoryExtensions.Replace( bufferDecrypted.AsSpan( 0, filenameLength ), ( byte )altDirChar, ( byte )Path.DirectorySeparatorChar );
 
                 decoded = Encoding.UTF8.GetString( bufferDecrypted, 0, filenameLength );
                 return true;
@@ -469,7 +469,7 @@ namespace SteamKit2
             {
                 if ( ReferenceEquals( x, y ) ) return true;
                 if ( x == null || y == null ) return false;
-                return x.SequenceEqual( y );
+                return x.AsSpan().SequenceEqual( y );
             }
 
             public int GetHashCode( byte[] obj )
@@ -545,10 +545,13 @@ namespace SteamKit2
                 SteamKitProtobuf.Model.Serialize<ContentManifestPayload>( ms_payload, payload );
 
                 int len = ( int )ms_payload.Length;
-                byte[] data = new byte[ 4 + len ];
-                Buffer.BlockCopy( BitConverter.GetBytes( len ), 0, data, 0, 4 );
-                Buffer.BlockCopy( ms_payload.ToArray(), 0, data, 4, len );
-                uint crc32 = Crc32.HashToUInt32( data );
+                Span<byte> lengthBytes = stackalloc byte[ sizeof( int ) ];
+                BinaryPrimitives.WriteInt32LittleEndian( lengthBytes, len );
+
+                var crc = new Crc32();
+                crc.Append( lengthBytes );
+                crc.Append( ms_payload.GetBuffer().AsSpan( 0, len ) );
+                uint crc32 = crc.GetCurrentHashAsUInt32();
 
                 if ( FilenamesEncrypted )
                 {

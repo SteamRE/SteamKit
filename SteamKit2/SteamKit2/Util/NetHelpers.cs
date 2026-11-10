@@ -6,10 +6,10 @@
 
 
 using System;
+using System.Buffers.Binary;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.CompilerServices;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -28,12 +28,7 @@ namespace SteamKit2
 
         public static IPAddress GetIPAddress( uint ipAddr )
         {
-            return new IPAddress(
-                ( ( ipAddr & 0xFF000000 ) >> 24 ) |
-                ( ( ipAddr & 0x00FF0000 ) >> 8 ) |
-                ( ( ipAddr & 0x0000FF00 ) << 8 ) |
-                ( ( ipAddr & 0x000000FF ) << 24 )
-            );
+            return new IPAddress( BinaryPrimitives.ReverseEndianness( ipAddr ) );
         }
 
         public static uint GetIPAddressAsUInt( IPAddress ipAddr )
@@ -43,7 +38,7 @@ namespace SteamKit2
             Span<byte> addrBytes = stackalloc byte[ 4 ];
             ipAddr.TryWriteBytes( addrBytes, out _ );
 
-            return Unsafe.BitCast<int, uint>( IPAddress.NetworkToHostOrder( BitConverter.ToInt32( addrBytes ) ) );
+            return BinaryPrimitives.ReadUInt32BigEndian( addrBytes );
         }
 
         public static IPAddress GetIPAddress( this CMsgIPAddress ipAddr )

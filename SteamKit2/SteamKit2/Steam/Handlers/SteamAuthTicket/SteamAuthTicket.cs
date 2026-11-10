@@ -192,7 +192,7 @@ namespace SteamKit2
 
         private uint RegisterAndSendTicket( uint appid, byte[] authToken, byte[]? serverSecret )
         {
-            uint crc = BitConverter.ToUInt32( Crc32.Hash( authToken ), 0 );
+            uint crc = Crc32.HashToUInt32( authToken );
             lock ( TicketChangeLock )
             {
                 if ( !TicketsByGame.TryGetValue( appid, out var items ) )

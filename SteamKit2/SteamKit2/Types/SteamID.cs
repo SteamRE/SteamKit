@@ -584,7 +584,7 @@ namespace SteamKit2
             {
                 case EAccountType.Invalid:
                 case EAccountType.Individual:
-                    var universeDigit = ( AccountUniverse <= EUniverse.Public ) ? "0" : Enum.Format( typeof( EUniverse ), AccountUniverse, "D" );
+                    var universeDigit = ( AccountUniverse <= EUniverse.Public ) ? 0 : (int)AccountUniverse;
                     return $"STEAM_{universeDigit}:{AccountID & 1}:{AccountID >> 1}";
                 default:
                     return Convert.ToString( this );

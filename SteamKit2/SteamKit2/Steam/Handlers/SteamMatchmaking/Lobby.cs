@@ -327,10 +327,9 @@ namespace SteamKit2
             /// </summary>
             public long? Weight { get; }
 
-            static readonly ReadOnlyDictionary<string, string> EmptyMetadata =
-                new( new Dictionary<string, string>() );
+            static readonly ReadOnlyDictionary<string, string> EmptyMetadata = ReadOnlyDictionary<string, string>.Empty;
 
-            static readonly IReadOnlyList<Member> EmptyMembers = Array.AsReadOnly(Array.Empty<Member>());
+            static readonly IReadOnlyList<Member> EmptyMembers = ReadOnlyCollection<Member>.Empty;
 
             internal Lobby( SteamID steamId, ELobbyType lobbyType, int lobbyFlags, SteamID? ownerSteamId, IReadOnlyDictionary<string, string>? metadata,
                 int maxMembers, int numMembers, IReadOnlyList<Member>? members, float? distance, long? weight )

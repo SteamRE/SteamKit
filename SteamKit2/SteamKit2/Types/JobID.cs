@@ -6,9 +6,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using SteamKit2.Util;
 
 namespace SteamKit2
 {
@@ -87,7 +87,7 @@ namespace SteamKit2
     /// </summary>
     public abstract class AsyncJob
     {
-        ValueStopwatch jobStart;
+        long jobStart;
 
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace SteamKit2
 
         internal bool IsTimedout
         {
-            get { return jobStart.GetElapsedTime() >= Timeout; }
+            get { return Stopwatch.GetElapsedTime( jobStart ) >= Timeout; }
         }
 
 
@@ -112,7 +112,7 @@ namespace SteamKit2
 
             ArgumentNullException.ThrowIfNull( jobId );
 
-            jobStart = ValueStopwatch.StartNew();
+            jobStart = Stopwatch.GetTimestamp();
             JobID = jobId;
         }
 

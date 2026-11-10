@@ -77,10 +77,7 @@ namespace SteamKit2
         public AsyncJob<ServiceMethodResponse<TResult>> SendMessage<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest, [DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TResult>( string name, TRequest message, TypeModel model )
             where TRequest : IExtensible, new() where TResult : IExtensible, new()
         {
-            if ( message is null )
-            {
-                throw new ArgumentNullException( nameof( message ) );
-            }
+            ArgumentNullException.ThrowIfNull( message );
 
             var eMsg = Client.SteamID is null ? EMsg.ServiceMethodCallFromClientNonAuthed : EMsg.ServiceMethodCallFromClient;
             var msg = new ClientMsgProtobuf<TRequest>( eMsg, model )
@@ -117,10 +114,7 @@ namespace SteamKit2
         public void SendNotification<[DynamicallyAccessedMembers( ProtobufUtil.ContractMembers )] TRequest>( string name, TRequest message, TypeModel model )
             where TRequest : IExtensible, new()
         {
-            if ( message is null )
-            {
-                throw new ArgumentNullException( nameof( message ) );
-            }
+            ArgumentNullException.ThrowIfNull( message );
 
             // Notifications do not set source jobid, otherwise Steam server will actively reject this message
             // if the method being used is a "Notification"

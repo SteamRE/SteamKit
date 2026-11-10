@@ -33,7 +33,7 @@ namespace SteamKit2
 
             entryStream.ReadExactly( destination, 0, sizeDecompressed );
 
-            if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan()[ ..sizeDecompressed ] ) != entry.Crc32 )
+            if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan( 0, sizeDecompressed ) ) != entry.Crc32 )
             {
                 throw new InvalidDataException( "Checksum validation failed for decompressed file" );
             }

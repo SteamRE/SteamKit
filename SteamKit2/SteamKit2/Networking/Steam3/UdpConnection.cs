@@ -416,7 +416,7 @@ namespace SteamKit2
                 try
                 {
                     // Wait up to 150ms for data, if none is found and the timeout is exceeded, we're done here.
-                    if ( !sock.Poll(150000, SelectMode.SelectRead)
+                    if ( !sock.Poll( TimeSpan.FromMilliseconds( 150 ), SelectMode.SelectRead )
                         && DateTime.Now > timeOut )
                     {
                         log.LogDebug(nameof( UdpConnection ), "Connection timed out");
@@ -427,7 +427,7 @@ namespace SteamKit2
 
                     // By using a 10ms wait, we allow for multiple packets sent at the time to all be processed before moving on
                     // to processing output and therefore Acks (the more we process at the same time, the fewer acks we have to send)
-                    while ( sock.Poll(10000, SelectMode.SelectRead) )
+                    while ( sock.Poll( TimeSpan.FromMilliseconds( 10 ), SelectMode.SelectRead ) )
                     {
                         int length = sock.ReceiveFrom(buf, ref packetSender);
 

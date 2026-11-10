@@ -20,7 +20,7 @@ namespace SteamKit2
         Timer timer;
 
         public ScheduledFunction( Action func )
-            : this( func, TimeSpan.FromMilliseconds( -1 ) )
+            : this( func, Timeout.InfiniteTimeSpan )
         {
         }
 
@@ -29,7 +29,7 @@ namespace SteamKit2
             this.func = func;
             this.Delay = delay;
 
-            timer = new Timer( Tick, null, TimeSpan.FromMilliseconds( -1 ), delay );
+            timer = new Timer( Tick, null, Timeout.InfiniteTimeSpan, delay );
         }
         ~ScheduledFunction()
         {
@@ -50,7 +50,7 @@ namespace SteamKit2
             if ( !bStarted )
                 return;
 
-            bStarted = !timer.Change( TimeSpan.FromMilliseconds( -1 ), Delay );
+            bStarted = !timer.Change( Timeout.InfiniteTimeSpan, Delay );
         }
 
 

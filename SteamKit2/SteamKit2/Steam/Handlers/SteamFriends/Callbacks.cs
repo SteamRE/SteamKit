@@ -442,8 +442,8 @@ namespace SteamKit2
 
                 if ( msg.message != null )
                 {
-                    this.Message = Encoding.UTF8.GetString( msg.message );
-                    this.Message = this.Message.TrimEnd( '\0' ); // trim any extra null chars from the end
+                    // trim any extra null chars from the end
+                    this.Message = Encoding.UTF8.GetString( msg.message.AsSpan().TrimEnd( ( byte )0 ) );
                 }
             }
         }
@@ -489,8 +489,8 @@ namespace SteamKit2
 
                 if ( msg.message != null )
                 {
-                    this.Message = Encoding.UTF8.GetString( msg.message );
-                    this.Message = this.Message.TrimEnd( '\0' ); // trim any extra null chars from the end
+                    // trim any extra null chars from the end
+                    this.Message = Encoding.UTF8.GetString( msg.message.AsSpan().TrimEnd( ( byte )0 ) );
                 }
             }
         }
@@ -745,9 +745,8 @@ namespace SteamKit2
 
                 this.ChatMsgType = msg.ChatMsgType;
 
-                var payload = chatMsg.Payload.ToArray();
-                this.Message = Encoding.UTF8.GetString( payload );
-                this.Message = this.Message.TrimEnd( '\0' ); // trim any extra null chars from the end
+                var payload = chatMsg.Payload.GetBuffer().AsSpan( 0, ( int )chatMsg.Payload.Length );
+                this.Message = Encoding.UTF8.GetString( payload.TrimEnd( ( byte )0 ) ); // trim any extra null chars from the end
             }
         }
 

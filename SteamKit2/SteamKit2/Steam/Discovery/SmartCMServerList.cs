@@ -353,11 +353,7 @@ namespace SteamKit2.Discovery
 
                 var result = servers
                     .Where( o => o.Protocol.HasFlagsFast( supportedProtocolTypes ) )
-                    .Select( static ( server, index ) => (Server: server, Index: index) )
-                    .OrderBy( static o => o.Server.LastBadConnectionTimeUtc.GetValueOrDefault() )
-                    .ThenBy( static o => o.Index )
-                    .Select( static o => o.Server )
-                    .FirstOrDefault();
+                    .MinBy( static s => s.LastBadConnectionTimeUtc.GetValueOrDefault() );
 
                 if ( result == null )
                 {

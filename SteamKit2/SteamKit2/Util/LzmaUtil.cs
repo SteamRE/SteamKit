@@ -66,8 +66,8 @@ namespace SteamKit2.Internal
         public static bool TryDecompress( Stream input, Func<int, Stream> outputFactory, [NotNullWhen( true )] out Stream? output )
         {
             Span<byte> buffer = stackalloc byte[ sizeof( int ) ];
-            
-            if ( !TryReadExactly( input, buffer ) )
+
+            if ( input.ReadAll( buffer ) != buffer.Length )
             {
                 output = null;
                 return false;
@@ -80,7 +80,7 @@ namespace SteamKit2.Internal
                 return false;
             }
 
-            if ( !TryReadExactly( input, buffer ) )
+            if ( input.ReadAll( buffer ) != buffer.Length )
             {
                 output = null;
                 return false;
@@ -88,7 +88,7 @@ namespace SteamKit2.Internal
 
             var uncompressedLength = BinaryPrimitives.ReadInt32LittleEndian( buffer );
 
-            if ( !TryReadExactly( input, buffer ) )
+            if ( input.ReadAll( buffer ) != buffer.Length )
             {
                 output = null;
                 return false;
@@ -119,23 +119,6 @@ namespace SteamKit2.Internal
                 output = null;
                 throw;
             }
-        }
-
-        static bool TryReadExactly( Stream stream, Span<byte> buffer)
-        {
-            var read = 0;
-            while ( read < buffer.Length )
-            {
-                var count = stream.Read( buffer.Slice( read ) );
-                if (count == 0)
-                {
-                    return false;
-                }
-
-                read += count;
-            }
-
-            return true;
         }
     }
 }

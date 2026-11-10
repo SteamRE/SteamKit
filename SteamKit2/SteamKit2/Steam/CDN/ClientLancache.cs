@@ -56,11 +56,12 @@ namespace SteamKit2.CDN
                 return true;
             }
 
-            byte[] bytes = toTest.GetAddressBytes();
-
             // IPv4
             if ( toTest.AddressFamily == AddressFamily.InterNetwork )
             {
+                Span<byte> bytes = stackalloc byte[ 4 ];
+                toTest.TryWriteBytes( bytes, out _ );
+
                 switch ( bytes[ 0 ] )
                 {
                     case 10:
@@ -78,7 +79,7 @@ namespace SteamKit2.CDN
             if ( toTest.AddressFamily == AddressFamily.InterNetworkV6 )
             {
                 // Check for Unique Local Address (fc00::/7) and loopback (::1)
-                return ( bytes[ 0 ] & 0xFE ) == 0xFC || toTest.IsIPv6LinkLocal;
+                return toTest.IsIPv6UniqueLocal || toTest.IsIPv6LinkLocal;
             }
 
             return false;

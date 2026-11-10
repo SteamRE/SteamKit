@@ -181,10 +181,7 @@ namespace SteamKit2
                     }
                     while ( !result.EndOfMessage );
 
-                    var output = new byte[ outputLength ];
-                    Buffer.BlockCopy( outputBuffer, 0, output, 0, output.Length );
-
-                    return output;
+                    return outputBuffer.AsSpan( 0, outputLength ).ToArray();
                 }
                 finally
                 {

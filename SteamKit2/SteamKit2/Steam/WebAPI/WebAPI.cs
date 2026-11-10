@@ -265,10 +265,7 @@ namespace SteamKit2
 
                 ArgumentNullException.ThrowIfNull( func );
 
-                if ( request == null )
-                {
-                    throw new ArgumentNullException( nameof( request ) );
-                }
+                ArgumentNullException.ThrowIfNull( request );
 
                 ArgumentNullException.ThrowIfNull( model );
                 ThrowIfUnexpectedFormat( extraArgs, "protobuf_raw", nameof( extraArgs ) );
@@ -276,7 +273,7 @@ namespace SteamKit2
                 using var inputPayload = new MemoryStream();
                 ProtobufUtil.Serialize( model, inputPayload, request );
 
-                var base64 = Convert.ToBase64String( inputPayload.ToArray() );
+                var base64 = Convert.ToBase64String( inputPayload.GetBuffer().AsSpan( 0, ( int )inputPayload.Length ) );
                 var args = new Dictionary<string, object?>
                 {
                     { "input_protobuf_encoded", base64 },

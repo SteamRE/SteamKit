@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -162,9 +161,7 @@ namespace SteamKit2
                 this.Result = ( EResult )resp.eresult;
                 this.EntryCount = resp.leaderboard_entry_count;
 
-                var list = new List<LeaderboardEntry>();
-
-                list.AddRange( resp.entries.Select( e => new LeaderboardEntry( e ) ) );
+                var list = resp.entries.ConvertAll( static e => new LeaderboardEntry( e ) );
 
                 Entries = new ReadOnlyCollection<LeaderboardEntry>( list );
             }

@@ -123,7 +123,7 @@ namespace SteamKit2
                 }
                 while ( true );
 
-                return Encoding.UTF8.GetString( buffer[ ..position ] );
+                return Encoding.UTF8.GetString( buffer.AsSpan( 0, position ) );
             }
             finally
             {

@@ -59,10 +59,7 @@ namespace SteamKit2
     {
         public static EMsg GetMsgTypeWithNullCheck( this IPacketMsg msg, string name )
         {
-            if ( msg == null )
-            {
-                throw new ArgumentNullException( name );
-            }
+            ArgumentNullException.ThrowIfNull( msg, name );
 
             return msg.MsgType;
         }

@@ -59,10 +59,7 @@ namespace SteamKit2.GC
     {
         public static uint GetMsgTypeWithNullCheck( this IPacketGCMsg msg, string name )
         {
-            if ( msg == null )
-            {
-                throw new ArgumentNullException( name );
-            }
+            ArgumentNullException.ThrowIfNull( msg, name );
 
             return msg.MsgType;
         }

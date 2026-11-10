@@ -59,15 +59,17 @@ namespace SteamKit2.CDN
                     throw new InvalidDataException( $"Not enough data in the decrypted depot chunk (was {written} bytes)." );
                 }
 
-                if ( buffer[ 0 ] == 'V' && buffer[ 1 ] == 'S' && buffer[ 2 ] == 'Z' && buffer[ 3 ] == 'a' ) // Zstd
+                var decrypted = buffer.AsSpan( 0, written );
+
+                if ( decrypted.StartsWith( "VSZa"u8 ) ) // Zstd
                 {
-                    writtenDecompressed = VZstdUtil.Decompress( buffer.AsSpan( 0, written ), destination, verifyChecksum: false );
+                    writtenDecompressed = VZstdUtil.Decompress( decrypted, destination, verifyChecksum: false );
                 }
-                else if ( buffer[ 0 ] == 'V' && buffer[ 1 ] == 'Z' && buffer[ 2 ] == 'a' ) // LZMA
+                else if ( decrypted.StartsWith( "VZa"u8 ) ) // LZMA
                 {
-                    writtenDecompressed = VZipUtil.Decompress( buffer.AsSpan( 0, written ), destination, verifyChecksum: false );
+                    writtenDecompressed = VZipUtil.Decompress( decrypted, destination, verifyChecksum: false );
                 }
-                else if ( buffer[ 0 ] == 'P' && buffer[ 1 ] == 'K' && buffer[ 2 ] == 0x03 && buffer[ 3 ] == 0x04 ) // PKzip
+                else if ( decrypted.StartsWith( "PK\x03\x04"u8 ) ) // PKzip
                 {
                     using var decryptedStream = new MemoryStream( buffer, 0, written );
                     writtenDecompressed = ZipUtil.Decompress( decryptedStream, destination, verifyChecksum: false );

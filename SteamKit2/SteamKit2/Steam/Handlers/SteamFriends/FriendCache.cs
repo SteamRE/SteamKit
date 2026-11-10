@@ -53,7 +53,7 @@ namespace SteamKit2
         {
             public T GetAccount( SteamID steamId )
             {
-                return this.GetOrAdd( steamId, new T { SteamID = steamId } );
+                return this.GetOrAdd( steamId, static id => new T { SteamID = id } );
             }
         }
 

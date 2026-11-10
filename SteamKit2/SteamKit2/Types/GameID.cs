@@ -85,11 +85,7 @@ namespace SteamKit2
         public GameID( string exePath, string appName )
             : this(0)
         {
-            string combined = string.Empty;
-            if (exePath != null)
-                combined += exePath;
-            if (appName != null)
-                combined += appName;
+            string combined = string.Concat( exePath, appName );
 
             AppID = 0;
             AppType = GameType.Shortcut;

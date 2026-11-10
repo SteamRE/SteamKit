@@ -307,7 +307,7 @@ namespace SteamKit2.CDN
                     }
 
                     // process the chunk immediately
-                    var writtenLength = DepotChunk.Process( chunk, buffer.AsSpan()[ ..contentLength ], destination, depotKey );
+                    var writtenLength = DepotChunk.Process( chunk, buffer.AsSpan( 0, contentLength ), destination, depotKey );
 
                     return writtenLength;
                 }

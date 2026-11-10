@@ -232,7 +232,7 @@ namespace SteamKit2
 
                 try
                 {
-                    canRead = socket!.Poll(POLL_MS * 1000, SelectMode.SelectRead);
+                    canRead = socket!.Poll( TimeSpan.FromMilliseconds( POLL_MS ), SelectMode.SelectRead );
                 }
                 catch (SocketException ex)
                 {
