@@ -4,7 +4,15 @@ v 4.0.0			November 6 2026
 
 * Added native AOT and trimming support with compile-time protobuf-net models (`SteamKitProtobuf.Model`, `UnifiedService.Model`).
 * Added `TypeModel` overloads to `ClientMsgProtobuf`, `ClientGCMsgProtobuf`, `SendMessage`, `SendNotification` and `CallProtobufAsync`.
+* Added .NET 11 target, which removes the dependency on `ZstdSharp.Port`.
+* Added newer macOS versions to `EOSType` and fixed macOS version detection.
 * WebAPI `Call` and `CallAsync` now flatten list arguments to `name[0]`, `name[1]`.
+* `PICSProductInfo` now logs malformed buffers instead of throwing, and no longer sets `UseHttp` when HTTP is not offered.
+* WebSocket connections now disconnect on text messages.
+* Message HMACs are now compared in constant time.
+* Fixed VZstd checksum validation rejecting some valid chunks.
+* Fixed a trailing null byte in depot manifest filenames.
+* Fixed binary `KeyValue` numbers being formatted with the current culture.
 * Fixed WebAPI key not being sent when a call had no arguments.
 * Fixed `CallProtobufAsync` rejecting `format=protobuf_raw` in arguments.
 * Fixed empty parameters in WebAPI query strings.
@@ -14,7 +22,9 @@ v 4.0.0			November 6 2026
 * Updated dependencies.
 
 BREAKING CHANGES
+* Dropped .NET 8 support.
 * Removed `dynamic` support from `WebAPI.Interface` and `WebAPI.AsyncInterface`, use `Call`, `CallAsync` or `CallProtobufAsync` instead.
+* `ILogContext.LogDebug`, `CMClient.LogDebug` and `DebugLog.WriteLine` now take `params ReadOnlySpan<object?>`.
 
 ------------------------------------------------------------------------------
 v 3.5.0			October 19 2026
