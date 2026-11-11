@@ -194,17 +194,16 @@ public class WebSocketConnectionFacts
     }
 
     [Fact]
-    public async Task TextMessageIsIgnored()
+    public async Task TextMessageRaisesDisconnected()
     {
         using var fixture = new Fixture();
         var server = await fixture.ConnectAsync();
 
         var text = Encoding.UTF8.GetBytes( "hello" );
         await server.SendAsync( text, WebSocketMessageType.Text, true, CancellationToken.None );
-        await server.SendAsync( new byte[] { 5 }, WebSocketMessageType.Binary, true, CancellationToken.None );
 
-        var args = await fixture.ReadReceivedAsync();
-        Assert.Equal( new byte[] { 5 }, args.Data );
+        var args = await fixture.ReadDisconnectedAsync();
+        Assert.False( args.UserInitiated );
         Assert.False( fixture.TryReadReceived( out _ ) );
         Assert.False( fixture.TryReadDisconnected( out _ ) );
     }

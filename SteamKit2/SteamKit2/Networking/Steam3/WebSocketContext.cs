@@ -3,7 +3,6 @@ using System.Buffers;
 using System.Net;
 using System.Net.Http;
 using System.Net.WebSockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -139,54 +138,40 @@ namespace SteamKit2
 
             async Task<byte[]?> ReadMessageAsync( CancellationToken cancellationToken )
             {
-                var outputBuffer = ArrayPool<byte>.Shared.Rent( 1024 );
-                var readBuffer = ArrayPool<byte>.Shared.Rent( 1024 );
-                var readMemory = readBuffer.AsMemory();
-
-                ValueWebSocketReceiveResult result;
-                var outputLength = 0;
+                var buffer = ArrayPool<byte>.Shared.Rent( 1024 );
+                var length = 0;
 
                 try
                 {
+                    ValueWebSocketReceiveResult result;
+
                     do
                     {
-                        result = await socket.ReceiveAsync( readMemory, cancellationToken ).ConfigureAwait( false );
-
-                        switch ( result.MessageType )
+                        if ( length == buffer.Length )
                         {
-                            case WebSocketMessageType.Binary:
-                                if ( outputLength + result.Count > outputBuffer.Length )
-                                {
-                                    var newBuffer = ArrayPool<byte>.Shared.Rent( outputBuffer.Length * 2 );
-                                    Buffer.BlockCopy( outputBuffer, 0, newBuffer, 0, outputLength );
-                                    ArrayPool<byte>.Shared.Return( outputBuffer );
-                                    outputBuffer = newBuffer;
-                                }
-
-                                Buffer.BlockCopy( readBuffer, 0, outputBuffer, outputLength, result.Count );
-                                outputLength += result.Count;
-
-                                break;
-
-                            case WebSocketMessageType.Text:
-                                var message = Encoding.UTF8.GetString( readBuffer, 0, result.Count );
-                                connection.log.LogDebug( nameof( WebSocketContext ), "Received websocket text message: \"{0}\"", message );
-                                break;
-
-                            case WebSocketMessageType.Close:
-                            default:
-                                connection.DisconnectCore( userInitiated: false, specificContext: this );
-                                return null;
+                            var newBuffer = ArrayPool<byte>.Shared.Rent( buffer.Length * 2 );
+                            Buffer.BlockCopy( buffer, 0, newBuffer, 0, length );
+                            ArrayPool<byte>.Shared.Return( buffer );
+                            buffer = newBuffer;
                         }
+
+                        result = await socket.ReceiveAsync( buffer.AsMemory( length ), cancellationToken ).ConfigureAwait( false );
+
+                        if ( result.MessageType != WebSocketMessageType.Binary )
+                        {
+                            connection.DisconnectCore( userInitiated: false, specificContext: this );
+                            return null;
+                        }
+
+                        length += result.Count;
                     }
                     while ( !result.EndOfMessage );
 
-                    return outputBuffer.AsSpan( 0, outputLength ).ToArray();
+                    return buffer.AsSpan( 0, length ).ToArray();
                 }
                 finally
                 {
-                    ArrayPool<byte>.Shared.Return( readBuffer );
-                    ArrayPool<byte>.Shared.Return( outputBuffer );
+                    ArrayPool<byte>.Shared.Return( buffer );
                 }
             }
 
