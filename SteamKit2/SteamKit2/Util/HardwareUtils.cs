@@ -479,7 +479,7 @@ namespace SteamKit2
         {
             data = SHA1.HashData( data );
 
-            return Utils.EncodeHexString( data );
+            return Convert.ToHexStringLower( data );
         }
     }
 }

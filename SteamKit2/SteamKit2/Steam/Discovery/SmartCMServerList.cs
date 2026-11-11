@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SteamKit2.Discovery
@@ -74,7 +75,7 @@ namespace SteamKit2.Discovery
 
         Task? listTask;
 
-        object listLock = new();
+        readonly Lock listLock = new();
         Collection<ServerInfo> servers = [];
         DateTime serversLastRefresh = DateTime.MinValue;
 

@@ -6,27 +6,12 @@
 
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace SteamKit2
 {
     static class Utils
     {
-        public static string EncodeHexString(byte[] input)
-        {
-            return Convert.ToHexString(input).ToLowerInvariant();
-        }
-
-        [return: NotNullIfNotNull( nameof( hex ) )]
-        public static byte[]? DecodeHexString(string? hex)
-        {
-            if (hex == null)
-                return null;
-
-            return Convert.FromHexString( hex );
-        }
-
         public static EOSType GetOSType()
         {
             var osVer = Environment.OSVersion;

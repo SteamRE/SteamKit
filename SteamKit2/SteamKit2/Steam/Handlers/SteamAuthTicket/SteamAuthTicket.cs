@@ -41,7 +41,7 @@ namespace SteamKit2
         private readonly Dictionary<EMsg, Action<IPacketMsg>> DispatchMap;
         private readonly Queue<byte[]> GameConnectTokens = new();
         private readonly Dictionary<uint, List<CMsgAuthTicket>> TicketsByGame = [];
-        private readonly object TicketChangeLock = new();
+        private readonly Lock TicketChangeLock = new();
         private static uint Sequence;
 
         // Per-CRC acknowledgement waiters. Steam correlates the auth-list ack by the ticket CRCs it

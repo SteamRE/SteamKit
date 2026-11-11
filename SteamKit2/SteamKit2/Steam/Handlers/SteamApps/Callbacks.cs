@@ -576,7 +576,7 @@ namespace SteamKit2
                             return null;
                         }
 
-                        var shaString = Convert.ToHexString( this.SHAHash! ).ToLowerInvariant();
+                        var shaString = Convert.ToHexStringLower( this.SHAHash! );
                         var uriString = string.Format( "http://{0}/appinfo/{1}/sha/{2}.txt.gz", this.HttpHost, this.ID, shaString );
                         return new Uri( uriString );
                     }
@@ -836,7 +836,7 @@ namespace SteamKit2
 
                 foreach ( var password in msg.betapasswords )
                 {
-                    BetaPasswords[ password.betaname ] = Utils.DecodeHexString( password.betapassword );
+                    BetaPasswords[ password.betaname ] = Convert.FromHexString( password.betapassword );
                 }
             }
         }

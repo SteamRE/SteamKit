@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using SteamKit2.Internal;
 
 namespace SteamKit2
@@ -18,7 +19,7 @@ namespace SteamKit2
     /// </summary>
     public sealed partial class SteamFriends : ClientMsgHandler
     {
-        object listLock = new();
+        readonly Lock listLock = new();
         List<SteamID> friendList;
         List<SteamID> clanList;
 

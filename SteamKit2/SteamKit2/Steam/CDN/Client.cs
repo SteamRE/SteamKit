@@ -226,7 +226,7 @@ namespace SteamKit2.CDN
                 }
             }
 
-            var chunkID = Utils.EncodeHexString( chunk.ChunkID );
+            var chunkID = Convert.ToHexStringLower( chunk.ChunkID );
             var url = $"depot/{depotId}/chunk/{chunkID}";
 
             HttpRequestMessage request;

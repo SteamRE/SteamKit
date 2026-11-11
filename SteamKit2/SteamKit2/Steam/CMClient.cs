@@ -125,7 +125,7 @@ namespace SteamKit2.Internal
         internal bool ExpectDisconnection { get; set; }
 
         // connection lock around the setup and tear down of the connection task
-        object connectionLock = new();
+        readonly Lock connectionLock = new();
         CancellationTokenSource? connectionCancellation;
         Task? connectionSetupTask;
         volatile IConnection? connection;
@@ -506,7 +506,7 @@ namespace SteamKit2.Internal
         {
             if ( data.Length < sizeof( uint ) )
             {
-                log.LogDebug( nameof( CMClient ), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, Utils.EncodeHexString( data ) );
+                log.LogDebug( nameof( CMClient ), "PacketMsg too small to contain a message, was only {0} bytes. Message: 0x{1}", data.Length, Convert.ToHexStringLower( data ) );
                 return null;
             }
 

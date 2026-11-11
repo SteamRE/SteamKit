@@ -141,8 +141,8 @@ namespace SteamKit2.Authentication
             var publicKey = await GetPasswordRSAPublicKeyAsync( details.Username! ).ConfigureAwait( false );
             var rsaParameters = new RSAParameters
             {
-                Modulus = Utils.DecodeHexString( publicKey.publickey_mod ),
-                Exponent = Utils.DecodeHexString( publicKey.publickey_exp ),
+                Modulus = Convert.FromHexString( publicKey.publickey_mod ),
+                Exponent = Convert.FromHexString( publicKey.publickey_exp ),
             };
 
             using var rsa = RSA.Create();

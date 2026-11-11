@@ -23,12 +23,11 @@ namespace SteamKit2
         private BinaryWriter? netWriter;
 
         private CancellationTokenSource? cancellationToken;
-        private object netLock;
+        private readonly Lock netLock = new();
 
         public TcpConnection(ILogContext log)
         {
             this.log = log ?? throw new ArgumentNullException( nameof( log ) );
-            netLock = new object();
         }
 
         public event EventHandler<NetMsgEventArgs>? NetMsgReceived;
