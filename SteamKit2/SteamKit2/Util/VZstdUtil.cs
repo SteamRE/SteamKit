@@ -2,6 +2,7 @@
 using System.Buffers.Binary;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.IO.Hashing;
 
 namespace SteamKit2
@@ -40,9 +41,15 @@ namespace SteamKit2
                 throw new ArgumentException( "The destination buffer is smaller than the decompressed data size.", nameof( destination ) );
             }
 
-            using var zstdDecompressor = new ZstdSharp.Decompressor();
-
             var input = buffer[ HeaderLength..^FooterLength ];
+
+#if NET11_0_OR_GREATER
+            if ( !ZstandardDecoder.TryDecompress( input, destination, out var sizeWritten ) || sizeDecompressed != sizeWritten )
+            {
+                throw new InvalidDataException( $"Failed to decompress Zstd (expected {sizeDecompressed} bytes, got {sizeWritten})." );
+            }
+#else
+            using var zstdDecompressor = new ZstdSharp.Decompressor();
 
             try
             {
@@ -55,6 +62,7 @@ namespace SteamKit2
             {
                 throw new InvalidDataException( "Failed to decompress Zstd.", ex );
             }
+#endif
 
             if ( verifyChecksum && Crc32.HashToUInt32( destination.AsSpan( 0, sizeDecompressed ) ) != crc32_footer )
             {
