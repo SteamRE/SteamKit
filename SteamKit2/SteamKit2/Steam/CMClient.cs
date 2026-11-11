@@ -327,8 +327,8 @@ namespace SteamKit2.Internal
         /// </summary>
         /// <param name="category">The category of the message.</param>
         /// <param name="message">A composite format string.</param>
-        /// <param name="args">An array containing zero or more objects to format.</param>
-        public void LogDebug( string category, string message, params object?[]? args )
+        /// <param name="args">Zero or more objects to format.</param>
+        public void LogDebug( string category, string message, params ReadOnlySpan<object?> args )
         {
             if ( !DebugLog.Enabled )
             {

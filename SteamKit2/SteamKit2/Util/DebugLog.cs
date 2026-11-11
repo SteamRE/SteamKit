@@ -140,8 +140,8 @@ namespace SteamKit2
         /// </summary>
         /// <param name="category">The category of the message.</param>
         /// <param name="msg">A composite format string.</param>
-        /// <param name="args">An System.Object array containing zero or more objects to format.</param>
-        public static void WriteLine( string category, string msg, params object?[]? args )
+        /// <param name="args">Zero or more objects to format.</param>
+        public static void WriteLine( string category, string msg, params ReadOnlySpan<object?> args )
         {
             if ( !DebugLog.Enabled )
             {
@@ -150,7 +150,7 @@ namespace SteamKit2
 
             string strMsg;
 
-            if ( args == null || args.Length == 0 )
+            if ( args.IsEmpty )
             {
                 strMsg = msg;
             }
