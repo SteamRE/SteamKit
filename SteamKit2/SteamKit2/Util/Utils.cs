@@ -110,22 +110,35 @@ namespace SteamKit2
                     _ => EOSType.LinuxUnknown,
                 },
 
+                // OSVersion on macOS is the product version from NSProcessInfo, not the Darwin kernel version
                 PlatformID.Unix when RuntimeInformation.IsOSPlatform( OSPlatform.OSX ) => ver.Major switch
                 {
-                    11 => EOSType.MacOS107, // "Lion"
-                    12 => EOSType.MacOS108, // "Mountain Lion"
-                    13 => EOSType.MacOS109, // "Mavericks"
-                    14 => EOSType.MacOS1010, // "Yosemite"
-                    15 => EOSType.MacOS1011, // El Capitan
-                    16 => EOSType.MacOS1012, // Sierra
-                    17 => EOSType.Macos1013, // High Sierra
-                    18 => EOSType.Macos1014, // Mojave
-                    19 => EOSType.Macos1015, // Catalina
-                    20 => EOSType.MacOS11, // Big Sur
-                    21 => EOSType.MacOS12, // Monterey
-                    22 => EOSType.MacOS13, // Ventura
-                    23 => EOSType.MacOS14, // Sonoma
-                    24 => EOSType.MacOS15, // Sequoia
+                    // 10.16 and later are what macOS reports to apps linked against an older SDK
+                    10 => ver.Minor switch
+                    {
+                        11 => EOSType.MacOS1011, // El Capitan
+                        12 => EOSType.MacOS1012, // Sierra
+                        13 => EOSType.Macos1013, // High Sierra
+                        14 => EOSType.Macos1014, // Mojave
+                        16 => EOSType.MacOS1016,
+                        17 => EOSType.MacOS1017,
+                        18 => EOSType.MacOS1018,
+                        19 => EOSType.MacOS1019,
+                        20 => EOSType.MacOS1020,
+                        21 => EOSType.MacOS1021,
+                        22 => EOSType.MacOS1022,
+                        23 => EOSType.MacOS1023,
+                        _ => EOSType.Macos1015, // Catalina
+                    },
+                    11 when ver.Minor == 0 => EOSType.MacOS11, // Big Sur
+                    11 => EOSType.MacOS111,
+                    12 => EOSType.MacOS12, // Monterey
+                    13 => EOSType.MacOS13, // Ventura
+                    14 => EOSType.MacOS14, // Sonoma
+                    15 => EOSType.MacOS15, // Sequoia
+                    26 => EOSType.MacOS26, // Tahoe
+                    27 => EOSType.MacOS27,
+                    28 => EOSType.MacOS28,
                     _ => EOSType.MacOSUnknown,
                 },
 
